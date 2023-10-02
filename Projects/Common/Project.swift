@@ -7,5 +7,5 @@ let project = Project.makeModule(
 	dependencies: [
 		
 	],
-	resources: ["Resources/**"]
+	sources: ["Sources/**"]
 )

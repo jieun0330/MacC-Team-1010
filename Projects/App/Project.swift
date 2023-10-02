@@ -9,7 +9,11 @@ let project = Project.makeModule(
 		.SPM.Kingfisher,
 		.SPM.Moya,
 		.Project.Common,
+		.Project.DesignSystem,
+		.Project.Core,
+		.Project.Feature
 	],
+	sources: ["Sources/**"],
 	resources: ["Resources/**"],
 	infoPlist: .file(path: "Support/Info.plist")
 )

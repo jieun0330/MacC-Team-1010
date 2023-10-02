@@ -9,7 +9,7 @@ public extension Project {
 		packages: [Package] = [],
 		deploymentTarget: DeploymentTarget? = .iOS(targetVersion: "16.0", devices: [.ipad]),
 		dependencies: [TargetDependency] = [],
-		sources: SourceFilesList = ["Sources/**"],
+		sources: SourceFilesList? = nil,
 		resources: ResourceFileElements? = nil,
 		infoPlist: InfoPlist = .default
 	) -> Project {
@@ -39,7 +39,7 @@ public extension Project {
 			bundleId: "\(organizationName).\(name)Tests",
 			deploymentTarget: deploymentTarget,
 			infoPlist: .default,
-			sources: ["Tests/**"],
+//			sources: ["Tests/**"],
 			dependencies: [.target(name: name)]
 		)
 
