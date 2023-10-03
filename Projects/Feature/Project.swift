@@ -6,5 +6,6 @@ let project = Project.makeModule(
 	product: .staticFramework,
 	dependencies: [
 		
-	]
+	],
+	sources: ["Scene/**"]
 )
