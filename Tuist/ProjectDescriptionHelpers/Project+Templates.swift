@@ -7,7 +7,7 @@ public extension Project {
 		product: Product,
 		organizationName: String = "com.tenten",
 		packages: [Package] = [],
-		deploymentTarget: DeploymentTarget? = .iOS(targetVersion: "16.0", devices: [.ipad]),
+		deploymentTarget: DeploymentTarget? = .iOS(targetVersion: "16.0", devices: [.iphone]),
 		dependencies: [TargetDependency] = [],
 		sources: SourceFilesList? = nil,
 		resources: ResourceFileElements? = nil,
