@@ -2,15 +2,10 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-	name: "TenTen",
+	name: "App",
 	platform: .iOS,
 	product: .app,
 	dependencies: [
-		.SPM.Kingfisher,
-		.SPM.Moya,
-		.Project.Common,
-		.Project.DesignSystem,
-		.Project.Core,
 		.Project.Feature
 	],
 	sources: ["Sources/**"],

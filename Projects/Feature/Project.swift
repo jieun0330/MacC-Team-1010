@@ -5,7 +5,7 @@ let project = Project.makeModule(
 	name: "Feature",
 	product: .staticFramework,
 	dependencies: [
-		
+		.Project.FeatureMain
 	],
 	sources: ["Scene/**"]
 )

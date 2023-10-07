@@ -2,10 +2,12 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-	name: "Core",
+	name: "FeatureMain",
 	product: .staticFramework,
 	dependencies: [
-		.SPM.Moya,
-		.Project.Common
-	]
+		.SPM.Kingfisher,
+		.Project.Core,
+		.Project.DesignSystem
+	],
+	sources: ["Scene/**"]
 )
