@@ -3,7 +3,8 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
 	name: "FeatureMain",
-	product: .staticFramework,
+	product: .framework,
+//	product: .app,
 	dependencies: [
 		.SPM.Kingfisher,
 		.Project.Core,
