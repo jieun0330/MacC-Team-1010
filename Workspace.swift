@@ -9,5 +9,6 @@ let workspace = Workspace(
 		//		"Projects/FeatureInformation"
 		//		"Projects/FeatureProfile"
 		//		"Projects/FeatureSearch"
+		//		"Projects/FeatureEvaluation"
 	]
 )

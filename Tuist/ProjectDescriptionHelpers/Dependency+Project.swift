@@ -21,4 +21,5 @@ public extension TargetDependency.Project {
 	static let FeatureInformation = TargetDependency.project(target: "FeatureInformation", path: .relativeToRoot("Projects/FeatureInformation"))
 	static let FeatureProfile = TargetDependency.project(target: "FeatureProfile", path: .relativeToRoot("Projects/FeatureProfile"))
 	static let FeatureSearch = TargetDependency.project(target: "FeatureSearch", path: .relativeToRoot("Projects/FeatureSearch"))
+	static let FeatureEvaluation = TargetDependency.project(target: "FeatureEvaluation", path: .relativeToRoot("Projects/FeatureEvaluation"))
 }
