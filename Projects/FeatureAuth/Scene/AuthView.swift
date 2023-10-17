@@ -6,13 +6,34 @@
 //
 
 import SwiftUI
+import FeatureMain
+import Utils
 
 public struct AuthView: View {
+	
+	@State private var keychainCreated = false
 	
 	public init() {}
 	
 	public var body: some View {
-		Text("Hello, World!")
+		Button {
+			Task {
+				try KeyChainManager.shared.create(account: .accessToken,
+												  data: UUID().uuidString)
+				keychainCreated = true
+			}
+		} label: {
+			Text("Set Temp User Token")
+				.foregroundColor(.black)
+				.padding()
+				.background {
+					RoundedRectangle(cornerRadius: 10)
+				}
+		}
+		.navigationDestination(isPresented: $keychainCreated) {
+			MainView()
+				.navigationBarBackButtonHidden()
+		}
 	}
 }
 

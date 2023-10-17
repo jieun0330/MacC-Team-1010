@@ -2,11 +2,10 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-	name: "Core",
+	name: "Utils",
 	product: .staticFramework,
 	dependencies: [
-		.SPM.Moya,
-		.Project.Common,
-		.Project.Utils
-	]
+		
+	],
+	sources: ["Sources/**"]
 )
