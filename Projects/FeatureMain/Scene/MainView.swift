@@ -24,7 +24,7 @@ public struct MainView: View {
 			}
 		}
 		.padding(.horizontal, 16)
-		.background(Color.black)
+		.background(Color(uiColor: .designSystem(.bgColor)!))
 	}
 }
 
