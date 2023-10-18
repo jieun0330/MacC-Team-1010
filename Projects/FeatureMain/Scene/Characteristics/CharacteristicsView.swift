@@ -20,7 +20,7 @@ struct CharacteristicsView: View {
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			HStack(spacing: 0) {
 				Text("특징")
 					.font(.system(size: 18, weight: .bold))
@@ -30,6 +30,8 @@ struct CharacteristicsView: View {
 					.foregroundColor(.white)
 				Spacer()
 			}
+			Spacer()
+				.frame(height: 16)
 			ScrollView(.horizontal, showsIndicators: false) {
 				ForEach(CharacteristicsGroup, id: \.self) { characteristics in
 					HStack {
@@ -43,6 +45,7 @@ struct CharacteristicsView: View {
 				}
 			}
 		}
+		.padding(.leading, 16)
 	}
 }
 

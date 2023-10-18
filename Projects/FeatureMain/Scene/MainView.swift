@@ -15,16 +15,31 @@ public struct MainView: View {
 	
 	public var body: some View {
 		ScrollView(showsIndicators: false) {
-			VStack {
+			VStack(spacing: 0) {
 				// Search Bar 수정
 				RoundedRectangle(cornerRadius: 4)
 					.fill(.gray)
 					.frame(height: 36)
+					.padding(.horizontal, 16)
+				
+				Spacer()
+					.frame(height: 12)
+				
 				CharacteristicsView()
+				
+				Spacer()
+					.frame(height: 20)
+				
+				Divider()
+					.frame(height: 1)
+					.background(Color(uiColor: .designSystem(.tempGrayColor)!))
+				
+				Spacer()
+					.frame(height: 20)
+				
 				Spacer()
 			}
 		}
-		.padding(.horizontal, 16)
 		.background(Color(uiColor: .designSystem(.bgColor)!))
 	}
 }
