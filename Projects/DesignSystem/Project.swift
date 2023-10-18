@@ -3,7 +3,7 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
 	name: "DesignSystem",
-	product: .staticFramework,
+	product: .framework,
 	dependencies: [
 		
 	],
