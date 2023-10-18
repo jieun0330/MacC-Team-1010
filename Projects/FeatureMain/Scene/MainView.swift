@@ -32,10 +32,12 @@ public struct MainView: View {
 				
 				Divider()
 					.frame(height: 1)
-					.background(Color(uiColor: .designSystem(.tempGrayColor)!))
+					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 				
 				Spacer()
 					.frame(height: 20)
+				
+				RegionView()
 				
 				Spacer()
 			}
