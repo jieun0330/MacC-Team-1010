@@ -11,20 +11,20 @@ import DesignSystem
 
 public struct MainView: View {
 	
-	let mockMakgeollis = MockMakgeolli()
-
 	public init() {}
 	
 	public var body: some View {
 		ScrollView {
 			VStack {
-				ForEach(mockMakgeollis, id: \.self) { mockMakgeolli in
-					Image(uiImage: .designSystem(.mockImage)!)
-					Text("\(mockMakgeolli.name)")
-					Text("\(mockMakgeolli.breweryName)")
-				}
+				// Search Bar
+				RoundedRectangle(cornerRadius: 4)
+					.fill(.gray)
+					.frame(height: 36)
+				Spacer()
 			}
 		}
+		.padding(.horizontal, 16)
+		.background(Color.black)
 	}
 }
 
