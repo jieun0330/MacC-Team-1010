@@ -14,12 +14,13 @@ public struct MainView: View {
 	public init() {}
 	
 	public var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			VStack {
-				// Search Bar
+				// Search Bar 수정
 				RoundedRectangle(cornerRadius: 4)
 					.fill(.gray)
 					.frame(height: 36)
+				CharacteristicsView()
 				Spacer()
 			}
 		}
