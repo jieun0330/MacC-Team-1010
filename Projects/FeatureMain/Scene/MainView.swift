@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import Core
+import DesignSystem
 
 public struct MainView: View {
 	
+	let mockMakgeollis = MockMakgeolli()
+
 	public init() {}
 	
 	public var body: some View {
-		Text("Hello, World!")
+		ScrollView {
+			VStack {
+				ForEach(mockMakgeollis, id: \.self) { mockMakgeolli in
+					Image(uiImage: .designSystem(.mockImage)!)
+					Text("\(mockMakgeolli.name)")
+					Text("\(mockMakgeolli.breweryName)")
+				}
+			}
+		}
 	}
 }
 

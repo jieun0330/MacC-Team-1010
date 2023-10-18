@@ -8,5 +8,6 @@ let project = Project.makeModule(
 		.SPM.Moya,
 		.Project.Common,
 		.Project.Utils
-	]
+	],
+	sources: ["Sources/**"]
 )
