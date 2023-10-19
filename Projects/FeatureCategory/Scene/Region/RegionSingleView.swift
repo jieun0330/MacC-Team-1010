@@ -10,7 +10,6 @@ import SwiftUI
 import DesignSystem
 
 struct RegionSingleView: View {
-	
 	let title: String
 	
 	var body: some View {
@@ -42,8 +41,8 @@ struct RegionSingleView: View {
 }
 
 struct RegionSingleView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegionSingleView(title: "")
-    }
+	static var previews: some View {
+		RegionSingleView(title: "")
+	}
 }
 

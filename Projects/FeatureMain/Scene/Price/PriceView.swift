@@ -10,7 +10,6 @@ import SwiftUI
 import Core
 
 struct PriceView: View {
-	
 	private let priceGroup = stride(from: 0,
 									to: PriceType.allCases.count,
 									by: 2).map { startIndex in

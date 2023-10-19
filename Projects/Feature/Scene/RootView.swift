@@ -9,10 +9,12 @@ import SwiftUI
 import FeatureMain
 import FeatureAuth
 import Utils
+import Common
 
 public struct RootView: View {
-	
-	public init() {}
+	public init() {
+		setCustomNavigationBar()
+	}
 	
 	public var body: some View {
 		NavigationStack {

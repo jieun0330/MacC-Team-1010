@@ -8,7 +8,8 @@ let project = Project.makeModule(
 	dependencies: [
 		.SPM.Kingfisher,
 		.Project.Core,
-		.Project.DesignSystem
+		.Project.DesignSystem,
+		.Project.FeatureMain
 	],
 	sources: ["Scene/**"]
 )
