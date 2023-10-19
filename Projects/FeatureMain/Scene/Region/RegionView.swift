@@ -8,22 +8,29 @@
 
 import SwiftUI
 import Core
+import Common
+import FeatureCategory
 
 struct RegionView: View {
-	
 	var body: some View {
 		VStack(spacing: 0) {
-			HStack(spacing: 0) {
-				Text("지역별")
-					.font(.system(size: 18, weight: .bold))
-					.foregroundColor(.white)
-				Text("로 찾기")
-					.font(.system(size: 18, weight: .regular))
-					.foregroundColor(.white)
-				Spacer()
-				Image(systemName: "chevron.right")
-					.foregroundColor(.white)
-					.padding(.trailing, 16)
+			NavigationLink {
+				CategoryView()
+					.navigationTitle("지역별로 찾기")
+					.navigationBarTitleDisplayMode(.large)
+			} label: {
+				HStack(spacing: 0) {
+					Text("지역별")
+						.font(.system(size: 18, weight: .bold))
+						.foregroundColor(.white)
+					Text("로 찾기")
+						.font(.system(size: 18, weight: .regular))
+						.foregroundColor(.white)
+					Spacer()
+					Image(systemName: "chevron.right")
+						.foregroundColor(.white)
+						.padding(.trailing, 16)
+				}
 			}
 			Spacer()
 				.frame(height: 16)
