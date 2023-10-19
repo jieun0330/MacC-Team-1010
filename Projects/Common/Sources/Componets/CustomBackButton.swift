@@ -14,13 +14,13 @@ public struct CustomBackButton: View {
 	
 	let title: String
 	
-	public init(title: String = "뒤로가기") { self.title = title }
+	public init(title: String = "돌아가기") { self.title = title }
 	
 	public var body: some View {
 		Button(action: {
 			self.presentationMode.wrappedValue.dismiss()
 		}) {
-			HStack(spacing: 4) {
+			HStack(spacing: 3) {
 				Image(systemName: "chevron.left")
 				Text(title)
 			}
