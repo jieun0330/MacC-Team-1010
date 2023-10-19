@@ -18,6 +18,7 @@ public enum TENTENColor {
 	
 	case tempDarkGrayColor
 	case tempLightGrayColor
+	case tempBackButtonGrayColor
 	
 	/// 컬러를 불러오기 위한 name space
 	public var name: String {
@@ -31,6 +32,7 @@ public enum TENTENColor {
 		case .thickColor: return "thickColor"
 		case .tempDarkGrayColor: return "tempDarkGrayColor"
 		case .tempLightGrayColor: return "tempLightGrayColor"
+		case .tempBackButtonGrayColor: return "tempBackButtonGrayColor"
 		}
 	}
 }
