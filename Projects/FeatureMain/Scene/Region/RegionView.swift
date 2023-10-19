@@ -10,8 +10,8 @@ import SwiftUI
 import Core
 
 struct RegionView: View {
-
-    var body: some View {
+	
+	var body: some View {
 		VStack(spacing: 0) {
 			HStack(spacing: 0) {
 				Text("지역별")
@@ -22,11 +22,11 @@ struct RegionView: View {
 					.foregroundColor(.white)
 				Spacer()
 				Image(systemName: "chevron.right")
+					.foregroundColor(.white)
+					.padding(.trailing, 16)
 			}
 			Spacer()
 				.frame(height: 16)
-			// 몇개까지 보여줄건지, 기준은?
-			// 다 보여줘도 상관은 없을 거 같긴함
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(RegionType.allCases, id: \.self) { region in
@@ -36,11 +36,11 @@ struct RegionView: View {
 			}
 		}
 		.padding(.leading, 16)
-    }
+	}
 }
 
 struct RegionView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegionView()
-    }
+	static var previews: some View {
+		RegionView()
+	}
 }

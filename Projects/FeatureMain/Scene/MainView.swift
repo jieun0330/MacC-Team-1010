@@ -27,17 +27,19 @@ public struct MainView: View {
 				
 				CharacteristicsView()
 				
-				Spacer()
-					.frame(height: 20)
+				Divider()
+					.frame(height: 1)
+					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.padding(.vertical, 20)
+				
+				RegionView()
 				
 				Divider()
 					.frame(height: 1)
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.padding(.vertical, 20)
 				
-				Spacer()
-					.frame(height: 20)
-				
-				RegionView()
+				PriceView()
 				
 				Spacer()
 			}

@@ -11,7 +11,7 @@ import Core
 
 struct CharacteristicsView: View {
 	
-	private let CharacteristicsGroup = stride(from: 0,
+	private let characteristicsGroup = stride(from: 0,
 											  to: CharacteristicsType.allCases.count,
 											  by: 2).map { startIndex in
 		Array(CharacteristicsType.allCases[
@@ -33,7 +33,7 @@ struct CharacteristicsView: View {
 			Spacer()
 				.frame(height: 16)
 			ScrollView(.horizontal, showsIndicators: false) {
-				ForEach(CharacteristicsGroup, id: \.self) { characteristics in
+				ForEach(characteristicsGroup, id: \.self) { characteristics in
 					HStack {
 						ForEach(characteristics, id: \.self) { characteristic in
 							CharacteristicsSignleView(
