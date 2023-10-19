@@ -1,5 +1,5 @@
 //
-//  RegionSignleView.swift
+//  RegionSingleView.swift
 //  FeatureMain
 //
 //  Created by Kim SungHun on 2023/10/18.
@@ -9,7 +9,7 @@
 import SwiftUI
 import DesignSystem
 
-struct RegionSignleView: View {
+struct RegionSingleView: View {
 	
 	let title: String
 	

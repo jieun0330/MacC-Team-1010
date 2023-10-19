@@ -1,5 +1,5 @@
 //
-//  CharacteristicsSignleView.swift
+//  PriceSingleView.swift
 //  FeatureMain
 //
 //  Created by Kim SungHun on 2023/10/18.
@@ -9,10 +9,9 @@
 import SwiftUI
 import DesignSystem
 
-struct CharacteristicsSignleView: View {
+struct PriceSingleView: View {
 	
 	let title: String
-	let color: UIColor
 	
 	var body: some View {
 		RoundedRectangle(cornerRadius: 10)
@@ -20,12 +19,8 @@ struct CharacteristicsSignleView: View {
 			.frame(height: 43)
 			.overlay {
 				HStack {
-					Rectangle()
-						.fill(Color(uiColor: color))
-						.padding(.trailing, 10.0)
-						.cornerRadius(9.0)
-						.padding(.trailing, -10.0)
-						.frame(width: 43, height: 43)
+					Spacer()
+						.frame(width: 16)
 					Text(title)
 						.font(.system(size: 16, weight: .regular))
 						.foregroundColor(.white)

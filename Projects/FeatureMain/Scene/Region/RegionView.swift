@@ -30,7 +30,7 @@ struct RegionView: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(RegionType.allCases, id: \.self) { region in
-						RegionSignleView(title: region.rawValue)
+						RegionSingleView(title: region.rawValue)
 					}
 				}
 			}

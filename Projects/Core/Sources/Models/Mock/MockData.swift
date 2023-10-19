@@ -13,7 +13,7 @@ public class MockData {
 	public init() { }
 
 	/// 느린마을  막걸리 10개
-	public func createNormalMockMakgeolli() -> [MockMakgeolliModel] {
+	public static func createNormalMockMakgeolli() -> [MockMakgeolliModel] {
 		var mockMakgeolliArray = [MockMakgeolliModel]()
 		for _ in 0..<10 {
 			mockMakgeolliArray.append(MockMakgeolliModel())

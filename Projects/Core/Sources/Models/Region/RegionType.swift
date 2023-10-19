@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RegionType.swift
 //  Core
 //
 //  Created by Kim SungHun on 2023/10/18.

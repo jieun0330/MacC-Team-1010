@@ -37,7 +37,7 @@ struct PriceView: View {
 				ForEach(priceGroup, id: \.self) { prices in
 					HStack {
 						ForEach(prices, id: \.self) { price in
-							PriceSignleView(title: price.description)
+							PriceSingleView(title: price.description)
 								.frame(width: 200)
 						}
 					}

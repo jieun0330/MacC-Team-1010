@@ -36,7 +36,7 @@ struct CharacteristicsView: View {
 				ForEach(characteristicsGroup, id: \.self) { characteristics in
 					HStack {
 						ForEach(characteristics, id: \.self) { characteristic in
-							CharacteristicsSignleView(
+							CharacteristicsSingleView(
 								title: characteristic.description,
 								color: characteristic.emphasisColor
 							).frame(width: 200)
