@@ -11,20 +11,40 @@ import DesignSystem
 
 public struct MainView: View {
 	
-	let mockMakgeollis = MockMakgeolli()
-
 	public init() {}
 	
 	public var body: some View {
-		ScrollView {
-			VStack {
-				ForEach(mockMakgeollis, id: \.self) { mockMakgeolli in
-					Image(uiImage: .designSystem(.mockImage)!)
-					Text("\(mockMakgeolli.name)")
-					Text("\(mockMakgeolli.breweryName)")
-				}
+		ScrollView(showsIndicators: false) {
+			VStack(spacing: 0) {
+				// Search Bar 수정
+				RoundedRectangle(cornerRadius: 4)
+					.fill(.gray)
+					.frame(height: 36)
+					.padding(.horizontal, 16)
+				
+				Spacer()
+					.frame(height: 12)
+				
+				CharacteristicsView()
+				
+				Divider()
+					.frame(height: 1)
+					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.padding(.vertical, 20)
+				
+				RegionView()
+				
+				Divider()
+					.frame(height: 1)
+					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.padding(.vertical, 20)
+				
+				PriceView()
+				
+				Spacer()
 			}
 		}
+		.background(Color(uiColor: .designSystem(.bgColor)!))
 	}
 }
 

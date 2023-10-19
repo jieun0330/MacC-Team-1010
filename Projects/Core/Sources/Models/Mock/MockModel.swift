@@ -46,11 +46,3 @@ public struct MockMakgeolliModel: Hashable {
 	public var recommendedFood: [String] = ["생선 요리", "족발"] // 어울리는 음식 배열
 	public var website: String = "https://www.example.com" // 홈페이지 URL
 }
-
-public func MockMakgeolli() -> [MockMakgeolliModel] {
-	var mockMakgeolliArray = [MockMakgeolliModel]()
-	for _ in 0..<10 {
-		mockMakgeolliArray.append(MockMakgeolliModel())
-	}
-	return mockMakgeolliArray
-}
