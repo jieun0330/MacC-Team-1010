@@ -8,7 +8,8 @@ let project = Project.makeModule(
 		.Project.FeatureMain,
 		.Project.FeatureAuth,
 		.Project.FeatureSearch,
-		.Project.FeatureInformation
+		.Project.FeatureInformation,
+		.Project.FeatureCategory
 	],
 	sources: ["Scene/**"]
 )
