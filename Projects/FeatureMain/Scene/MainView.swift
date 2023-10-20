@@ -10,18 +10,13 @@ import Core
 import DesignSystem
 
 public struct MainView: View {
+    @Environment(\.isSearching) private var isSearching
 	
 	public init() {}
 	
 	public var body: some View {
 		ScrollView(showsIndicators: false) {
 			VStack(spacing: 0) {
-				// Search Bar 수정
-				RoundedRectangle(cornerRadius: 4)
-					.fill(.gray)
-					.frame(height: 36)
-					.padding(.horizontal, 16)
-				
 				Spacer()
 					.frame(height: 12)
 				
@@ -45,6 +40,8 @@ public struct MainView: View {
 			}
 		}
 		.background(Color(uiColor: .designSystem(.bgColor)!))
+        .opacity(isSearching ? 0 : 1)
+        .animation(.easeIn, value: isSearching)
 	}
 }
 
