@@ -10,7 +10,6 @@ import SwiftUI
 import Core
 
 struct CharacteristicsView: View {
-	
 	private let characteristicsGroup = stride(from: 0,
 											  to: CharacteristicsType.allCases.count,
 											  by: 2).map { startIndex in

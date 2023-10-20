@@ -1,8 +1,8 @@
 //
 //  RegionSingleView.swift
-//  FeatureMain
+//  FeatureCategory
 //
-//  Created by Kim SungHun on 2023/10/18.
+//  Created by Kim SungHun on 2023/10/19.
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ struct RegionSingleView: View {
 	var body: some View {
 		RoundedRectangle(cornerRadius: 10)
 			.fill(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
-			.frame(width: 150, height: 150)
+			.aspectRatio(contentMode: .fit)
 			.overlay {
 				VStack {
 					Spacer()
@@ -24,13 +24,13 @@ struct RegionSingleView: View {
 						.padding(.top, 10.0)
 						.cornerRadius(9.0)
 						.padding(.top, -10.0)
-						.frame(width: 150, height: 43)
+						.frame(height: 48)
 						.overlay {
 							HStack {
 								Spacer()
 									.frame(width: 16)
 								Text(title)
-									.font(.system(size: 16, weight: .regular))
+									.font(.system(size: 20, weight: .regular))
 									.foregroundColor(.white)
 								Spacer()
 							}
@@ -39,3 +39,10 @@ struct RegionSingleView: View {
 			}
 	}
 }
+
+struct RegionSingleView_Previews: PreviewProvider {
+	static var previews: some View {
+		RegionSingleView(title: "")
+	}
+}
+
