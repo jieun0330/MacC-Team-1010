@@ -2,22 +2,19 @@
 //  SearchView.swift
 //  ProjectDescriptionHelpers
 //
-//  Created by Kim SungHun on 2023/10/12.
+//  Created by Kim SungHun on 2023/10/20.
 //
 
 import SwiftUI
 
-public struct SearchView: View {
-	
-	public init() {}
-	
-	public var body: some View {
-		Text("Hello, World!")
-	}
+struct SearchView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
 }
 
 struct SearchView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchView()
-	}
+    static var previews: some View {
+        SearchView()
+    }
 }
