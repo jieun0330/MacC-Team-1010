@@ -9,6 +9,7 @@ import SwiftUI
 import FeatureMain
 import FeatureAuth
 import Utils
+import FeatureInformation
 
 public struct RootView: View {
 	
@@ -19,7 +20,8 @@ public struct RootView: View {
 			if KeyChainManager.shared.read(account: .accessToken) == "" {
 				AuthView()
 			} else {
-				MainView()
+//				MainView()
+                InformationView()
 			}
 		}
 		.onAppear {

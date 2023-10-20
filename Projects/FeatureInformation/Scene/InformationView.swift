@@ -32,7 +32,7 @@ public struct InformationView: View {
             VStack(spacing: 10) {
                 MarkHolyView()
                 TasteRatingView()
-                MarkHolyInfoView()
+                InfoView()
                 AwardView()
                 IngredientsView()
                 BreweryInfoView()
