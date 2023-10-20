@@ -9,10 +9,12 @@
 import SwiftUI
 import FeatureMain
 
-struct SearchView: View {
+public struct SearchView: View {
     @StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
     
-    var body: some View {
+    public init() { }
+    
+    public var body: some View {
         ZStack {
             MainView()
             SearchSuggestionView()

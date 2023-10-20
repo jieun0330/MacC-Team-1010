@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FeatureMain
+import FeatureSearch
 import FeatureAuth
 import Utils
 import Common
@@ -21,7 +21,7 @@ public struct RootView: View {
 			if KeyChainManager.shared.read(account: .accessToken) == "" {
 				AuthView()
 			} else {
-				MainView()
+                SearchView()
 			}
 		}
 		.onAppear {
