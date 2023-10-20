@@ -12,31 +12,25 @@ extension UINavigationController: UIGestureRecognizerDelegate {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
     }
-    
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }
 }
 
-
 public struct PreviousPageView: View {
-	
-	public init() {}
-	
-	public var body: some View {
+    public init() {}
+    public var body: some View {
         NavigationView {
-            NavigationLink(destination: ContentView(), label: {
+            NavigationLink(destination: InformationView(), label: {
                 Text("Previous Page")
             })
         }
-	}
+    }
 }
 
-
-
 struct PreviousPageView_Previews: PreviewProvider {
-	static var previews: some View {
+    static var previews: some View {
         PreviousPageView()
-	}
+    }
 }
 
