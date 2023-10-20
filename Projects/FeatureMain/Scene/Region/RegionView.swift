@@ -22,15 +22,13 @@ struct RegionView: View {
 				HStack(spacing: 0) {
 					Text("지역별")
 						.font(.system(size: 18, weight: .bold))
-						.foregroundColor(.white)
 					Text("로 찾기")
 						.font(.system(size: 18, weight: .regular))
-						.foregroundColor(.white)
 					Spacer()
 					Image(systemName: "chevron.right")
-						.foregroundColor(.white)
 						.padding(.trailing, 16)
 				}
+				.foregroundColor(.white)
 			}
 			Spacer()
 				.frame(height: 16)
