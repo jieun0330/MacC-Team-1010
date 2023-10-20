@@ -1,20 +1,29 @@
 //
 //  SearchView.swift
-//  ProjectDescriptionHelpers
+//  FeatureSearch
 //
-//  Created by Kim SungHun on 2023/10/20.
+//  Created by Eric Lee on 2023/10/20.
+//  Copyright © 2023 com.tenten. All rights reserved.
 //
 
 import SwiftUI
+import FeatureMain
 
 struct SearchView: View {
+    @StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            MainView()
+            SearchSuggestionView()
+                .environmentObject(searchViewModel)
+        }
+        .searchable(text: $searchViewModel.searchText)
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         SearchView()
     }
 }
