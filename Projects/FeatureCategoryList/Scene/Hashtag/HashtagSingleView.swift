@@ -11,20 +11,20 @@ import DesignSystem
 import Core
 
 struct HashtagSingleView: View {
-	@Binding var selected: CharacteristicsType
+	let title: String
 	
-	let title: CharacteristicsType
+	@Binding var targetTitle: String
 	
     var body: some View {
 		Button {
-			selected = title
+			targetTitle = title
 		} label: {
-			Text(title.description)
+			Text(title)
 				.font(.system(size: 15))
 				.foregroundColor(.white)
 		}
 		.cornerRadius(40)
 		.buttonStyle(.borderedProminent)
-		.tint(selected == title ? .yellow : Color(uiColor: .designSystem(.tempLightGrayColor)!))
+		.tint(title == targetTitle ? .yellow : Color(uiColor: .designSystem(.tempLightGrayColor)!))
     }
 }

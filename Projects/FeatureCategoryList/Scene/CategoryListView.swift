@@ -8,13 +8,21 @@
 import SwiftUI
 import DesignSystem
 import Common
+import Core
 
 public struct CategoryListView: View {
-	public init() { }
+	let type: CategoryType
+	
+	@State var targetTitle: String
+	
+	public init(type: CategoryType, targetTitle: String) {
+		self.type = type
+		self.targetTitle = targetTitle
+	}
 
 	public var body: some View {
 		VStack {
-			HashtagView()
+			HashtagView(type: self.type, targetTitle: $targetTitle)
 				.padding(.leading, 16)
 			
 			Spacer()
@@ -24,15 +32,9 @@ public struct CategoryListView: View {
 				.padding(.horizontal, 16)
 		}
 		.background(Color(uiColor: .designSystem(.bgColor)!))
-		.navigationTitle("맛맛맛")
+		.navigationTitle(targetTitle)
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton())
-	}
-}
-
-struct CategoryListView_Previews: PreviewProvider {
-	static var previews: some View {
-		CategoryListView()
 	}
 }

@@ -11,21 +11,45 @@ import Core
 import Common
 
 struct HashtagView: View {
-	@State var selectedType: CharacteristicsType = .sweet
+	var type: CategoryType
+	
+	@Binding var targetTitle: String
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack(spacing: 10) {
-				ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
-					HashtagSingleView(selected: $selectedType, title: characteristics)
+				switch type {
+				case .characteristics:
+					createCharacteristicsHashtag()
+				case .price:
+					createPriceHashtag()
+				case .region:
+					createRegionHashtag()
 				}
 			}
 		}
 	}
 }
 
-struct HashtagView_Previews: PreviewProvider {
-	static var previews: some View {
-		HashtagView()
+private extension HashtagView {
+	@ViewBuilder
+	func createCharacteristicsHashtag() -> some View {
+		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
+			HashtagSingleView(title: characteristics.description, targetTitle: $targetTitle)
+		}
+	}
+	
+	@ViewBuilder
+	func createPriceHashtag() -> some View {
+		ForEach(PriceType.allCases, id: \.self) { price in
+			HashtagSingleView(title: price.description, targetTitle: $targetTitle)
+		}
+	}
+	
+	@ViewBuilder
+	func createRegionHashtag() -> some View {
+		ForEach(RegionType.allCases, id: \.self) { region in
+			HashtagSingleView(title: region.rawValue, targetTitle: $targetTitle)
+		}
 	}
 }
