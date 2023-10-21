@@ -27,28 +27,7 @@ enum TasteRating: Int {
     }
 }
 
-public struct FlavorRatingView: View {
-    let flavorName: String
-    @Binding var tasteRating: TasteRating
-    
-    public var body: some View {
-        VStack {
-            Text(flavorName)
-                .bold()
-                .font(.system(size: 12))
-                .foregroundColor(.white)
-            Circle()
-                .frame(width: 60, height: 60)
-                .foregroundColor(tasteRating.backgroundColor)
-                .overlay(
-                    Text("\(tasteRating.rawValue)")
-                        .bold()
-                        .foregroundColor(.white)
-                        .font(.system(size: 30))
-                )
-        }
-    }
-}
+
 
 public struct TasteRatingView: View {
     public init() {}

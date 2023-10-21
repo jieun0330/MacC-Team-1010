@@ -11,6 +11,8 @@ import DesignSystem
 
 public struct MarkHolyView: View {
     public init() {}
+    
+    
     public var body: some View {
         VStack {
             HStack {
@@ -42,20 +44,20 @@ public struct MarkHolyView: View {
     }
 }
 
-public struct InfoRow: View {
-    let title: String
-    let value: String
-    
-    public var body: some View {
-        HStack {
-            Text(title)
-                .opacity(0.5)
-                .padding(.trailing, 16)
-            Text(value)
-                .font(.system(size: 16))
-        }
-    }
-}
+//public struct InfoRow: View {
+//    let title: String
+//    let value: String
+//
+//    public var body: some View {
+//        HStack {
+//            Text(title)
+//                .opacity(0.5)
+//                .padding(.trailing, 16)
+//            Text(value)
+//                .font(.system(size: 16))
+//        }
+//    }
+//}
 
 struct MarkHolyView_Previews: PreviewProvider {
     static var previews: some View {
