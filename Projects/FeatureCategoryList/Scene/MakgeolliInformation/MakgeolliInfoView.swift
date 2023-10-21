@@ -8,22 +8,23 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 struct MakgeolliInfoView: View {
-    var body: some View {
+	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
-			ForEach(1..<10) { _ in
-				MakgeolliInfoSignleView()
+			ForEach(MockData.createMockMakgeolli(), id: \.self) { data in
+				MakgeolliInfoSignleView(makgeolliData: data)
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 					.cornerRadius(10)
 			}
 		}
 		.background(Color(uiColor: .designSystem(.bgColor)!))
-    }
+	}
 }
 
 struct MakgeolliInformationView_Previews: PreviewProvider {
-    static var previews: some View {
-        MakgeolliInfoView()
-    }
+	static var previews: some View {
+		MakgeolliInfoView()
+	}
 }
