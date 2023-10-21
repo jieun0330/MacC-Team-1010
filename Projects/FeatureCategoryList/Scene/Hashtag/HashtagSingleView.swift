@@ -11,12 +11,15 @@ import DesignSystem
 import Core
 
 struct HashtagSingleView: View {
+	@ObservedObject var viewModel: CategoryListViewModel
+	
 	let title: String
 	
 	@Binding var targetTitle: String
 	
     var body: some View {
 		Button {
+			viewModel.fetchCategoryList()
 			targetTitle = title
 		} label: {
 			Text(title)

@@ -11,6 +11,8 @@ import Core
 import Common
 
 struct HashtagView: View {
+	@ObservedObject var viewModel: CategoryListViewModel
+	
 	var type: CategoryType
 	
 	@Binding var targetTitle: String
@@ -35,21 +37,27 @@ private extension HashtagView {
 	@ViewBuilder
 	func createCharacteristicsHashtag() -> some View {
 		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
-			HashtagSingleView(title: characteristics.description, targetTitle: $targetTitle)
+			HashtagSingleView(viewModel: viewModel,
+							  title: characteristics.description,
+							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
 	func createPriceHashtag() -> some View {
 		ForEach(PriceType.allCases, id: \.self) { price in
-			HashtagSingleView(title: price.description, targetTitle: $targetTitle)
+			HashtagSingleView(viewModel: viewModel,
+							  title: price.description,
+							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
 	func createRegionHashtag() -> some View {
 		ForEach(RegionType.allCases, id: \.self) { region in
-			HashtagSingleView(title: region.rawValue, targetTitle: $targetTitle)
+			HashtagSingleView(viewModel: viewModel,
+							  title: region.rawValue,
+							  targetTitle: $targetTitle)
 		}
 	}
 }
