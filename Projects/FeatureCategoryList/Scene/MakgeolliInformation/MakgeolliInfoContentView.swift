@@ -9,7 +9,7 @@
 import SwiftUI
 import DesignSystem
 
-struct MakgeolliInformationContentView: View {
+struct MakgeolliInfoContentView: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			Text("순천주조")
@@ -55,6 +55,6 @@ struct MakgeolliInformationContentView: View {
 
 struct MakgeolliInformationContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		MakgeolliInformationContentView()
+		MakgeolliInfoContentView()
 	}
 }

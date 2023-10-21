@@ -9,7 +9,7 @@
 import SwiftUI
 import DesignSystem
 
-struct MakgeolliInformationSignleView: View {
+struct MakgeolliInfoSignleView: View {
 	var body: some View {
 		VStack {
 			HStack(alignment: .center, spacing: 0) {
@@ -21,7 +21,7 @@ struct MakgeolliInformationSignleView: View {
 				
 				HStack(spacing: 0) {
 					VStack(alignment: .leading, spacing: 0) {
-						MakgeolliInformationContentView()
+						MakgeolliInfoContentView()
 					}
 				}
 				.padding(.leading, 40)
@@ -58,6 +58,6 @@ struct MakgeolliInformationSignleView: View {
 
 struct MakgeolliInformationSignleView_Previews: PreviewProvider {
 	static var previews: some View {
-		MakgeolliInformationSignleView()
+		MakgeolliInfoSignleView()
 	}
 }

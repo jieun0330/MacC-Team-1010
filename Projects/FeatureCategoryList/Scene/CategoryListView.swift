@@ -20,7 +20,7 @@ public struct CategoryListView: View {
 			Spacer()
 				.frame(height: 16)
 			
-			MakgeolliInformationView()
+			MakgeolliInfoView()
 				.padding(.horizontal, 16)
 		}
 		.background(Color(uiColor: .designSystem(.bgColor)!))

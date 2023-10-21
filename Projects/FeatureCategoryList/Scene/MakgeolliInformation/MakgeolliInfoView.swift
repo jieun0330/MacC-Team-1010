@@ -9,11 +9,11 @@
 import SwiftUI
 import DesignSystem
 
-struct MakgeolliInformationView: View {
+struct MakgeolliInfoView: View {
     var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
 			ForEach(1..<10) { _ in
-				MakgeolliInformationSignleView()
+				MakgeolliInfoSignleView()
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 					.cornerRadius(10)
 			}
@@ -24,6 +24,6 @@ struct MakgeolliInformationView: View {
 
 struct MakgeolliInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        MakgeolliInformationView()
+        MakgeolliInfoView()
     }
 }
