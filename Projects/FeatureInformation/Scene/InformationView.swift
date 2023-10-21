@@ -30,7 +30,7 @@ public struct InformationView: View {
     public var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                MarkHolyView()
+                MakgeolliView()
                 TasteRatingView()
                 InfoView()
                 AwardView()

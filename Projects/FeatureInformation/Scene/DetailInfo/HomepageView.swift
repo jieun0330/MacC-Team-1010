@@ -12,7 +12,7 @@ import DesignSystem
 public struct HomepageView: View {
     public init() {}
     public var body: some View {
-        MarkHolyDetail(title: "홈페이지", content: "www.xn-vbo8x7wc.com/main/index.php")
+        MakgeolliDetail(title: "홈페이지", content: "www.xn-vbo8x7wc.com/main/index.php")
     }
 }
 

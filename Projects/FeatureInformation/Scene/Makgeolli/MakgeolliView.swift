@@ -1,5 +1,5 @@
 //
-//  MarkHolyView.swift
+//  MakgeolliView.swift
 //  FeatureInformation
 //
 //  Created by 박지은 on 2023/10/20.
@@ -9,7 +9,7 @@
 import SwiftUI
 import DesignSystem
 
-public struct MarkHolyView: View {
+public struct MakgeolliView: View {
     public init() {}
     
     
@@ -44,23 +44,8 @@ public struct MarkHolyView: View {
     }
 }
 
-//public struct InfoRow: View {
-//    let title: String
-//    let value: String
-//
-//    public var body: some View {
-//        HStack {
-//            Text(title)
-//                .opacity(0.5)
-//                .padding(.trailing, 16)
-//            Text(value)
-//                .font(.system(size: 16))
-//        }
-//    }
-//}
-
-struct MarkHolyView_Previews: PreviewProvider {
+struct MakgeolliView_Previews: PreviewProvider {
     static var previews: some View {
-        MarkHolyView()
+        MakgeolliView()
     }
 }

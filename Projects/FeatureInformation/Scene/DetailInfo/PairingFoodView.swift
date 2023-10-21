@@ -12,7 +12,7 @@ import DesignSystem
 public struct PairingFoodView: View {
     public init() {}
     public var body: some View {
-        MarkHolyDetail(title: "어울리는 음식", content: "파스타, 소고기, 생선회, 빈대떡")
+        MakgeolliDetail(title: "어울리는 음식", content: "파스타, 소고기, 생선회, 빈대떡")
     }
 }
 

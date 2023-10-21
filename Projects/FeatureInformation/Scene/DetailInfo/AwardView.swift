@@ -12,7 +12,7 @@ import DesignSystem
 public struct AwardView: View {
     public init() {}
     public var body: some View {
-        MarkHolyDetail(title: "수상", content: "2022우리술품평회\n농림축산식품부장관상")
+        MakgeolliDetail(title: "수상", content: "2022우리술품평회\n농림축산식품부장관상")
     }
 }
 
