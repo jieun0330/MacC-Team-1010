@@ -37,7 +37,10 @@ struct CharacteristicsView: View {
 					HStack {
 						ForEach(characteristics, id: \.self) { characteristic in
 							NavigationLink {
-								CategoryListView()
+								CategoryListView(
+									type: .characteristics,
+									targetTitle: characteristic.description
+								)
 							} label: {
 								CharacteristicsSingleView(
 									title: characteristic.description,

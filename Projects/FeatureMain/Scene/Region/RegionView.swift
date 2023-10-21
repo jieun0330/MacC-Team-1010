@@ -37,7 +37,10 @@ struct RegionView: View {
 				HStack {
 					ForEach(RegionType.allCases, id: \.self) { region in
 						NavigationLink {
-							CategoryListView()
+							CategoryListView(
+								type: .region,
+								targetTitle: region.rawValue
+							)
 						} label: {
 							RegionSingleView(title: region.rawValue)
 						}

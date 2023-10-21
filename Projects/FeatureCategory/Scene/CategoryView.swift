@@ -9,6 +9,7 @@
 import SwiftUI
 import Core
 import Common
+import FeatureCategoryList
 
 public struct CategoryView: View {
 	private let regionGroup = stride(from: 0,
@@ -26,9 +27,14 @@ public struct CategoryView: View {
 			ForEach(regionGroup, id: \.self) { regions in
 				HStack {
 					ForEach(regions, id: \.self) { region in
-						RegionSingleView(
-							title: region.rawValue
-						)
+						NavigationLink {
+							CategoryListView(
+								type: .region,
+								targetTitle: region.rawValue
+							)
+						} label: {
+							RegionSingleView(title: region.rawValue)
+						}
 					}
 				}
 			}

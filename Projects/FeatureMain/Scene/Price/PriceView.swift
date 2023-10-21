@@ -38,7 +38,10 @@ struct PriceView: View {
 					HStack {
 						ForEach(prices, id: \.self) { price in
 							NavigationLink {
-								CategoryListView()
+								CategoryListView(
+									type: .price,
+									targetTitle: price.description
+								)
 							} label: {
 								PriceSingleView(title: price.description)
 									.frame(width: 200)
