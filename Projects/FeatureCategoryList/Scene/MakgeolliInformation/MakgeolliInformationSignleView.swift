@@ -21,43 +21,7 @@ struct MakgeolliInformationSignleView: View {
 				
 				HStack(spacing: 0) {
 					VStack(alignment: .leading, spacing: 0) {
-						Text("순천주조")
-							.font(.system(size: 16, weight: .bold))
-							.foregroundColor(Color(uiColor: .designSystem(.tempLightGrayColor)!))
-							.padding(.bottom, 2)
-						Text("하늘달6 생막걸리")
-							.font(.system(size: 20, weight: .bold))
-							.foregroundColor(.white)
-						
-						Spacer()
-							.frame(height: 20)
-						
-						HStack(spacing: 10) {
-							Text("도수")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(Color(uiColor: .designSystem(.tempLightGrayColor)!))
-							Text("9%")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(.white)
-						}
-						.padding(.bottom, 2)
-						HStack(spacing: 10) {
-							Text("도수")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(Color(uiColor: .designSystem(.tempLightGrayColor)!))
-							Text("9%")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(.white)
-						}
-						.padding(.bottom, 2)
-						HStack(spacing: 10) {
-							Text("도수")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(Color(uiColor: .designSystem(.tempLightGrayColor)!))
-							Text("9%")
-								.font(.system(size: 16, weight: .regular))
-								.foregroundColor(.white)
-						}
+						MakgeolliInformationContentView()
 					}
 				}
 				.padding(.leading, 40)
