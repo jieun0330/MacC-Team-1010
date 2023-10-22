@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct SearchHistoryView: View {
+    @ObservedObject var searchViewModel: SearchViewModel = SearchViewModel()
+    
     var body: some View {
         ZStack {
             Color(.blue)
@@ -18,5 +20,5 @@ struct SearchHistoryView: View {
 }
 
 #Preview {
-    SearchHistoryView()
+    SearchHistoryView(searchViewModel: SearchViewModel())
 }

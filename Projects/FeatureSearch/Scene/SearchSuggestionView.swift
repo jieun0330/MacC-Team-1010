@@ -11,7 +11,7 @@ import Core
 
 struct SearchSuggestionView: View {
     @Environment(\.isSearching) private var isSearching
-    @EnvironmentObject private var searchViewModel: SearchViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     
     var body: some View {
         Group {
@@ -31,8 +31,7 @@ struct MainView_Previews: PreviewProvider {
     static let testingSearchViewModel = SearchViewModel()
     
     static var previews: some View {
-        SearchSuggestionView()
-            .environmentObject(testingSearchViewModel)
+        SearchSuggestionView(searchViewModel: SearchViewModel())
     }
 }
 

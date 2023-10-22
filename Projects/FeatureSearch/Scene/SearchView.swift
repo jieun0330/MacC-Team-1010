@@ -17,8 +17,7 @@ public struct SearchView: View {
     public var body: some View {
         ZStack {
             MainView()
-            SearchSuggestionView()
-                .environmentObject(searchViewModel)
+            SearchSuggestionView(searchViewModel: searchViewModel)
         }
         .searchable(text: $searchViewModel.searchText)
     }
