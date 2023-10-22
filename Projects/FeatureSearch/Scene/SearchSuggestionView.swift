@@ -21,10 +21,10 @@ struct SearchSuggestionView: View {
                 SearchResultView()
             }
         }
+        .padding(.horizontal, 16)
         .background(Color(uiColor: .designSystem(.bgColor)!))
         .opacity(isSearching ? 1 : 0)
         .animation(.easeIn, value: isSearching)
-        .padding(.horizontal, 16)
     }
 }
 
