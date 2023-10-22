@@ -56,8 +56,8 @@ struct CharacteristicsView: View {
 	}
 }
 
-struct CharacteristicsView_Previews: PreviewProvider {
-	static var previews: some View {
-		CharacteristicsView()
-	}
-}
+//struct CharacteristicsView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		CharacteristicsView()
+//	}
+//}

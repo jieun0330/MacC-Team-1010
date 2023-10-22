@@ -19,6 +19,13 @@ public enum TENTENColor {
 	case tempDarkGrayColor
 	case tempLightGrayColor
 	case tempBackButtonGrayColor
+  
+    case tasteCircle
+    case grayFont
+    case blueTemp
+    case blackBlock
+    case yellowHeart
+
 	
     case searchAccentColor
     
@@ -34,7 +41,14 @@ public enum TENTENColor {
 		case .thickColor: return "thickColor"
 		case .tempDarkGrayColor: return "tempDarkGrayColor"
 		case .tempLightGrayColor: return "tempLightGrayColor"
-		case .tempBackButtonGrayColor: return "tempBackButtonGrayColor"
+      		case .tempBackButtonGrayColor: return "tempBackButtonGrayColor"
+            
+        case .tasteCircle: return "tasteCircle"
+        case .grayFont: return "grayFont"
+        case .blueTemp: return "blueTemp"
+        case .blackBlock: return "blackBlock"
+        case .yellowHeart: return "yellowHeart"
+
         case .searchAccentColor: return "searchAccentColor"
 		}
 	}
