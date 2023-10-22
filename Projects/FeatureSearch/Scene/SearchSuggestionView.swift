@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Core
+import DesignSystem
 
 struct SearchSuggestionView: View {
     @Environment(\.isSearching) private var isSearching
