@@ -8,9 +8,9 @@
 
 import SwiftUI
 import Core
+import FeatureCategoryList
 
 struct PriceView: View {
-	
 	private let priceGroup = stride(from: 0,
 									to: PriceType.allCases.count,
 									by: 2).map { startIndex in
@@ -37,8 +37,15 @@ struct PriceView: View {
 				ForEach(priceGroup, id: \.self) { prices in
 					HStack {
 						ForEach(prices, id: \.self) { price in
-							PriceSingleView(title: price.description)
-								.frame(width: 200)
+							NavigationLink {
+								CategoryListView(
+									type: .price,
+									targetTitle: price.description
+								)
+							} label: {
+								PriceSingleView(title: price.description)
+									.frame(width: 200)
+							}
 						}
 					}
 				}

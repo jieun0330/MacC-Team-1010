@@ -19,4 +19,5 @@ public enum RegionType: String, CaseIterable, Hashable {
 	case 경남
 	case 경기
 	case 서울
+	case 대구
 }

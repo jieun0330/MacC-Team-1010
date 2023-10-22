@@ -7,8 +7,9 @@ let project = Project.makeModule(
 	dependencies: [
 		.Project.FeatureMain,
 		.Project.FeatureAuth,
-		.Project.FeatureSearch,
-		.Project.FeatureInformation
+		.Project.FeatureInformation,
+		.Project.FeatureCategory,
+		.Project.FeatureSearch
 	],
 	sources: ["Scene/**"]
 )

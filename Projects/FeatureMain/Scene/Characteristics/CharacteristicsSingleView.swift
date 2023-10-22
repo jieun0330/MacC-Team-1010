@@ -10,7 +10,6 @@ import SwiftUI
 import DesignSystem
 
 struct CharacteristicsSingleView: View {
-	
 	let title: String
 	let color: UIColor
 	

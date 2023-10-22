@@ -10,7 +10,6 @@ import FeatureMain
 import Utils
 
 public struct AuthView: View {
-	
 	@State private var keychainCreated = false
 	
 	public init() {}

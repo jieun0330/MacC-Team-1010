@@ -8,9 +8,9 @@
 
 import SwiftUI
 import Core
+import FeatureCategoryList
 
 struct CharacteristicsView: View {
-	
 	private let characteristicsGroup = stride(from: 0,
 											  to: CharacteristicsType.allCases.count,
 											  by: 2).map { startIndex in
@@ -36,10 +36,17 @@ struct CharacteristicsView: View {
 				ForEach(characteristicsGroup, id: \.self) { characteristics in
 					HStack {
 						ForEach(characteristics, id: \.self) { characteristic in
-							CharacteristicsSingleView(
-								title: characteristic.description,
-								color: characteristic.emphasisColor
-							).frame(width: 200)
+							NavigationLink {
+								CategoryListView(
+									type: .characteristics,
+									targetTitle: characteristic.description
+								)
+							} label: {
+								CharacteristicsSingleView(
+									title: characteristic.description,
+									color: characteristic.emphasisColor
+								).frame(width: 200)
+							}
 						}
 					}
 				}

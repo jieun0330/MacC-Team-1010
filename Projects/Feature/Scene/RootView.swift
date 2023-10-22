@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
-import FeatureMain
+import FeatureSearch
 import FeatureAuth
 import Utils
 import FeatureInformation
+import Common
 
 public struct RootView: View {
-	
-	public init() {}
+	public init() {
+		setCustomNavigationBar()
+	}
 	
 	public var body: some View {
 		NavigationStack {
@@ -21,7 +23,8 @@ public struct RootView: View {
 				AuthView()
 			} else {
 //				MainView()
-                InformationView()
+                // InformationView()
+                SearchView()
 			}
 		}
 		.onAppear {

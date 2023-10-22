@@ -10,7 +10,6 @@ import SwiftUI
 import DesignSystem
 
 struct RegionSingleView: View {
-	
 	let title: String
 	
 	var body: some View {
