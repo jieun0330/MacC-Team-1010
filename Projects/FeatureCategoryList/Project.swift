@@ -2,14 +2,13 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-	name: "FeatureCategory",
+	name: "FeatureCategoryList",
 	product: .framework,
 //	product: .app,
 	dependencies: [
 		.SPM.Kingfisher,
 		.Project.Core,
-		.Project.DesignSystem,
-		.Project.FeatureCategoryList
+		.Project.DesignSystem
 	],
 	sources: ["Scene/**"]
 )

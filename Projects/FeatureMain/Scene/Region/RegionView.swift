@@ -10,6 +10,7 @@ import SwiftUI
 import Core
 import Common
 import FeatureCategory
+import FeatureCategoryList
 
 struct RegionView: View {
 	var body: some View {
@@ -35,7 +36,14 @@ struct RegionView: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(RegionType.allCases, id: \.self) { region in
-						RegionSingleView(title: region.rawValue)
+						NavigationLink {
+							CategoryListView(
+								type: .region,
+								targetTitle: region.rawValue
+							)
+						} label: {
+							RegionSingleView(title: region.rawValue)
+						}
 					}
 				}
 			}
