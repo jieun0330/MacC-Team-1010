@@ -10,9 +10,9 @@ import SwiftUI
 import DesignSystem
 
 public struct CustomBackButton: View {
-	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	
 	let title: String
+	
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	
 	public init(title: String = "돌아가기") { self.title = title }
 	

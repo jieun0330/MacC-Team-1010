@@ -10,10 +10,9 @@ import SwiftUI
 import Core
 
 struct HashtagView: View {
+	let type: CategoryType
+	
 	@ObservedObject var viewModel: CategoryListViewModel
-	
-	var type: CategoryType
-	
 	@Binding var targetTitle: String
 	
 	var body: some View {
@@ -36,8 +35,8 @@ private extension HashtagView {
 	@ViewBuilder
 	func createCharacteristicsHashtag() -> some View {
 		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
-			HashtagSingleView(viewModel: viewModel,
-							  title: characteristics.description,
+			HashtagSingleView(title: characteristics.description,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
@@ -45,8 +44,8 @@ private extension HashtagView {
 	@ViewBuilder
 	func createPriceHashtag() -> some View {
 		ForEach(PriceType.allCases, id: \.self) { price in
-			HashtagSingleView(viewModel: viewModel,
-							  title: price.description,
+			HashtagSingleView(title: price.description,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
@@ -54,8 +53,8 @@ private extension HashtagView {
 	@ViewBuilder
 	func createRegionHashtag() -> some View {
 		ForEach(RegionType.allCases, id: \.self) { region in
-			HashtagSingleView(viewModel: viewModel,
-							  title: region.rawValue,
+			HashtagSingleView(title: region.rawValue,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}

@@ -11,10 +11,9 @@ import Core
 import FeatureInformation
 
 public struct CategoryListView: View {
-	@StateObject private var viewModel = CategoryListViewModel()
-	
 	let type: CategoryType
 	
+	@StateObject private var viewModel = CategoryListViewModel()
 	@State var targetTitle: String
 	
 	public init(type: CategoryType, targetTitle: String) {
@@ -24,8 +23,8 @@ public struct CategoryListView: View {
 	
 	public var body: some View {
 		VStack {
-			HashtagView(viewModel: viewModel,
-						type: self.type,
+			HashtagView(type: self.type,
+						viewModel: viewModel,
 						targetTitle: $targetTitle)
 			.padding(.leading, 16)
 			

@@ -11,10 +11,9 @@ import DesignSystem
 import Core
 
 struct HashtagSingleView: View {
-	@ObservedObject var viewModel: CategoryListViewModel
-	
 	let title: String
 	
+	@ObservedObject var viewModel: CategoryListViewModel
 	@Binding var targetTitle: String
 	
 	var body: some View {
