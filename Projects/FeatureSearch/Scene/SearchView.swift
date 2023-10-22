@@ -17,15 +17,23 @@ public struct SearchView: View {
     public var body: some View {
         ZStack {
             MainView()
-            SearchSuggestionView()
-                .environmentObject(searchViewModel)
+            SearchSuggestionView(searchViewModel: searchViewModel)
         }
         .searchable(text: $searchViewModel.searchText)
+        .onSubmit(of: .search) {
+            searchViewModel.addSearchHistory()
+        }
+        .onAppear {
+            UISearchBar.appearance().tintColor = .designSystem(.searchAccentColor)
+        }
     }
 }
 
-#Preview {
-    NavigationStack {
-        SearchView()
+
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            SearchView()
+        }
     }
 }

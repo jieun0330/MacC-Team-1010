@@ -7,20 +7,21 @@
 //
 
 import SwiftUI
-import Core
+import DesignSystem
 
 struct SearchSuggestionView: View {
     @Environment(\.isSearching) private var isSearching
-    @EnvironmentObject private var searchViewModel: SearchViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     
     var body: some View {
         Group {
             if searchViewModel.searchText.isEmpty {
-                SearchHistoryView()
+                SearchHistoryView(searchViewModel: self.searchViewModel)
             } else {
                 SearchResultView()
             }
         }
+        .padding(.horizontal, 16)
         .background(Color(uiColor: .designSystem(.bgColor)!))
         .opacity(isSearching ? 1 : 0)
         .animation(.easeIn, value: isSearching)
@@ -28,11 +29,8 @@ struct SearchSuggestionView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let testingSearchViewModel = SearchViewModel()
-    
     static var previews: some View {
-        SearchSuggestionView()
-            .environmentObject(testingSearchViewModel)
+        SearchSuggestionView(searchViewModel: SearchViewModel())
     }
 }
 
