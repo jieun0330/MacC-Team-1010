@@ -15,7 +15,7 @@ struct SearchHistoryListView: View {
         ScrollView(showsIndicators: false) {
             ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
                 VStack {
-                    SearchHistoryListSingleView(searchHistory: searchHistory)
+                    searchHistoryListSingleView(searchHistory: searchHistory)
                     Divider()
                         .frame(height: 1)
                         .background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
@@ -24,7 +24,11 @@ struct SearchHistoryListView: View {
         }
     }
     
-    private func SearchHistoryListSingleView(searchHistory: String) -> some View {
+}
+
+private extension SearchHistoryListView {
+    @ViewBuilder
+    func searchHistoryListSingleView(searchHistory: String) -> some View {
         HStack {
             Button(action: {
                 searchViewModel.setCompletion(searchHistory)
@@ -47,7 +51,6 @@ struct SearchHistoryListView: View {
         }
         .padding(.horizontal, 4)
     }
-    
 }
 
 
