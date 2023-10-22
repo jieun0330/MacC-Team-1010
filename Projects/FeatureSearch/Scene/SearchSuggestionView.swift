@@ -18,7 +18,7 @@ struct SearchSuggestionView: View {
             if searchViewModel.searchText.isEmpty {
                 SearchHistoryView(searchViewModel: self.searchViewModel)
             } else {
-                SearchResultView()
+                SearchResultView(searchViewModel: self.searchViewModel)
             }
         }
         .padding(.horizontal, 16)
