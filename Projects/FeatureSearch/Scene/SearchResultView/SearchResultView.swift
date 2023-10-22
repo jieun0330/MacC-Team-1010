@@ -17,6 +17,8 @@ struct SearchResultView: View {
     }
 }
 
-#Preview {
-    SearchResultView()
+struct SearchResultView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchResultView()
+    }
 }

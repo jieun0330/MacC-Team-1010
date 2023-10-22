@@ -29,8 +29,11 @@ public struct SearchView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        SearchView()
+
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            SearchView()
+        }
     }
 }

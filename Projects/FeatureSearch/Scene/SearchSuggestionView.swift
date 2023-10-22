@@ -29,8 +29,6 @@ struct SearchSuggestionView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    static let testingSearchViewModel = SearchViewModel()
-    
     static var previews: some View {
         SearchSuggestionView(searchViewModel: SearchViewModel())
     }

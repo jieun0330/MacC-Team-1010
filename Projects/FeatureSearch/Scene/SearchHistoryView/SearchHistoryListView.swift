@@ -50,6 +50,9 @@ struct SearchHistoryListView: View {
     
 }
 
-#Preview {
-    SearchHistoryListView(searchViewModel: SearchViewModel())
+
+struct SearchHistoryListView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchHistoryListView(searchViewModel: SearchViewModel())
+    }
 }

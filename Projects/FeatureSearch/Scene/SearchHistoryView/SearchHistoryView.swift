@@ -23,6 +23,8 @@ struct SearchHistoryView: View {
     }
 }
 
-#Preview {
-    SearchHistoryView(searchViewModel: SearchViewModel())
+struct SearchHistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchHistoryView(searchViewModel: SearchViewModel())
+    }
 }
