@@ -45,4 +45,3 @@ struct RegionSingleView_Previews: PreviewProvider {
 		RegionSingleView(title: "")
 	}
 }
-

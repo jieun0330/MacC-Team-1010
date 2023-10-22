@@ -27,7 +27,7 @@ public struct CategoryListView: View {
 			HashtagView(viewModel: viewModel,
 						type: self.type,
 						targetTitle: $targetTitle)
-				.padding(.leading, 16)
+			.padding(.leading, 16)
 			
 			Spacer()
 				.frame(height: 16)

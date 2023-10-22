@@ -24,8 +24,6 @@ public struct RootView: View {
 				AuthView()
 			} else {
 				SearchView()
-//				MainView()
-//				InformationView()
 			}
 		}
 		.onAppear {

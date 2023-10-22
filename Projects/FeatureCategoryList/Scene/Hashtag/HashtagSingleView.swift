@@ -17,7 +17,7 @@ struct HashtagSingleView: View {
 	
 	@Binding var targetTitle: String
 	
-    var body: some View {
+	var body: some View {
 		Button {
 			viewModel.fetchCategoryList()
 			targetTitle = title
@@ -29,5 +29,5 @@ struct HashtagSingleView: View {
 		.cornerRadius(40)
 		.buttonStyle(.borderedProminent)
 		.tint(title == targetTitle ? .yellow : Color(uiColor: .designSystem(.tempLightGrayColor)!))
-    }
+	}
 }

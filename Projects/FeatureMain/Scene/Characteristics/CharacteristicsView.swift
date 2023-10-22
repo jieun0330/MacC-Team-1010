@@ -55,9 +55,3 @@ struct CharacteristicsView: View {
 		.padding(.leading, 16)
 	}
 }
-
-//struct CharacteristicsView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		CharacteristicsView()
-//	}
-//}

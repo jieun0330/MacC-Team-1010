@@ -10,21 +10,21 @@ import SwiftUI
 import DesignSystem
 
 struct SearchHistoryView: View {
-    @ObservedObject var searchViewModel: SearchViewModel
-    
-    var body: some View {
-        VStack {
-            SearchHistoryControllerView(searchViewModel: searchViewModel)
-            SearchHistoryListView(searchViewModel: searchViewModel)
-        }
-        .onAppear {
-            searchViewModel.fetchSearchHistorys()
-        }
-    }
+	@ObservedObject var searchViewModel: SearchViewModel
+	
+	var body: some View {
+		VStack {
+			SearchHistoryControllerView(searchViewModel: searchViewModel)
+			SearchHistoryListView(searchViewModel: searchViewModel)
+		}
+		.onAppear {
+			searchViewModel.fetchSearchHistorys()
+		}
+	}
 }
 
 struct SearchHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchHistoryView(searchViewModel: SearchViewModel())
-    }
+	static var previews: some View {
+		SearchHistoryView(searchViewModel: SearchViewModel())
+	}
 }

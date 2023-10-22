@@ -10,7 +10,6 @@ import Foundation
 import Security
 
 public final class KeyChainManager {
-	
 	public static let shared = KeyChainManager()
 	static let serviceName = "kr.tenten.com"
 	
@@ -43,13 +42,12 @@ public final class KeyChainManager {
 		
 		var dataTypeRef: AnyObject?
 		let status = SecItemCopyMatching(query, &dataTypeRef)
-
+		
 		if status == errSecSuccess,
 		   let item = dataTypeRef as? Data,
 		   let data = String(data: item, encoding: String.Encoding.utf8) {
 			return data
 		}
-		
 		return ""
 	}
 	

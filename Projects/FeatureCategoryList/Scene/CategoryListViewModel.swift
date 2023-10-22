@@ -9,7 +9,6 @@
 import Foundation
 
 final class CategoryListViewModel: ObservableObject {
-	
 	@Published var fetchLoading = true
 	
 	func fetchCategoryList() {

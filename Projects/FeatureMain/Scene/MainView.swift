@@ -10,7 +10,7 @@ import Core
 import DesignSystem
 
 public struct MainView: View {
-    @Environment(\.isSearching) private var isSearching
+	@Environment(\.isSearching) private var isSearching
 	
 	public init() {}
 	
@@ -40,8 +40,8 @@ public struct MainView: View {
 			}
 		}
 		.background(Color(uiColor: .designSystem(.bgColor)!))
-        .opacity(isSearching ? 0 : 1)
-        .animation(.easeIn, value: isSearching)
+		.opacity(isSearching ? 0 : 1)
+		.animation(.easeIn, value: isSearching)
 	}
 }
 
