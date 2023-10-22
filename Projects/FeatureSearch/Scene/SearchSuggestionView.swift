@@ -16,7 +16,7 @@ struct SearchSuggestionView: View {
     var body: some View {
         Group {
             if searchViewModel.searchText.isEmpty {
-                SearchHistoryView()
+                SearchHistoryView(searchViewModel: self.searchViewModel)
             } else {
                 SearchResultView()
             }
@@ -24,6 +24,7 @@ struct SearchSuggestionView: View {
         .background(Color(uiColor: .designSystem(.bgColor)!))
         .opacity(isSearching ? 1 : 0)
         .animation(.easeIn, value: isSearching)
+        .padding(.horizontal, 16)
     }
 }
 

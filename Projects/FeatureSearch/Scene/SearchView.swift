@@ -20,6 +20,12 @@ public struct SearchView: View {
             SearchSuggestionView(searchViewModel: searchViewModel)
         }
         .searchable(text: $searchViewModel.searchText)
+        .onSubmit(of: .search) {
+            searchViewModel.addSearchHistory()
+        }
+        .onAppear {
+            UISearchBar.appearance().tintColor = .designSystem(.searchAccentColor)
+        }
     }
 }
 

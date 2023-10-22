@@ -7,14 +7,18 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct SearchHistoryView: View {
-    @ObservedObject var searchViewModel: SearchViewModel = SearchViewModel()
+    @ObservedObject var searchViewModel: SearchViewModel
     
     var body: some View {
-        ZStack {
-            Color(.blue)
-            Text("SearchHistoryView")
+        VStack {
+            SearchHistoryControllerView(searchViewModel: searchViewModel)
+            SearchHistoryListView(searchViewModel: searchViewModel)
+        }
+        .onAppear {
+            searchViewModel.fetchSearchHistorys()
         }
     }
 }
