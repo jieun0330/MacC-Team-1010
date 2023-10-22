@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Core
-import Common
 
 struct HashtagView: View {
 	@ObservedObject var viewModel: CategoryListViewModel

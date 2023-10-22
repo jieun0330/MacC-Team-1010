@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Core
-import Common
 import FeatureCategory
 import FeatureCategoryList
 

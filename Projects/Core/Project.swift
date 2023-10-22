@@ -6,7 +6,6 @@ let project = Project.makeModule(
 	product: .staticFramework,
 	dependencies: [
 		.SPM.Moya,
-		.Project.Common,
 		.Project.Utils
 	],
 	sources: ["Sources/**"]

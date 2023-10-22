@@ -11,7 +11,7 @@ import FeatureAuth
 import FeatureMain
 import Utils
 import FeatureInformation
-import Common
+import Core
 
 public struct RootView: View {
 	public init() {

@@ -7,8 +7,8 @@
 
 import SwiftUI
 import DesignSystem
-import Common
 import Core
+import FeatureInformation
 
 public struct CategoryListView: View {
 	@StateObject private var viewModel = CategoryListViewModel()
@@ -35,6 +35,7 @@ public struct CategoryListView: View {
 			if viewModel.fetchLoading {
 				ProgressView()
 					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+					.tint(.white)
 			} else {
 				MakgeolliInfoView()
 					.padding(.horizontal, 16)
