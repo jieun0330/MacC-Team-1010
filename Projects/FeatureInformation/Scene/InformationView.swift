@@ -8,11 +8,10 @@
 
 import SwiftUI
 import DesignSystem
-import Common
 import Core
 
 public struct InformationView: View {
-	let makgeolliData: MockMakgeolliModel
+	public let makgeolliData: MockMakgeolliModel
 	
 	@State private var isclickHearted: Bool = false
 	
@@ -24,14 +23,13 @@ public struct InformationView: View {
 		ScrollView {
 			VStack(spacing: 10) {
 				MakgeolliView(makgeolliData: makgeolliData)
-//				TasteRatingView(makgeolliData: MockMakgeolliModel())
 				TasteRatingView(makgeolliData: makgeolliData)
-				InfoView(makgeolliData: makgeolliData)
-				AwardView(makgeolliData: makgeolliData)
-				IngredientsView(makgeolliData: makgeolliData)
-				BreweryInfoView(makgeolliData: makgeolliData)
-				PairingFoodView(makgeolliData: makgeolliData)
-				HomepageView(makgeolliData: makgeolliData)
+				InfoView()
+				AwardView()
+				IngredientsView()
+				BreweryInfoView()
+				PairingFoodView()
+				HomepageView()
 			}
 		}
 		.navigationBarBackButtonHidden(true)
@@ -47,5 +45,43 @@ public struct InformationView: View {
 		}))
 		.toolbarBackground(Color.black, for: .navigationBar)
 		.background(Color.black)
+	}
+}
+
+private extension InformationView {
+	@ViewBuilder
+	func AwardView() -> some View {
+		if !makgeolliData.awards.isEmpty {
+			MakgeolliDetail(title: "수상", content: makgeolliData.awards.joined(separator: "\n"))
+		}
+	}
+	
+	@ViewBuilder
+	func BreweryInfoView() -> some View {
+		MakgeolliDetail(title: "양조장 정보", content: makgeolliData.breweryInfo)
+	}
+	
+	@ViewBuilder
+	func HomepageView() -> some View {
+		MakgeolliDetail(title: "홈페이지", content: makgeolliData.website)
+	}
+	
+	@ViewBuilder
+	func InfoView() -> some View {
+		MakgeolliDetail(title: "정보", content: makgeolliData.info)
+	}
+	
+	@ViewBuilder
+	func IngredientsView() -> some View {
+		MakgeolliDetail(title: "원재료", content: makgeolliData.ingredients.joined(
+			separator: ", ")
+		)
+	}
+	
+	@ViewBuilder
+	func PairingFoodView() -> some View {
+		MakgeolliDetail(title: "어울리는 음식", content: makgeolliData.recommendedFood.joined(
+			separator: ", ")
+		)
 	}
 }

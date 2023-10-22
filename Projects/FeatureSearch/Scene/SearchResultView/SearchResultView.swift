@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FeatureInformation
 
 struct SearchResultView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
@@ -15,7 +16,7 @@ struct SearchResultView: View {
 		ScrollView(showsIndicators: false) {
 			ForEach(searchViewModel.resultMakgeollies, id: \.self) { makgeolli in
 				NavigationLink {
-					Text("신디 뷰 연결")
+					InformationView(makgeolliData: makgeolli)
 						.onAppear {
 							searchViewModel.addSearchHistory()
 						}

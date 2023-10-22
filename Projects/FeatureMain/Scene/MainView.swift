@@ -23,15 +23,15 @@ public struct MainView: View {
 				CharacteristicsView()
 				
 				Divider()
-					.frame(height: 1)
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.frame(height: 1)
 					.padding(.vertical, 20)
 				
 				RegionView()
 				
 				Divider()
-					.frame(height: 1)
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+					.frame(height: 1)
 					.padding(.vertical, 20)
 				
 				PriceView()

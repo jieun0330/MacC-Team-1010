@@ -1,11 +1,11 @@
+////
+////  MakgeolliInformationSignleView.swift
+////  FeatureCategoryList
+////
+////  Created by Kim SungHun on 2023/10/20.
+////  Copyright © 2023 com.tenten. All rights reserved.
+////
 //
-//  MakgeolliInformationSignleView.swift
-//  FeatureCategoryList
-//
-//  Created by Kim SungHun on 2023/10/20.
-//  Copyright © 2023 com.tenten. All rights reserved.
-//
-
 import SwiftUI
 import DesignSystem
 import Core
@@ -38,8 +38,8 @@ struct MakgeolliInfoSignleView: View {
 				}
 				
 				Divider()
+					.background(Color(uiColor: .designSystem(.tempLightGrayColor)!))
 					.frame(height: 1)
-					.foregroundColor(Color(uiColor: .designSystem(.tempLightGrayColor)!))
 					.padding(.horizontal, 16)
 					.padding(.vertical, 16)
 				

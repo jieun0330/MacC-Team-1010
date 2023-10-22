@@ -32,9 +32,3 @@ public struct MakgeolliDetail: View {
         .cornerRadius(10)
     }
 }
-
-//struct MakgeolliDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MakgeolliDetail()
-//    }
-//}

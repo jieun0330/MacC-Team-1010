@@ -12,7 +12,7 @@ import Core
 
 struct MakgeolliInfoContentView: View {
 	let makgeolliData: MockMakgeolliModel
-	
+
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			Text(makgeolliData.breweryName)
@@ -22,10 +22,10 @@ struct MakgeolliInfoContentView: View {
 			Text(makgeolliData.name)
 				.font(.system(size: 20, weight: .bold))
 				.foregroundColor(.white)
-			
+
 			Spacer()
 				.frame(height: 20)
-			
+
 			HStack(spacing: 10) {
 				Text("도수")
 					.font(.system(size: 16, weight: .regular))

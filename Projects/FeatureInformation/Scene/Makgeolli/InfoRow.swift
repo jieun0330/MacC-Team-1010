@@ -9,9 +9,8 @@
 import SwiftUI
 
 public struct InfoRow: View {
-    
-    var title: String
-    var value: String
+    let title: String
+    let value: String
     
     public var body: some View {
         HStack {
