@@ -8,23 +8,46 @@
 
 import SwiftUI
 import DesignSystem
+import Core
+//import FeatureCategory
 
 public struct MakgeolliView: View {
-    public init() {}
-    
+	let makgeolliData: MockMakgeolliModel
+
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
     
     public var body: some View {
-        VStack {
-            HStack {
-                Rectangle()
-                    .frame(width: 90, height: 180)
-                    .foregroundColor(Color(uiColor: .designSystem(.blueTemp)!).opacity(0.2))
-                VStack(alignment: .leading) {
-                    Text("양조장 이름")
+//        VStack {
+//			HStack(alignment: .center, spacing: 0) {
+//				Image(uiImage: .designSystem(makgeolliData.imageName)!)
+//					.resizable()
+//					.aspectRatio(contentMode: .fit)
+//					.frame(height: 180)
+//					.padding(.leading, 40)
+//
+//				HStack(spacing: 0) {
+//					VStack(alignment: .leading, spacing: 0) {
+//						MakgeolliInfoContentView(makgeolliData: makgeolliData)
+//					}
+//				}
+//				.padding(.leading, 40)
+//				Spacer()
+//			}
+		
+            HStack(alignment: .center, spacing: 0) {
+				Image(uiImage: .designSystem(makgeolliData.imageName)!)
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(height: 180)
+					.padding(.leading, 40)
+                VStack(alignment: .leading, spacing: 0) {
+					Text(makgeolliData.breweryName)
                         .bold()
                         .font(.system(size: 16))
                         .opacity(0.5)
-                    Text("하늘달6 생막걸리 길면 두줄까지 가능")
+					Text(makgeolliData.name)
                         .bold()
                         .font(.system(size: 20))
                         .frame(height: 51, alignment: .top)
@@ -33,19 +56,13 @@ public struct MakgeolliView: View {
                     InfoRow(title: "가격", value: "1000원")
                 }
                 .foregroundColor(.white)
-                .padding(.leading, 20)
+				.padding(.leading, 40)
                 Spacer()
             }
-            .padding()
-        }
+//            .padding()
+//        }
         .padding()
         .background(Color(uiColor: .designSystem(.blackBlock)!))
         .cornerRadius(10)
-    }
-}
-
-struct MakgeolliView_Previews: PreviewProvider {
-    static var previews: some View {
-        MakgeolliView()
     }
 }

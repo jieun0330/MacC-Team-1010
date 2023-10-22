@@ -8,16 +8,16 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct IngredientsView: View {
-    public init() {}
-    public var body: some View {
-        MakgeolliDetail(title: "원재료", content: "쌀(국내산/무농약), 효모, 누룩(밀/국내산), 정제수")
-    }
-}
+	let makgeolliData: MockMakgeolliModel
 
-struct IngredientsView_Previews: PreviewProvider {
-    static var previews: some View {
-        IngredientsView()
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
+	
+    public var body: some View {
+		MakgeolliDetail(title: "원재료", content: makgeolliData.ingredients.joined(separator: ", "))
     }
 }

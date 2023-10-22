@@ -8,16 +8,18 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct PairingFoodView: View {
-    public init() {}
-    public var body: some View {
-        MakgeolliDetail(title: "어울리는 음식", content: "파스타, 소고기, 생선회, 빈대떡")
-    }
-}
+	let makgeolliData: MockMakgeolliModel
 
-struct PairingFoodView_Previews: PreviewProvider {
-    static var previews: some View {
-        PairingFoodView()
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
+	
+    public var body: some View {
+		if !makgeolliData.recommendedFood.isEmpty {
+			MakgeolliDetail(title: "어울리는 음식", content: makgeolliData.recommendedFood.joined(separator: ", "))
+		}
     }
 }

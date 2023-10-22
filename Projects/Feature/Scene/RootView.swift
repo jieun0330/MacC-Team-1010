@@ -8,6 +8,7 @@
 import SwiftUI
 import FeatureSearch
 import FeatureAuth
+import FeatureMain
 import Utils
 import FeatureInformation
 import Common
@@ -22,9 +23,9 @@ public struct RootView: View {
 			if KeyChainManager.shared.read(account: .accessToken) == "" {
 				AuthView()
 			} else {
+				SearchView()
 //				MainView()
-                // InformationView()
-                SearchView()
+//				InformationView()
 			}
 		}
 		.onAppear {

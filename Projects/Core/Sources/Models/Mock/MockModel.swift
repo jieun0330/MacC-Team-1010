@@ -33,8 +33,8 @@ public enum MockTaste {
 }
 
 public struct MockMakgeolliModel: Hashable {
-	public var imageName: TENTENAsset.name = .mockImage
-	public var breweryName: String = "양조장 이름" ///양조장 이름
+	public var imageName: TENTENAsset.name = .mockImage /// 막걸리 이미지
+	public var breweryName: String = "양조장 이름" /// 양조장 이름
 	public var name: String = "막걸리 이름" /// 막걸리 이름
 	public var alcoholContent: Double = 16.0 /// 도수
 	public var capacity: Int = 750 /// 용량

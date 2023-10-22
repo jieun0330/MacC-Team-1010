@@ -8,16 +8,16 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct BreweryInfoView: View {
-    public init() {}
-    public var body: some View {
-        MakgeolliDetail(title: "양조장 정보", content: "충주시 중앙탑면 탄금대로 626\n02-403-5002")
-    }
-}
+	let makgeolliData: MockMakgeolliModel
 
-struct BreweryInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        BreweryInfoView()
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
+	
+    public var body: some View {
+		MakgeolliDetail(title: "양조장 정보", content: makgeolliData.breweryInfo)
     }
 }

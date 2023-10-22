@@ -46,7 +46,9 @@ public struct CategoryListView: View {
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton())
 		.onAppear {
-			viewModel.fetchCategoryList()
+			if viewModel.fetchLoading {
+				viewModel.fetchCategoryList()
+			}
 		}
 	}
 }

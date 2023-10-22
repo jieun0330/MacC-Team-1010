@@ -8,16 +8,16 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct HomepageView: View {
-    public init() {}
-    public var body: some View {
-        MakgeolliDetail(title: "홈페이지", content: "www.xn-vbo8x7wc.com/main/index.php")
-    }
-}
+	let makgeolliData: MockMakgeolliModel
 
-struct HomepageView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomepageView()
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
+	
+    public var body: some View {
+		MakgeolliDetail(title: "홈페이지", content: makgeolliData.website)
     }
 }

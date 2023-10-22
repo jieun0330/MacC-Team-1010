@@ -8,16 +8,16 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct InfoView: View {
-    public init() {}
-    public var body: some View {
-        MakgeolliDetail(title: "정보", content: "담백하고 깔끔한 맛이 특징으로, 단맛과 신맛, 알코올이 균형을 맞춘 술입니다.")
-    }
-}
+	let makgeolliData: MockMakgeolliModel
 
-struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoView()
+	public init(makgeolliData: MockMakgeolliModel) {
+		self.makgeolliData = makgeolliData
+	}
+	
+    public var body: some View {
+		MakgeolliDetail(title: "정보", content: makgeolliData.info)
     }
 }
