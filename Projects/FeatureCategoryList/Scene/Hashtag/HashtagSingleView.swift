@@ -11,16 +11,20 @@ import DesignSystem
 import Core
 
 struct HashtagSingleView: View {
-	@ObservedObject var viewModel: CategoryListViewModel
-	
 	let title: String
+	let proxy: ScrollViewProxy
 	
+	@ObservedObject var viewModel: CategoryListViewModel
 	@Binding var targetTitle: String
 	
-    var body: some View {
+	var body: some View {
 		Button {
 			viewModel.fetchCategoryList()
 			targetTitle = title
+			
+			withAnimation {
+				proxy.scrollTo(title, anchor: .center)
+			}
 		} label: {
 			Text(title)
 				.font(.system(size: 15))
@@ -28,6 +32,13 @@ struct HashtagSingleView: View {
 		}
 		.cornerRadius(40)
 		.buttonStyle(.borderedProminent)
-		.tint(title == targetTitle ? .yellow : Color(uiColor: .designSystem(.tempLightGrayColor)!))
-    }
+		.tint(title == targetTitle ? Color(uiColor: .designSystem(.yellowHeart)!) :
+				Color(uiColor: .designSystem(.tempLightGrayColor)!))
+		.id(title)
+		.onAppear {
+			withAnimation {
+				proxy.scrollTo(targetTitle)
+			}
+		}
+	}
 }

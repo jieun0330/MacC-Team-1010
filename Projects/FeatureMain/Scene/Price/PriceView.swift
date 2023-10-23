@@ -29,7 +29,6 @@ struct PriceView: View {
 					.font(.system(size: 18, weight: .regular))
 					.foregroundColor(.white)
 				Spacer()
-				Image(systemName: "chevron.right")
 			}
 			Spacer()
 				.frame(height: 16)

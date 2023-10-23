@@ -10,8 +10,8 @@ import SwiftUI
 import DesignSystem
 
 public struct MakgeolliDetail: View {
-    var title: String
-    var content: String
+    let title: String
+	let content: String
     
     public var body: some View {
         VStack(alignment: .leading) {
@@ -32,9 +32,3 @@ public struct MakgeolliDetail: View {
         .cornerRadius(10)
     }
 }
-
-//struct MakgeolliDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MakgeolliDetail()
-//    }
-//}

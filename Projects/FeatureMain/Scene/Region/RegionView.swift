@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Core
-import Common
 import FeatureCategory
 import FeatureCategoryList
 
@@ -42,7 +41,7 @@ struct RegionView: View {
 								targetTitle: region.rawValue
 							)
 						} label: {
-							RegionSingleView(title: region.rawValue)
+							RegionSingleView(regionType: region)
 						}
 					}
 				}

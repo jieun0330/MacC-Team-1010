@@ -44,7 +44,7 @@ struct CharacteristicsView: View {
 							} label: {
 								CharacteristicsSingleView(
 									title: characteristic.description,
-									color: characteristic.emphasisColor
+									image: characteristic.characteristicsImage
 								).frame(width: 200)
 							}
 						}
@@ -55,9 +55,3 @@ struct CharacteristicsView: View {
 		.padding(.leading, 16)
 	}
 }
-
-//struct CharacteristicsView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		CharacteristicsView()
-//	}
-//}

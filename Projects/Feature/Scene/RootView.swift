@@ -8,9 +8,11 @@
 import SwiftUI
 import FeatureSearch
 import FeatureAuth
+import FeatureMain
 import Utils
 import FeatureInformation
-import Common
+import Core
+import DesignSystem
 
 public struct RootView: View {
 	public init() {
@@ -19,16 +21,33 @@ public struct RootView: View {
 	
 	public var body: some View {
 		NavigationStack {
-			if KeyChainManager.shared.read(account: .accessToken) == "" {
-				AuthView()
-			} else {
-//				MainView()
-                // InformationView()
-                SearchView()
-			}
+			SearchView()
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading) {
+						Image(uiImage: .designSystem(.logo)!)
+					}
+					
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Image(uiImage: .designSystem(.logo2)!)
+					}
+				}
 		}
-		.onAppear {
-			print(KeyChainManager.shared.read(account: .accessToken))
-		}
+		
+		//MARK: - version 2
+		//		NavigationStack {
+		//			if KeyChainManager.shared.read(account: .accessToken) == "" {
+		//				AuthView()
+		//			} else {
+		//				SearchView()
+		//					.toolbar {
+		//						ToolbarItem(placement: .navigationBarLeading) {
+		//							Image(uiImage: .designSystem(.logo)!)
+		//						}
+		//					}
+		//			}
+		//		}
+		//		.onAppear {
+		//			print(KeyChainManager.shared.read(account: .accessToken))
+		//		}
 	}
 }

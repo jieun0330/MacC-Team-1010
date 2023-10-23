@@ -25,6 +25,27 @@ public enum TENTENAsset {
 		case markholy
 		case damun
 		
+		case logo
+		case logo2
+		
+		case 강원
+		case 충북
+		case 충남
+		case 제주
+		case 울릉
+		case 경북
+		case 경남
+		case 경기
+		case 서울
+		case 대구
+		
+		case additive
+		case alcohol
+		case refresh
+		case sour
+		case sweet
+		case thick
+		
 		public var description: String {
 			switch self {
 			case .mockImage:
@@ -49,6 +70,45 @@ public enum TENTENAsset {
 				return "markholy"
 			case .damun:
 				return "damun"
+				
+			case .logo:
+				return "logo"
+			case .logo2:
+				return "logo2"
+				
+			case .강원:
+				return "강원"
+			case .충북:
+				return "충북"
+			case .충남:
+				return "충남"
+			case .제주:
+				return "제주"
+			case .울릉:
+				return "울릉"
+			case .경북:
+				return "경북"
+			case .경남:
+				return "경남"
+			case .경기:
+				return "경기"
+			case .서울:
+				return "서울"
+			case .대구:
+				return "대구"
+				
+			case .additive:
+				return "additive"
+			case .alcohol:
+				return "alcohol"
+			case .refresh:
+				return "refresh"
+			case .sour:
+				return "sour"
+			case .sweet:
+				return "sweet"
+			case .thick:
+				return "thick"
 			}
 		}
 	}

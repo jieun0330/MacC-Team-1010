@@ -14,7 +14,7 @@ struct MakgeolliInfoView: View {
 	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
 			ForEach(MockData.createMockMakgeolli(), id: \.self) { data in
-				MakgeolliInfoSignleView(makgeolliData: data)
+				MakgeolliInfoSingleView(makgeolliData: data)
 					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 					.cornerRadius(10)
 			}

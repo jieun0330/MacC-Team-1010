@@ -8,25 +8,25 @@
 
 import SwiftUI
 import Core
-import Common
 
 struct HashtagView: View {
+	let type: CategoryType
+	
 	@ObservedObject var viewModel: CategoryListViewModel
-	
-	var type: CategoryType
-	
 	@Binding var targetTitle: String
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack(spacing: 10) {
-				switch type {
-				case .characteristics:
-					createCharacteristicsHashtag()
-				case .price:
-					createPriceHashtag()
-				case .region:
-					createRegionHashtag()
+			ScrollViewReader { scrollViewProxy in
+				HStack(spacing: 10) {
+					switch type {
+					case .characteristics:
+						createCharacteristicsHashtag(proxy: scrollViewProxy)
+					case .price:
+						createPriceHashtag(proxy: scrollViewProxy)
+					case .region:
+						createRegionHashtag(proxy: scrollViewProxy)
+					}
 				}
 			}
 		}
@@ -35,28 +35,31 @@ struct HashtagView: View {
 
 private extension HashtagView {
 	@ViewBuilder
-	func createCharacteristicsHashtag() -> some View {
+	func createCharacteristicsHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
-			HashtagSingleView(viewModel: viewModel,
-							  title: characteristics.description,
+			HashtagSingleView(title: characteristics.description,
+							  proxy: proxy,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
-	func createPriceHashtag() -> some View {
+	func createPriceHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(PriceType.allCases, id: \.self) { price in
-			HashtagSingleView(viewModel: viewModel,
-							  title: price.description,
+			HashtagSingleView(title: price.description,
+							  proxy: proxy,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
-	func createRegionHashtag() -> some View {
+	func createRegionHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(RegionType.allCases, id: \.self) { region in
-			HashtagSingleView(viewModel: viewModel,
-							  title: region.rawValue,
+			HashtagSingleView(title: region.rawValue,
+							  proxy: proxy,
+							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}

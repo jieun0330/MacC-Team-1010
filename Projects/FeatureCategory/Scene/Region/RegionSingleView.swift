@@ -8,19 +8,22 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 struct RegionSingleView: View {
-	let title: String
+	let regionType: RegionType
 	
 	var body: some View {
-		RoundedRectangle(cornerRadius: 10)
-			.fill(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
+		Image(uiImage: regionType.regionImage)
+			.resizable()
+			.frame(height: 178)
 			.aspectRatio(contentMode: .fit)
+			.cornerRadius(10)
 			.overlay {
 				VStack {
 					Spacer()
 					Rectangle()
-						.fill(Color(uiColor: .designSystem(.tempLightGrayColor)!))
+						.fill(.black.opacity(0.7))
 						.padding(.top, 10.0)
 						.cornerRadius(9.0)
 						.padding(.top, -10.0)
@@ -29,7 +32,7 @@ struct RegionSingleView: View {
 							HStack {
 								Spacer()
 									.frame(width: 16)
-								Text(title)
+								Text(regionType.rawValue)
 									.font(.system(size: 20, weight: .regular))
 									.foregroundColor(.white)
 								Spacer()
@@ -39,10 +42,3 @@ struct RegionSingleView: View {
 			}
 	}
 }
-
-struct RegionSingleView_Previews: PreviewProvider {
-	static var previews: some View {
-		RegionSingleView(title: "")
-	}
-}
-

@@ -7,14 +7,13 @@
 
 import SwiftUI
 import DesignSystem
-import Common
 import Core
+import FeatureInformation
 
 public struct CategoryListView: View {
-	@StateObject private var viewModel = CategoryListViewModel()
-	
 	let type: CategoryType
 	
+	@StateObject private var viewModel = CategoryListViewModel()
 	@State var targetTitle: String
 	
 	public init(type: CategoryType, targetTitle: String) {
@@ -24,10 +23,10 @@ public struct CategoryListView: View {
 	
 	public var body: some View {
 		VStack {
-			HashtagView(viewModel: viewModel,
-						type: self.type,
+			HashtagView(type: self.type,
+						viewModel: viewModel,
 						targetTitle: $targetTitle)
-				.padding(.leading, 16)
+			.padding(.leading, 16)
 			
 			Spacer()
 				.frame(height: 16)
@@ -35,6 +34,7 @@ public struct CategoryListView: View {
 			if viewModel.fetchLoading {
 				ProgressView()
 					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+					.tint(.white)
 			} else {
 				MakgeolliInfoView()
 					.padding(.horizontal, 16)
@@ -46,7 +46,9 @@ public struct CategoryListView: View {
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton())
 		.onAppear {
-			viewModel.fetchCategoryList()
+			if viewModel.fetchLoading {
+				viewModel.fetchCategoryList()
+			}
 		}
 	}
 }
