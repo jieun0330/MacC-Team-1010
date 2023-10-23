@@ -12,6 +12,7 @@ import FeatureMain
 import Utils
 import FeatureInformation
 import Core
+import DesignSystem
 
 public struct RootView: View {
 	public init() {
@@ -24,6 +25,11 @@ public struct RootView: View {
 				AuthView()
 			} else {
 				SearchView()
+					.toolbar {
+						ToolbarItem(placement: .navigationBarLeading) {
+							Image(uiImage: .designSystem(.logo)!)
+						}
+					}
 			}
 		}
 		.onAppear {

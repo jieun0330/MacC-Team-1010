@@ -31,6 +31,7 @@ public struct InformationView: View {
 				PairingFoodView()
 				HomepageView()
 			}
+			.padding(.horizontal, 16)
 		}
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton(), trailing:
