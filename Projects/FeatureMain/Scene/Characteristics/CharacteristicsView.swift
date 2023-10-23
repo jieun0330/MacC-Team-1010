@@ -44,7 +44,7 @@ struct CharacteristicsView: View {
 							} label: {
 								CharacteristicsSingleView(
 									title: characteristic.description,
-									color: characteristic.emphasisColor
+									image: characteristic.characteristicsImage
 								).frame(width: 200)
 							}
 						}

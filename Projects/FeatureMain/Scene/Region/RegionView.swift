@@ -41,7 +41,7 @@ struct RegionView: View {
 								targetTitle: region.rawValue
 							)
 						} label: {
-							RegionSingleView(title: region.rawValue)
+							RegionSingleView(regionType: region)
 						}
 					}
 				}

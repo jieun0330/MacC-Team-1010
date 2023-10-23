@@ -35,20 +35,20 @@ public enum CharacteristicsType: CaseIterable, Hashable {
 		}
 	}
 	
-	public var emphasisColor: UIColor {
+	public var characteristicsImage: UIImage {
 		switch self {
 		case .sweet:
-			return .designSystem(.sweetColor)!
+			return .designSystem(.sweet)!
 		case .thick:
-			return .designSystem(.thickColor)!
+			return .designSystem(.thick)!
 		case .sour:
-			return .designSystem(.sourColor)!
+			return .designSystem(.sour)!
 		case .refresh:
-			return .designSystem(.refreshColor)!
+			return .designSystem(.refresh)!
 		case .alcohol:
-			return .designSystem(.alcoholColor)!
+			return .designSystem(.alcohol)!
 		case .additive:
-			return .designSystem(.additiveColor)!
+			return .designSystem(.additive)!
 		}
 	}
 }

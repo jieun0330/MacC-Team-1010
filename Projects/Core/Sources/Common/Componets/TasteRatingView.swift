@@ -11,11 +11,11 @@ import DesignSystem
 
 public struct TasteRatingView: View {
 	let makgeolliData: MockMakgeolliModel
-
+	
 	public init(makgeolliData: MockMakgeolliModel) {
 		self.makgeolliData = makgeolliData
 	}
-
+	
 	public var body: some View {
 		VStack {
 			HStack(spacing: 10) {
@@ -44,7 +44,8 @@ private extension TasteRatingView {
 			Circle()
 				.frame(width: 60, height: 60)
 				.foregroundColor(Color(uiColor: .designSystem(.tasteCircle)!).opacity(
-					tasteRating == 1 ? 0.2
+					tasteRating == 0 ? 0.1
+					: tasteRating == 1 ? 0.2
 					: tasteRating == 2 ? 0.4
 					: tasteRating == 3 ? 0.6
 					: tasteRating == 4 ? 0.8

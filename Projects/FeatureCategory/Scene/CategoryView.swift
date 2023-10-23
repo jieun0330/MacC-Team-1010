@@ -32,7 +32,7 @@ public struct CategoryView: View {
 								targetTitle: region.rawValue
 							)
 						} label: {
-							RegionSingleView(title: region.rawValue)
+							RegionSingleView(regionType: region)
 						}
 					}
 				}
