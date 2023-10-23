@@ -11,7 +11,7 @@ import DesignSystem
 import Core
 import FeatureInformation
 
-struct MakgeolliInfoSignleView: View {
+struct MakgeolliInfoSingleView: View {
 	let makgeolliData: MockMakgeolliModel
 	
 	@State private var isclickHearted: Bool = false
@@ -54,13 +54,11 @@ struct MakgeolliInfoSignleView: View {
 					isclickHearted ?
 					Image(systemName: "heart.fill")
 						.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
-						.padding(.trailing, 20)
-						.padding(.top, 20)
 					: Image(systemName: "heart")
 						.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
-						.padding(.trailing, 20)
-						.padding(.top, 20)
 				}
+				.padding(.trailing, 20)
+				.padding(.top, 20)
 			}
 		}
 	}
