@@ -17,14 +17,16 @@ struct HashtagView: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack(spacing: 10) {
-				switch type {
-				case .characteristics:
-					createCharacteristicsHashtag()
-				case .price:
-					createPriceHashtag()
-				case .region:
-					createRegionHashtag()
+			ScrollViewReader { scrollViewProxy in
+				HStack(spacing: 10) {
+					switch type {
+					case .characteristics:
+						createCharacteristicsHashtag(proxy: scrollViewProxy)
+					case .price:
+						createPriceHashtag(proxy: scrollViewProxy)
+					case .region:
+						createRegionHashtag(proxy: scrollViewProxy)
+					}
 				}
 			}
 		}
@@ -33,27 +35,30 @@ struct HashtagView: View {
 
 private extension HashtagView {
 	@ViewBuilder
-	func createCharacteristicsHashtag() -> some View {
+	func createCharacteristicsHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
 			HashtagSingleView(title: characteristics.description,
+							  proxy: proxy,
 							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
-	func createPriceHashtag() -> some View {
+	func createPriceHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(PriceType.allCases, id: \.self) { price in
 			HashtagSingleView(title: price.description,
+							  proxy: proxy,
 							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}
 	}
 	
 	@ViewBuilder
-	func createRegionHashtag() -> some View {
+	func createRegionHashtag(proxy: ScrollViewProxy) -> some View {
 		ForEach(RegionType.allCases, id: \.self) { region in
 			HashtagSingleView(title: region.rawValue,
+							  proxy: proxy,
 							  viewModel: viewModel,
 							  targetTitle: $targetTitle)
 		}

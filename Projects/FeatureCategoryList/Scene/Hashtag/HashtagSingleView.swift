@@ -12,6 +12,7 @@ import Core
 
 struct HashtagSingleView: View {
 	let title: String
+	let proxy: ScrollViewProxy
 	
 	@ObservedObject var viewModel: CategoryListViewModel
 	@Binding var targetTitle: String
@@ -20,6 +21,10 @@ struct HashtagSingleView: View {
 		Button {
 			viewModel.fetchCategoryList()
 			targetTitle = title
+			
+			withAnimation {
+				proxy.scrollTo(title, anchor: .center)
+			}
 		} label: {
 			Text(title)
 				.font(.system(size: 15))
@@ -29,5 +34,11 @@ struct HashtagSingleView: View {
 		.buttonStyle(.borderedProminent)
 		.tint(title == targetTitle ? Color(uiColor: .designSystem(.yellowHeart)!) :
 				Color(uiColor: .designSystem(.tempLightGrayColor)!))
+		.id(title)
+		.onAppear {
+			withAnimation {
+				proxy.scrollTo(targetTitle)
+			}
+		}
 	}
 }
