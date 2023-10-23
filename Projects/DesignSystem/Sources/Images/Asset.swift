@@ -26,6 +26,7 @@ public enum TENTENAsset {
 		case damun
 		
 		case logo
+		case logo2
 		
 		case 강원
 		case 충북
@@ -72,6 +73,8 @@ public enum TENTENAsset {
 				
 			case .logo:
 				return "logo"
+			case .logo2:
+				return "logo2"
 				
 			case .강원:
 				return "강원"

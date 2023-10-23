@@ -81,8 +81,10 @@ private extension InformationView {
 	
 	@ViewBuilder
 	func PairingFoodView() -> some View {
-		MakgeolliDetail(title: "어울리는 음식", content: makgeolliData.recommendedFood.joined(
-			separator: ", ")
-		)
+		if !makgeolliData.recommendedFood.isEmpty {
+			MakgeolliDetail(title: "어울리는 음식", content: makgeolliData.recommendedFood.joined(
+				separator: ", ")
+			)
+		}
 	}
 }

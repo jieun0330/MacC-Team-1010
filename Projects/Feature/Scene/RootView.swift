@@ -21,19 +21,33 @@ public struct RootView: View {
 	
 	public var body: some View {
 		NavigationStack {
-			if KeyChainManager.shared.read(account: .accessToken) == "" {
-				AuthView()
-			} else {
-				SearchView()
-					.toolbar {
-						ToolbarItem(placement: .navigationBarLeading) {
-							Image(uiImage: .designSystem(.logo)!)
-						}
+			SearchView()
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading) {
+						Image(uiImage: .designSystem(.logo)!)
 					}
-			}
+					
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Image(uiImage: .designSystem(.logo2)!)
+					}
+				}
 		}
-		.onAppear {
-			print(KeyChainManager.shared.read(account: .accessToken))
-		}
+		
+		//MARK: - version 2
+		//		NavigationStack {
+		//			if KeyChainManager.shared.read(account: .accessToken) == "" {
+		//				AuthView()
+		//			} else {
+		//				SearchView()
+		//					.toolbar {
+		//						ToolbarItem(placement: .navigationBarLeading) {
+		//							Image(uiImage: .designSystem(.logo)!)
+		//						}
+		//					}
+		//			}
+		//		}
+		//		.onAppear {
+		//			print(KeyChainManager.shared.read(account: .accessToken))
+		//		}
 	}
 }
