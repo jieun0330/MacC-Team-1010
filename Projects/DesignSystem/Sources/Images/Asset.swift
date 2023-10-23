@@ -25,6 +25,8 @@ public enum TENTENAsset {
 		case markholy
 		case damun
 		
+		case logo
+		
 		public var description: String {
 			switch self {
 			case .mockImage:
@@ -49,6 +51,8 @@ public enum TENTENAsset {
 				return "markholy"
 			case .damun:
 				return "damun"
+			case .logo:
+				return "logo"
 			}
 		}
 	}
