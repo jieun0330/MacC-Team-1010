@@ -9,7 +9,6 @@ import SwiftUI
 import FeatureSearch
 import FeatureAuth
 import FeatureMain
-import Utils
 import FeatureInformation
 import Core
 import DesignSystem

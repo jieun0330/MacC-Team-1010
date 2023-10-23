@@ -24,7 +24,7 @@ public extension Project {
 			name: name,
 			platform: platform,
 			product: product,
-			bundleId: "\(organizationName).\(name)",
+			bundleId: "\(organizationName).juruk\(name.lowercased())",
 			deploymentTarget: deploymentTarget,
 			infoPlist: infoPlist,
 			sources: sources,

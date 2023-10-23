@@ -11,7 +11,7 @@ import Foundation
 public enum DesignSystem {
 	/// DesignSystem에서만 사용될 Constant
 	public enum Constant {
-		private static var bundleId: String { "com.tenten.DesignSystem" }
+		private static var bundleId: String { "com.tenten.jurukdesignsystem" }
 		public static var bundle: Bundle? { Bundle(identifier: bundleId) }
 	}
 }
