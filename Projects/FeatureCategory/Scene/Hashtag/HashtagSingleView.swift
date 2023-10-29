@@ -14,7 +14,7 @@ struct HashtagSingleView: View {
 	let title: String
 	let proxy: ScrollViewProxy
 	
-	@ObservedObject var viewModel: CategoryListViewModel
+	@ObservedObject var viewModel: CategoryViewModel
 	@Binding var targetTitle: String
 	
 	var body: some View {

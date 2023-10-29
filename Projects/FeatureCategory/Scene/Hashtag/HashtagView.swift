@@ -12,7 +12,7 @@ import Core
 struct HashtagView: View {
 	let type: CategoryType
 	
-	@ObservedObject var viewModel: CategoryListViewModel
+	@ObservedObject var viewModel: CategoryViewModel
 	@Binding var targetTitle: String
 	
 	var body: some View {

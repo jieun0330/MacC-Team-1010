@@ -10,10 +10,10 @@ import DesignSystem
 import Core
 import FeatureInformation
 
-public struct CategoryListView: View {
+public struct CategoryView: View {
 	let type: CategoryType
 	
-	@StateObject private var viewModel = CategoryListViewModel()
+	@StateObject private var viewModel = CategoryViewModel()
 	@State var targetTitle: String
 	
 	public init(type: CategoryType, targetTitle: String) {

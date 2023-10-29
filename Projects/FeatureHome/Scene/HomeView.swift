@@ -9,7 +9,7 @@ import SwiftUI
 import Core
 import DesignSystem
 
-public struct MainView: View {
+public struct HomeView: View {
 	@Environment(\.isSearching) private var isSearching
 	
 	public init() {}
@@ -47,6 +47,6 @@ public struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
 	static var previews: some View {
-		MainView()
+		HomeView()
 	}
 }
