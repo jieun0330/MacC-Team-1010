@@ -6,9 +6,8 @@
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
-import Foundation
-import DesignSystem
 import UIKit
+import DesignSystem
 
 public enum RegionType: String, CaseIterable, Hashable {
 	// 추후 변경

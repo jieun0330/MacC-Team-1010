@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 
 struct MakgeolliInfoView: View {
 	var body: some View {

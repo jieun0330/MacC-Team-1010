@@ -9,7 +9,6 @@
 import SwiftUI
 import Core
 import FeatureCategory
-import FeatureCategoryList
 
 struct RegionView: View {
 	var body: some View {

@@ -6,7 +6,6 @@
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import DesignSystem
 

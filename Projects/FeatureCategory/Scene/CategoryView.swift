@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 import FeatureInformation
 
 public struct CategoryView: View {

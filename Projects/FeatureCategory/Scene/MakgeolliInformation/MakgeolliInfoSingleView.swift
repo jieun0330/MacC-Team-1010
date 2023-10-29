@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 import FeatureInformation
 
 struct MakgeolliInfoSingleView: View {

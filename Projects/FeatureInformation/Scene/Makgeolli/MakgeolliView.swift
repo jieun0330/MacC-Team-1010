@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 
 public struct MakgeolliView: View {
 	let makgeolliData: MockMakgeolliModel
