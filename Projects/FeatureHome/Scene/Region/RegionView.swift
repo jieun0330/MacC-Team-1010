@@ -15,9 +15,9 @@ struct RegionView: View {
 	var body: some View {
 		VStack(spacing: 0) {
 			NavigationLink {
-				CategoryView()
-					.navigationTitle("지역별로 찾기")
-					.navigationBarTitleDisplayMode(.large)
+//				CategoryView()
+//					.navigationTitle("지역별로 찾기")
+//					.navigationBarTitleDisplayMode(.large)
 			} label: {
 				HStack(spacing: 0) {
 					Text("지역별")
@@ -36,10 +36,10 @@ struct RegionView: View {
 				HStack {
 					ForEach(RegionType.allCases, id: \.self) { region in
 						NavigationLink {
-							CategoryListView(
-								type: .region,
-								targetTitle: region.rawValue
-							)
+//							CategoryListView(
+//								type: .region,
+//								targetTitle: region.rawValue
+//							)
 						} label: {
 							RegionSingleView(regionType: region)
 						}
