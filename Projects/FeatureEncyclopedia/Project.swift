@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
-	name: "FeatureCategoryList",
+	name: "FeatureEncyclopedia",
 	product: .framework,
 //	product: .app,
 	dependencies: [
