@@ -13,7 +13,6 @@ public enum TENTENColor {
 	case lightgrey
 	
 	case goldenyellow
-	case shininggold
 	case primary
 	
 	case white
@@ -24,7 +23,9 @@ public enum TENTENColor {
 	case w25
 	case w20
 	case w10
-    
+	
+	case lilac
+	
 	/// 컬러를 불러오기 위한 name space
 	public var name: String {
 		switch self {
@@ -34,7 +35,6 @@ public enum TENTENColor {
 		case .lightgrey: return "lightgrey"
 			
 		case .goldenyellow: return "goldenyellow"
-		case .shininggold: return "shininggold"
 		case .primary: return "primary"
 			
 		case .white: return "white"
@@ -45,6 +45,8 @@ public enum TENTENColor {
 		case .w25: return "w25"
 		case .w20: return "w20"
 		case .w10: return "w10"
+			
+		case .lilac: return "lilac"
 		}
 	}
 }
