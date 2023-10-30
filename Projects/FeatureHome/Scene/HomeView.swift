@@ -15,30 +15,32 @@ public struct HomeView: View {
 	public init() {}
 	
 	public var body: some View {
-		ScrollView(showsIndicators: false) {
-			VStack(spacing: 0) {
-				Spacer()
-					.frame(height: 12)
-				
-				CharacteristicsView()
-				
-				Divider()
-					.frame(height: 1)
-					.padding(.vertical, 20)
-				
-				RegionView()
-				
-				Divider()
-					.frame(height: 1)
-					.padding(.vertical, 20)
-				
-				PriceView()
-				
-				Spacer()
+		NavigationStack {
+			ScrollView(showsIndicators: false) {
+				VStack(spacing: 0) {
+					Spacer()
+						.frame(height: 12)
+					
+					CharacteristicsView()
+					
+					Divider()
+						.frame(height: 1)
+						.padding(.vertical, 20)
+					
+					RegionView()
+					
+					Divider()
+						.frame(height: 1)
+						.padding(.vertical, 20)
+					
+					PriceView()
+					
+					Spacer()
+				}
 			}
+			.opacity(isSearching ? 0 : 1)
+			.animation(.easeIn, value: isSearching)
 		}
-		.opacity(isSearching ? 0 : 1)
-		.animation(.easeIn, value: isSearching)
 	}
 }
 

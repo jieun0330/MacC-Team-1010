@@ -11,13 +11,15 @@ import SwiftUI
 public struct EncyclopediaView: View {
 	public init() { }
 	
-    public var body: some View {
-        Text("EncyclopediaView")
-    }
+	public var body: some View {
+		NavigationStack {
+			Text("EncyclopediaView")
+		}
+	}
 }
 
 struct EncyclopediaView_Previews: PreviewProvider {
-    static var previews: some View {
-        EncyclopediaView()
-    }
+	static var previews: some View {
+		EncyclopediaView()
+	}
 }

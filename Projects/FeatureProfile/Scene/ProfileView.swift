@@ -11,13 +11,15 @@ import SwiftUI
 public struct ProfileView: View {
 	public init() { }
 	
-    public var body: some View {
-        Text("ProfileView")
-    }
+	public var body: some View {
+		NavigationStack {
+			Text("ProfileView")
+		}
+	}
 }
 
 struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
+	static var previews: some View {
+		ProfileView()
+	}
 }

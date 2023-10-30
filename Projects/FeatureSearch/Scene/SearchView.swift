@@ -15,16 +15,18 @@ public struct SearchView: View {
 	public init() { }
 	
 	public var body: some View {
-		ZStack {
-			HomeView()
-			SearchSuggestionView(searchViewModel: searchViewModel)
-		}
-		.searchable(text: $searchViewModel.searchText)
-		.onSubmit(of: .search) {
-			searchViewModel.addSearchHistory()
-		}
-		.onAppear {
-			
+		NavigationStack {
+			ZStack {
+				HomeView()
+				SearchSuggestionView(searchViewModel: searchViewModel)
+			}
+			.searchable(text: $searchViewModel.searchText)
+			.onSubmit(of: .search) {
+				searchViewModel.addSearchHistory()
+			}
+			.onAppear {
+				
+			}
 		}
 	}
 }
