@@ -24,7 +24,7 @@ public struct SearchView: View {
 			searchViewModel.addSearchHistory()
 		}
 		.onAppear {
-			UISearchBar.appearance().tintColor = .designSystem(.searchAccentColor)
+			
 		}
 	}
 }

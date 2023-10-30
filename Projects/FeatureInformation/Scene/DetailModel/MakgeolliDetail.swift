@@ -28,7 +28,6 @@ public struct MakgeolliDetail: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(uiColor: .designSystem(.blackBlock)!))
         .cornerRadius(10)
     }
 }

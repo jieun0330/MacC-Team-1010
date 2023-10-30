@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 
 public struct InformationView: View {
 	public let makgeolliData: MockMakgeolliModel
@@ -40,9 +40,9 @@ public struct InformationView: View {
 		}, label: {
 			isclickHearted ?
 			Image(systemName: "heart.fill")
-				.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
+				.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 			: Image(systemName: "heart")
-				.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
+				.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 		}))
 		.toolbarBackground(Color.black, for: .navigationBar)
 		.background(Color.black)

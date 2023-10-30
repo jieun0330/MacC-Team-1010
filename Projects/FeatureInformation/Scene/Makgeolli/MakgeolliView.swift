@@ -7,8 +7,8 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 
 public struct MakgeolliView: View {
 	let makgeolliData: MockMakgeolliModel
@@ -42,7 +42,6 @@ public struct MakgeolliView: View {
 			Spacer()
 		}
 		.padding()
-		.background(Color(uiColor: .designSystem(.blackBlock)!))
 		.cornerRadius(10)
 	}
 }

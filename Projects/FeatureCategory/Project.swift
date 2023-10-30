@@ -9,7 +9,7 @@ let project = Project.makeModule(
 		.SPM.Kingfisher,
 		.Project.Core,
 		.Project.DesignSystem,
-		.Project.FeatureCategoryList
+		.Project.FeatureInformation
 	],
 	sources: ["Scene/**"]
 )

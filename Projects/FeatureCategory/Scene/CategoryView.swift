@@ -1,52 +1,53 @@
 //
-//  CategoryView.swift
-//  FeatureCategory
+//  CategoryListView.swift
+//  ProjectDescriptionHelpers
 //
-//  Created by Kim SungHun on 2023/10/19.
-//  Copyright © 2023 com.tenten. All rights reserved.
+//  Created by Kim SungHun on 2023/10/20.
 //
 
 import SwiftUI
 import Core
-import FeatureCategoryList
+import DesignSystem
+import FeatureInformation
 
 public struct CategoryView: View {
-	private let regionGroup = stride(from: 0,
-									 to: RegionType.allCases.count,
-									 by: 2).map { startIndex in
-		Array(RegionType.allCases[
-			startIndex..<min(startIndex + 2, RegionType.allCases.count)
-		])
-	}
+	let type: CategoryType
 	
-	public init() { }
+	@StateObject private var viewModel = CategoryViewModel()
+	@State var targetTitle: String
+	
+	public init(type: CategoryType, targetTitle: String) {
+		self.type = type
+		self.targetTitle = targetTitle
+	}
 	
 	public var body: some View {
-		ScrollView(.vertical, showsIndicators: false) {
-			ForEach(regionGroup, id: \.self) { regions in
-				HStack {
-					ForEach(regions, id: \.self) { region in
-						NavigationLink {
-							CategoryListView(
-								type: .region,
-								targetTitle: region.rawValue
-							)
-						} label: {
-							RegionSingleView(regionType: region)
-						}
-					}
-				}
+		VStack {
+			HashtagView(type: self.type,
+						viewModel: viewModel,
+						targetTitle: $targetTitle)
+			.padding(.leading, 16)
+			
+			Spacer()
+				.frame(height: 16)
+			
+			if viewModel.fetchLoading {
+				ProgressView()
+					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+					.tint(.white)
+			} else {
+				MakgeolliInfoView()
+					.padding(.horizontal, 16)
 			}
 		}
-		.padding(.horizontal, 16)
-		.background(Color(uiColor: .designSystem(.bgColor)!))
+		.navigationTitle(targetTitle)
+		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton())
-	}
-}
-
-struct CategoryView_Previews: PreviewProvider {
-	static var previews: some View {
-		CategoryView()
+		.onAppear {
+			if viewModel.fetchLoading {
+				viewModel.fetchCategoryList()
+			}
+		}
 	}
 }

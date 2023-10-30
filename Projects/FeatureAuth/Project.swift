@@ -6,10 +6,9 @@ let project = Project.makeModule(
 	product: .framework,
 //	product: .app,
 	dependencies: [
-		.SPM.Kingfisher,
 		.Project.Core,
 		.Project.DesignSystem,
-		.Project.FeatureMain
+		.Project.FeatureHome
 	],
 	sources: ["Scene/**"]
 )
