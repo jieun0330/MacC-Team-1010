@@ -19,23 +19,29 @@ public struct RootView: View {
 	}
 	
 	public var body: some View {
-		NavigationStack {
-			TabView {
+		TabView {
+			NavigationStack {
 				HomeView()
 					.tabItem {
 						Image(systemName: "house.fill")
 						Text("홈")
 					}
+			}
+			NavigationStack {
 				SearchView()
 					.tabItem {
 						Image(systemName: "magnifyingglass")
 						Text("검색")
 					}
+			}
+			NavigationStack {
 				EncyclopediaView()
 					.tabItem {
 						Image(systemName: "menucard.fill")
 						Text("내 막걸리")
 					}
+			}
+			NavigationStack {
 				ProfileView()
 					.tabItem {
 						Image(systemName: "person.fill")

@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import FeatureMain
+import FeatureHome
 
 public struct SearchView: View {
 	@StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
@@ -16,7 +16,7 @@ public struct SearchView: View {
 	
 	public var body: some View {
 		ZStack {
-			MainView()
+			HomeView()
 			SearchSuggestionView(searchViewModel: searchViewModel)
 		}
 		.searchable(text: $searchViewModel.searchText)

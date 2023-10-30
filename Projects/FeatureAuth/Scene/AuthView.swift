@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FeatureMain
+import FeatureHome
 import Utils
 
 public struct AuthView: View {
@@ -30,7 +30,7 @@ public struct AuthView: View {
 				}
 		}
 		.navigationDestination(isPresented: $keychainCreated) {
-			MainView()
+			HomeView()
 				.navigationBarBackButtonHidden()
 		}
 	}
