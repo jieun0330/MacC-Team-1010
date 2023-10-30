@@ -10,7 +10,6 @@ import SwiftUI
 import DesignSystem
 
 struct SearchSuggestionView: View {
-	@Environment(\.isSearching) private var isSearching
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
@@ -22,8 +21,6 @@ struct SearchSuggestionView: View {
 			}
 		}
 		.padding(.horizontal, 16)
-		.opacity(isSearching ? 1 : 0)
-		.animation(.easeIn, value: isSearching)
 	}
 }
 

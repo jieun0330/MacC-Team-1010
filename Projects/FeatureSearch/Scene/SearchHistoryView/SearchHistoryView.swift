@@ -13,8 +13,11 @@ struct SearchHistoryView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			SearchHistoryControllerView(searchViewModel: searchViewModel)
+			Divider()
+				.foregroundColor(Color(uiColor: .designSystem(.w25)!))
+				.frame(height: 0.33)
 			SearchHistoryListView(searchViewModel: searchViewModel)
 		}
 		.onAppear {

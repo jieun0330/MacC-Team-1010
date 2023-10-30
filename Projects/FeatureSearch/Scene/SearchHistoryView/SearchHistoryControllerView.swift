@@ -7,26 +7,31 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct SearchHistoryControllerView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
-		HStack(spacing: 0) {
+		HStack(alignment: .center, spacing: 0) {
 			Text("최근 검색어")
-				.font(.system(size: 16, weight: .medium))
-				.foregroundColor(.white)
+				.font(.style(.SF14R))
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
 			
 			Spacer()
 			
 			Button(action: {
 				searchViewModel.clearSearchHistory()
 			}, label: {
-				Text("모두 삭제")
-					.font(.system(size: 14, weight: .regular))
+				Text("지우기")
+					.font(.style(.SF14R))
+					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 			})
+			
+			
 		}
-		.frame(height: 40)
+		.padding(.vertical, 10)
+		
 	}
 }
 
