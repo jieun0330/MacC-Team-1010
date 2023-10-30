@@ -19,7 +19,7 @@ struct CharacteristicsSingleView: View {
 				.resizable()
 				.frame(width: 70, height: 70)
 			Text(title)
-				.font(.system(size: 12, weight: .bold))
+				.font(.style(.SF12B))
 				.foregroundColor(.white)
 		}
 	}

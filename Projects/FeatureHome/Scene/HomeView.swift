@@ -18,7 +18,6 @@ public struct HomeView: View {
 				VStack {
 					GeometryReader { proxy in
 						let global = proxy.frame(in: .global)
-						
 						LinearGradient(
 							stops: [
 								Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),

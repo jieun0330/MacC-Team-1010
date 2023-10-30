@@ -8,13 +8,14 @@
 
 import SwiftUI
 import Core
+import DesignSystem
 
 struct CharacteristicsView: View {
 	var body: some View {
 		VStack(spacing: 0) {
 			HStack(spacing: 4) {
 				Text("특징으로 찾기")
-					.font(.system(size: 22, weight: .bold))
+					.font(.style(.SF22B))
 					.foregroundColor(.white)
 				Image(systemName: "chevron.right")
 					.font(.system(size: 22, weight: .bold))

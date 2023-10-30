@@ -8,13 +8,14 @@
 
 import SwiftUI
 import Core
+import DesignSystem
 
 struct LatestCommentView: View {
     var body: some View {
 		VStack {
 			HStack(spacing: 4) {
 				Text("코멘트가 달렸어요")
-					.font(.system(size: 22, weight: .bold))
+					.font(.style(.SF22B))
 					.foregroundColor(.white)
 				Image(systemName: "chevron.right")
 					.font(.system(size: 22, weight: .bold))

@@ -19,14 +19,14 @@ struct LatestCommentSingleView: View {
 			
 			VStack(alignment: .leading, spacing: 0) {
 				Text("좋았어요")
-					.font(.system(size: 12))
+					.font(.style(.SF12R))
 					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 					.padding(.bottom, 3)
 				Text("하늘담 막걸리")
-					.font(.system(size: 14))
+					.font(.style(.SF14R))
 					.padding(.bottom, 1.5)
 				Text("너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요.")
-					.font(.system(size: 14))
+					.font(.style(.SF14R))
 					.lineLimit(2)
 			}
 		}
