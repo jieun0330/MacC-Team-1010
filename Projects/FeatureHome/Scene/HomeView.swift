@@ -16,17 +16,28 @@ public struct HomeView: View {
 		NavigationStack {
 			ScrollView(showsIndicators: false) {
 				VStack {
-					LinearGradient(
-						stops: [
-							Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),
-										  location: 0.00),
-							Gradient.Stop(color: Color(red: 0.4, green: 0.33, blue: 0.13),
-										  location: 1.00),
-						],
-						startPoint: UnitPoint(x: 0.5, y: 0),
-						endPoint: UnitPoint(x: 0.5, y: 1)
-					)
-					.frame(height: 340)
+					GeometryReader { proxy in
+						let global = proxy.frame(in: .global)
+						
+						LinearGradient(
+							stops: [
+								Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),
+											  location: 0.00),
+								Gradient.Stop(color: Color(red: 0.4, green: 0.33, blue: 0.13),
+											  location: 1.00),
+							],
+							startPoint: UnitPoint(x: 0.5, y: 0),
+							endPoint: UnitPoint(x: 0.5, y: 1)
+						)
+						// image로 변경 시 resizable 추가해야함
+						.offset(y: global.minY > 0 ? -global.minY : 0)
+						.frame(
+							height: global.minY > 0 ?
+							(UIScreen.main.bounds.height/2.5) + global.minY
+							: UIScreen.main.bounds.height/2.5
+						)
+					}
+					.frame(height: UIScreen.main.bounds.height / 2.5)
 					.padding(.bottom, 20)
 					
 					CharacteristicsView()
@@ -39,6 +50,15 @@ public struct HomeView: View {
 						.padding(.bottom, 20)
 					
 					NewItemView()
+					
+					Divider()
+						.background(Color(uiColor: .designSystem(.w25)!))
+						.frame(height: 0.33)
+						.padding(.top, 10)
+						.padding(.leading, 20)
+						.padding(.bottom, 20)
+					
+					LatestCommentView()
 				}
 				//			VStack(spacing: 0) {
 				//				Spacer()

@@ -12,7 +12,7 @@ import DesignSystem
 
 struct NewItemSingleView: View {
 	var body: some View {
-		RoundedRectangle(cornerRadius: 10)
+		RoundedRectangle(cornerRadius: 12)
 			.fill(Color(uiColor: .designSystem(.darkgrey)!))
 			.frame(width: 130, height: 244)
 	}
