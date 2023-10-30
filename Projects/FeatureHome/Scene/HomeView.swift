@@ -23,14 +23,12 @@ public struct HomeView: View {
 				CharacteristicsView()
 				
 				Divider()
-					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 					.frame(height: 1)
 					.padding(.vertical, 20)
 				
 				RegionView()
 				
 				Divider()
-					.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 					.frame(height: 1)
 					.padding(.vertical, 20)
 				
@@ -39,7 +37,6 @@ public struct HomeView: View {
 				Spacer()
 			}
 		}
-		.background(Color(uiColor: .designSystem(.bgColor)!))
 		.opacity(isSearching ? 0 : 1)
 		.animation(.easeIn, value: isSearching)
 	}

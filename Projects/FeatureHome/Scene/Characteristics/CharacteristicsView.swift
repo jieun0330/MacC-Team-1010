@@ -43,7 +43,8 @@ struct CharacteristicsView: View {
 							} label: {
 								CharacteristicsSingleView(
 									title: characteristic.description,
-									image: characteristic.characteristicsImage
+//									image: characteristic.characteristicsImage
+									image: UIImage(systemName: "square.and.arrow.up")!
 								).frame(width: 200)
 							}
 						}

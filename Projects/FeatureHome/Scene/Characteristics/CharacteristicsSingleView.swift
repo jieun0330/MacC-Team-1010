@@ -16,7 +16,6 @@ struct CharacteristicsSingleView: View {
 	var body: some View {
 		
 		RoundedRectangle(cornerRadius: 10)
-			.fill(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 			.frame(height: 43)
 			.overlay {
 				HStack {

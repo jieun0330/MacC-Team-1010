@@ -14,7 +14,7 @@ struct RegionSingleView: View {
 	let regionType: RegionType
 	
 	var body: some View {
-		Image(uiImage: regionType.regionImage)
+		Image(uiImage: .designSystem(.mockMakgeolli)!)
 			.resizable()
 			.frame(width: 150, height: 150)
 			.aspectRatio(contentMode: .fit)

@@ -34,20 +34,20 @@ public enum CharacteristicsType: CaseIterable, Hashable {
 		}
 	}
 	
-	public var characteristicsImage: UIImage {
-		switch self {
-		case .sweet:
-			return .designSystem(.sweet)!
-		case .thick:
-			return .designSystem(.thick)!
-		case .sour:
-			return .designSystem(.sour)!
-		case .refresh:
-			return .designSystem(.refresh)!
-		case .alcohol:
-			return .designSystem(.alcohol)!
-		case .additive:
-			return .designSystem(.additive)!
-		}
-	}
+//	public var characteristicsImage: UIImage {
+//		switch self {
+//		case .sweet:
+//			return .designSystem(.sweet)!
+//		case .thick:
+//			return .designSystem(.thick)!
+//		case .sour:
+//			return .designSystem(.sour)!
+//		case .refresh:
+//			return .designSystem(.refresh)!
+//		case .alcohol:
+//			return .designSystem(.alcohol)!
+//		case .additive:
+//			return .designSystem(.additive)!
+//		}
+//	}
 }

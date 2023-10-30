@@ -38,7 +38,6 @@ struct MakgeolliInfoSingleView: View {
 				}
 				
 				Divider()
-					.background(Color(uiColor: .designSystem(.tempLightGrayColor)!))
 					.frame(height: 1)
 					.padding(.horizontal, 16)
 					.padding(.vertical, 16)
@@ -53,9 +52,9 @@ struct MakgeolliInfoSingleView: View {
 				} label: {
 					isclickHearted ?
 					Image(systemName: "heart.fill")
-						.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
+						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 					: Image(systemName: "heart")
-						.foregroundColor(Color(uiColor: .designSystem(.yellowHeart)!))
+						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 				}
 				.padding(.trailing, 20)
 				.padding(.top, 20)

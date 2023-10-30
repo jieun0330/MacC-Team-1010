@@ -24,7 +24,6 @@ public struct CustomBackButton: View {
 				Image(systemName: "chevron.left")
 				Text(title)
 			}
-			.foregroundColor(Color(uiColor: .designSystem(.tempBackButtonGrayColor)!))
 		}
 	}
 }

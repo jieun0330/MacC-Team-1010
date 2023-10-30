@@ -28,7 +28,6 @@ public struct TasteRatingView: View {
 			}
 			.padding()
 		}
-		.background(Color(uiColor: .designSystem(.blackBlock)!))
 		.cornerRadius(10)
 	}
 }
@@ -43,7 +42,7 @@ private extension TasteRatingView {
 				.foregroundColor(.white)
 			Circle()
 				.frame(width: 60, height: 60)
-				.foregroundColor(Color(uiColor: .designSystem(.tasteCircle)!).opacity(
+				.foregroundColor(Color(uiColor: .designSystem(.primary)!).opacity(
 					tasteRating == 0 ? 0.1
 					: tasteRating == 1 ? 0.2
 					: tasteRating == 2 ? 0.4

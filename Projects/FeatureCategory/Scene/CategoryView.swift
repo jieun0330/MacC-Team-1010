@@ -40,7 +40,6 @@ public struct CategoryView: View {
 					.padding(.horizontal, 16)
 			}
 		}
-		.background(Color(uiColor: .designSystem(.bgColor)!))
 		.navigationTitle(targetTitle)
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)

@@ -38,7 +38,6 @@ struct SearchResultSingleView: View {
 		}
 		.padding(.horizontal, 16)
 		.padding(.vertical, 10)
-		.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 		.clipShape(RoundedRectangle(cornerRadius: 10))
 	}
 }

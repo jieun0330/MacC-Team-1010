@@ -7,49 +7,44 @@
 //
 
 public enum TENTENColor {
-	case bgColor
+	case darkbase
 	
-	case additiveColor
-	case alcoholColor
-	case refreshColor
-	case sourColor
-	case sweetColor
-	case thickColor
+	case darkgrey
+	case lightgrey
 	
-	case tempDarkGrayColor
-	case tempLightGrayColor
-	case tempBackButtonGrayColor
-  
-    case tasteCircle
-    case grayFont
-    case blueTemp
-    case blackBlock
-    case yellowHeart
-
+	case goldenyellow
+	case shininggold
+	case primary
 	
-    case searchAccentColor
+	case white
+	case w75
+	case w60
+	case w50
+	case w40
+	case w25
+	case w20
+	case w10
     
 	/// 컬러를 불러오기 위한 name space
 	public var name: String {
 		switch self {
-		case .bgColor: return "bgColor"
-		case .additiveColor: return "additiveColor"
-		case .alcoholColor: return "alcoholColor"
-		case .refreshColor: return "refreshColor"
-		case .sourColor: return "sourColor"
-		case .sweetColor: return "sweetColor"
-		case .thickColor: return "thickColor"
-		case .tempDarkGrayColor: return "tempDarkGrayColor"
-		case .tempLightGrayColor: return "tempLightGrayColor"
-      		case .tempBackButtonGrayColor: return "tempBackButtonGrayColor"
-            
-        case .tasteCircle: return "tasteCircle"
-        case .grayFont: return "grayFont"
-        case .blueTemp: return "blueTemp"
-        case .blackBlock: return "blackBlock"
-        case .yellowHeart: return "yellowHeart"
-
-        case .searchAccentColor: return "searchAccentColor"
+		case .darkbase: return "darkbase"
+			
+		case .darkgrey: return "darkgrey"
+		case .lightgrey: return "lightgrey"
+			
+		case .goldenyellow: return "goldenyellow"
+		case .shininggold: return "shininggold"
+		case .primary: return "primary"
+			
+		case .white: return "white"
+		case .w75: return "w75"
+		case .w60: return "w60"
+		case .w50: return "w50"
+		case .w40: return "w40"
+		case .w25: return "w25"
+		case .w20: return "w20"
+		case .w10: return "w10"
 		}
 	}
 }

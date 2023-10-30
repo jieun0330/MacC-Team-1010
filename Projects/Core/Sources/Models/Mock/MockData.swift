@@ -25,7 +25,7 @@ public class MockData {
 	public static func createMockMakgeolli() -> [MockMakgeolliModel] {
 		var mockMakgeolliArray = [MockMakgeolliModel]()
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .haechang12,
+			imageName: .mockMakgeolli,
 			breweryName: "해창주조장",
 			name: "해창 생막걸리",
 			alcoholContent: 12.0,
@@ -42,7 +42,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .haechang9,
+			imageName: .mockMakgeolli,
 			breweryName: "해창주조장",
 			name: "해창 막걸리 9도",
 			alcoholContent: 9.0,
@@ -59,7 +59,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .bokson,
+			imageName: .mockMakgeolli,
 			breweryName: "복순도가",
 			name: "복순도가 손막걸리",
 			alcoholContent: 6.5,
@@ -76,7 +76,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .neulinmaeul,
+			imageName: .mockMakgeolli,
 			breweryName: "배상면주가",
 			name: "느린마을 막걸리",
 			alcoholContent: 6,
@@ -93,7 +93,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .palpal,
+			imageName: .mockMakgeolli,
 			breweryName: "팔팔양조장",
 			name: "팔팔막걸리",
 			alcoholContent: 6,
@@ -110,7 +110,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .nalu6,
+			imageName: .mockMakgeolli,
 			breweryName: "한강주조",
 			name: "나루 생 막걸리 6도",
 			alcoholContent: 6,
@@ -127,7 +127,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .nalu11,
+			imageName: .mockMakgeolli,
 			breweryName: "한강주조",
 			name: "나루 생 막걸리 11.5도",
 			alcoholContent: 11.5,
@@ -144,7 +144,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .yusangyun,
+			imageName: .mockMakgeolli,
 			breweryName: "국순당",
 			name: "1000억 유산균 막걸리",
 			alcoholContent: 5,
@@ -161,7 +161,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .markholy,
+			imageName: .mockMakgeolli,
 			breweryName: "어메이징브루잉컴퍼니",
 			name: "마크홀리 오리지널 6.0",
 			alcoholContent: 6,
@@ -178,7 +178,7 @@ public class MockData {
 		))
 		
 		mockMakgeolliArray.append(MockMakgeolliModel(
-			imageName: .damun,
+			imageName: .mockMakgeolli,
 			breweryName: "1932포천일동막걸리",
 			name: "담은",
 			alcoholContent: 6.5,

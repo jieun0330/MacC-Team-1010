@@ -18,7 +18,6 @@ struct SearchHistoryListView: View {
 					searchHistoryListSingleView(searchHistory: searchHistory)
 					Divider()
 						.frame(height: 1)
-						.background(Color(uiColor: .designSystem(.tempDarkGrayColor)!))
 				}
 			}
 		}

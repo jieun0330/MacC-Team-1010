@@ -42,7 +42,6 @@ public struct MakgeolliView: View {
 			Spacer()
 		}
 		.padding()
-		.background(Color(uiColor: .designSystem(.blackBlock)!))
 		.cornerRadius(10)
 	}
 }

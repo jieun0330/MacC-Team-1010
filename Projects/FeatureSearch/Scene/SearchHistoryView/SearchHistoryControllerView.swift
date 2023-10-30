@@ -24,7 +24,6 @@ struct SearchHistoryControllerView: View {
 			}, label: {
 				Text("모두 삭제")
 					.font(.system(size: 14, weight: .regular))
-					.foregroundColor(Color(uiColor: .designSystem(.searchAccentColor)!))
 			})
 		}
 		.frame(height: 40)
