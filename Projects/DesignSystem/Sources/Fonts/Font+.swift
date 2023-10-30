@@ -31,6 +31,8 @@ extension Font {
 			return .system(size: 10, weight: .bold)
 		case .SF16R:
 			return .system(size: 16, weight: .regular)
+		case .SF15R:
+			return .system(size: 15, weight: .regular)
 		}
 		
 	}
