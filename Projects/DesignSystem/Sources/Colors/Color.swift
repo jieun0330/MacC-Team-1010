@@ -9,7 +9,7 @@
 public enum TENTENColor {
 	case darkbase
 	
-	case darkgrey
+	case darkGrey
 	case lightgrey
 	
 	case goldenyellow
@@ -31,7 +31,7 @@ public enum TENTENColor {
 		switch self {
 		case .darkbase: return "darkbase"
 			
-		case .darkgrey: return "darkgrey"
+		case .darkGrey: return "darkGrey"
 		case .lightgrey: return "lightgrey"
 			
 		case .goldenyellow: return "goldenyellow"
