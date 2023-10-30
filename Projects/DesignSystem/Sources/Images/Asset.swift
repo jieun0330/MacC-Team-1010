@@ -14,11 +14,31 @@ public enum TENTENAsset {
 	public enum name {
 		
 		case mockMakgeolli
+		
+		case additive
+		case alcohol
+		case refresh
+		case sour
+		case sweet
+		case thick
 
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
 				return "MockMakgeolli"
+				
+			case .additive:
+				return "additive"
+			case .alcohol:
+				return "alcohol"
+			case .refresh:
+				return "refresh"
+			case .sour:
+				return "sour"
+			case .sweet:
+				return "sweet"
+			case .thick:
+				return "thick"
 			}
 		}
 	}
