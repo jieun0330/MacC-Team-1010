@@ -9,6 +9,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import FeatureCategory
 
 struct CharacteristicsView: View {
 	var body: some View {
@@ -27,10 +28,8 @@ struct CharacteristicsView: View {
 				HStack(spacing: 16) {
 					ForEach(CharacteristicsType.allCases, id: \.self) { characteristic in
 						NavigationLink {
-							//								CategoryListView(
-							//									type: .characteristics,
-							//									targetTitle: characteristic.description
-							//								)
+							CategoryView(type: .characteristics,
+										 targetTitle: characteristic.description)
 						} label: {
 							CharacteristicsSingleView(
 								title: characteristic.description,

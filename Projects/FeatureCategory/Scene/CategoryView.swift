@@ -40,7 +40,7 @@ public struct CategoryView: View {
 					.padding(.horizontal, 16)
 			}
 		}
-		.navigationTitle(targetTitle)
+		.navigationTitle("특징으로 찾기")
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)
 		.navigationBarItems(leading: CustomBackButton())

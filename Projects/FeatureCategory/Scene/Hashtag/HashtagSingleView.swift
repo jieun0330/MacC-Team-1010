@@ -27,13 +27,13 @@ struct HashtagSingleView: View {
 			}
 		} label: {
 			Text(title)
-				.font(.system(size: 15))
+				.font(.style(.SF15R))
 				.foregroundColor(.white)
 		}
-		.cornerRadius(40)
+		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
-		.tint(title == targetTitle ? Color(uiColor: .designSystem(.primary)!) :
-				Color(uiColor: .designSystem(.lightgrey)!))
+		.tint(title == targetTitle ? Color(uiColor: .designSystem(.goldenyellow)!) :
+				Color(uiColor: .designSystem(.w20)!))
 		.id(title)
 		.onAppear {
 			withAnimation {
