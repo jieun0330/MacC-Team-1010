@@ -18,12 +18,11 @@ struct MakgeolliInfoView: View {
 			HStack {
 				Text("어떤 방식으로 목록이 나오나요?")
 					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
-					.font(.style(.SF12R))
 				Spacer()
 				Text("추천순")
 					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					.font(.style(.SF12R))
 			}
+			.font(.style(.SF12R))
 			.padding(.horizontal, 16)
 			.padding(.bottom, 16)
 			LazyVGrid(columns: columns) {

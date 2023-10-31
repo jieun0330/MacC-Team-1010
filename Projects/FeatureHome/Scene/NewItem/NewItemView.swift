@@ -21,7 +21,7 @@ struct NewItemView: View {
 				Spacer()
 			}
 			ScrollView(.horizontal, showsIndicators: false) {
-				HStack {
+				HStack(spacing: 16) {
 					ForEach(MockData.createMockMakgeolli(), id: \.self) { _ in
 						NewItemSingleView()
 					}
