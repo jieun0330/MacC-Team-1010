@@ -45,7 +45,6 @@ public struct HomeView: View {
 						.background(Color(uiColor: .designSystem(.w25)!))
 						.frame(height: 0.33)
 						.padding(.top, 10)
-						.padding(.leading, 20)
 						.padding(.bottom, 20)
 					
 					NewItemView()
@@ -54,7 +53,6 @@ public struct HomeView: View {
 						.background(Color(uiColor: .designSystem(.w25)!))
 						.frame(height: 0.33)
 						.padding(.top, 10)
-						.padding(.leading, 20)
 						.padding(.bottom, 20)
 					
 					LatestCommentView()

@@ -19,6 +19,8 @@ struct MakgeolliInfoView: View {
 				ForEach(MockData.createMockMakgeolli(), id: \.self) { data in
 					MakgeolliInfoSingleView(makgeolliData: data)
 						.cornerRadius(12)
+						.padding(.horizontal, 8)
+						.padding(.bottom, 30)
 				}
 			}
 		}
