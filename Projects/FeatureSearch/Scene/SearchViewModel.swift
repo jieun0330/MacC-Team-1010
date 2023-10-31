@@ -41,6 +41,11 @@ final class SearchViewModel: ObservableObject {
 			searchHistorys.remove(at: existingIndex)
 		}
 		searchHistorys.append(searchText)
+		
+		if searchHistorys.count > 10 {
+			searchHistorys.removeFirst()
+		}
+		
 		saveSearchHistorys()
 	}
 	
