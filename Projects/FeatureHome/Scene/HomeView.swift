@@ -41,19 +41,11 @@ public struct HomeView: View {
 					
 					CharacteristicsView()
 					
-					Divider()
-						.background(Color(uiColor: .designSystem(.w25)!))
-						.frame(height: 0.33)
-						.padding(.top, 10)
-						.padding(.bottom, 20)
-					
+					DividerView(topPadding: 10, bottomPadding: 20)
+
 					NewItemView()
 					
-					Divider()
-						.background(Color(uiColor: .designSystem(.w25)!))
-						.frame(height: 0.33)
-						.padding(.top, 10)
-						.padding(.bottom, 20)
+					DividerView(topPadding: 10, bottomPadding: 20)
 					
 					LatestCommentView()
 				}

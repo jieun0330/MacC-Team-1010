@@ -29,11 +29,7 @@ public struct CategoryView: View {
 			.padding(.leading, 16)
 			.padding(.bottom, 10)
 			
-			Divider()
-				.background(Color(uiColor: .designSystem(.w25)!))
-				.frame(height: 0.33)
-				.padding(.top, 10)
-				.padding(.bottom, 16)
+			DividerView(topPadding: 10, bottomPadding: 16)
 			
 			HStack {
 				Text("어떤 방식으로 목록이 나오나요?")
