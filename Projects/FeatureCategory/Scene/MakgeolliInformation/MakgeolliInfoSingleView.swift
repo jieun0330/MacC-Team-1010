@@ -14,50 +14,33 @@ import FeatureInformation
 struct MakgeolliInfoSingleView: View {
 	let makgeolliData: MockMakgeolliModel
 	
-	@State private var isclickHearted: Bool = false
-	
 	var body: some View {
 		NavigationLink {
 			InformationView(makgeolliData: makgeolliData)
 		} label: {
-			VStack {
-				HStack(alignment: .center, spacing: 0) {
-					Image(uiImage: .designSystem(makgeolliData.imageName)!)
-						.resizable()
-						.aspectRatio(contentMode: .fit)
-						.frame(height: 180)
-						.padding(.leading, 40)
-					
-					HStack(spacing: 0) {
-						VStack(alignment: .leading, spacing: 0) {
-							MakgeolliInfoContentView(makgeolliData: makgeolliData)
+			VStack(alignment: .leading, spacing: 0) {
+				RoundedRectangle(cornerRadius: 12)
+					.fill(Color(uiColor: .designSystem(.darkgrey)!))
+					.frame(height: 285)
+					.overlay {
+						VStack {
+							Image(uiImage: .designSystem(.mockMakgeolli)!)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.padding(.bottom, 18)
+							
+							ScoreView(scoreType: .mini,
+									  scores: [1, 2, 3, 4])
 						}
+						.padding(.vertical, 32)
 					}
-					.padding(.leading, 40)
-					Spacer()
-				}
-				
-				Divider()
-					.frame(height: 1)
-					.padding(.horizontal, 16)
-					.padding(.vertical, 16)
-				
-				TasteRatingView(makgeolliData: makgeolliData)
-			}
-			.padding(.vertical, 20)
-			.frame(maxWidth: .infinity)
-			.overlay(alignment: .topTrailing) {
-				Button {
-					self.isclickHearted.toggle()
-				} label: {
-					isclickHearted ?
-					Image(systemName: "heart.fill")
-						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					: Image(systemName: "heart")
-						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-				}
-				.padding(.trailing, 20)
-				.padding(.top, 20)
+				Text("하늘달 막걸리")
+					.font(.style(.SF14R))
+					.padding(.top, 12)
+				Text("9도, 650ml, 5000원")
+					.font(.style(.SF12R))
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+					.padding(.top, 2)
 			}
 		}
 	}

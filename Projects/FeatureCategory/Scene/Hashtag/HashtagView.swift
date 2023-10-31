@@ -13,7 +13,7 @@ struct HashtagView: View {
 	let type: CategoryType
 	
 	@ObservedObject var viewModel: CategoryViewModel
-	@Binding var targetTitle: String
+	@Binding var targetTitle: [String]
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
