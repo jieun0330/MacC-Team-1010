@@ -29,7 +29,7 @@ struct CharacteristicsView: View {
 					ForEach(CharacteristicsType.allCases, id: \.self) { characteristic in
 						NavigationLink {
 							CategoryView(type: .characteristics,
-										 targetTitle: characteristic.description)
+										 targetTitle: [characteristic.description])
 						} label: {
 							CharacteristicsSingleView(
 								title: characteristic.description,

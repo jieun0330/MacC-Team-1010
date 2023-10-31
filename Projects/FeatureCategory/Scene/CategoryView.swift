@@ -14,22 +14,38 @@ public struct CategoryView: View {
 	let type: CategoryType
 	
 	@StateObject private var viewModel = CategoryViewModel()
-	@State var targetTitle: String
+	@State var targetTitle: [String]
 	
-	public init(type: CategoryType, targetTitle: String) {
+	public init(type: CategoryType, targetTitle: [String]) {
 		self.type = type
 		self.targetTitle = targetTitle
 	}
 	
 	public var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			HashtagView(type: self.type,
 						viewModel: viewModel,
 						targetTitle: $targetTitle)
 			.padding(.leading, 16)
+			.padding(.bottom, 10)
 			
-			Spacer()
-				.frame(height: 16)
+			Divider()
+				.background(Color(uiColor: .designSystem(.w25)!))
+				.frame(height: 0.33)
+				.padding(.top, 10)
+				.padding(.bottom, 16)
+			
+			HStack {
+				Text("어떤 방식으로 목록이 나오나요?")
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+					.font(.style(.SF12R))
+				Spacer()
+				Text("추천순")
+					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+					.font(.style(.SF12R))
+			}
+			.padding(.horizontal, 16)
+			.padding(.bottom, 16)
 			
 			if viewModel.fetchLoading {
 				ProgressView()
@@ -37,7 +53,7 @@ public struct CategoryView: View {
 					.tint(.white)
 			} else {
 				MakgeolliInfoView()
-					.padding(.horizontal, 16)
+					.padding(.horizontal, 8)
 			}
 		}
 		.navigationTitle("특징으로 찾기")

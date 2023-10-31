@@ -15,13 +15,19 @@ struct HashtagSingleView: View {
 	let proxy: ScrollViewProxy
 	
 	@ObservedObject var viewModel: CategoryViewModel
-	@Binding var targetTitle: String
+	@Binding var targetTitle: [String]
 	
 	var body: some View {
 		Button {
+			// 선택한 태그에 맞춰 fetch
 			viewModel.fetchCategoryList()
-			targetTitle = title
-			
+			if targetTitle.contains(title) {
+				if let index = targetTitle.firstIndex(where: {$0 == title}) {
+					targetTitle.remove(at: index)
+				}
+			} else {
+				targetTitle.append(title)
+			}
 			withAnimation {
 				proxy.scrollTo(title, anchor: .center)
 			}
@@ -32,7 +38,7 @@ struct HashtagSingleView: View {
 		}
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
-		.tint(title == targetTitle ? Color(uiColor: .designSystem(.goldenyellow)!) :
+		.tint(targetTitle.contains(title) ? Color(uiColor: .designSystem(.goldenyellow)!) :
 				Color(uiColor: .designSystem(.w20)!))
 		.id(title)
 		.onAppear {
