@@ -8,8 +8,8 @@
 
 import Foundation
 
-public struct MakHoly: Codable {
-	
+public struct MakHoly: Identifiable, Codable {
+	public var id: String
 	public let name: String /// 막걸리 이름
 	public let imageURL: String /// 막걸리 이미지
 	public let adv: Double /// 도수
