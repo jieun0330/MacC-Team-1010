@@ -31,18 +31,6 @@ public struct CategoryView: View {
 			
 			DividerView(topPadding: 10, bottomPadding: 16)
 			
-			HStack {
-				Text("어떤 방식으로 목록이 나오나요?")
-					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
-					.font(.style(.SF12R))
-				Spacer()
-				Text("추천순")
-					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					.font(.style(.SF12R))
-			}
-			.padding(.horizontal, 16)
-			.padding(.bottom, 16)
-			
 			if viewModel.fetchLoading {
 				ProgressView()
 					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

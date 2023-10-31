@@ -28,28 +28,9 @@ struct MakgeolliInfoSingleView: View {
 								.resizable()
 								.aspectRatio(contentMode: .fit)
 								.padding(.bottom, 18)
-							HStack(spacing: 0) {
-								VStack {
-									Image(uiImage: .designSystem(.scoremini0)!)
-									Text("단맛")
-										.font(.style(.SF10B))
-								}
-								VStack {
-									Image(uiImage: .designSystem(.scoremini0)!)
-									Text("신맛")
-										.font(.style(.SF10B))
-								}
-								VStack {
-									Image(uiImage: .designSystem(.scoremini0)!)
-									Text("걸쭉")
-										.font(.style(.SF10B))
-								}
-								VStack {
-									Image(uiImage: .designSystem(.scoremini0)!)
-									Text("탄산")
-										.font(.style(.SF10B))
-								}
-							}
+							
+							ScoreView(scoreType: .mini,
+									  scores: [1, 2, 3, 4])
 						}
 						.padding(.vertical, 32)
 					}
