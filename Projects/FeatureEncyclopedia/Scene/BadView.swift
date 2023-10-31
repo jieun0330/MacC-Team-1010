@@ -28,10 +28,3 @@ public struct BadView: View {
         }
     }
 }
-
-//
-//struct BadView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BadView()
-//    }
-//}

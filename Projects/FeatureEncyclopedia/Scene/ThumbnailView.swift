@@ -17,7 +17,7 @@ public struct ThumbnailView: View {
         
         VStack(alignment: .leading) {
             Rectangle()
-                .foregroundColor(Color(uiColor: .designSystem(.darkGrey)!))
+                .foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
                 .cornerRadius(10)
                 .frame(height: 190)
                 .overlay(
@@ -43,10 +43,3 @@ public struct ThumbnailView: View {
         }
     }
 }
-
-
-//struct ThumbnailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ThumbnailView()
-//    }
-//}

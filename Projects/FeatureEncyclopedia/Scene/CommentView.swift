@@ -27,9 +27,3 @@ public struct CommentView: View {
         }
     }
 }
-
-//struct CommentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommentView()
-//    }
-//}

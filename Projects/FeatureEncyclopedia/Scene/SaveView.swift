@@ -27,9 +27,3 @@ public struct SaveView: View {
         }
     }
 }
-
-//struct SaveView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SaveView()
-//    }
-//}

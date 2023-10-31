@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 public struct TabPageView: View {
     
     public init() { }
@@ -37,9 +36,3 @@ public struct TabPageView: View {
         }
     }
 }
-
-//struct TabPageView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GoodView()
-//    }
-//}

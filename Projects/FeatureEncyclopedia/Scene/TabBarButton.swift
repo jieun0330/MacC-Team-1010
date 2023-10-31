@@ -21,9 +21,3 @@ public struct TabBarButton: View {
             .font(.style(.SF14R))
     }
 }
-
-//struct TabBarButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TabView()
-//    }
-//}

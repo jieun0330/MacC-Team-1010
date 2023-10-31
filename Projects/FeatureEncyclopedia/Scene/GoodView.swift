@@ -27,10 +27,3 @@ public struct GoodView: View {
         }
     }
 }
-
-
-//struct GoodView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GoodView()
-//    }
-//}

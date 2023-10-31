@@ -27,9 +27,3 @@ public struct EncyclopediaView: View {
         }
     }
 }
-
-struct EncyclopediaView_Previews: PreviewProvider {
-    static var previews: some View {
-        EncyclopediaView()
-    }
-}

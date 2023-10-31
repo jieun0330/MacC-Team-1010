@@ -33,9 +33,3 @@ struct CustomTopTabBar: View {
         tabIndex = index
     }
 }
-
-//struct CustomTopTabBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomTopTabBar()
-//    }
-//}
