@@ -30,7 +30,7 @@ public struct RootView: View {
 					Image(systemName: "magnifyingglass")
 					Text("검색")
 				}
-			EncyclopediaView()
+            TabPageView()
 				.tabItem {
 					Image(systemName: "menucard.fill")
 					Text("내 막걸리")
