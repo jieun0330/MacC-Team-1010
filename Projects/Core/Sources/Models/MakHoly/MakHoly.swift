@@ -9,6 +9,7 @@
 import Foundation
 
 public struct MakHoly: Identifiable, Codable {
+	
 	public var id: String
 	public let name: String /// 막걸리 이름
 	public let imageURL: String /// 막걸리 이미지
@@ -17,7 +18,7 @@ public struct MakHoly: Identifiable, Codable {
 	public let price: Int /// 가격
 	public let taste: Taste /// 맛 정보
 	public let description: String /// 소개 내용
-	public let awards: [String] ///수상 정보 배열
+	public let awards: [Award] ///수상 정보 배열
 	public let ingredients: [String] /// 원재료 배열
 	public let salesURL: String? /// 판매 사이트
 	public let brewery: Brewery /// 양조장
