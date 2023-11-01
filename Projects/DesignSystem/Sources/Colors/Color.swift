@@ -16,6 +16,7 @@ public enum TENTENColor {
 	case primary
 	
 	case white
+	case w85
 	case w75
 	case w60
 	case w50
@@ -38,6 +39,7 @@ public enum TENTENColor {
 		case .primary: return "primary"
 			
 		case .white: return "white"
+		case .w85: return "w85"
 		case .w75: return "w75"
 		case .w60: return "w60"
 		case .w50: return "w50"
