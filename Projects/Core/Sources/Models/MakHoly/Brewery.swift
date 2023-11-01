@@ -9,6 +9,6 @@
 import Foundation
 
 public struct Brewery: Codable {
-	let name: String /// 양조장 이름
-	let url: String? /// 양조장 사이트
+	public let name: String /// 양조장 이름
+	public let url: String? /// 양조장 사이트
 }

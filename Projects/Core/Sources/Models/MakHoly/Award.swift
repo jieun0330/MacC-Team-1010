@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Award : Codable {
-	let year: Int
-	let name: String
-	let type: String
+	public let year: Int
+	public let name: String
+	public let type: String
 }
 
