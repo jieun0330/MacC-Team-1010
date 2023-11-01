@@ -31,10 +31,10 @@ extension LikeControllerView {
 			}, label: {
 				ZStack{
 					RoundedRectangle(cornerRadius: 12)
-						.frame(width: 150, height: 50)
+						.frame(height: 50)
 						.foregroundColor(buttonState == .like ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
 					
-					HStack(spacing: 5) {
+					HStack(spacing: 3) {
 						Image(systemName: "hand.thumbsup.fill")
 						Text("좋았어요")
 					}
@@ -53,10 +53,10 @@ extension LikeControllerView {
 			}, label: {
 				ZStack{
 					RoundedRectangle(cornerRadius: 12)
-						.frame(width: 150, height: 50)
+						.frame(height: 50)
 						.foregroundColor(buttonState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
 					
-					HStack(spacing: 5) {
+					HStack(spacing: 3) {
 						Image(systemName: "hand.thumbsdown.fill")
 						Text("아쉬워요")
 					}
