@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Review: Codable {
-	let name: String /// 리뷰어 이름
-	let likeState: LikeState /// 좋았어요 상태
-	let comment: String? /// 코멘트
-	let date: String /// 리뷰 작성 시각
+	public let name: String /// 리뷰어 이름
+	public let likeState: LikeState /// 좋았어요 상태
+	public let comment: String? /// 코멘트
+	public let date: String /// 리뷰 작성 시각
 }
