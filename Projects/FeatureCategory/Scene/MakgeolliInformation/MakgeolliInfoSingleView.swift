@@ -16,7 +16,7 @@ struct MakgeolliInfoSingleView: View {
 	
 	var body: some View {
 		NavigationLink {
-			InformationView(makgeolliData: makgeolliData)
+			InformationView()
 		} label: {
 			VStack(alignment: .leading, spacing: 0) {
 				RoundedRectangle(cornerRadius: 12)
