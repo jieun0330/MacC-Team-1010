@@ -6,11 +6,7 @@ let project = Project.makeModule(
 	platform: .iOS,
 	product: .app,
 	dependencies: [
-		.Project.Feature,
-		.SPM.FirebaseAuth,
-		.SPM.FirebaseFirestore,
-		.SPM.FirebaseAnalytics,
-		.SPM.FirebaseRemoteConfig
+		.Project.Feature
 	],
 	sources: ["Sources/**"],
 	resources: ["Resources/**"],

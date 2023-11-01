@@ -5,8 +5,12 @@ let project = Project.makeModule(
 	name: "Core",
 	product: .staticFramework,
 	dependencies: [
+		.Project.Utils,
 		.SPM.Moya,
-		.Project.Utils
+		.SPM.FirebaseAuth,
+		.SPM.FirebaseFirestore,
+		.SPM.FirebaseAnalytics,
+		.SPM.FirebaseRemoteConfig
 	],
 	sources: ["Sources/**"]
 )
