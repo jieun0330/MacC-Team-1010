@@ -23,7 +23,7 @@ private struct TasteScoreViewStyle {
 	init(scoreType: TasteScoreViewType) {
 		switch scoreType {
 		case .mini:
-			outerSpacing = 0.0
+			outerSpacing = 6.0
 			innerSpacing = 4.0
 			font = .SF10B
 			color = .w75
