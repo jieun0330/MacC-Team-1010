@@ -33,14 +33,11 @@ struct TabNameView: View {
                             Spacer()
                                 .frame(height: 10)
                             title.foregroundColor(.white)
-                                .border(.red)
                             Capsule()
                                 .frame(width: 68, height: 2)
                                 .foregroundColor(Color(uiColor: .designSystem(.goldenyellow)!))
                         }
-                        .border(.white)
                         .frame(maxWidth: .infinity)
-                        
                     } else {
                         title.foregroundColor(.gray)
                     }
@@ -49,6 +46,5 @@ struct TabNameView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .border(.green)
     }
 }
