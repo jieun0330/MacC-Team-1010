@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MakHoly: Identifiable, Codable {
+public struct MakHoly: Identifiable {
 	
 	public var id: String
 	public let name: String /// 막걸리 이름
@@ -26,5 +26,24 @@ public struct MakHoly: Identifiable, Codable {
 	public var bookMark: Bool /// 찜하기
 	public var comment: String? /// 코멘트
 	public var reviews: [Review] /// 리뷰들
+	
+	public init(id: String, name: String, imageURL: String, adv: Double, volume: Int, price: Int, taste: Taste, description: String, awards: [Award], ingredients: [String], salesURL: String?, brewery: Brewery, likeState: LikeState, bookMark: Bool, comment: String? = nil, reviews: [Review]) {
+		self.id = id
+		self.name = name
+		self.imageURL = imageURL
+		self.adv = adv
+		self.volume = volume
+		self.price = price
+		self.taste = taste
+		self.description = description
+		self.awards = awards
+		self.ingredients = ingredients
+		self.salesURL = salesURL
+		self.brewery = brewery
+		self.likeState = likeState
+		self.bookMark = bookMark
+		self.comment = comment
+		self.reviews = reviews
+	}
 	
 }

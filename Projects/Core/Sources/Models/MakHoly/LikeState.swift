@@ -8,8 +8,10 @@
 
 import Foundation
 
-public enum LikeState: Codable {
+public enum LikeState {
+	
 	case none /// nil
 	case like /// 좋았어요
 	case dislike /// 아쉬워요
+	///
 }

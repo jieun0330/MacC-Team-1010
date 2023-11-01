@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Taste: Codable {
+public struct Taste {
 	public let sweetness: TasteRating? /// 단맛 점수
 	public let sourness: TasteRating? /// 신맛 점수
 	public let thickness: TasteRating? /// 걸쭉 점수

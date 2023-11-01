@@ -8,7 +8,14 @@
 
 import Foundation
 
-public struct Brewery: Codable {
+public struct Brewery {
+	
 	public let name: String /// 양조장 이름
 	public let url: String? /// 양조장 사이트
+	
+	public init(name: String, url: String?) {
+		self.name = name
+		self.url = url
+	}
+	
 }
