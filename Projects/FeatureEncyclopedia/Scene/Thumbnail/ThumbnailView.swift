@@ -8,10 +8,11 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 public struct ThumbnailView: View {
     
-    let model: ThumbnailModel
+    let model: Thumbnail
     
     public var body: some View {
         

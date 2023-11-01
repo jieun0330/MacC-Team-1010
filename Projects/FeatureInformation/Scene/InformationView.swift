@@ -18,6 +18,8 @@ public struct InformationView: View {
 	public init(makgeolliData: MockMakgeolliModel) {
 		self.makgeolliData = makgeolliData
 	}
+    
+//    public init() { }
 	
 	public var body: some View {
 		ScrollView {

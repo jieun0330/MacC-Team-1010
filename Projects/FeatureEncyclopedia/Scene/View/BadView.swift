@@ -1,25 +1,27 @@
 //
-//  EncyclopediaView.swift
+//  BadView.swift
 //  FeatureEncyclopedia
 //
-//  Created by 박지은 on 2023/10/30.
+//  Created by 박지은 on 2023/10/31.
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
+
 import SwiftUI
 import DesignSystem
+import Core
 
-public struct EncyclopediaView: View {
+public struct BadView: View {
     public init() { }
     
     let columns: [GridItem] = Array(repeating: .init(.fixed(110)), count: 3)
     
-    public var dummyModel = ThumbnailModel.dummyThumbNailModel
+    public var dummyModel = Thumbnail.dummyThumbNailModel
     
     public var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, content: {
-                ForEach(dummyModel, content: { (dataItem: ThumbnailModel) in
+                ForEach(dummyModel, content: { (dataItem: Thumbnail) in
                     
                     ThumbnailView(model: dataItem)
                 })
