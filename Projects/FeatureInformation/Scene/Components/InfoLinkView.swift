@@ -8,11 +8,7 @@
 
 import SwiftUI
 import DesignSystem
-
-public struct Brewery: Codable {
-	let name: String /// 양조장 이름
-	let url: String? /// 양조장 사이트
-}
+import Core
 
 struct InfoLinkView: View {
 	
@@ -87,16 +83,12 @@ struct InfoLinkView: View {
 				
 			}
 			
-			
-			
 		}
     }
-	
-	
 }
 
 struct InfoLinkView_Previews: PreviewProvider {
 	static var previews: some View {
-		InfoLinkView(salesURL: "www.good-tomorrow.co.kr", brewery: Brewery(name: "별산의 막걸리", url: "https://smartstore.naver.com/yangjudoga/products/4714123125"))
+		InfoLinkView(salesURL: "https://smartstore.naver.com/yangjudoga/products/4714123125", brewery: Brewery(name: "별산의 막걸리", url: "https://www.good-tomorrow.co.k"))
 	}
 }
