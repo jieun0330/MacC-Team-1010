@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Award {
+public struct Award: Hashable {
 	
 	public let year: Int
 	public let name: String
