@@ -12,14 +12,14 @@ import DesignSystem
 
 public struct InformationView: View {
 	
-	@State private var isclickHearted: Bool = false
-	
 	public init() {
 	}
 	
 	public var body: some View {
 		ScrollView {
 			VStack(spacing: 10) {
+				
+				TasteScoreView(type: .large, taste: Taste(sweetness: .none, sourness: .two, thickness: .five, freshness: .one))
 				
 				LikeControllerView()
 					.padding(.horizontal, 16)
