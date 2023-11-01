@@ -7,12 +7,7 @@
 //
 
 import SwiftUI
-
-enum LikeState {
-	case none
-	case like
-	case dislike
-}
+import Core
 
 struct LikeControllerView: View {
 	@State var buttonState: LikeState = .none
@@ -59,7 +54,7 @@ extension LikeControllerView {
 				ZStack{
 					RoundedRectangle(cornerRadius: 12)
 						.frame(width: 150, height: 50)
-						.foregroundColor(buttonState == .dislike ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
+						.foregroundColor(buttonState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
 					
 					HStack(spacing: 5) {
 						Image(systemName: "hand.thumbsdown.fill")
