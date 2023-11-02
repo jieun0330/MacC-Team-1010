@@ -10,7 +10,7 @@ import Foundation
 
 public struct MakHoly: Identifiable {
 	
-	public var id: String
+	public var id: String /// 막걸리 ID
 	public let name: String /// 막걸리 이름
 	public let imageURL: String /// 막걸리 이미지
 	public let adv: Double /// 도수
@@ -22,12 +22,12 @@ public struct MakHoly: Identifiable {
 	public let ingredients: [String] /// 원재료 배열
 	public let salesURL: String? /// 판매 사이트
 	public let brewery: Brewery /// 양조장
-	public var likeState: LikeState /// 좋았어요 상태
-	public var bookMark: Bool /// 찜하기
-	public var comment: String? /// 코멘트
+	public var isBookMarked: Bool /// 찜하기
+	public var myLikeState: LikeState /// 좋았어요 상태
+	public var myComment: Comment? /// 코멘트
 	public var reviews: [Review] /// 리뷰들
 	
-	public init(id: String, name: String, imageURL: String, adv: Double, volume: Int, price: Int, taste: Taste, description: String, awards: [Award], ingredients: [String], salesURL: String?, brewery: Brewery, likeState: LikeState, bookMark: Bool, comment: String? = nil, reviews: [Review]) {
+	public init(id: String, name: String, imageURL: String, adv: Double, volume: Int, price: Int, taste: Taste, description: String, awards: [Award], ingredients: [String], salesURL: String?, brewery: Brewery, myLikeState: LikeState, isBookMarked: Bool, myComment: Comment?, reviews: [Review]) {
 		self.id = id
 		self.name = name
 		self.imageURL = imageURL
@@ -40,9 +40,9 @@ public struct MakHoly: Identifiable {
 		self.ingredients = ingredients
 		self.salesURL = salesURL
 		self.brewery = brewery
-		self.likeState = likeState
-		self.bookMark = bookMark
-		self.comment = comment
+		self.myLikeState = myLikeState
+		self.isBookMarked = isBookMarked
+		self.myComment = myComment
 		self.reviews = reviews
 	}
 	

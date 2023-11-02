@@ -12,13 +12,11 @@ public struct Review {
 	
 	public let name: String /// 리뷰어 이름
 	public let likeState: LikeState /// 좋았어요 상태
-	public let comment: String? /// 코멘트
-	public let date: String /// 리뷰 작성 시각
+	public let comment: Comment? /// 코멘트
 	
-	public init(name: String, likeState: LikeState, comment: String?, date: String) {
+	public init(name: String, likeState: LikeState, comment: Comment?) {
 		self.name = name
 		self.likeState = likeState
 		self.comment = comment
-		self.date = date
 	}
 }
