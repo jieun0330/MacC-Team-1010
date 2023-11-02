@@ -19,27 +19,21 @@ struct TabNameView: View {
         
         ScrollViewReader { proxy in
             
-            HStack(spacing: 20) {
+            HStack(spacing: 10) {
                 ForEach(titles.indices) {id in
-                    
                     let title = Text(titles[id])
                         .frame(width: 52)
                         .onTapGesture {
                             index = id
                         }
-                    
-                    if self.index == id {
-                        VStack {
-                            Spacer()
-                                .frame(height: 10)
-                            title.foregroundColor(.white)
-                            Capsule()
-                                .frame(width: 68, height: 2)
-                                .foregroundColor(Color(uiColor: .designSystem(.goldenyellow)!))
-                        }
-                        .frame(maxWidth: .infinity)
-                    } else {
-                        title.foregroundColor(.gray)
+                    VStack {
+                        Spacer()
+                            .frame(height: 10)
+                        title
+                            .foregroundColor(self.index == id ? .white : .gray)
+                        Capsule()
+                            .frame(width: 68, height: 2)
+                            .foregroundColor(self.index == id ? Color(uiColor: .designSystem(.goldenyellow)!) : .black)
                     }
                 }
                 .font(.style(.SF14R))

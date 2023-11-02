@@ -25,5 +25,6 @@ public struct EncyclopediaView: View {
                 })
             })
         }
+
     }
 }
