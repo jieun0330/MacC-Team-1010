@@ -23,10 +23,3 @@ struct SearchSuggestionView: View {
 		.padding(.horizontal, 16)
 	}
 }
-
-struct MainView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchSuggestionView(searchViewModel: SearchViewModel())
-	}
-}
-
