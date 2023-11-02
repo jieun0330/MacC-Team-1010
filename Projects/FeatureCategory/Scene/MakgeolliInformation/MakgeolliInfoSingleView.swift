@@ -16,7 +16,7 @@ struct MakgeolliInfoSingleView: View {
 	
 	var body: some View {
 		NavigationLink {
-			InformationView(makgeolliData: makgeolliData)
+			InformationView()
 		} label: {
 			VStack(alignment: .leading, spacing: 0) {
 				RoundedRectangle(cornerRadius: 12)
@@ -29,8 +29,7 @@ struct MakgeolliInfoSingleView: View {
 								.aspectRatio(contentMode: .fit)
 								.padding(.bottom, 18)
 							
-							ScoreView(scoreType: .mini,
-									  scores: [1, 2, 3, 4])
+							TasteScoreView(type: .mini, taste: Taste(sweetness: .one, sourness: .two, thickness: .three, freshness: .four))
 						}
 						.padding(.vertical, 32)
 					}

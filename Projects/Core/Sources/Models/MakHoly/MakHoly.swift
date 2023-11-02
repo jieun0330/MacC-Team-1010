@@ -8,7 +8,15 @@
 
 import Foundation
 
-public struct MakHoly: Identifiable {
+public struct MakHoly: Identifiable, Hashable {
+	
+	public static func == (lhs: MakHoly, rhs: MakHoly) -> Bool {
+		return lhs.id == rhs.id
+	}
+	
+	public func hash(into hasher: inout Hasher) {
+		id.hash(into: &hasher)
+	}
 	
 	public var id: String /// 막걸리 ID
 	public let name: String /// 막걸리 이름

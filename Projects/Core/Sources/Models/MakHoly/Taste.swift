@@ -9,16 +9,24 @@
 import Foundation
 
 public struct Taste {
-	public let sweetness: TasteRating? /// 단맛 점수
-	public let sourness: TasteRating? /// 신맛 점수
-	public let thickness: TasteRating? /// 걸쭉 점수
-	public let freshness: TasteRating? /// 청량 점수
+	public let sweetness: TasteScore /// 단맛 점수
+	public let sourness: TasteScore /// 신맛 점수
+	public let thickness: TasteScore /// 걸쭉 점수
+	public let freshness: TasteScore /// 청량 점수
 	
 	static let descriptions: [String] = ["단맛", "신맛", "걸쭉", "청량"] /// 설명 텍스트
+	
+	public init(sweetness: TasteScore, sourness: TasteScore, thickness: TasteScore, freshness: TasteScore) {
+		self.sweetness = sweetness
+		self.sourness = sourness
+		self.thickness = thickness
+		self.freshness = freshness
+	}
 }
 
-public enum TasteRating: Int, Codable {
-	case zero = 0
+public enum TasteScore: Int, Codable {
+	case none = -1
+	case zero
 	case one
 	case two
 	case three

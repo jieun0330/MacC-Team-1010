@@ -21,25 +21,22 @@ public enum TENTENAsset {
 		case sweet
 		case thick
 		
-		case scorelarge0
-		case scorelarge1
-		case scorelarge2
-		case scorelarge3
-		case scorelarge4
-		case scorelarge5
-		case scoremini0
-		case scoremini1
-		case scoremini2
-		case scoremini3
-		case scoremini4
-		case scoremini5
-		case scoresmall0
-		case scoresmall1
-		case scoresmall2
-		case scoresmall3
-		case scoresmall4
-		case scoresmall5
-
+		case scoreLarge0
+		case scoreLarge1
+		case scoreLarge2
+		case scoreLarge3
+		case scoreLarge4
+		case scoreLarge5
+		case scoreLargeNull
+		
+		case scoreMini0
+		case scoreMini1
+		case scoreMini2
+		case scoreMini3
+		case scoreMini4
+		case scoreMini5
+		case scoreMiniNull
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -58,42 +55,36 @@ public enum TENTENAsset {
 			case .thick:
 				return "thick"
 				
-			case .scorelarge0:
+			case .scoreLarge0:
 				return "scorelarge0"
-			case .scorelarge1:
+			case .scoreLarge1:
 				return "scorelarge1"
-			case .scorelarge2:
+			case .scoreLarge2:
 				return "scorelarge2"
-			case .scorelarge3:
+			case .scoreLarge3:
 				return "scorelarge3"
-			case .scorelarge4:
+			case .scoreLarge4:
 				return "scorelarge4"
-			case .scorelarge5:
+			case .scoreLarge5:
 				return "scorelarge5"
-			case .scoremini0:
+			case .scoreLargeNull:
+				return "scorelargeNull"
+				
+			case .scoreMini0:
 				return "scoremini0"
-			case .scoremini1:
+			case .scoreMini1:
 				return "scoremini1"
-			case .scoremini2:
+			case .scoreMini2:
 				return "scoremini2"
-			case .scoremini3:
+			case .scoreMini3:
 				return "scoremini3"
-			case .scoremini4:
+			case .scoreMini4:
 				return "scoremini4"
-			case .scoremini5:
+			case .scoreMini5:
 				return "scoremini5"
-			case .scoresmall0:
-				return "scoresmall0"
-			case .scoresmall1:
-				return "scoresmall1"
-			case .scoresmall2:
-				return "scoresmall2"
-			case .scoresmall3:
-				return "scoresmall3"
-			case .scoresmall4:
-				return "scoresmall4"
-			case .scoresmall5:
-				return "scoresmall5"
+			case .scoreMiniNull:
+				return "scoreminiNull"
+				
 			}
 		}
 	}
