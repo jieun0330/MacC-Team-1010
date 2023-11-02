@@ -11,6 +11,8 @@ import Core
 import DesignSystem
 
 struct LatestCommentView: View {
+	@ObservedObject var viewModel: HomeViewModel
+	
     var body: some View {
 		VStack {
 			HStack(spacing: 4) {
@@ -22,10 +24,9 @@ struct LatestCommentView: View {
 				Spacer()
 			}
 			VStack(spacing: 16) {
-				LatestCommentSingleView()
-				LatestCommentSingleView()
-				LatestCommentSingleView()
-				LatestCommentSingleView()
+				ForEach(viewModel.reviews, id: \.self) { review in
+					LatestCommentSingleView(review: review)
+				}
 			}
 		}
 		.padding(.horizontal, 16)

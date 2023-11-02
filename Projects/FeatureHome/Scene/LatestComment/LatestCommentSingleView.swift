@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 
 struct LatestCommentSingleView: View {
+	let review: ReviewResponse
+	
     var body: some View {
 		HStack(spacing: 0) {
 			RoundedRectangle(cornerRadius: 12)
@@ -18,14 +21,29 @@ struct LatestCommentSingleView: View {
 				.padding(.trailing, 16)
 			
 			VStack(alignment: .leading, spacing: 0) {
-				Text("좋았어요")
-					.font(.style(.SF12R))
-					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					.padding(.bottom, 3)
+				switch review.preference {
+				case 0:
+					Text("평가가 없어요")
+						.font(.style(.SF12R))
+						.foregroundColor(Color(uiColor: .designSystem(.w60)!))
+						.padding(.bottom, 3)
+				case 1:
+					Text("아쉬워요")
+						.font(.style(.SF12R))
+						.foregroundColor(Color(uiColor: .designSystem(.w60)!))
+						.padding(.bottom, 3)
+				case 2:
+					Text("좋았어요")
+						.font(.style(.SF12R))
+						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+						.padding(.bottom, 3)
+				default:
+					EmptyView()
+				}
 				Text("하늘담 막걸리")
 					.font(.style(.SF14R))
 					.padding(.bottom, 1.5)
-				Text("너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요. 너무 맛있어요.")
+				Text(review.content)
 					.font(.style(.SF14R))
 					.lineLimit(2)
 			}

@@ -10,6 +10,8 @@ import SwiftUI
 import Core
 
 struct NewItemView: View {
+	@ObservedObject var viewModel: HomeViewModel
+	
 	var body: some View {
 		VStack {
 			HStack(spacing: 4) {
