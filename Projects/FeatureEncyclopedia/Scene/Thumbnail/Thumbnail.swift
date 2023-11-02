@@ -6,7 +6,6 @@
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 import DesignSystem
 
@@ -16,7 +15,7 @@ public struct Thumbnail: Identifiable {
     var save: Image
     var makgeolliImage: Image
     
-    var product: Image
+    var liked: Image
     var title: String
 }
 
@@ -27,7 +26,7 @@ extension Thumbnail {
             Thumbnail(comment: Image(systemName: "ellipsis.message.fill"),
                       save: Image(systemName: "heart.fill"),
                       makgeolliImage: Image(uiImage: .designSystem(.mockMakgeolli)!),
-                      product: Image(systemName: "hand.thumbsdown.fill"),
+                      liked: Image(systemName: "hand.thumbsdown.fill"),
                       title: "막걸리 이름")
         }
     }

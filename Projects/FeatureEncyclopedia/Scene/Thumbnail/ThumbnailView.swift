@@ -37,7 +37,7 @@ public struct ThumbnailView: View {
                     }
                 )
             HStack {
-                model.product
+                model.liked
                 Text(model.title)
             }
             .font(.style(.SF14R))

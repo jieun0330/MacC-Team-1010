@@ -20,24 +20,22 @@ public struct TabMenuView: View {
             ZStack {
                 TabView(selection: $index) {
                     ForEach (0..<5) { pageId in
-                        if pageId == 0 {
+                        switch pageId {
+                            
+                        case 0:
                             EncyclopediaView()
-                        }
-                        else if pageId == 1 {
+                        case 1:
                             GoodView()
-                        }
-                        else if pageId == 2 {
+                        case 2:
                             BadView()
-                        }
-                        else if pageId == 3 {
+                        case 3:
                             LikeView()
-                        }
-                        else {
+                        default:
                             CommentView()
                         }
                     }
                 }
-                //                .tabViewStyle(.page(indexDisplayMode: .never))
+//                                .tabViewStyle(.page(indexDisplayMode: .never))
                 VStack {
                     TabNameView(index: $index)
                         .background(Color.black)

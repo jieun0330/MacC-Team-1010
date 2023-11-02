@@ -13,15 +13,13 @@ import Core
 
 public struct CommentView: View {
     public init() { }
-    let columns: [GridItem] = Array(repeating: .init(.fixed(110)), count: 3)
     
-    public var dummyModel = Thumbnail.dummyThumbNailModel
+    let columns: [GridItem] = Array(repeating: .init(.fixed(110)), count: 3)
     
     public var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, content: {
-                ForEach(dummyModel, content: { (dataItem: Thumbnail) in
-                    
+                ForEach(Thumbnail.dummyThumbNailModel, content: { (dataItem: Thumbnail) in
                     ThumbnailView(model: dataItem)
                 })
             })
