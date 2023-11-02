@@ -13,7 +13,7 @@ import DesignSystem
 struct LatestCommentSingleView: View {
 	let review: ReviewResponse
 	
-    var body: some View {
+	var body: some View {
 		HStack(spacing: 0) {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(Color(uiColor: .designSystem(.darkgrey)!))
@@ -40,7 +40,7 @@ struct LatestCommentSingleView: View {
 				default:
 					EmptyView()
 				}
-				Text("하늘담 막걸리")
+				Text(review.makName)
 					.font(.style(.SF14R))
 					.padding(.bottom, 1.5)
 				Text(review.content)
@@ -48,5 +48,5 @@ struct LatestCommentSingleView: View {
 					.lineLimit(2)
 			}
 		}
-    }
+	}
 }

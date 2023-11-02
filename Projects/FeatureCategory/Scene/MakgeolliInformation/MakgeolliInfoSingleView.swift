@@ -12,11 +12,11 @@ import DesignSystem
 import FeatureInformation
 
 struct MakgeolliInfoSingleView: View {
-	let makgeolliData: MockMakgeolliModel
+	let makgeolliData: MakgeolliItem
 	
 	var body: some View {
 		NavigationLink {
-			InformationView()
+			// 막걸리 디테일 뷰로 이동
 		} label: {
 			VStack(alignment: .leading, spacing: 0) {
 				RoundedRectangle(cornerRadius: 12)
@@ -33,10 +33,12 @@ struct MakgeolliInfoSingleView: View {
 						}
 						.padding(.vertical, 32)
 					}
-				Text("하늘달 막걸리")
+				Text(makgeolliData.makName!)
+					.lineLimit(1)
 					.font(.style(.SF14R))
 					.padding(.top, 12)
-				Text("9도, 650ml, 5000원")
+				
+				Text("\(String(format: "%.1f", makgeolliData.makAlcoholPercentage!))도, \(makgeolliData.makVolume!)ml, \(makgeolliData.makPrice!)원")
 					.font(.style(.SF12R))
 					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 					.padding(.top, 2)
