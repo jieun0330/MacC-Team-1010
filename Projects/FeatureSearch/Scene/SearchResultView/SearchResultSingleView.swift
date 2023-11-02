@@ -55,7 +55,6 @@ extension SearchResultSingleView {
 	
 	func descriptionView() -> some View {
 		VStack(alignment: .leading, spacing: 0) {
-			
 			Text(makHoly.name)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))

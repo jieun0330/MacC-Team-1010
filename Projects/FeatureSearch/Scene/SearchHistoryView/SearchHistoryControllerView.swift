@@ -27,8 +27,6 @@ struct SearchHistoryControllerView: View {
 					.font(.style(.SF14R))
 					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 			})
-			
-			
 		}
 		.padding(.vertical, 10)
 		

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 struct SearchHistoryView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
@@ -15,9 +16,7 @@ struct SearchHistoryView: View {
 	var body: some View {
 		VStack(spacing: 0) {
 			SearchHistoryControllerView(searchViewModel: searchViewModel)
-			Divider()
-				.foregroundColor(Color(uiColor: .designSystem(.w25)!))
-				.frame(height: 0.33)
+			DividerView()
 			SearchHistoryListView(searchViewModel: searchViewModel)
 		}
 		.onAppear {

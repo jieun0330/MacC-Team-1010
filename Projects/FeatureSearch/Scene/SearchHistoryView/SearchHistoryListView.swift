@@ -21,6 +21,7 @@ struct SearchHistoryListView: View {
 						Divider()
 							.foregroundColor(Color(uiColor: .designSystem(.w25)!))
 							.frame(height: 0.33)
+					
 				}
 			}
 		}
