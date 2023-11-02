@@ -13,7 +13,7 @@ import Combine
 final class SearchViewModel: ObservableObject {
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
-	@Published var resultMakgeollies: [MockMakgeolliModel] = []
+	@Published var resultMakHolies: [MakHoly] = [MakHoly.test1, MakHoly.test2]
 	@Published var fetchLoading = true
 	
 	private var cancellables = Set<AnyCancellable>()
@@ -26,7 +26,7 @@ final class SearchViewModel: ObservableObject {
 		$searchText
 			.debounce(for: 0.3, scheduler: DispatchQueue.main)
 			.sink { [weak self] (searchText) in
-				self?.searchMakgeollies(searchText: searchText)
+				self?.searchMakHolies(searchText: searchText)
 			}
 			.store(in: &cancellables)
 	}
@@ -71,20 +71,7 @@ final class SearchViewModel: ObservableObject {
 		UserDefaults.standard.set(searchHistorys, forKey: "searchHistorys")
 	}
 	
-	func searchMakgeollies(searchText: String) {
-		resultMakgeollies = []
-		
-		for makgeolli in MockData.createMockMakgeolli() {
-			if makgeolli.breweryName.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.name.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.info.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.awards.contains(where: { $0.lowercased().contains(searchText.lowercased()) }) ||
-				makgeolli.ingredients.contains(where: { $0.lowercased().contains(searchText.lowercased()) }) ||
-				makgeolli.breweryInfo.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.recommendedFood.contains(where: { $0.lowercased().contains(searchText.lowercased()) })
-			{
-				self.resultMakgeollies.append(makgeolli)
-			}
-		}
+	func searchMakHolies(searchText: String) {
+		/// to do 검색 로직 구현
 	}
 }
