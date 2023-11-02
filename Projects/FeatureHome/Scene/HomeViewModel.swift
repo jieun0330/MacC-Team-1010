@@ -32,7 +32,7 @@ final class HomeViewModel: ObservableObject {
 	func fetchNewMakgeolli() {
 		Task {
 			do {
-				let response = try await makgeolliRepository.fetchMakgeolliInfo()
+				let response = try await makgeolliRepository.fetchMakgeolliList()
 				newItems = (response.result?.contents)!
 				fetchLoading = false
 			} catch {

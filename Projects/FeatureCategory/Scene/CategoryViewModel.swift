@@ -27,7 +27,7 @@ final class CategoryViewModel: ObservableObject {
 		Task {
 			do {
 				let stringCategory = categories.map { $0.rawValue }
-				let response = try await makgeolliRepository.fetchMakgeolliInfo(
+				let response = try await makgeolliRepository.fetchMakgeolliList(
 					categories: stringCategory.isEmpty ? nil : stringCategory
 				)
 				makgeollis = (response.result?.contents)!
