@@ -15,7 +15,6 @@ extension Award {
 }
 
 extension Brewery {
-	
 	public static var mockTenTen: Brewery = Brewery(
 		name: "텐텐",
 		url: "https://instagram.com/1010_appleacademy?igshid=YTQwZjQ0NmI0OA%3D%3D&utm_source=qr")
@@ -34,7 +33,7 @@ extension Comment {
 		description: "코멘트 남긴 내용 맛있어요",
 		isOpened: true,
 		date: "2022-10-28")
-	
+
 	public static var mockNotOpened: Comment = Comment(
 		description: "코멘트 남긴 내용 맛 없어요",
 		isOpened: false,
@@ -45,7 +44,6 @@ extension Taste {
 	public static var mock1: Taste = Taste(sweetness: .five, sourness: .four, thickness: .three, freshness: .two)
 	public static var mock2: Taste = Taste(sweetness: .none, sourness: .zero, thickness: .one, freshness: .two)
 }
-
 
 extension Review {
 	public static var mockOpened: Review = Review(name: "리이오", likeState: .like, comment: Comment.mockOpened)
@@ -70,7 +68,6 @@ extension MakHoly {
 		isBookMarked: false,
 		myComment: nil,
 		reviews: [Review.mockOpened, Review.mockNotOpened])
-	
 	
 	public static var test2: MakHoly = MakHoly(
 		id: "test2-ID",
@@ -343,5 +340,4 @@ extension MakHoly {
 		isBookMarked: false,
 		myComment: nil,
 		reviews: [])
-	
 }
