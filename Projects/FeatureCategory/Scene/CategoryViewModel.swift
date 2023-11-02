@@ -7,14 +7,43 @@
 //
 
 import Foundation
+import Core
 
 final class CategoryViewModel: ObservableObject {
 	@Published var fetchLoading = true
+	@Published var makgeollis: [MakgeolliItem] = []
 	
-	func fetchCategoryList() {
+	let makgeolliRepository: DefaultMakgeolliRepository
+	
+	init(
+		makgeolliRepository: DefaultMakgeolliRepository
+	) {
+		self.makgeolliRepository = makgeolliRepository
+	}
+	
+	@MainActor
+	func fetchCategoryMakgeolli(categories: [CharacteristicsType]) {
 		fetchLoading = true
-		DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-			self?.fetchLoading = false
+		Task {
+			do {
+				let stringCategory = categories.map { $0.rawValue }
+				let response = try await makgeolliRepository.fetchMakgeolliInfo(
+					categories: stringCategory.isEmpty ? nil : stringCategory
+				)
+				makgeollis = (response.result?.contents)!
+				fetchLoading = false
+			} catch {
+				// error
+			}
 		}
+	}
+	
+	// 페이지네이션, sort 우선 뒤로
+	@MainActor
+	func fetchSortMakgeolli() {
+		//				let response = try await makgeolliRepository.fetchMakgeolliInfo(
+		//					lastMakNum: 5,
+		//					categories: ["sweet", "sour"]
+		//				)
 	}
 }

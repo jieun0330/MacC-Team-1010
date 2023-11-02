@@ -14,13 +14,17 @@ import FeatureCategory
 struct CharacteristicsView: View {
 	var body: some View {
 		VStack(spacing: 0) {
-			HStack(spacing: 4) {
-				Text("특징으로 찾기")
-					.font(.style(.SF22B))
-					.foregroundColor(.white)
-				Image(systemName: "chevron.right")
-					.font(.system(size: 22, weight: .bold))
-				Spacer()
+			NavigationLink {
+				CategoryView(type: .characteristics, targetTitle: [])
+			} label: {
+				HStack(spacing: 4) {
+					Text("특징으로 찾기")
+						.font(.style(.SF22B))
+						.foregroundColor(.white)
+					Image(systemName: "chevron.right")
+						.font(.system(size: 22, weight: .bold))
+					Spacer()
+				}
 			}
 			Spacer()
 				.frame(height: 16)
@@ -29,7 +33,7 @@ struct CharacteristicsView: View {
 					ForEach(CharacteristicsType.allCases, id: \.self) { characteristic in
 						NavigationLink {
 							CategoryView(type: .characteristics,
-										 targetTitle: [characteristic.description])
+										 targetTitle: [characteristic])
 						} label: {
 							CharacteristicsSingleView(
 								title: characteristic.description,
