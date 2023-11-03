@@ -58,10 +58,9 @@ extension SearchResultSingleView {
 			Text(makHoly.name)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
-				.foregroundColor(.white)
 			Text(makHoly.formattedSet())
-				.font(.system(size: 14, weight: .regular))
-				.foregroundColor(.white)
+				.font(.style(.SF12R))
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				.opacity(0.5)
 		}
 	}
