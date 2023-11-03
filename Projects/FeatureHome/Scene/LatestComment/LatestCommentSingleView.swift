@@ -11,8 +11,6 @@ import Core
 import DesignSystem
 
 struct LatestCommentSingleView: View {
-	let review: ReviewResponse
-	
 	var body: some View {
 		NavigationLink {
 			// 막걸리 상세 뷰로 이동
@@ -24,29 +22,14 @@ struct LatestCommentSingleView: View {
 					.padding(.trailing, 16)
 				
 				VStack(alignment: .leading, spacing: 0) {
-					switch review.preference {
-					case 0:
-						Text("평가가 없어요")
-							.font(.style(.SF12R))
-							.foregroundColor(Color(uiColor: .designSystem(.w60)!))
-							.padding(.bottom, 3)
-					case 1:
-						Text("아쉬워요")
-							.font(.style(.SF12R))
-							.foregroundColor(Color(uiColor: .designSystem(.w60)!))
-							.padding(.bottom, 3)
-					case 2:
-						Text("좋았어요")
-							.font(.style(.SF12R))
-							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-							.padding(.bottom, 3)
-					default:
-						EmptyView()
-					}
-					Text(review.makName)
+					Text("평가가 없어요")
+						.font(.style(.SF12R))
+						.foregroundColor(Color(uiColor: .designSystem(.w60)!))
+						.padding(.bottom, 3)
+					Text("review.makName")
 						.font(.style(.SF14R))
 						.padding(.bottom, 1.5)
-					Text(review.content)
+					Text("review.content")
 						.font(.style(.SF14R))
 						.lineLimit(2)
 				}

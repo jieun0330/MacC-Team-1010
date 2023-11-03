@@ -28,9 +28,7 @@ struct LatestCommentView: View {
 				}
 			}
 			VStack(spacing: 16) {
-				ForEach(viewModel.reviews, id: \.self) { review in
-					LatestCommentSingleView(review: review)
-				}
+				LatestCommentSingleView()
 			}
 		}
 		.padding(.horizontal, 16)

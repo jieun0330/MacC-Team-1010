@@ -11,21 +11,14 @@ import Core
 
 final class HomeViewModel: ObservableObject {
 	@Published var newItems: [MakgeolliItem] = []
-	@Published var reviews: [ReviewResponse] = []
 	@Published var fetchLoading = true
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
-	let reviewRepository: DefaultReviewRepository
-	let userRepository: DefaultUserRepository
 	
 	init(
-		makgeolliRepository: DefaultMakgeolliRepository,
-		reviewRepository: DefaultReviewRepository,
-		userRepository: DefaultUserRepository
+		makgeolliRepository: DefaultMakgeolliRepository
 	) {
 		self.makgeolliRepository = makgeolliRepository
-		self.reviewRepository = reviewRepository
-		self.userRepository = userRepository
 	}
 	
 	@MainActor
@@ -34,18 +27,6 @@ final class HomeViewModel: ObservableObject {
 			do {
 				let response = try await makgeolliRepository.fetchMakgeolliList()
 				newItems = (response.result?.contents)!
-				fetchLoading = false
-			} catch {
-				// error
-			}
-		}
-	}
-	
-	@MainActor
-	func fetchReview() {
-		Task {
-			do {
-				reviews = try await reviewRepository.fetchReview()
 				fetchLoading = false
 			} catch {
 				// error
