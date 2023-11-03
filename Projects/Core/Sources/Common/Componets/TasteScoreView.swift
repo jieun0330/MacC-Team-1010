@@ -46,12 +46,6 @@ public struct TasteScoreView: View {
 	let thickness: Int // 걸쭉 점수
 	let freshness: Int // 청량 점수
 	
-//	public init(type : TasteScoreViewType, taste: Taste) {
-//		self.type = type
-//		self.taste = taste
-//		self.style = TasteScoreViewStyle(scoreType: type)
-//	}
-	
 	public init(
 		type: TasteScoreViewType,
 		sweetness: Int,
