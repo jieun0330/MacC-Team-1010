@@ -11,36 +11,35 @@ import Core
 import DesignSystem
 
 struct HashtagSingleView: View {
-	let title: String
+	let type: CharacteristicsType
 	let proxy: ScrollViewProxy
 	
 	@ObservedObject var viewModel: CategoryViewModel
-	@Binding var targetTitle: [String]
+	@Binding var targetTitle: [CharacteristicsType]
 	
 	var body: some View {
 		Button {
-			// 선택한 태그에 맞춰 fetch
-			viewModel.fetchCategoryList()
-			if targetTitle.contains(title) {
-				if let index = targetTitle.firstIndex(where: {$0 == title}) {
+			if targetTitle.contains(type) {
+				if let index = targetTitle.firstIndex(where: {$0 == type}) {
 					targetTitle.remove(at: index)
 				}
 			} else {
-				targetTitle.append(title)
+				targetTitle.append(type)
 			}
 			withAnimation {
-				proxy.scrollTo(title, anchor: .center)
+				proxy.scrollTo(type, anchor: .center)
 			}
+			viewModel.fetchCategoryMakgeolli(categories: targetTitle)
 		} label: {
-			Text(title)
+			Text(type.description)
 				.font(.style(.SF15R))
 				.foregroundColor(.white)
 		}
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
-		.tint(targetTitle.contains(title) ? Color(uiColor: .designSystem(.goldenyellow)!) :
+		.tint(targetTitle.contains(type) ? Color(uiColor: .designSystem(.goldenyellow)!) :
 				Color(uiColor: .designSystem(.w20)!))
-		.id(title)
+		.id(type)
 		.onAppear {
 			withAnimation {
 				proxy.scrollTo(targetTitle)

@@ -5,8 +5,8 @@ let project = Project.makeModule(
 	name: "Core",
 	product: .staticFramework,
 	dependencies: [
-		.SPM.Moya,
-		.Project.Utils
+		.Project.Utils,
+		.SPM.Moya
 	],
 	sources: ["Sources/**"]
 )

@@ -8,22 +8,29 @@
 
 import SwiftUI
 import Core
+import FeatureCategory
 
 struct NewItemView: View {
+	@ObservedObject var viewModel: HomeViewModel
+	
 	var body: some View {
 		VStack {
-			HStack(spacing: 4) {
-				Text("새로 나왔어요")
-					.font(.style(.SF22B))
-					.foregroundColor(.white)
-				Image(systemName: "chevron.right")
-					.font(.system(size: 22, weight: .bold))
-				Spacer()
+			NavigationLink {
+				CategoryView(type: .new, targetTitle: [])
+			} label: {
+				HStack(spacing: 4) {
+					Text("새로 나왔어요")
+						.font(.style(.SF22B))
+						.foregroundColor(.white)
+					Image(systemName: "chevron.right")
+						.font(.system(size: 22, weight: .bold))
+					Spacer()
+				}
 			}
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 16) {
-					ForEach(MockData.createMockMakgeolli(), id: \.self) { _ in
-						NewItemSingleView()
+					ForEach(viewModel.newItems, id: \.self) { item in
+						NewItemSingleView(item: item)
 					}
 				}
 			}

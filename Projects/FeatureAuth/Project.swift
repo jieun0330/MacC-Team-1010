@@ -3,7 +3,7 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
 	name: "FeatureAuth",
-	product: .framework,
+	product: .staticFramework,
 //	product: .app,
 	dependencies: [
 		.Project.Core,

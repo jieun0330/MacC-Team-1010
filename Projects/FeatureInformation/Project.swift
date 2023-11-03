@@ -3,7 +3,7 @@ import ProjectDescriptionHelpers
 
 let project = Project.makeModule(
 	name: "FeatureInformation",
-	product: .framework,
+	product: .staticFramework,
 //	product: .app,
 	dependencies: [
 		.SPM.Kingfisher,

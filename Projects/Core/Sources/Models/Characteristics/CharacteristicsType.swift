@@ -9,11 +9,11 @@
 import UIKit
 import DesignSystem
 
-public enum CharacteristicsType: CaseIterable, Hashable {
+public enum CharacteristicsType: String, CaseIterable, Hashable {
 	case sweet
 	case thick
 	case sour
-	case refresh
+	case fresh
 	case additive
 	
 	public var description: String {
@@ -24,7 +24,7 @@ public enum CharacteristicsType: CaseIterable, Hashable {
 			return "걸쭉한"
 		case .sour:
 			return "시큼한"
-		case .refresh:
+		case .fresh:
 			return "탄삼감 좋은"
 		case .additive:
 			return "아스파탐이 없는"
@@ -39,7 +39,7 @@ public enum CharacteristicsType: CaseIterable, Hashable {
 			return .designSystem(.thick)!
 		case .sour:
 			return .designSystem(.sour)!
-		case .refresh:
+		case .fresh:
 			return .designSystem(.refresh)!
 		case .additive:
 			return .designSystem(.additive)!
