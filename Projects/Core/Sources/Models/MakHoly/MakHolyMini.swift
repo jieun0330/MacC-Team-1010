@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MakHolyMini {
+public struct MakHolyMini: Identifiable, Hashable {
 	public let id: String // 막걸리 ID - Seq
 	public let name: String // 막걸리 이름
 	public let imageId: String // 이미지 ID

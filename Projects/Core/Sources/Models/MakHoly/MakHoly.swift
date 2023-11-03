@@ -8,7 +8,16 @@
 
 import Foundation
 
-public struct MakHoly {
+public struct MakHoly: Identifiable, Hashable {
+	
+	public static func == (lhs: MakHoly, rhs: MakHoly) -> Bool {
+		return lhs.id == rhs.id
+	}
+	
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+	}
+	
 	public init (
 		makHolyMini: MakHolyMini,
 		comments: [Comment],
