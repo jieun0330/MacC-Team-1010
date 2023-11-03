@@ -13,7 +13,7 @@ import Combine
 final class SearchViewModel: ObservableObject {
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
-	@Published var resultMakgeollies: [MockMakgeolliModel] = []
+	@Published var resultMakHolies: [MakHoly] = []
 	@Published var fetchLoading = true
 	
 	private var cancellables = Set<AnyCancellable>()
@@ -26,7 +26,7 @@ final class SearchViewModel: ObservableObject {
 		$searchText
 			.debounce(for: 0.3, scheduler: DispatchQueue.main)
 			.sink { [weak self] (searchText) in
-				self?.searchMakgeollies(searchText: searchText)
+				self?.searchMakHolies(searchText: searchText)
 			}
 			.store(in: &cancellables)
 	}
@@ -41,6 +41,11 @@ final class SearchViewModel: ObservableObject {
 			searchHistorys.remove(at: existingIndex)
 		}
 		searchHistorys.append(searchText)
+		
+		if searchHistorys.count > 10 {
+			searchHistorys.removeFirst()
+		}
+		
 		saveSearchHistorys()
 	}
 	
@@ -66,20 +71,18 @@ final class SearchViewModel: ObservableObject {
 		UserDefaults.standard.set(searchHistorys, forKey: "searchHistorys")
 	}
 	
-	func searchMakgeollies(searchText: String) {
-		resultMakgeollies = []
+	func searchMakHolies(searchText: String) {
+		resultMakHolies = []
 		
-		for makgeolli in MockData.createMockMakgeolli() {
-			if makgeolli.breweryName.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.name.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.info.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.awards.contains(where: { $0.lowercased().contains(searchText.lowercased()) }) ||
-				makgeolli.ingredients.contains(where: { $0.lowercased().contains(searchText.lowercased()) }) ||
-				makgeolli.breweryInfo.lowercased().contains(searchText.lowercased()) ||
-				makgeolli.recommendedFood.contains(where: { $0.lowercased().contains(searchText.lowercased()) })
+		for makHoly in MakHoly.mockMakHolies {
+			if makHoly.name.contains(searchText) ||
+				makHoly.brewery.name.contains(searchText) ||
+				makHoly.ingredients.contains(where: { $0.contains(searchText) }) ||
+				makHoly.awards.contains(where: { $0.name.contains(searchText) })
 			{
-				self.resultMakgeollies.append(makgeolli)
+				self.resultMakHolies.append(makHoly)
 			}
 		}
+		
 	}
 }

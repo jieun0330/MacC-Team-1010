@@ -13,11 +13,15 @@ struct SearchHistoryListView: View {
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
-			ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
-				VStack {
-					searchHistoryListSingleView(searchHistory: searchHistory)
-					Divider()
-						.frame(height: 1)
+			
+			VStack(spacing: 0) {
+				ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
+					
+						searchHistoryListSingleView(searchHistory: searchHistory)
+						Divider()
+							.foregroundColor(Color(uiColor: .designSystem(.w25)!))
+							.frame(height: 0.33)
+					
 				}
 			}
 		}
@@ -27,14 +31,14 @@ struct SearchHistoryListView: View {
 private extension SearchHistoryListView {
 	@ViewBuilder
 	func searchHistoryListSingleView(searchHistory: String) -> some View {
-		HStack {
+		HStack(alignment: .center, spacing: 0) {
 			Button(action: {
 				searchViewModel.setCompletion(searchHistory)
 			}, label: {
 				HStack {
 					Text(searchHistory)
-						.font(.system(size: 16, weight: .regular))
-						.foregroundColor(.white)
+						.font(.style(.SF16R))
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
 			})
@@ -42,11 +46,11 @@ private extension SearchHistoryListView {
 				searchViewModel.deleteSearchHistory(searchHistory)
 			}, label: {
 				Image(systemName: "xmark")
-					.font(.system(size: 14, weight: .regular))
-					.foregroundColor(.white)
+					.font(.style(.SF16R))
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 			})
 		}
-		.padding(.horizontal, 4)
+		.padding(.vertical, 15)
 	}
 }
 

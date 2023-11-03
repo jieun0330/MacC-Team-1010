@@ -8,22 +8,27 @@
 
 import SwiftUI
 import FeatureInformation
+import Core
 
 struct SearchResultView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
-			ForEach(searchViewModel.resultMakgeollies, id: \.self) { makgeolli in
+			ForEach(searchViewModel.resultMakHolies) { makHoly in
 				NavigationLink {
 					InformationView()
 						.onAppear {
 							searchViewModel.addSearchHistory()
 						}
 				} label: {
-					SearchResultSingleView(makgeolliData: makgeolli)
+					SearchResultSingleView(makHoly: makHoly)
 				}
-				Spacer().frame(height: 10)
+				
+				if makHoly != searchViewModel.resultMakHolies.last {
+					DividerView()
+				}
+				
 			}
 		}
 	}
