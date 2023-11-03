@@ -54,4 +54,7 @@ public struct MakHoly: Identifiable, Hashable {
 		self.reviews = reviews
 	}
 	
+	public func formattedSet() -> String {
+		return self.adv.formattedAdv() + " ・ " + self.volume.formattedVolume() + " ・ " + self.price.formattedPrice()
+	}
 }

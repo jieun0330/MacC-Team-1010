@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import FeatureHome
 
 public struct SearchView: View {
 	@StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
@@ -16,25 +15,20 @@ public struct SearchView: View {
 	
 	public var body: some View {
 		NavigationStack {
-			ZStack {
-				HomeView()
-				SearchSuggestionView(searchViewModel: searchViewModel)
-			}
-			.searchable(text: $searchViewModel.searchText)
-			.onSubmit(of: .search) {
-				searchViewModel.addSearchHistory()
-			}
-			.onAppear {
-				
-			}
+			SearchSuggestionView(searchViewModel: searchViewModel)
+				.searchable(text: $searchViewModel.searchText)
+				.onSubmit(of: .search) {
+					searchViewModel.addSearchHistory()
+				}
+				.onAppear {
+					UISearchBar.appearance().tintColor = .designSystem(.primary)
+				}
 		}
 	}
 }
 
 struct SearchView_Previews: PreviewProvider {
 	static var previews: some View {
-		NavigationStack {
-			SearchView()
-		}
+		SearchView()
 	}
 }
