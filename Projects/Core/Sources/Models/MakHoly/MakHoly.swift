@@ -8,50 +8,60 @@
 
 import Foundation
 
-public struct MakHoly: Identifiable, Hashable {
-	
-	public static func == (lhs: MakHoly, rhs: MakHoly) -> Bool {
-		return lhs.id == rhs.id
-	}
-	
-	public func hash(into hasher: inout Hasher) {
-		id.hash(into: &hasher)
-	}
-	
-	public var id: String /// 막걸리 ID
-	public let name: String /// 막걸리 이름
-	public let imageURL: String /// 막걸리 이미지
-	public let adv: Double /// 도수
-	public let volume: Int /// 용량
-	public let price: Int /// 가격
-	public let taste: Taste /// 맛 정보
-	public let description: String /// 소개 내용
-	public let awards: [Award] ///수상 정보 배열
-	public let ingredients: [String] /// 원재료 배열
-	public let salesURL: String? /// 판매 사이트
-	public let brewery: Brewery /// 양조장
-	public var isBookMarked: Bool /// 찜하기
-	public var myLikeState: LikeState /// 좋았어요 상태
-	public var myComment: Comment? /// 코멘트
-	public var reviews: [Review] /// 리뷰들
-	
-	public init(id: String, name: String, imageURL: String, adv: Double, volume: Int, price: Int, taste: Taste, description: String, awards: [Award], ingredients: [String], salesURL: String?, brewery: Brewery, myLikeState: LikeState, isBookMarked: Bool, myComment: Comment?, reviews: [Review]) {
-		self.id = id
-		self.name = name
-		self.imageURL = imageURL
-		self.adv = adv
-		self.volume = volume
-		self.price = price
-		self.taste = taste
-		self.description = description
-		self.awards = awards
+public struct MakHoly {
+	public init (
+		makHolyMini: MakHolyMini,
+		comments: [Comment],
+		awards: [Award],
+		likeUsers: [String],
+		dislikeUsers: [String],
+		bookmarkUsers: [String],
+		ingredients: String,
+		description: String,
+		brewery: Brewery
+	) {
+		self.id = makHolyMini.id
+		self.name = makHolyMini.name
+		self.imageId = makHolyMini.imageId
+		self.sweetness = makHolyMini.sweetness
+		self.sourness = makHolyMini.sourness
+		self.thickness = makHolyMini.thickness
+		self.freshness = makHolyMini.freshness
+		self.price = makHolyMini.price
+		self.volume = makHolyMini.volume
+		self.adv = makHolyMini.adv
 		self.ingredients = ingredients
-		self.salesURL = salesURL
+		self.description = description
+		
 		self.brewery = brewery
-		self.myLikeState = myLikeState
-		self.isBookMarked = isBookMarked
-		self.myComment = myComment
-		self.reviews = reviews
+		
+		self.comments = comments
+		self.awards = awards
+		
+		self.likeUsers = likeUsers
+		self.dislikeUsers = dislikeUsers
+		self.bookmarkUsers = bookmarkUsers
 	}
 	
+	public let id: String // 막걸리 ID - Seq
+	public let name: String // 막걸리 이름
+	public let imageId: String // 이미지 ID
+	public let sweetness: String // 단맛 점수
+	public let sourness: String // 신맛 점수
+	public let thickness: String // 걸쭉 점수
+	public let freshness: String // 청량 점수
+	public let price: String // 가격
+	public let volume: String // 용량
+	public let adv: String // 알코올 도수
+	public let ingredients: String // 원재료
+	public let description: String // 막걸리 설명
+	
+	public let brewery: Brewery // 브루어리
+	
+	public let comments: [Comment] // 코멘트 리스트 모음
+	public let awards: [Award] // 수상 리스트
+	
+	public let likeUsers: [String] // 유저 ID
+	public let dislikeUsers: [String] // 유저 ID
+	public let bookmarkUsers: [String] // 유저 ID
 }

@@ -22,6 +22,9 @@ public struct MakgeolliDetail: Codable {
 	public let attributes: [MakgeolliAttribute]?
 	
 	public var toEntity: MakHoly {
+		
+		let awards = [Award]
+		
 		return MakHoly(id: String(makSeq ?? 0),
 					   name: makName ?? "",
 					   imageURL: makImageNumber ?? "",

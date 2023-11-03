@@ -9,16 +9,22 @@
 import Foundation
 
 public struct Award: Hashable {
-	
 	public let year: Int
 	public let name: String
 	public let type: String
 	
-	public init(year: Int, name: String, type: String) {
-		self.year = year
-		self.name = name
-		self.type = type
+	public init(_  input: String) {
+		let components = input.components(separatedBy: " ")
+		if components.count >= 4 {
+			let yearString = components[0]
+			self.year = Int(yearString) ?? 0
+			self.name = components[1] + " " 	+ components[2]
+			self.type = components[3]
+			
+		} else {
+			self.year = 0
+			self.name = ""
+			self.type = ""
+		}
 	}
-	
 }
-
