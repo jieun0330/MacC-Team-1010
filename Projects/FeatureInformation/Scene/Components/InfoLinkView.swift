@@ -12,11 +12,9 @@ import Core
 
 struct InfoLinkView: View {
 	
-	public let salesURL: String? /// 판매 사이트
 	public let brewery: Brewery /// 양조장
 	
-	init(salesURL: String?, brewery: Brewery) {
-		self.salesURL = salesURL
+	init(brewery: Brewery) {
 		self.brewery = brewery
 	}
 	
@@ -65,7 +63,7 @@ struct InfoLinkView: View {
 			DividerView()
 			
 			//판매 링크
-			if let url = salesURL {
+			if let url = brewery.salesURL {
 				
 				HStack(alignment: .center) {
 					Text("판매 링크")
@@ -89,6 +87,6 @@ struct InfoLinkView: View {
 
 struct InfoLinkView_Previews: PreviewProvider {
 	static var previews: some View {
-		InfoLinkView(salesURL: "https://smartstore.naver.com/yangjudoga/products/4714123125", brewery: Brewery(name: "별산의 막걸리", url: "https://www.good-tomorrow.co.k"))
+		InfoLinkView(brewery: Brewery.mockTenTen)
 	}
 }

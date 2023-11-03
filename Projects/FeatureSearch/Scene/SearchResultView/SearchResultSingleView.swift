@@ -25,7 +25,7 @@ struct SearchResultSingleView: View {
 			
 			Spacer()
 			
-			TasteScoreView(type: .mini, taste: makHoly.taste)
+			TasteScoreView(type: .mini, sweetness: makHoly.sweetness, sourness: makHoly.sourness, thickness: makHoly.thickness, freshness: makHoly.freshness)
 			
 		}
 		.frame(height: 80)
@@ -58,7 +58,7 @@ extension SearchResultSingleView {
 			Text(makHoly.name)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
-			Text(makHoly.formattedSet())
+			Text(String.formattedSet(adv: makHoly.adv, volume: makHoly.volume, price: makHoly.price))
 				.font(.style(.SF12R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				.opacity(0.5)

@@ -22,27 +22,7 @@ public struct MakgeolliDetail: Codable {
 	public let attributes: [MakgeolliAttribute]?
 	
 	public var toEntity: MakHoly {
-		
-		let awards = [Award]
-		
-		return MakHoly(id: String(makSeq ?? 0),
-					   name: makName ?? "",
-					   imageURL: makImageNumber ?? "",
-					   adv: attributes?.first?.mainDetail?.first?.makAlcoholPercentage ?? 0.0,
-					   volume: attributes?.first?.mainDetail?.first?.makVolume ?? 0,
-					   price: attributes?.first?.mainDetail?.first?.makPrice ?? 0,
-					   taste: Taste(sweetness: .one, sourness: .five, thickness: .four, freshness: .one), // 못함
-					   description: attributes?.description ?? "",
-					   awards: [Award(year: 0, name: "", type: "")], // 못함
-					   ingredients: (attributes?.first?.makRaw?.components(separatedBy: ", ")) ?? [],
-					   salesURL: attributes?.first?.breweryInfo?.first?.makSalesLink,
-					   brewery: Brewery(name: attributes?.first?.breweryInfo?.first?.makBrewery ?? "",
-										url: attributes?.first?.breweryInfo?.first?.makBreweryLink ?? ""),
-					   myLikeState: LikeState.dislike,
-					   isBookMarked: false,
-					   myComment: Comment.init(description: "", isOpened: false, date: ""),
-					   reviews: [Review(name: "", likeState: LikeState.dislike,
-										comment: Comment(description: "", isOpened: false, date: ""))])
+		return MakHoly.test1
 	}
 }
 

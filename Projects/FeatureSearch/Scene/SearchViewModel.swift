@@ -74,10 +74,10 @@ final class SearchViewModel: ObservableObject {
 	func searchMakHolies(searchText: String) {
 		resultMakHolies = []
 		
-		for makHoly in MakHoly.mockMakHolies {
+		for makHoly in MakHoly.mockDatas {
 			if makHoly.name.contains(searchText) ||
 				makHoly.brewery.name.contains(searchText) ||
-				makHoly.ingredients.contains(where: { $0.contains(searchText) }) ||
+				makHoly.ingredients.contains(searchText) ||
 				makHoly.awards.contains(where: { $0.name.contains(searchText) })
 			{
 				self.resultMakHolies.append(makHoly)

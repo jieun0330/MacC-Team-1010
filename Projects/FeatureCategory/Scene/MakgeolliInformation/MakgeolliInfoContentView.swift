@@ -11,14 +11,11 @@ import Core
 import DesignSystem
 
 struct MakgeolliInfoContentView: View {
-	let makgeolliData: MockMakgeolliModel
+	let makHoly: MakHolyMini
 
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
-			Text(makgeolliData.breweryName)
-				.font(.system(size: 16, weight: .bold))
-				.padding(.bottom, 2)
-			Text(makgeolliData.name)
+			Text(makHoly.name)
 				.font(.system(size: 20, weight: .bold))
 				.foregroundColor(.white)
 
@@ -28,7 +25,7 @@ struct MakgeolliInfoContentView: View {
 			HStack(spacing: 10) {
 				Text("도수")
 					.font(.system(size: 16, weight: .regular))
-				Text("\(String(format: "%.1f", makgeolliData.alcoholContent))%")
+				Text("\(String(format: "%.1f", makHoly.adv))%")
 					.font(.system(size: 16, weight: .regular))
 					.foregroundColor(.white)
 			}
@@ -36,7 +33,7 @@ struct MakgeolliInfoContentView: View {
 			HStack(spacing: 10) {
 				Text("용량")
 					.font(.system(size: 16, weight: .regular))
-				Text("\(makgeolliData.capacity)ml")
+				Text("\(makHoly.volume)ml")
 					.font(.system(size: 16, weight: .regular))
 					.foregroundColor(.white)
 			}
@@ -44,7 +41,7 @@ struct MakgeolliInfoContentView: View {
 			HStack(spacing: 10) {
 				Text("가격")
 					.font(.system(size: 16, weight: .regular))
-				Text("\(makgeolliData.price)원")
+				Text("\(makHoly.price)원")
 					.font(.system(size: 16, weight: .regular))
 					.foregroundColor(.white)
 			}

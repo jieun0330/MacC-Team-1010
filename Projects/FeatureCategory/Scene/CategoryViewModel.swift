@@ -10,8 +10,8 @@ import Foundation
 import Core
 
 final class CategoryViewModel: ObservableObject {
-	@Published var fetchLoading = true
-	@Published var makgeollis: [MakgeolliItem] = []
+	@Published var fetchLoading = false
+	@Published var makHolys: [MakHolyMini] = MakHolyMini.mokDatas
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
 	
@@ -26,11 +26,11 @@ final class CategoryViewModel: ObservableObject {
 		fetchLoading = true
 		Task {
 			do {
-				let stringCategory = categories.map { $0.rawValue }
-				let response = try await makgeolliRepository.fetchMakgeolliList(
-					categories: stringCategory.isEmpty ? nil : stringCategory
-				)
-				makgeollis = (response.result?.contents)!
+//				let stringCategory = categories.map { $0.rawValue }
+//				let response = try await makgeolliRepository.fetchMakgeolliList(
+//					categories: stringCategory.isEmpty ? nil : stringCategory
+//				)
+//				makgeollis = (response.result?.contents)!
 				fetchLoading = false
 			} catch {
 				// error

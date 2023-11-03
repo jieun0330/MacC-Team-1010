@@ -9,6 +9,8 @@
 import Foundation
 
 extension Award {
+	public static var mockDatas: [Award] = [Award.mock1, Award.mock2, Award.mock3]
+	
 	public static var mock1: Award = Award("2023 우리술 품평회 대상")
 	public static var mock2: Award = Award("2023 대한민국 주류대상 은상")
 	public static var mock3: Award = Award("2022 우리술 품평회 장려상")
@@ -303,6 +305,8 @@ extension MakHolyMini {
 }
 
 extension MakHoly {
+	public static var mockDatas: [MakHoly] = [test1, test2]
+	
 	public static var test1: MakHoly = MakHoly(
 		makHolyMini: MakHolyMini.test1,
 		comments: [Comment.mock1, Comment.mock2, Comment.mock3, Comment.mock4],

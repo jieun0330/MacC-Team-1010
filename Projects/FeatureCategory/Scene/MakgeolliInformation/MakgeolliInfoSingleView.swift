@@ -12,7 +12,7 @@ import DesignSystem
 import FeatureInformation
 
 struct MakgeolliInfoSingleView: View {
-	let makgeolliData: MakgeolliItem
+	let makHoly: MakHolyMini
 	
 	var body: some View {
 		NavigationLink {
@@ -29,16 +29,16 @@ struct MakgeolliInfoSingleView: View {
 								.aspectRatio(contentMode: .fit)
 								.padding(.bottom, 18)
 							
-							TasteScoreView(type: .mini, taste: Taste(sweetness: .one, sourness: .two, thickness: .three, freshness: .four))
+							TasteScoreView(type: .mini, sweetness: makHoly.sweetness, sourness: makHoly.sourness, thickness: makHoly.thickness, freshness: makHoly.freshness)
 						}
 						.padding(.vertical, 32)
 					}
-				Text(makgeolliData.makName!)
+				Text(makHoly.name)
 					.lineLimit(1)
 					.font(.style(.SF14R))
 					.padding(.top, 12)
 				
-				Text("\(String(format: "%.1f", makgeolliData.makAlcoholPercentage!))도, \(makgeolliData.makVolume!)ml, \(makgeolliData.makPrice!)원")
+				Text(String.formattedSet(adv: makHoly.adv, volume: makHoly.volume, price: makHoly.price))
 					.font(.style(.SF12R))
 					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 					.padding(.top, 2)

@@ -31,8 +31,8 @@ struct MakgeolliInfoView: View {
 				.padding(.bottom, 16)
 			}
 			LazyVGrid(columns: columns) {
-				ForEach(viewModel.makgeollis, id: \.self) { data in
-					MakgeolliInfoSingleView(makgeolliData: data)
+				ForEach(viewModel.makHolys, id: \.self) { data in
+					MakgeolliInfoSingleView(makHoly: data)
 						.padding(.horizontal, 8)
 						.padding(.bottom, 30)
 				}
