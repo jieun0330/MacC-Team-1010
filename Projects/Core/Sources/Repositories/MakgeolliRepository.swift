@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseFirestore
 import Utils
 
 public protocol MakgeolliRepository {
@@ -18,8 +17,6 @@ public protocol MakgeolliRepository {
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
-	let db = Firestore.firestore()
-	
 	public init() { }
 	
 	/// 막걸리 리스트 가져오기
