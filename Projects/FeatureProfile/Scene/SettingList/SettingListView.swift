@@ -82,7 +82,7 @@ struct SettingListView: View {
 		HStack {
 			Text("탈퇴하기")
 				.font(.style(.SF12B))
-				.foregroundColor(Color(uiColor: .designSystem(.alert)!))
+//				.foregroundColor(Color(uiColor: .designSystem(.alert)!))
 			Spacer()
 		}
 		.padding(.top, 30)
