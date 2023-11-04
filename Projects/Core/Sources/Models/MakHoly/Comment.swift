@@ -9,12 +9,18 @@
 import Foundation
 
 public struct Comment: Identifiable, Hashable {
-	public let id: String // 코멘트 ID
-	public let makHolyId: String // 막걸리 ID
-	public let userId: String // user ID
-	public let isOpened: Bool // 공개여부
-	public let description: String // 코멘트 내용
-	public let date: String // 날짜
+	/// 코멘트 ID
+	public let id: String
+	/// 막걸리 ID
+	public let makHolyId: String
+	/// user ID
+	public let userId: String
+	/// 공개 여부
+	public let isOpened: Bool
+	/// 코멘트 내용
+	public let description: String
+	///  코멘트 작성 날짜
+	public let date: String
 	
 	public init(id: String,
 				makHolyId: String,

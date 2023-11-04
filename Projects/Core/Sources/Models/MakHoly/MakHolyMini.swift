@@ -9,16 +9,26 @@
 import Foundation
 
 public struct MakHolyMini: Identifiable, Hashable {
-	public let id: String // 막걸리 ID - Seq
-	public let name: String // 막걸리 이름
-	public let imageId: String // 이미지 ID
-	public let sweetness: Int // 단맛 점수
-	public let sourness: Int // 신맛 점수
-	public let thickness: Int // 걸쭉 점수
-	public let freshness: Int // 청량 점수
-	public let price: Int // 가격
-	public let volume: Int // 용량
-	public let adv: Double // 알코올 도수
+	/// 막걸리 ID
+	public let id: String
+	///막걸리 이름
+	public let name: String
+	/// 이미지 ID
+	public let imageId: String
+	/// 단맛 점수
+	public let sweetness: Int
+	/// 신맛 점수
+	public let sourness: Int
+	/// 걸쭉 점수
+	public let thickness: Int
+	/// 청량 점수
+	public let freshness: Int
+	/// 가격
+	public let price: Int
+	/// 용량
+	public let volume: Int
+	/// 도수
+	public let adv: Double
 	
 	public init(id: String,
 				name: String,

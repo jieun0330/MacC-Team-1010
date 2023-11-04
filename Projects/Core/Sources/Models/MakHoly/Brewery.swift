@@ -9,9 +9,12 @@
 import Foundation
 
 public struct Brewery: Hashable {
-	public let name: String /// 양조장 이름
-	public let url: String? /// 양조장 사이트
-	public let salesURL: String? /// 판매 사이트
+	/// 양조장 이름
+	public let name: String
+	/// 양조장 사이트
+	public let url: String?
+	/// 판매 사이트
+	public let salesURL: String?
 	
 	public init(name: String, url: String?, salesURL: String?) {
 		self.name = name
