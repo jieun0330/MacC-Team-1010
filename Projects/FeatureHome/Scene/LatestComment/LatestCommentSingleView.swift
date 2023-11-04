@@ -11,6 +11,8 @@ import Core
 import DesignSystem
 
 struct LatestCommentSingleView: View {
+	let comment: Comment
+	
 	var body: some View {
 		NavigationLink {
 			// 막걸리 상세 뷰로 이동
@@ -22,17 +24,28 @@ struct LatestCommentSingleView: View {
 					.padding(.trailing, 16)
 				
 				VStack(alignment: .leading, spacing: 0) {
-					Text("평가가 없어요")
-						.font(.style(.SF12R))
-						.foregroundColor(Color(uiColor: .designSystem(.w50)!))
-						.padding(.bottom, 3)
-					Text("review.makName")
-						.font(.style(.SF14R))
-						.padding(.bottom, 1.5)
-					Text("review.content")
-						.font(.style(.SF14R))
+					HStack(spacing: 0) {
+						Text(comment.makHolyId)
+							.font(.style(.SF14R))
+							.foregroundColor(.white)
+						Image(uiImage: .designSystem(.like)!)
+							.padding(.leading, 4)
+						Spacer()
+						Text(comment.userId)
+							.font(.style(.SF14R))
+							.foregroundColor(Color(uiColor: .designSystem(.w25)!))
+					}
+					.padding(.bottom, 3)
+					Text(comment.description)
 						.lineLimit(2)
+						.font(.style(.SF14R))
+						.foregroundColor(Color(uiColor: .designSystem(.w85)!))
+					Spacer()
+					Text(comment.date)
+						.font(.style(.SF14R))
+						.foregroundColor(Color(uiColor: .designSystem(.w25)!))
 				}
+				Spacer()
 			}
 		}
 	}

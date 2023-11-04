@@ -15,6 +15,8 @@ public enum CategoryType {
 	case event
 	/// 새로 나왔어요
 	case new
+	/// 코멘트가 달렸어요
+	case comment
 	
 	public var description: String {
 		switch self {
@@ -24,6 +26,8 @@ public enum CategoryType {
 			return "주룩 개발자 픽"
 		case .new:
 			return "새로 나왔어요"
+		case .comment:
+			return "코멘트가 달렸어요"
 		}
 	}
 }
