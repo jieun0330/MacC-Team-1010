@@ -47,6 +47,11 @@ public enum TENTENAsset {
 		case graph5
 		case graphNull
 		
+		case home
+		case search
+		case heart
+		case person
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -111,6 +116,15 @@ public enum TENTENAsset {
 				return "graph5"
 			case .graphNull:
 				return "graphNull"
+				
+			case .home:
+				return "home"
+			case .search:
+				return "search"
+			case .heart:
+				return "heart"
+			case .person:
+				return "person"
 			}
 		}
 	}

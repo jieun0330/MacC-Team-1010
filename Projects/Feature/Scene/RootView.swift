@@ -19,6 +19,7 @@ public struct RootView: View {
 	}
 	
 	public var body: some View {
+<<<<<<< HEAD
         
             TabView {
                 HomeView()
@@ -43,5 +44,33 @@ public struct RootView: View {
                         Text("내 정보")
                     }
             }
+=======
+		TabView {
+			HomeView()
+				.tabItem {
+					Image(uiImage: .designSystem(.home)!)
+					Text("홈")
+						.font(.style(.SF10B))
+				}
+			SearchView()
+				.tabItem {
+					Image(uiImage: .designSystem(.search)!)
+					Text("검색")
+						.font(.style(.SF10B))
+				}
+			EncyclopediaView()
+				.tabItem {
+					Image(uiImage: .designSystem(.heart)!)
+					Text("내 막걸리")
+						.font(.style(.SF10B))
+				}
+			ProfileView()
+				.tabItem {
+					Image(uiImage: .designSystem(.person)!)
+					Text("내 정보")
+						.font(.style(.SF10B))
+				}
+		}
+>>>>>>> 2091ac0 (:lipstick: [style] tab icon 세팅 #45)
 	}
 }
