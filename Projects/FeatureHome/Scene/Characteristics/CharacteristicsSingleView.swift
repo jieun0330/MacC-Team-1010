@@ -20,7 +20,7 @@ struct CharacteristicsSingleView: View {
 				.frame(width: 70, height: 70)
 			Text(title)
 				.font(.style(.SF12B))
-				.foregroundColor(.white)
+				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 		}
 	}
 }

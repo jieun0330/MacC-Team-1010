@@ -34,6 +34,7 @@ extension Brewery {
 }
 
 extension Comment {
+	public static var mokDatas: [Comment] = [mock1, mock2, mock3, mock4]
 	
 	public static var mock1: Comment = Comment(
 		id: "c-1",
@@ -48,7 +49,7 @@ extension Comment {
 		makHolyId: "m-1",
 		userId: "u-2",
 		isOpened: false,
-		description: "너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다...",
+		description: "너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다...",
 		date: "2010-10-10")
 	
 	public static var mock3: Comment = Comment(
@@ -137,10 +138,10 @@ extension MakHolyMini {
 		id: "m-1",
 		name: "맑은내일 발효막걸리 시그니처",
 		imageId: "824",
-		sweetness: 4,
+		sweetness: 5,
 		sourness: 4,
-		thickness: 4,
-		freshness: 4,
+		thickness: -1,
+		freshness: 0,
 		price: 9000,
 		volume: 930,
 		adv: 6.5)

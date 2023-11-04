@@ -20,9 +20,10 @@ struct CharacteristicsView: View {
 				HStack(spacing: 4) {
 					Text("특징으로 찾기")
 						.font(.style(.SF22B))
-						.foregroundColor(.white)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
 			}

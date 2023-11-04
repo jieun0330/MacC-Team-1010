@@ -29,6 +29,8 @@ extension Font {
 			return .system(size: 12, weight: .regular)
 		case .SF10B:
 			return .system(size: 10, weight: .bold)
+		case .SF10R:
+			return .system(size: 10, weight: .regular)
 		case .SF16R:
 			return .system(size: 16, weight: .regular)
 		case .SF15R:

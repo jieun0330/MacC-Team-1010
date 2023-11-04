@@ -35,7 +35,7 @@ struct MyInformationView: View {
 		.overlay {
 			VStack(spacing: 0) {
 				Spacer()
-				Image(uiImage: .designSystem(.alcohol)!)
+				Image(uiImage: .designSystem(.sour)!)
 					.padding(.bottom, 24)
 				Text("걸쭉한청록색라쿤")
 					.font(.style(.SF22B))

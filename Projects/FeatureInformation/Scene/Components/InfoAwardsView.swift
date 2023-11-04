@@ -68,10 +68,10 @@ extension InfoAwardsView {
 				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 			Text(award.name)
 				.font(.style(.SF12R))
-				.foregroundColor(Color(uiColor: .designSystem(.w75)!))
+				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 			Text(award.type)
 				.font(.style(.SF17R))
-				.foregroundColor(Color(uiColor: .designSystem(.w75)!))
+				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 		}
 		.frame(width: self.width)
 		.padding(.vertical, 24)

@@ -18,18 +18,19 @@ struct MakgeolliInfoView: View {
 	
 	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
-			if type == .characteristics {
-				HStack {
-					Text("어떤 방식으로 목록이 나오나요?")
-						.foregroundColor(Color(uiColor: .designSystem(.w50)!))
-					Spacer()
-					Text("추천순")
-						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-				}
-				.font(.style(.SF12R))
-				.padding(.horizontal, 16)
-				.padding(.bottom, 16)
+			HStack(spacing: 4) {
+				Image(systemName: "questionmark.circle.fill")
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				Text("리스트 순서가 궁금하신가요")
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				Spacer()
+				Text("추천순")
+					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 			}
+			.font(.style(.SF12R))
+			.padding(.horizontal, 8)
+			.padding(.vertical, 16)
+			
 			LazyVGrid(columns: columns) {
 				ForEach(viewModel.makHolys, id: \.self) { data in
 					MakgeolliInfoSingleView(makHoly: data)

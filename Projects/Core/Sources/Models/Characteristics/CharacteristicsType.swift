@@ -31,6 +31,21 @@ public enum CharacteristicsType: String, CaseIterable, Hashable {
 		}
 	}
 	
+	public var scoreDescription: String {
+		switch self {
+		case .sweet:
+			return "sweetness"
+		case .thick:
+			return "thickness"
+		case .sour:
+			return "sourness"
+		case .fresh:
+			return "freshness"
+		default:
+			return ""
+		}
+	}
+	
 	public var characteristicsImage: UIImage {
 		switch self {
 		case .sweet:

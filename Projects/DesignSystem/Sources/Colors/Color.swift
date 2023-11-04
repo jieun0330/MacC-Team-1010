@@ -8,47 +8,43 @@
 
 public enum TENTENColor {
 	case darkbase
-	
 	case darkgrey
-	case lightgrey
+	case darkwindow
 	
 	case goldenyellow
 	case primary
-	
+
 	case white
 	case w85
-	case w75
-	case w60
 	case w50
-	case w40
 	case w25
-	case w20
 	case w10
 	
 	case lilac
+	case primary2
+	
+	case alert
 	
 	/// Color name space
 	public var name: String {
 		switch self {
 		case .darkbase: return "darkbase"
-			
 		case .darkgrey: return "darkgrey"
-		case .lightgrey: return "lightgrey"
+		case .darkwindow: return "darkwindow"
 			
 		case .goldenyellow: return "goldenyellow"
 		case .primary: return "primary"
 			
 		case .white: return "white"
 		case .w85: return "w85"
-		case .w75: return "w75"
-		case .w60: return "w60"
 		case .w50: return "w50"
-		case .w40: return "w40"
 		case .w25: return "w25"
-		case .w20: return "w20"
 		case .w10: return "w10"
 			
 		case .lilac: return "lilac"
+		case .primary2: return "primary2"
+			
+		case .alert: return "alert"
 		}
 	}
 }

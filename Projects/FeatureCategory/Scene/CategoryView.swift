@@ -25,31 +25,43 @@ public struct CategoryView: View {
 	}
 	
 	public var body: some View {
-		VStack(spacing: 0) {
-			if type == .characteristics {
-				HashtagView(viewModel: viewModel,
-							targetTitle: $targetTitle)
-				.padding(.leading, 16)
-				.padding(.bottom, 10)
+		if type == .comment {
+			NewCommentView(comments: viewModel.comments)
+				.background(Color(uiColor: .designSystem(.darkbase)!))
+				.navigationTitle(type.description)
+				.navigationBarTitleDisplayMode(.large)
+				.navigationBarBackButtonHidden(true)
+				.navigationBarItems(leading: CustomBackButton())
+				.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+				.onAppear {
+					if viewModel.fetchLoading {
+						viewModel.fetchCategoryMakgeolli(categories: targetTitle)
+					}
+				}
+		} else {
+			VStack(spacing: 0) {
+				if type == .characteristics {
+					HashtagView(viewModel: viewModel,
+								targetTitle: $targetTitle)
+					.padding(.leading, 16)
+					.padding(.bottom, 10)
+				}
+				if viewModel.fetchLoading {
+					ProgressView()
+						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
+				} else {
+					MakgeolliInfoView(viewModel: viewModel, type: type)
+						.padding(.horizontal, 8)
+				}
 			}
-			
-			DividerView(topPadding: 10, bottomPadding: 16)
-			
-			if viewModel.fetchLoading {
-				ProgressView()
-					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-					.tint(.white)
-			} else {
-				MakgeolliInfoView(viewModel: viewModel, type: type)
-					.padding(.horizontal, 8)
-			}
-		}
-		.navigationTitle(type.description)
-		.navigationBarTitleDisplayMode(type == .characteristics ? .inline : .large)
-		.navigationBarBackButtonHidden(true)
-		.navigationBarItems(leading: CustomBackButton())
-		.onAppear {
-			if viewModel.fetchLoading {
+			.background(Color(uiColor: .designSystem(.darkbase)!))
+			.navigationTitle(type.description)
+			.navigationBarTitleDisplayMode(type == .characteristics ? .inline : .large)
+			.navigationBarBackButtonHidden(true)
+			.navigationBarItems(leading: CustomBackButton())
+			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+			.onAppear {
 				viewModel.fetchCategoryMakgeolli(categories: targetTitle)
 			}
 		}
