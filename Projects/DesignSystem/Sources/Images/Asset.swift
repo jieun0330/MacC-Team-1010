@@ -15,7 +15,6 @@ public enum TENTENAsset {
 		case mockMakgeolli
 		
 		case additive
-		case alcohol
 		case refresh
 		case sour
 		case sweet
@@ -44,8 +43,6 @@ public enum TENTENAsset {
 				
 			case .additive:
 				return "additive"
-			case .alcohol:
-				return "alcohol"
 			case .refresh:
 				return "refresh"
 			case .sour:
