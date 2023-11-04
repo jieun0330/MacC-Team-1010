@@ -10,8 +10,9 @@ import Foundation
 import Core
 
 final class HomeViewModel: ObservableObject {
-	@Published var newItems: [MakHolyMini] = MakHolyMini.mokDatas
 	@Published var fetchLoading = true
+	@Published var newItems: [MakHolyMini] = MakHolyMini.mokDatas
+	@Published var comments: [Comment] = Comment.mokDatas
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
 	

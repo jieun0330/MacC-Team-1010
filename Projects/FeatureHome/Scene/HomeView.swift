@@ -71,6 +71,7 @@ public struct HomeView: View {
 						self.viewOpacityValue = 1.0
 					}
 				}
+				.background(Color(uiColor: .designSystem(.darkbase)!))
 			}
 		}
 	}
