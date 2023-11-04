@@ -38,7 +38,7 @@ struct HashtagSingleView: View {
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
 		.tint(targetTitle.contains(type) ? Color(uiColor: .designSystem(.goldenyellow)!) :
-				Color(uiColor: .designSystem(.w20)!))
+				Color(uiColor: .designSystem(.w10)!))
 		.id(type)
 		.onAppear {
 			withAnimation {

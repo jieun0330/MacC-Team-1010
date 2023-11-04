@@ -39,7 +39,7 @@ extension LikeControllerView {
 						Text("좋았어요")
 					}
 					.font(.style(.SF17R))
-					.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
+					.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
 				}
 			})
 		}
@@ -61,7 +61,7 @@ extension LikeControllerView {
 						Text("아쉬워요")
 					}
 					.font(.style(.SF17R))
-					.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
+					.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
 				}
 			})
 		}

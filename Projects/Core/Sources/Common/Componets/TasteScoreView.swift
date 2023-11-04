@@ -26,12 +26,12 @@ private struct TasteScoreViewStyle {
 			outerSpacing = 6.0
 			innerSpacing = 4.0
 			font = .SF10B
-			color = .w75
+			color = .w50
 		case .large:
 			outerSpacing = 20.0
 			innerSpacing = 6.0
 			font = .SF12B
-			color = .w85
+			color = .w50
 		}
 	}
 }

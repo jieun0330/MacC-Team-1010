@@ -37,7 +37,7 @@ struct InfoLinkView: View {
 			HStack(alignment: .center) {
 				Text("양조장")
 					.font(.style(.SF14R))
-					.foregroundColor(Color(uiColor: .designSystem(.lightgrey)!))
+					.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
 				
 				Spacer()
 				
@@ -68,7 +68,7 @@ struct InfoLinkView: View {
 				HStack(alignment: .center) {
 					Text("판매 링크")
 						.font(.style(.SF14R))
-						.foregroundColor(Color(uiColor: .designSystem(.lightgrey)!))
+						.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
 					Spacer()
 					
 					Link(destination: URL(string: url)!, label: {

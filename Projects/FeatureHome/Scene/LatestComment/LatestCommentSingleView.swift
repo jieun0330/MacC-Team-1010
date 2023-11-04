@@ -24,7 +24,7 @@ struct LatestCommentSingleView: View {
 				VStack(alignment: .leading, spacing: 0) {
 					Text("평가가 없어요")
 						.font(.style(.SF12R))
-						.foregroundColor(Color(uiColor: .designSystem(.w60)!))
+						.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 						.padding(.bottom, 3)
 					Text("review.makName")
 						.font(.style(.SF14R))
