@@ -8,12 +8,17 @@
 
 import SwiftUI
 import Feature
+import DesignSystem
 
 @main
 struct _App: App {
 	var body: some Scene {
 		WindowGroup {
 			RootView()
+				.onAppear {
+					UITabBar.appearance().backgroundColor = .designSystem(.darkwindow)!
+				}
+				.accentColor(Color(uiColor: .designSystem(.primary)!))
 		}
 	}
 }
