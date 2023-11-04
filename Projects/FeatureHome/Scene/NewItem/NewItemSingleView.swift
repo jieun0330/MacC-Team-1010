@@ -17,45 +17,47 @@ struct NewItemSingleView: View {
 		NavigationLink {
 			// 막걸리 상세 뷰로 이동
 		} label: {
-			RoundedRectangle(cornerRadius: 12)
-				.fill(Color(uiColor: .designSystem(.darkgrey)!))
-				.frame(width: 130, height: 244)
-				.overlay {
-					VStack {
-						Rectangle()
-							.fill(Color(uiColor: .designSystem(.goldenyellow)!))
-						
-						Text(item.name)
-							.font(.style(.SF12R))
-							.lineLimit(1)
-						
-						TasteGraphView(steps: Int(item.sweetness))
-							.frame(height: 4)
-						TasteGraphView(steps: Int(item.sourness))
-							.frame(height: 4)
-						TasteGraphView(steps: Int(item.thickness))
-							.frame(height: 4)
-						TasteGraphView(steps: Int(item.freshness))
-							.frame(height: 4)
-					}
-					.padding(.vertical, 12)
-					.padding(.horizontal, 8)
-				}
-		}
-	}
-}
-
-private extension NewItemSingleView {
-	@ViewBuilder
-	func TasteGraphView(steps: Int) -> some View {
-		HStack(spacing: 0) {
-			ForEach(1...5, id: \.self) { step in
-				Rectangle()
-					.foregroundColor(
-						step <= steps ? Color(uiColor: .designSystem(.primary)!)
-						: Color(uiColor: .designSystem(.w10)!)
-					)
-			}
+			Rectangle()
+				.foregroundColor(.clear)
+				.frame(width: 110, height: 230)
+				.cornerRadius(18)
+				.overlay(
+					RoundedRectangle(cornerRadius: 18)
+						.inset(by: 1.5)
+						.stroke(
+							LinearGradient(
+								stops: [
+									Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),
+												  location: 0.00),
+									Gradient.Stop(color: Color(red: 0.71, green: 0.66, blue: 0.48),
+												  location: 1.00)
+								],
+								startPoint: UnitPoint(x: 0.5, y: 0),
+								endPoint: UnitPoint(x: 0.5, y: 1)
+							), lineWidth: 3)
+						.overlay {
+							VStack {
+								Rectangle()
+									.fill(Color(uiColor: .designSystem(.goldenyellow)!))
+								
+								Spacer()
+									.frame(height: 12)
+								
+								Text(item.name)
+									.font(.style(.SF12R))
+									.lineLimit(1)
+								
+								Spacer()
+									.frame(height: 12)
+								
+								TasteGraphView(scores: [item.sweetness, item.sourness,
+														item.thickness, item.freshness])
+							}
+							.padding(.vertical, 12)
+							.padding(.horizontal, 8)
+						}
+					
+				)
 		}
 	}
 }

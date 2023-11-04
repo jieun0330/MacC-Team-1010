@@ -137,10 +137,10 @@ extension MakHolyMini {
 		id: "m-1",
 		name: "맑은내일 발효막걸리 시그니처",
 		imageId: "824",
-		sweetness: 4,
+		sweetness: 5,
 		sourness: 4,
-		thickness: 4,
-		freshness: 4,
+		thickness: -1,
+		freshness: 0,
 		price: 9000,
 		volume: 930,
 		adv: 6.5)

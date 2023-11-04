@@ -24,6 +24,7 @@ struct NewItemView: View {
 						.foregroundColor(.white)
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
+						.foregroundColor(.white)
 					Spacer()
 				}
 			}
