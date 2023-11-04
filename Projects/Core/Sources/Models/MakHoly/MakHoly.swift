@@ -51,26 +51,43 @@ public struct MakHoly: Identifiable, Hashable {
 		self.dislikeUsers = dislikeUsers
 		self.bookmarkUsers = bookmarkUsers
 	}
+	/// 막걸리 ID
+	public let id: String
+	/// 막걸리 이름
+	public let name: String
+	/// 이미지 Id
+	public let imageId: String
+	/// 단맛 점수
+	public let sweetness: Int
+	/// 신맛 점수
+	public let sourness: Int
+	/// 걸쭉 점수
+	public let thickness: Int
+	/// 청량 점수
+	public let freshness: Int
+	/// 가격
+	public let price: Int
+	/// 용량
+	public let volume: Int
+	/// 도수
+	public let adv: Double
+	/// 원재료
+	public let ingredients: String
+	/// 막걸리 설명
+	public let description: String
 	
-	public let id: String // 막걸리 ID - Seq
-	public let name: String // 막걸리 이름
-	public let imageId: String // 이미지 ID
-	public let sweetness: Int // 단맛 점수
-	public let sourness: Int // 신맛 점수
-	public let thickness: Int // 걸쭉 점수
-	public let freshness: Int // 청량 점수
-	public let price: Int // 가격
-	public let volume: Int // 용량
-	public let adv: Double // 알코올 도수
-	public let ingredients: String // 원재료
-	public let description: String // 막걸리 설명
+	/// 양조장
+	public let brewery: Brewery
 	
-	public let brewery: Brewery // 브루어리
+	/// 코멘트 배열
+	public let comments: [Comment]
+	/// 수상 배열
+	public let awards: [Award]
 	
-	public let comments: [Comment] // 코멘트 리스트 모음
-	public let awards: [Award] // 수상 리스트
-	
-	public let likeUsers: [String] // 유저 ID
-	public let dislikeUsers: [String] // 유저 ID
-	public let bookmarkUsers: [String] // 유저 ID
+	/// 좋아요 유저 ID 배열
+	public let likeUsers: [String]
+	/// 싫어요 유저 ID 배열
+	public let dislikeUsers: [String]
+	/// 북마크 유저 ID 배열
+	public let bookmarkUsers: [String]
 }

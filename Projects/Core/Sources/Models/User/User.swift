@@ -9,12 +9,18 @@
 import Foundation
 
 public struct User {
+	/// 유저  Id
 	public let id: String // UUID
+	/// 유저 닉네임
 	public let name: String // 유저네임
-	public let bookmarks: [String] // 찜 목록 - 막걸리 ID 리스트
-	public let likes: [String] // 좋았어요 목록 - 막걸리 ID 리스트
-	public let dislikes: [String] // 아쉬워요 목록 - 막걸리 ID 리스트
-	public let comments: [String] // 코멘트 단 목록 - 코멘트 ID 리스트
+	/// 찜 막걸리 ID 리스트
+	public let bookmarks: [String]
+	/// 좋았어요 막걸리 ID 리스트
+	public let likes: [String] 	
+	/// 아쉬워요 막걸리 ID 리스트
+	public let dislikes: [String]
+	/// 코멘트 막걸리 ID 리스트
+	public let comments: [String]
 	
 	public init(id: String,
 				name: String,

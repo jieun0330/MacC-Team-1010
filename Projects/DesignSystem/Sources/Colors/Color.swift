@@ -27,7 +27,7 @@ public enum TENTENColor {
 	
 	case lilac
 	
-	/// 컬러를 불러오기 위한 name space
+	/// Color name space
 	public var name: String {
 		switch self {
 		case .darkbase: return "darkbase"

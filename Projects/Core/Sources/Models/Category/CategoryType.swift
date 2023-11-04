@@ -9,9 +9,12 @@
 import Foundation
 
 public enum CategoryType {
-	case characteristics /// 특징으로 찾기
-	case event /// 주룩 개발자 픽
-	case new /// 새로 나왔어요
+	/// 특징으로 찾기
+	case characteristics
+	/// 주룩 개발자 픽
+	case event
+	/// 새로 나왔어요
+	case new
 	
 	public var description: String {
 		switch self {
