@@ -7,13 +7,17 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 public struct ProfileView: View {
 	public init() { }
 	
 	public var body: some View {
 		NavigationStack {
-			Text("ProfileView")
+			ScrollView(.vertical, showsIndicators: false) {
+				MyInformationView()
+				SettingListView()
+			}
 		}
 	}
 }
