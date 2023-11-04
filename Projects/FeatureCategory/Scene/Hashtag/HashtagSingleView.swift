@@ -37,7 +37,7 @@ struct HashtagSingleView: View {
 		}
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
-		.tint(targetTitle.contains(type) ? Color(uiColor: .designSystem(.goldenyellow)!) :
+		.tint(targetTitle.contains(type) ? Color(uiColor: .designSystem(.lilac)!) :
 				Color(uiColor: .designSystem(.w10)!))
 		.id(type)
 		.onAppear {
