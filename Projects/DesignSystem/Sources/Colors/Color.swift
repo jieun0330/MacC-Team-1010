@@ -23,6 +23,8 @@ public enum TENTENColor {
 	case lilac
 	case primary2
 	
+	case alert
+	
 	/// Color name space
 	public var name: String {
 		switch self {
@@ -41,6 +43,8 @@ public enum TENTENColor {
 			
 		case .lilac: return "lilac"
 		case .primary2: return "primary2"
+			
+		case .alert: return "alert"
 		}
 	}
 }
