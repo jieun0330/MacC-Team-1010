@@ -305,7 +305,10 @@ extension MakHolyMini {
 }
 
 extension MakHoly {
-	public static var mockDatas: [MakHoly] = [test1, test2]
+	public static var mockDatas: [MakHoly] = [
+		test1, test2, test3, test4, test5, test6, test7,
+		test8, test9, test10, test11, test12, test13, test14
+	]
 	
 	public static var test1: MakHoly = MakHoly(
 		makHolyMini: MakHolyMini.test1,
@@ -336,4 +339,175 @@ extension MakHoly {
 			url: "http://drink.ksdb.co.kr/",
 			salesURL: nil)
 	)
+	
+	public static var test3: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test3,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	
+	public static var test4: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test4,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test5: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test5,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test6: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test6,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test7: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test7,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test8: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test8,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test9: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test9,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test10: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test10,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test11: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test11,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test12: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test12,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test13: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test13,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	public static var test14: MakHoly = MakHoly(
+		makHolyMini: MakHolyMini.test14,
+		comments: [],
+		awards: [],
+		likeUsers: [],
+		dislikeUsers: [],
+		bookmarkUsers: [],
+		ingredients: "",
+		description: "",
+		brewery: Brewery(
+			name: "임시",
+			url: nil,
+			salesURL: nil)
+	)
+	
 }
