@@ -36,6 +36,17 @@ public enum TENTENAsset {
 		case scoreMini5
 		case scoreMiniNull
 		
+		case like
+		case sorry
+		
+		case graph0
+		case graph1
+		case graph2
+		case graph3
+		case graph4
+		case graph5
+		case graphNull
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -82,6 +93,24 @@ public enum TENTENAsset {
 			case .scoreMiniNull:
 				return "scoreminiNull"
 				
+			case .like:
+				return "like"
+			case .sorry:
+				return "sorry"
+			case .graph0:
+				return "graph0"
+			case .graph1:
+				return "graph1"
+			case .graph2:
+				return "graph2"
+			case .graph3:
+				return "graph3"
+			case .graph4:
+				return "graph4"
+			case .graph5:
+				return "graph5"
+			case .graphNull:
+				return "graphNull"
 			}
 		}
 	}
