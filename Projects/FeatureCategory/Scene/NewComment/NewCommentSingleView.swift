@@ -24,7 +24,7 @@ struct NewCommentSingleView: View {
 				HStack(spacing: 0) {
 					Text(comment.makHolyId)
 						.font(.style(.SF14R))
-						.foregroundColor(.white)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(uiImage: .designSystem(.like)!)
 						.padding(.leading, 4)
 					Spacer()

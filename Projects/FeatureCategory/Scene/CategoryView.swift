@@ -49,7 +49,7 @@ public struct CategoryView: View {
 				if viewModel.fetchLoading {
 					ProgressView()
 						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-						.tint(.white)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				} else {
 					MakgeolliInfoView(viewModel: viewModel, type: type)
 						.padding(.horizontal, 8)

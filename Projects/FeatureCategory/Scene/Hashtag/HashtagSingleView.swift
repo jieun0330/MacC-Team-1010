@@ -33,7 +33,7 @@ struct HashtagSingleView: View {
 		} label: {
 			Text(type.description)
 				.font(.style(.SF15R))
-				.foregroundColor(.white)
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
 		}
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)

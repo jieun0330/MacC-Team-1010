@@ -22,10 +22,10 @@ struct LatestCommentView: View {
 				HStack(spacing: 4) {
 					Text("코멘트가 달렸어요")
 						.font(.style(.SF22B))
-						.foregroundColor(.white)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
-						.foregroundColor(.white)
+						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
 			}
