@@ -18,6 +18,7 @@ public enum TENTENFont {
 	case SF12B
 	case SF12R
 	case SF10B
+	case SF10R
 	case SF16R
 	case SF15R
 	
