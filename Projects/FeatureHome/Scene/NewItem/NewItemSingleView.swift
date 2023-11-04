@@ -11,7 +11,7 @@ import Core
 import DesignSystem
 
 struct NewItemSingleView: View {
-	let item: MakgeolliItem
+	let item: MakHolyMini
 	
 	var body: some View {
 		NavigationLink {
@@ -25,17 +25,17 @@ struct NewItemSingleView: View {
 						Rectangle()
 							.fill(Color(uiColor: .designSystem(.goldenyellow)!))
 						
-						Text(item.makName!)
+						Text(item.name)
 							.font(.style(.SF12R))
 							.lineLimit(1)
 						
-						TasteGraphView(steps: Int(item.makTasteSweet ?? 0))
+						TasteGraphView(steps: Int(item.sweetness))
 							.frame(height: 4)
-						TasteGraphView(steps: Int(item.makTasteSour ?? 0))
+						TasteGraphView(steps: Int(item.sourness))
 							.frame(height: 4)
-						TasteGraphView(steps: Int(item.makTasteThick ?? 0))
+						TasteGraphView(steps: Int(item.thickness))
 							.frame(height: 4)
-						TasteGraphView(steps: Int(item.makTasteFresh ?? 0))
+						TasteGraphView(steps: Int(item.freshness))
 							.frame(height: 4)
 					}
 					.padding(.vertical, 12)

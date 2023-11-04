@@ -10,7 +10,7 @@ import Foundation
 import Core
 
 final class HomeViewModel: ObservableObject {
-	@Published var newItems: [MakgeolliItem] = []
+	@Published var newItems: [MakHolyMini] = MakHolyMini.mokDatas
 	@Published var fetchLoading = true
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
@@ -25,8 +25,8 @@ final class HomeViewModel: ObservableObject {
 	func fetchNewMakgeolli() {
 		Task {
 			do {
-				let response = try await makgeolliRepository.fetchMakgeolliList()
-				newItems = (response.result?.contents)!
+//				let response = try await makgeolliRepository.fetchMakgeolliList()
+//				newItems = (response.result?.contents)!
 				fetchLoading = false
 			} catch {
 				// error

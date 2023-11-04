@@ -38,29 +38,40 @@ private struct TasteScoreViewStyle {
 
 public struct TasteScoreView: View {
 	
-	let taste: Taste
 	let type: TasteScoreViewType
 	private let style: TasteScoreViewStyle
 	
-	public init(type : TasteScoreViewType, taste: Taste) {
+	let sweetness: Int // 단맛 점수
+	let sourness: Int // 신맛 점수
+	let thickness: Int // 걸쭉 점수
+	let freshness: Int // 청량 점수
+	
+	public init(
+		type: TasteScoreViewType,
+		sweetness: Int,
+		sourness: Int,
+		thickness: Int, freshness: Int) {
 		self.type = type
-		self.taste = taste
 		self.style = TasteScoreViewStyle(scoreType: type)
+		self.sweetness = sweetness
+		self.sourness = sourness
+		self.thickness = thickness
+		self.freshness = freshness
 	}
 	
 	public var body: some View {
 		HStack(spacing: self.style.outerSpacing) {
-			scoreSingleView(description: "단맛", score: taste.sweetness)
-			scoreSingleView(description: "신맛", score: taste.sourness)
-			scoreSingleView(description: "걸쭉", score: taste.thickness)
-			scoreSingleView(description: "탄산", score: taste.freshness)
+			scoreSingleView(description: "단맛", score: sweetness)
+			scoreSingleView(description: "신맛", score: sourness)
+			scoreSingleView(description: "걸쭉", score: thickness)
+			scoreSingleView(description: "탄산", score: freshness)
 		}
 	}
 }
 
 extension TasteScoreView {
 	@ViewBuilder
-	func scoreSingleView(description: String, score: TasteScore) -> some View {
+	func scoreSingleView(description: String, score: Int) -> some View {
 		VStack(spacing: self.style.innerSpacing) {
 			Image(uiImage: getImage(for: self.type, score: score))
 			Text(description)
@@ -69,10 +80,10 @@ extension TasteScoreView {
 		}
 	}
 	
-	private func getImage(for type: TasteScoreViewType, score: TasteScore) -> UIImage {
+	private func getImage(for type: TasteScoreViewType, score: Int) -> UIImage {
 		switch type {
 		case .mini:
-			switch score.rawValue {
+			switch score {
 			case 0:
 				return .designSystem(.scoreMini0)!
 			case 1:
@@ -89,7 +100,7 @@ extension TasteScoreView {
 				return .designSystem(.scoreMiniNull)!
 			}
 		case .large:
-			switch score.rawValue {
+			switch score {
 			case 0:
 				return .designSystem(.scoreLarge0)!
 			case 1:

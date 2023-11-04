@@ -11,26 +11,8 @@ import DesignSystem
 import Core
 
 struct InfoAwardsView: View {
-			var awardRawData: [String] = ["2022 우리술 품평회 대상"]
-//		var awardRawData: [String] = ["2019 우리술 품평회 대상", "2022 대한민국 주류대상 대상"]
-//			var awardRawData: [String] = ["2022 우리술 품평회 대상", "2019 대한민국 주류대상 대상", "2018 대한민국 주류대상 대상"]
-//	var awardRawData: [String] = ["2022 우리술 품평회 대상", "2019 대한민국 주류대상 대상", "2015 대한민국 주류대상 대상", "2017 우리술 품평회 대상"]
 	
-	var awards: [Award] {
-		return awardRawData.map { awardString in
-			let components = awardString.components(separatedBy: " ")
-			if components.count >= 4 {
-				let yearString = components[0]
-				let year = Int(yearString) ?? 0
-				let name = components[1] + " " 	+ components[2]
-				let type = components[3]
-				return Award(year: year, name: name, type: type)
-			}
-			return Award(year: 0, name: "", type: "")
-		}
-		.sorted { $0.year > $1.year }
-	}
-	
+	var awards: [Award] = Award.mockDatas
 	var count: Int {
 		return awards.count
 	}

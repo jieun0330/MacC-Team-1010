@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Comment {
+public struct Comment: Identifiable, Hashable {
 	public let id: String // 코멘트 ID
 	public let makHolyId: String // 막걸리 ID
 	public let userId: String // user ID

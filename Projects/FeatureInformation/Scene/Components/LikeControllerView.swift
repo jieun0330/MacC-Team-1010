@@ -10,7 +10,7 @@ import SwiftUI
 import Core
 
 struct LikeControllerView: View {
-	@State var buttonState: LikeState = .none
+	@State var buttonState: Bool? = true
 	
 	var body: some View {
 		HStack(spacing: 16) {
@@ -24,44 +24,44 @@ struct LikeControllerView: View {
 extension LikeControllerView {
 	
 	struct LikeButton: View {
-		@Binding var buttonState: LikeState
+		@Binding var buttonState: Bool?
 		var body: some View {
 			Button(action: {
-				buttonState = .like
+				buttonState = (buttonState == true) ? nil : true
 			}, label: {
 				ZStack{
 					RoundedRectangle(cornerRadius: 12)
 						.frame(height: 50)
-						.foregroundColor(buttonState == .like ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
+						.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
 					
 					HStack(spacing: 3) {
 						Image(systemName: "hand.thumbsup.fill")
 						Text("좋았어요")
 					}
 					.font(.style(.SF17R))
-					.foregroundColor(buttonState == .like ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
+					.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
 				}
 			})
 		}
 	}
 	
 	struct DisLikeButton: View {
-		@Binding var buttonState: LikeState
+		@Binding var buttonState: Bool?
 		var body: some View {
 			Button(action: {
-				buttonState = .dislike
+				buttonState = (buttonState == false) ? nil : false
 			}, label: {
 				ZStack{
 					RoundedRectangle(cornerRadius: 12)
 						.frame(height: 50)
-						.foregroundColor(buttonState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
+						.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
 					
 					HStack(spacing: 3) {
 						Image(systemName: "hand.thumbsdown.fill")
 						Text("아쉬워요")
 					}
 					.font(.style(.SF17R))
-					.foregroundColor(buttonState == .dislike ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
+					.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.lightgrey)!))
 				}
 			})
 		}

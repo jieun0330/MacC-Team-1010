@@ -8,7 +8,16 @@
 
 import Foundation
 
-public struct MakHoly {
+public struct MakHoly: Identifiable, Hashable {
+	
+	public static func == (lhs: MakHoly, rhs: MakHoly) -> Bool {
+		return lhs.id == rhs.id
+	}
+	
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+	}
+	
 	public init (
 		makHolyMini: MakHolyMini,
 		comments: [Comment],
@@ -46,13 +55,13 @@ public struct MakHoly {
 	public let id: String // 막걸리 ID - Seq
 	public let name: String // 막걸리 이름
 	public let imageId: String // 이미지 ID
-	public let sweetness: String // 단맛 점수
-	public let sourness: String // 신맛 점수
-	public let thickness: String // 걸쭉 점수
-	public let freshness: String // 청량 점수
-	public let price: String // 가격
-	public let volume: String // 용량
-	public let adv: String // 알코올 도수
+	public let sweetness: Int // 단맛 점수
+	public let sourness: Int // 신맛 점수
+	public let thickness: Int // 걸쭉 점수
+	public let freshness: Int // 청량 점수
+	public let price: Int // 가격
+	public let volume: Int // 용량
+	public let adv: Double // 알코올 도수
 	public let ingredients: String // 원재료
 	public let description: String // 막걸리 설명
 	

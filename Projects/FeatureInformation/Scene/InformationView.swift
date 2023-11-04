@@ -19,7 +19,7 @@ public struct InformationView: View {
 		ScrollView {
 			VStack(spacing: 10) {
 				
-				TasteScoreView(type: .large, taste: Taste(sweetness: .none, sourness: .two, thickness: .five, freshness: .one))
+				TasteScoreView(type: .large, sweetness: -1, sourness: 1, thickness: 2, freshness: 5)
 				
 				LikeControllerView()
 					.padding(.horizontal, 16)
@@ -30,7 +30,7 @@ public struct InformationView: View {
 				InfoIngredientsView()
 					.padding(.horizontal, 16)
 				
-				InfoLinkView(salesURL: "https://smartstore.naver.com/yangjudoga/products/4714123125", brewery: Brewery(name: "별산의 막걸리", url: "https://www.good-tomorrow.co.kr"))
+				InfoLinkView(brewery: Brewery.mockADA)
 					.padding(.horizontal, 16)
 				
 			}
