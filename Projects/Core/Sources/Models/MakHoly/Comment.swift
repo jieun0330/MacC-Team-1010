@@ -16,11 +16,11 @@ public struct Comment: Identifiable, Hashable {
 	/// user ID
 	public let userId: String
 	/// 공개 여부
-	public let isOpened: Bool
+	public var isOpened: Bool
 	/// 코멘트 내용
-	public let description: String
+	public var description: String
 	///  코멘트 작성 날짜
-	public let date: String
+	public var date: String
 	
 	public init(id: String,
 				makHolyId: String,
