@@ -20,11 +20,11 @@ public struct MakHoly: Identifiable, Hashable {
 	
 	public init (
 		makHolyMini: MakHolyMini,
-		comments: [Comment],
+		commentIds: [String],
 		awards: [Award],
-		likeUsers: [String],
-		dislikeUsers: [String],
-		bookmarkUsers: [String],
+		likeUserIds: [String],
+		dislikeUserIds: [String],
+		bookmarkUserIds: [String],
 		ingredients: String,
 		description: String,
 		brewery: Brewery
@@ -44,12 +44,12 @@ public struct MakHoly: Identifiable, Hashable {
 		
 		self.brewery = brewery
 		
-		self.comments = comments
+		self.commentIds = commentIds
 		self.awards = awards
 		
-		self.likeUsers = likeUsers
-		self.dislikeUsers = dislikeUsers
-		self.bookmarkUsers = bookmarkUsers
+		self.likeUserIds = likeUserIds
+		self.dislikeUserIds = dislikeUserIds
+		self.bookmarkUserIds = bookmarkUserIds
 	}
 	/// 막걸리 ID
 	public let id: String
@@ -78,16 +78,15 @@ public struct MakHoly: Identifiable, Hashable {
 	
 	/// 양조장
 	public let brewery: Brewery
-	
-	/// 코멘트 배열
-	public let comments: [Comment]
 	/// 수상 배열
 	public let awards: [Award]
 	
+	/// 코멘트 ID 배열
+	public let commentIds: [String]
 	/// 좋아요 유저 ID 배열
-	public let likeUsers: [String]
+	public let likeUserIds: [String]
 	/// 싫어요 유저 ID 배열
-	public let dislikeUsers: [String]
+	public let dislikeUserIds: [String]
 	/// 북마크 유저 ID 배열
-	public let bookmarkUsers: [String]
+	public let bookmarkUserIds: [String]
 }
