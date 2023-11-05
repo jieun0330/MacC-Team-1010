@@ -12,14 +12,17 @@ import DesignSystem
 
 public struct InformationView: View {
 	
-	public init() {
+	@StateObject var viewModel: InformationViewModel
+	
+	public init(makHoly: MakHoly) {
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHoly: makHoly))
 	}
-    
-//    public init() { }
 	
 	public var body: some View {
 		ScrollView {
 			VStack(spacing: 10) {
+				
+				InfoMyCommentView(viewModel: viewModel)
 				
 				TasteScoreView(type: .large, sweetness: -1, sourness: 1, thickness: 2, freshness: 5)
 				
@@ -37,11 +40,17 @@ public struct InformationView: View {
 				
 			}
 		}
+		.onAppear(perform: {
+			viewModel.fetchDatas()
+		})
+		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
+			ActionSheet(title: Text("Action Sheet title"))
+		})
 	}
 }
 
 struct InformationView_Previews: PreviewProvider {
 	static var previews: some View {
-		InformationView()
+		InformationView(makHoly: MakHoly.test1)
 	}
 }
