@@ -17,7 +17,7 @@ struct SearchResultView: View {
 		ScrollView(showsIndicators: false) {
 			ForEach(searchViewModel.resultMakHolies) { makHoly in
 				NavigationLink {
-					InformationView(makHoly: makHoly)
+					InformationView(makHolyMini: makHoly)
 						.onAppear {
 							searchViewModel.addSearchHistory()
 						}

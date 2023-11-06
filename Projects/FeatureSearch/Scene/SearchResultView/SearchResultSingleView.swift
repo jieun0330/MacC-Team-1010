@@ -11,7 +11,7 @@ import DesignSystem
 import Core
 
 struct SearchResultSingleView: View {
-	let makHoly: MakHoly
+	let makHoly: MakHolyMini
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: 0) {
@@ -35,7 +35,7 @@ struct SearchResultSingleView: View {
 
 struct SearchResultSingleView_Previews: PreviewProvider {
 	static var previews: some View {
-		SearchResultSingleView(makHoly: MakHoly.test1)
+		SearchResultSingleView(makHoly: MakHolyMini.test1)
 	}
 }
 
