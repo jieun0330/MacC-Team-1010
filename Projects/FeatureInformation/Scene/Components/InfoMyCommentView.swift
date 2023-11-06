@@ -20,7 +20,7 @@ struct InfoMyCommentView: View {
 			HStack {
 				Text("내 코멘트")
 				Spacer()
-				if var myComment = viewModel.myComment {
+				if var myComment = viewModel.makHoly?.myComment {
 					Button(action: {
 						myComment.isVisible.toggle()
 					}, label: {
@@ -30,8 +30,8 @@ struct InfoMyCommentView: View {
 			}
 			
 			//Comment Description
-			if let myComment = viewModel.myComment {
-				Text(myComment.description)
+			if let myComment = viewModel.makHoly?.myComment {
+				Text(myComment.contents)
 			} else {
 				
 				Text("터치해서 코멘트를 남겨보세요!")
@@ -42,7 +42,7 @@ struct InfoMyCommentView: View {
 				
 			}
 			
-			if let myComment = viewModel.myComment {
+			if let myComment = viewModel.makHoly?.myComment {
 				HStack {
 					Text("\(myComment.date)")
 					Spacer()
@@ -59,11 +59,4 @@ struct InfoMyCommentView: View {
 			
 		}
     }
-}
-
-
-struct InfoMyCommentView_Previews: PreviewProvider {
-	static var previews: some View {
-		InfoMyCommentView(viewModel: InformationViewModel(makHoly: MakHoly.test1))
-	}
 }

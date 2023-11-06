@@ -14,8 +14,8 @@ public struct InformationView: View {
 	
 	@StateObject var viewModel: InformationViewModel
 	
-	public init(makHoly: MakHoly) {
-		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHoly: makHoly))
+	public init(makHolyMini: MakHolyMini) {
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyMini: makHolyMini))
 	}
 	
 	public var body: some View {
@@ -41,7 +41,8 @@ public struct InformationView: View {
 			}
 		}
 		.onAppear(perform: {
-			viewModel.fetchDatas()
+			viewModel.fetchMakHoly()
+			viewModel.fetchReactions()
 		})
 		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
 			ActionSheet(title: Text("Action Sheet title"))
@@ -51,6 +52,6 @@ public struct InformationView: View {
 
 struct InformationView_Previews: PreviewProvider {
 	static var previews: some View {
-		InformationView(makHoly: MakHoly.test1)
+		InformationView(makHolyMini: MakHolyMini.test1)
 	}
 }
