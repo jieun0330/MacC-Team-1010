@@ -9,9 +9,9 @@
 import Foundation
 
 public struct MakgeolliInfoRequest: Codable {
+	let makNumber: Int
+	
 	public init(makNumber: Int) {
 		self.makNumber = makNumber
 	}
-	
-	let makNumber: Int
 }

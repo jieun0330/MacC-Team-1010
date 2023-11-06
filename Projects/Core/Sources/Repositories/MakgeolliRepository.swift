@@ -14,6 +14,8 @@ public protocol MakgeolliRepository {
 	func fetchMakgeolliList(lastMakNum: Int?,
 							categories: [String]?,
 							sort: String?) async throws -> MakgeolliListResponse
+	func fetchMakgeolliLikesAndComments(
+		makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
@@ -59,5 +61,15 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 			parameter: request), dataType: MakgeolliInfoResponse.self
 		)
 		return response.result!.toEntity
+	}
+	
+	public func fetchMakgeolliLikesAndComments(makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse {
+		let request: [String: Any] = try MakgeolliLikesAndCommentsRequest(
+			makNumber: makNumber
+		).asDictionary()
+		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakgeolliLikesAndComments(
+			parameter: request), dataType: MakgeolliLikesAndCommentResponse.self
+		)
+		return response
 	}
 }
