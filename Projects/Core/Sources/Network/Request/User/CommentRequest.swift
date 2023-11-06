@@ -8,8 +8,20 @@
 
 import Foundation
 
-public struct CommentRequest: Codable {
+public struct InsertCommentRequest: Codable {
+	public let userId: String
+	public let makNumber: Int
+	public let contents: String
+	public let isVisible: String
+}
+
+public struct UpdateCommentRequest: Codable {
 	public let commentId: String
 	public let contents: String
 	public let isVisible: String
+}
+
+public struct DeleteCommentRequest: Codable {
+	public let commentId: String
+	public let isUserDeleteComment: String
 }

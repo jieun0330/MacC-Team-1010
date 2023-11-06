@@ -11,7 +11,9 @@ import Moya
 
 public enum UserAPI {
 	case skipSignin(parameter: UserRequest)
-	case updateComment(parameter: CommentRequest)
+	case updateComment(parameter: UpdateCommentRequest)
+	case insertComment(parameter: InsertCommentRequest)
+	case deleteComment(parameter: DeleteCommentRequest)
 }
 
 extension UserAPI: TargetType {
@@ -25,6 +27,10 @@ extension UserAPI: TargetType {
 			return "/SkipSignIn"
 		case .updateComment:
 			return "/updateComment"
+		case .insertComment:
+			return "/insertComment"
+		case .deleteComment:
+			return "/deleteComment"
 		}
 	}
 	
@@ -37,6 +43,10 @@ extension UserAPI: TargetType {
 		case .skipSignin(let parameter):
 			return .requestJSONEncodable(parameter)
 		case .updateComment(let parameter):
+			return .requestJSONEncodable(parameter)
+		case .insertComment(parameter: let parameter):
+			return .requestJSONEncodable(parameter)
+		case .deleteComment(parameter: let parameter):
 			return .requestJSONEncodable(parameter)
 		}
 	}

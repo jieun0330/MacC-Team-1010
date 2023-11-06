@@ -11,7 +11,7 @@ import Utils
 
 public protocol UserRepository {
 	func skipSignin(_ request: UserRequest) async throws -> UserResponse
-	func updateComment(_ request: CommentRequest) async throws -> CommentResponse
+	func updateComment(_ request: UpdateCommentRequest) async throws -> CommentResponse
 }
 
 public final class DefaultUserRepository: UserRepository {
@@ -24,8 +24,22 @@ public final class DefaultUserRepository: UserRepository {
 		return response
 	}
 	
-	public func updateComment(_ request: CommentRequest) async throws -> CommentResponse {
+	public func updateComment(_ request: UpdateCommentRequest) async throws -> CommentResponse {
 		let response = try await UserAPI.request(target: UserAPI.updateComment(
+			parameter: request), dataType: CommentResponse.self
+		)
+		return response
+	}
+	
+	public func insertComment(_ request: InsertCommentRequest) async throws -> CommentResponse {
+		let response = try await UserAPI.request(target: UserAPI.insertComment(
+			parameter: request), dataType: CommentResponse.self
+		)
+		return response
+	}
+	
+	public func deleteComment(_ request: DeleteCommentRequest) async throws -> CommentResponse {
+		let response = try await UserAPI.request(target: UserAPI.deleteComment(
 			parameter: request), dataType: CommentResponse.self
 		)
 		return response
