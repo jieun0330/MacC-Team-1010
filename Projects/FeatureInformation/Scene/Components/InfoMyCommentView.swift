@@ -22,9 +22,9 @@ struct InfoMyCommentView: View {
 				Spacer()
 				if var myComment = viewModel.myComment {
 					Button(action: {
-						myComment.isOpened.toggle()
+						myComment.isVisible.toggle()
 					}, label: {
-						Text(myComment.isOpened ? "전체 공개" : "비공개")
+						Text(myComment.isVisible ? "전체 공개" : "비공개")
 					})
 				}
 			}
