@@ -11,6 +11,7 @@ import Moya
 
 public enum UserAPI {
 	case skipSignin(parameter: UserRequest)
+	case updateComment(parameter: CommentRequest)
 }
 
 extension UserAPI: TargetType {
@@ -22,6 +23,8 @@ extension UserAPI: TargetType {
 		switch self {
 		case .skipSignin:
 			return "/SkipSignIn"
+		case .updateComment:
+			return "/updateComment"
 		}
 	}
 	
@@ -32,6 +35,8 @@ extension UserAPI: TargetType {
 	public var task: Moya.Task {
 		switch self {
 		case .skipSignin(let parameter):
+			return .requestJSONEncodable(parameter)
+		case .updateComment(let parameter):
 			return .requestJSONEncodable(parameter)
 		}
 	}
@@ -51,7 +56,6 @@ extension UserAPI {
 					print("request 1 didFinishRequest URL [\(response.request?.url?.absoluteString ?? "")]")
 					do {
 						let data = try JSONDecoder().decode(T.self, from: response.data)
-						let test = data as? UserResponse
 						continuation.resume(returning: data)
 					} catch {
 						continuation.resume(throwing: error)
