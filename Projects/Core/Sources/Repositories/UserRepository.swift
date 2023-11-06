@@ -10,35 +10,23 @@ import Foundation
 import Utils
 
 public protocol UserRepository {
-	func skipSignin(userNickName: String,
-					userSex: String,
-					userAgeRange: String) async throws -> UserResponse
-	func updateComment(commentId: String,
-					   contents: String,
-					   isVisible: String) async throws -> CommentResponse
+	func skipSignin(_ request: UserRequest) async throws -> UserResponse
+	func updateComment(_ request: CommentRequest) async throws -> CommentResponse
 }
 
 public final class DefaultUserRepository: UserRepository {
 	public init() { }
 	
-	public func skipSignin(userNickName: String,
-						   userSex: String,
-						   userAgeRange: String) async throws -> UserResponse {
+	public func skipSignin(_ request: UserRequest) async throws -> UserResponse {
 		let response = try await UserAPI.request(target: UserAPI.skipSignin(
-			parameter: UserRequest(userNickName: userNickName,
-								   userSex: userSex,
-								   userAgeRange: userAgeRange)), dataType: UserResponse.self
+			parameter: request), dataType: UserResponse.self
 		)
 		return response
 	}
 	
-	public func updateComment(commentId: String,
-							  contents: String,
-							  isVisible: String) async throws -> CommentResponse {
+	public func updateComment(_ request: CommentRequest) async throws -> CommentResponse {
 		let response = try await UserAPI.request(target: UserAPI.updateComment(
-			parameter: CommentRequest(commentId: commentId,
-									  contents: contents,
-									  isVisible: isVisible)), dataType: CommentResponse.self
+			parameter: request), dataType: CommentResponse.self
 		)
 		return response
 	}

@@ -9,8 +9,8 @@
 import Foundation
 
 public struct UserResponse: Codable {
-	public let status: Int?
-	public let resultMsg: String?
+	public let status: Int
+	public let resultMsg: String
 	public let result: UserData?
 }
 

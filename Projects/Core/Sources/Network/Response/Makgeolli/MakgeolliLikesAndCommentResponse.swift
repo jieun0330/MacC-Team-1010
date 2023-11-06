@@ -9,8 +9,8 @@
 import Foundation
 
 public struct MakgeolliLikesAndCommentResponse: Codable {
-	public let status: Int?
-	public let resultMsg: String?
+	public let status: Int
+	public let resultMsg: String
 	public let result: ResultData?
 }
 
