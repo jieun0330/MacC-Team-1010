@@ -16,7 +16,7 @@ public struct Comment: Identifiable, Hashable {
 	/// user ID
 	public let userId: String
 	/// 공개 여부
-	public var isOpened: Bool
+	public var isVisible: Bool
 	/// 코멘트 내용
 	public var description: String
 	///  코멘트 작성 날짜
@@ -32,7 +32,7 @@ public struct Comment: Identifiable, Hashable {
 		self.id = id
 		self.makHolyId = makHolyId
 		self.userId = userId
-		self.isOpened = isOpened
+		self.isVisible = isOpened
 		self.description = description
 		self.date = date
 	}
