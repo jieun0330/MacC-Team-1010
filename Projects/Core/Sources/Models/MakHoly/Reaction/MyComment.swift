@@ -19,4 +19,15 @@ public struct MyComment: Identifiable, Hashable {
 	///  코멘트 작성 날짜
 	public var date: String
 	
+	public init(
+		id: String,
+		isVisible: Bool,
+		contents: String,
+		date: String) {
+		self.id = id
+		self.isVisible = isVisible
+		self.contents = contents
+		self.date = date
+	}
+	
 }
