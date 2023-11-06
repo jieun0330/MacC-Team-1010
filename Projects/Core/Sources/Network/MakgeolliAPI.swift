@@ -12,6 +12,7 @@ import Moya
 public enum MakgeolliAPI {
 	case fetchMakgeolliList(parameters: [String: Any]?)
 	case fetchMakgeolliInfo(parameter: [String: Any])
+	case fetchMakgeolliLikesAndComments(parameter: [String: Any])
 }
 
 extension MakgeolliAPI: TargetType {
@@ -25,6 +26,8 @@ extension MakgeolliAPI: TargetType {
 			return ""
 		case .fetchMakgeolliInfo:
 			return "/detail"
+		case .fetchMakgeolliLikesAndComments:
+			return "/makLikesAndComments"
 		}
 	}
 	
@@ -39,6 +42,8 @@ extension MakgeolliAPI: TargetType {
 		case .fetchMakgeolliList(let parameter):
 			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
 		case .fetchMakgeolliInfo(let parameter):
+			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+		case .fetchMakgeolliLikesAndComments(let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		}
 	}
