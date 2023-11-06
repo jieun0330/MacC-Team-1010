@@ -38,7 +38,7 @@ struct MyInformationView: View {
 				Image(uiImage: .designSystem(.sour)!)
 					.padding(.bottom, 24)
 				Text("걸쭉한청록색라쿤")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 					.padding(.bottom, 4)
 				Text("ID: 123456789")
 					.font(.style(.SF14R))

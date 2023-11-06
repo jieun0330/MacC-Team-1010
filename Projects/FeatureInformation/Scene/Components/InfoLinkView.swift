@@ -25,7 +25,7 @@ struct InfoLinkView: View {
 			//Header
 			HStack {
 				Text("정보")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 					.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				Spacer()
 

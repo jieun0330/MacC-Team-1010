@@ -17,7 +17,7 @@ struct InfoIngredientsView: View {
 			
 			HStack {
 				Text("원재료")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 					.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				Spacer()
 

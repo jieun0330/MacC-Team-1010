@@ -19,7 +19,7 @@ struct CharacteristicsView: View {
 			} label: {
 				HStack(spacing: 4) {
 					Text("특징으로 찾기")
-						.font(.style(.SF22B))
+						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
