@@ -22,9 +22,14 @@ public struct InformationView: View {
 		ScrollView {
 			VStack(spacing: 10) {
 				
-				InfoMyCommentView(viewModel: viewModel)
 				
-				TasteScoreView(type: .large, sweetness: -1, sourness: 1, thickness: 2, freshness: 5)
+				TasteScoreView(type: .large,
+							   sweetness: viewModel.makHolyMini.sweetness,
+							   sourness: viewModel.makHolyMini.sourness,
+							   thickness: viewModel.makHolyMini.thickness,
+							   freshness: viewModel.makHolyMini.freshness)
+				
+				InfoMyCommentView(viewModel: viewModel)
 				
 				LikeControllerView()
 					.padding(.horizontal, 16)

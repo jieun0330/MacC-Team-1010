@@ -13,50 +13,99 @@ import DesignSystem
 struct InfoMyCommentView: View {
 	@ObservedObject var viewModel: InformationViewModel
 	
-    var body: some View {
+	var body: some View {
 		VStack(spacing: 6) {
 			
-			//Header
-			HStack {
-				Text("내 코멘트")
-				Spacer()
-				if var myComment = viewModel.makHoly?.myComment {
-					Button(action: {
-						myComment.isVisible.toggle()
-					}, label: {
-						Text(myComment.isVisible ? "전체 공개" : "비공개")
-					})
-				}
-			}
+			headerView()
 			
-			//Comment Description
-			if let myComment = viewModel.makHoly?.myComment {
-				Text(myComment.contents)
-			} else {
-				
-				Text("터치해서 코멘트를 남겨보세요!")
-					.font(.style(.SF14R))
-					.foregroundColor(Color(uiColor: .designSystem(.w85)!))
-					
-					.padding(.vertical, 16)
-				
-			}
+			contentView()
 			
-			if let myComment = viewModel.makHoly?.myComment {
-				HStack {
-					Text("\(myComment.date)")
-					Spacer()
-					Button(action: {
-						// 수정 모달 Sheet 활성화
-						viewModel.showActionSheet.toggle()
-					}, label: {
-						Text("수정")
-							.font(.style(.SF12R))
-							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					})
-				}
+			if let data = viewModel.makHoly?.myComment?.date {
+				footerView(date: data)
 			}
 			
 		}
-    }
+	}
+}
+
+extension InfoMyCommentView {
+	@ViewBuilder
+	func headerView() -> some View {
+		
+		HStack {
+			Text("내 코멘트")
+				.font(.style(.SF12B))
+				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
+			
+			Spacer()
+			
+			if let myComment = viewModel.makHoly?.myComment {
+				Button(action: {
+					
+					viewModel.toggleCommentVisible()
+					
+				}, label: {
+					HStack(spacing: 1) {
+						
+						Text(myComment.isVisible ? "전체 공개" : "비공개")
+						Image(systemName: myComment.isVisible ? "checkmark" : "lock.fill")
+						
+					}
+					.font(.style(.SF12R))
+					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+					.padding(.leading, 30)
+				})
+			}
+		}
+		.padding(.horizontal, 3)
+		
+	}
+	
+	func contentView() -> some View {
+		Button {
+			
+			viewModel.showCommentSheet.toggle()
+			
+		} label: {
+			
+			let contents = viewModel.makHoly?.myComment?.contents ?? "터치해서 코멘트를 남겨보세요!"
+			
+			Text(contents)
+				.font(.style(.SF14R))
+				.foregroundColor(Color(uiColor: viewModel.makHoly?.myComment != nil ? .designSystem(.white)! : .designSystem(.w85)!))
+				.padding(16)
+				.frame(maxWidth: .infinity)
+				.multilineTextAlignment(.leading)
+				.lineLimit(nil)
+				.background(
+					RoundedRectangle(cornerRadius: 12)
+						.foregroundColor(Color(uiColor: .designSystem(.w10)!))
+				)
+		}
+		.disabled(viewModel.makHoly?.myComment != nil )
+		
+		
+	}
+	
+	func footerView(date: String) -> some View {
+		
+		HStack {
+			Text("\(date)")
+				.font(.style(.SF12R))
+				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+			
+			Spacer()
+			
+			Button(action: {
+				viewModel.showActionSheet.toggle()
+			}, label: {
+				Text("수정")
+					.font(.style(.SF12R))
+					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+					.padding(.leading, 60)
+			})
+		}
+		.padding(.horizontal, 3)
+		
+	}
 }

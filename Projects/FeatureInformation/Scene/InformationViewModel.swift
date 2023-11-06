@@ -42,7 +42,13 @@ final class InformationViewModel: ObservableObject {
 		
 	}
 	
-	
+	// Comment Visibe 변경
+	func toggleCommentVisible() {
+		
+		self.makHoly?.myComment?.isVisible.toggle()
+		
+		// Comment Visible 업데이트 API 연결
+	}
 	
 }
 
