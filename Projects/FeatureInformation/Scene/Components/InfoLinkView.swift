@@ -12,12 +12,7 @@ import Core
 
 struct InfoLinkView: View {
 	
-	public let brewery: Brewery /// 양조장
-	
-	init(brewery: Brewery) {
-		self.brewery = brewery
-	}
-	
+	@ObservedObject var viewModel: InformationViewModel
 	
 	var body: some View {
 		VStack(spacing: 0) {
@@ -41,10 +36,11 @@ struct InfoLinkView: View {
 				
 				Spacer()
 				
-				if let url = brewery.url {
+				if let name = viewModel.makHoly?.brewery.name, 
+					let url = viewModel.makHoly?.brewery.url {
 					
 					Link(destination: URL(string: url)!, label: {
-						Text(brewery.name)
+						Text(name)
 							.font(.style(.SF14R))
 							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 					})
@@ -52,7 +48,7 @@ struct InfoLinkView: View {
 					
 				} else {
 					
-					Text(brewery.name)
+					Text(viewModel.makHoly?.brewery.name ?? "")
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					
@@ -63,7 +59,7 @@ struct InfoLinkView: View {
 			DividerView()
 			
 			//판매 링크
-			if let url = brewery.salesURL {
+			if let url = viewModel.makHoly?.brewery.salesURL {
 				
 				HStack(alignment: .center) {
 					Text("판매 링크")
@@ -83,10 +79,4 @@ struct InfoLinkView: View {
 			
 		}
     }
-}
-
-struct InfoLinkView_Previews: PreviewProvider {
-	static var previews: some View {
-		InfoLinkView(brewery: Brewery.mockTenTen)
-	}
 }
