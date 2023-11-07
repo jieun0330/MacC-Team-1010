@@ -13,7 +13,7 @@ public struct EvaluateRequest: Codable {
 	public let makNumber: Int
 	public let likeMak: String
 	
-	init(userId: Int, makNumber: Int, likeMak: String) {
+	public init(userId: Int, makNumber: Int, likeMak: String) {
 		self.userId = userId
 		self.makNumber = makNumber
 		self.likeMak = likeMak
