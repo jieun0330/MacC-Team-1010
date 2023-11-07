@@ -12,9 +12,10 @@ import Core
 
 struct InfoAwardsView: View {
 	
-	var awards: [Award] = Award.mockDatas
+	@ObservedObject var viewModel: InformationViewModel
+	
 	var count: Int {
-		return awards.count
+		return viewModel.makHoly?.awards.count ?? 0
 	}
 	
 	var width: CGFloat {
@@ -43,9 +44,9 @@ struct InfoAwardsView: View {
 		if count > 0 {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 0) {
-					ForEach(awards, id: \.self) { award in
+					ForEach(viewModel.makHoly?.awards ?? []) { award in
 						infoAwardsSingleView(award: award)
-						if award != awards.last {
+						if award != viewModel.makHoly?.awards.last {
 							Divider()
 								.background(Color(uiColor: .designSystem(.w25)!))
 								.frame(width: 0.33, height: 42)
@@ -77,13 +78,4 @@ extension InfoAwardsView {
 		.padding(.vertical, 24)
 	}
 	
-}
-
-struct InfoAwardsView_Previews: PreviewProvider {
-	static var previews: some View {
-		HStack {
-			InfoAwardsView()
-		}
-		.padding(.horizontal, 16)
-	}
 }
