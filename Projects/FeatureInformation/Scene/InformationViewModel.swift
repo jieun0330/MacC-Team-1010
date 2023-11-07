@@ -28,7 +28,14 @@ final class InformationViewModel: ObservableObject {
 	
 	// detail api
 	func fetchMakHoly() {
-		self.makHoly = MakHoly.test1
+		
+		for makHoly in MakHoly.mockDatas {
+			if self.makHolyMini.id == makHoly.id {
+				self.makHoly = makHoly
+				break
+			}
+		}
+		
 	}
 	
 	// makLikesAndComments  api
