@@ -71,10 +71,7 @@ public final class DefaultUserRepository: UserRepository {
 	}
 	
 	public func getUserMakFolder(_ request: GetUserMakFolderRequest) async throws -> GetUserMakFolderResponse {
-		
 		let request: [String: Any] = try request.asDictionary()
-		print("request \(request)")
-		
 		let response = try await UserAPI.request(target: UserAPI.getUserMakFolder(
 			parameter: request), dataType: GetUserMakFolderResponse.self
 		)

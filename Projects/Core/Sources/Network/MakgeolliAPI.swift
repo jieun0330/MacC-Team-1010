@@ -17,7 +17,10 @@ public enum MakgeolliAPI {
 
 extension MakgeolliAPI: TargetType {
 	public var baseURL: URL {
-		return URL(string: "http://43.202.219.115:8080/api/v1/makInfo/userSearch")!
+		if let url = Bundle.main.infoDictionary?["Makgeolli_API_URL"] as? String {
+			return URL(string: url)!
+		}
+		return URL(string: "")!
 	}
 	
 	public var path: String {

@@ -23,7 +23,10 @@ public enum UserAPI {
 
 extension UserAPI: TargetType {
 	public var baseURL: URL {
-		return URL(string: "http://43.202.219.115:8080/api/v1/user")!
+		if let url = Bundle.main.infoDictionary?["USER_API_URL"] as? String {
+			return URL(string: url)!
+		}
+		return URL(string: "")!
 	}
 	
 	public var path: String {
@@ -93,10 +96,8 @@ extension UserAPI {
 					print("request 1 didFinishRequest URL [\(response.request?.url?.absoluteString ?? "")]")
 					do {
 						let data = try JSONDecoder().decode(T.self, from: response.data)
-						print("dodo \(data)")
 						continuation.resume(returning: data)
 					} catch {
-						print("catch \(error.localizedDescription)")
 						continuation.resume(throwing: error)
 					}
 				case .failure(let error):

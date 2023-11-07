@@ -16,7 +16,10 @@ public enum HomeAPI {
 
 extension HomeAPI: TargetType {
 	public var baseURL: URL {
-		return URL(string: "http://43.202.219.115:8080/api/v1/home")!
+		if let url = Bundle.main.infoDictionary?["HOME_API_URL"] as? String {
+			return URL(string: url)!
+		}
+		return URL(string: "")!
 	}
 	
 	public var path: String {

@@ -11,15 +11,14 @@ public extension Project {
 		dependencies: [TargetDependency] = [],
 		sources: SourceFilesList? = nil,
 		resources: ResourceFileElements? = nil,
-		infoPlist: InfoPlist = .default
-	) -> Project {
-		let settings: Settings = .settings(
+		infoPlist: InfoPlist = .default,
+		settings: Settings? = .settings(
 			base: [:],
 			configurations: [
 				.debug(name: .debug),
 				.release(name: .release)
 			], defaultSettings: .recommended)
-
+	) -> Project {
 		let appTarget = Target(
 			name: name,
 			platform: platform,
@@ -31,7 +30,7 @@ public extension Project {
 			resources: resources,
 			dependencies: dependencies
 		)
-
+		
 		let testTarget = Target(
 			name: "\(name)Tests",
 			platform: platform,
@@ -39,14 +38,14 @@ public extension Project {
 			bundleId: "\(organizationName).\(name)Tests",
 			deploymentTarget: deploymentTarget,
 			infoPlist: .default,
-//			sources: ["Tests/**"],
+			//			sources: ["Tests/**"],
 			dependencies: [.target(name: name)]
 		)
-
+		
 		let schemes: [Scheme] = [.makeScheme(target: .debug, name: name)]
-
+		
 		let targets: [Target] = [appTarget, testTarget]
-
+		
 		return Project(
 			name: name,
 			organizationName: organizationName,
