@@ -13,7 +13,7 @@ extension Text {
 	func customTextStyle(fontSize : CGFloat, fontWeight: Font.Weight, perLineHeight: CGFloat) -> some View {
 		self
 			.font(.system(size: fontSize, weight: fontWeight))
-			.lineSpacing(fontSize * (perLineHeight - 100)/100)
+			.lineSpacing(fontSize/2 * (perLineHeight - 100)/100)
 	}
 	
 	func customTextStyle(fontSize : CGFloat, fontWeight: Font.Weight, customLineHeight: CGFloat) -> some View {
