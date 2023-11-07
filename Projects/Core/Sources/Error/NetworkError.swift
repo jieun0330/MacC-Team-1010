@@ -8,6 +8,15 @@
 
 import Foundation
 
-public enum NetworkError: LocalizedError, Equatable {
-	
+public enum NetworkError: Error {
+	case normal
+}
+
+extension NetworkError: LocalizedError {
+	public var errorDescription: String? {
+		switch self {
+		case .normal:
+			return NSLocalizedString("네트워크 에러", comment: "Network Error")
+		}
+	}
 }
