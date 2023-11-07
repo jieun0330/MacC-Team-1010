@@ -10,6 +10,7 @@ Icon
 # Thumbnails
 ._*
 
+# Config
 *.xcconfig
 
 # Files that might appear in the root of a volume
