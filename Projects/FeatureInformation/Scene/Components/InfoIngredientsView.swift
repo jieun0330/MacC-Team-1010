@@ -10,7 +10,7 @@ import SwiftUI
 import DesignSystem
 
 struct InfoIngredientsView: View {
-	var ingredients: [String] = ["쌀(국내산/무농약)", "효모", "누룩(밀/국내산)", "정제수", "밀가루(수입산)", "발효미강(미강), 곡자(누룩)", "조효소제(밀), 사카린나트륨(감미료)", "젖산", "식품첨가물혼합제제(충무정제효소, 송천효모)"]
+	@ObservedObject var viewModel: InformationViewModel
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
@@ -24,18 +24,14 @@ struct InfoIngredientsView: View {
 			}
 			.padding(.vertical, 20)
 			
-			Text(ingredients.joined(separator: ", "))
-				.font(.style(.SF16R))
+			Text(viewModel.makHoly?.description ?? "")
+				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
+				.multilineTextAlignment(.leading)
+				.lineLimit(nil)
 				.fixedSize(horizontal: false, vertical: true)
 				.padding(.bottom, 20)
 			
 		}
-	}
-}
-
-struct InfoIngredientsView_Previews: PreviewProvider {
-	static var previews: some View {
-		InfoIngredientsView()
 	}
 }
