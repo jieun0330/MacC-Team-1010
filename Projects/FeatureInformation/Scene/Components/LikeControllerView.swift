@@ -10,67 +10,56 @@ import SwiftUI
 import Core
 
 struct LikeControllerView: View {
-	@State var buttonState: Bool? = true
+	@ObservedObject var viewModel: InformationViewModel
 	
 	var body: some View {
 		HStack(spacing: 16) {
-			DisLikeButton(buttonState: $buttonState)
-			LikeButton(buttonState: $buttonState)
+			dislikeButton()
+			likeButton()
 		}
 	}
 }
 
 
 extension LikeControllerView {
-	
-	struct LikeButton: View {
-		@Binding var buttonState: Bool?
-		var body: some View {
-			Button(action: {
-				buttonState = (buttonState == true) ? nil : true
-			}, label: {
-				ZStack{
-					RoundedRectangle(cornerRadius: 12)
-						.frame(height: 50)
-						.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
-					
-					HStack(spacing: 3) {
-						Image(systemName: "hand.thumbsup.fill")
-						Text("좋았어요")
-					}
-					.font(.style(.SF17R))
-					.foregroundColor(buttonState == true ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
+	@ViewBuilder
+	func likeButton() -> some View {
+		Button(action: {
+			viewModel.likeButtonTapped()
+		}, label: {
+			ZStack{
+				RoundedRectangle(cornerRadius: 12)
+					.frame(height: 50)
+					.foregroundColor(viewModel.makHoly?.likeState == .like ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
+				
+				HStack(spacing: 3) {
+					Image(systemName: "hand.thumbsup.fill")
+					Text("좋았어요")
 				}
-			})
-		}
+				.font(.style(.SF17R))
+				.foregroundColor(viewModel.makHoly?.likeState == .like ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.w85)!))
+			}
+		})
+		
 	}
 	
-	struct DisLikeButton: View {
-		@Binding var buttonState: Bool?
-		var body: some View {
-			Button(action: {
-				buttonState = (buttonState == false) ? nil : false
-			}, label: {
-				ZStack{
-					RoundedRectangle(cornerRadius: 12)
-						.frame(height: 50)
-						.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
-					
-					HStack(spacing: 3) {
-						Image(systemName: "hand.thumbsdown.fill")
-						Text("아쉬워요")
-					}
-					.font(.style(.SF17R))
-					.foregroundColor(buttonState == false ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
+	func dislikeButton() -> some View {
+		
+		Button(action: {
+			viewModel.dislikeButtonTapped()
+		}, label: {
+			ZStack{
+				RoundedRectangle(cornerRadius: 12)
+					.frame(height: 50)
+					.foregroundColor(viewModel.makHoly?.likeState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
+				
+				HStack(spacing: 3) {
+					Image(systemName: "hand.thumbsdown.fill")
+					Text("아쉬워요")
 				}
-			})
-		}
-	}
-	
-}
-
-struct LikeControllerView_Previews: PreviewProvider {
-	static var previews: some View {
-		LikeControllerView()
+				.font(.style(.SF17R))
+				.foregroundColor(viewModel.makHoly?.likeState == .dislike ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
+			}
+		})
 	}
 }

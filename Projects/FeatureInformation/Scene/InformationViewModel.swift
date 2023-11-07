@@ -50,6 +50,28 @@ final class InformationViewModel: ObservableObject {
 		// Comment Visible 업데이트 API 연결
 	}
 	
+	func likeButtonTapped() {
+		
+		switch self.makHoly?.likeState {
+		case .like:
+			self.makHoly?.likeState = .none
+		default:
+			self.makHoly?.likeState = .like
+		}
+		
+	}
+	
+	func dislikeButtonTapped() {
+		
+		switch self.makHoly?.likeState {
+		case .dislike:
+			self.makHoly?.likeState = .none
+		default:
+			self.makHoly?.likeState = .dislike
+		}
+		
+	}
+	
 }
 
 
