@@ -73,10 +73,10 @@ extension InfoMyCommentView {
 			Text(contents)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: viewModel.makHoly?.myComment != nil ? .designSystem(.white)! : .designSystem(.w85)!))
-				.padding(16)
 				.frame(maxWidth: .infinity)
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)
+				.padding(16)
 				.background(
 					RoundedRectangle(cornerRadius: 12)
 						.foregroundColor(Color(uiColor: .designSystem(.w10)!))

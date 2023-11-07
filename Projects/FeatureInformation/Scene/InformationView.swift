@@ -22,7 +22,6 @@ public struct InformationView: View {
 		ScrollView {
 			VStack(spacing: 10) {
 				
-				
 				TasteScoreView(type: .large,
 							   sweetness: viewModel.makHolyMini.sweetness,
 							   sourness: viewModel.makHolyMini.sourness,

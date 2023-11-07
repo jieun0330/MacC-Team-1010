@@ -77,7 +77,6 @@ extension InfoAwardsView {
 		.padding(.vertical, 24)
 	}
 	
-	
 }
 
 struct InfoAwardsView_Previews: PreviewProvider {
