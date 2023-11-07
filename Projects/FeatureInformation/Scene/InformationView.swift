@@ -30,16 +30,19 @@ public struct InformationView: View {
 				
 				InfoMyCommentView(viewModel: viewModel)
 				
-				LikeControllerView()
+				LikeControllerView(viewModel: viewModel)
 					.padding(.horizontal, 16)
 				
-				InfoAwardsView()
+				InfoAwardsView(viewModel: viewModel)
 					.padding(.leading, 16)
 				
-				InfoIngredientsView()
+				InfoDescriptionView(viewModel: viewModel)
 					.padding(.horizontal, 16)
 				
-				InfoLinkView(brewery: Brewery.mockADA)
+				InfoIngredientsView(viewModel: viewModel)
+					.padding(.horizontal, 16)
+				
+				InfoLinkView(viewModel: viewModel)
 					.padding(.horizontal, 16)
 				
 			}
