@@ -14,6 +14,11 @@ public enum UserAPI {
 	case updateComment(parameter: UpdateCommentRequest)
 	case insertComment(parameter: InsertCommentRequest)
 	case deleteComment(parameter: DeleteCommentRequest)
+	case evaluateMak(parameter: EvaluateRequest)
+	case addWishList(parameter: WishListRequest)
+	case deleteWishList(parameter: WishListRequest)
+	
+	case getUserMakFolder(parameter: [String: Any])
 }
 
 extension UserAPI: TargetType {
@@ -31,11 +36,24 @@ extension UserAPI: TargetType {
 			return "/insertComment"
 		case .deleteComment:
 			return "/deleteComment"
+		case .evaluateMak:
+			return "/evaluateMak"
+		case .addWishList:
+			return "/addWishList"
+		case .deleteWishList:
+			return "/deleteWishList"
+		case .getUserMakFolder:
+			return "/getUserMakFolder"
 		}
 	}
 	
 	public var method: Moya.Method {
-		.post
+		switch self {
+		case .getUserMakFolder:
+			return .get
+		default:
+			return .post
+		}
 	}
 	
 	public var task: Moya.Task {
@@ -44,10 +62,19 @@ extension UserAPI: TargetType {
 			return .requestJSONEncodable(parameter)
 		case .updateComment(let parameter):
 			return .requestJSONEncodable(parameter)
-		case .insertComment(parameter: let parameter):
+		case .insertComment(let parameter):
 			return .requestJSONEncodable(parameter)
-		case .deleteComment(parameter: let parameter):
+		case .deleteComment(let parameter):
 			return .requestJSONEncodable(parameter)
+		case .evaluateMak(let parameter):
+			return .requestJSONEncodable(parameter)
+		case .addWishList(let parameter):
+			return .requestJSONEncodable(parameter)
+		case .deleteWishList(let parameter):
+			return .requestJSONEncodable(parameter)
+			
+		case .getUserMakFolder(let parameter):
+			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		}
 	}
 	
@@ -66,8 +93,10 @@ extension UserAPI {
 					print("request 1 didFinishRequest URL [\(response.request?.url?.absoluteString ?? "")]")
 					do {
 						let data = try JSONDecoder().decode(T.self, from: response.data)
+						print("dodo \(data)")
 						continuation.resume(returning: data)
 					} catch {
+						print("catch \(error.localizedDescription)")
 						continuation.resume(throwing: error)
 					}
 				case .failure(let error):
