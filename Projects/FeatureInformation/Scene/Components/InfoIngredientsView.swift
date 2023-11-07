@@ -24,7 +24,7 @@ struct InfoIngredientsView: View {
 			}
 			.padding(.vertical, 20)
 			
-			Text(viewModel.makHoly?.description ?? "")
+			Text(viewModel.makHoly.description)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 				.multilineTextAlignment(.leading)

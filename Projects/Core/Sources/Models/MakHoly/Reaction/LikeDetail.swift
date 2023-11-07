@@ -23,4 +23,10 @@ public struct LikeDetail {
 		self.dislikeCount = dislikeCount
 	}
 	
+	public init() {
+		self.totalCount = 0
+		self.likeCount = 0
+		self.dislikeCount = 0
+	}
+	
 }

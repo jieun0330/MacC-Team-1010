@@ -36,19 +36,18 @@ struct InfoLinkView: View {
 				
 				Spacer()
 				
-				if let name = viewModel.makHoly?.brewery.name, 
-					let url = viewModel.makHoly?.brewery.url {
+				if let stringURL = viewModel.makHoly.brewery.url,
+				   let url = URL(string: stringURL) {
 					
-					Link(destination: URL(string: url)!, label: {
-						Text(name)
+					Link(destination: url , label: {
+						Text(viewModel.makHoly.brewery.name)
 							.font(.style(.SF14R))
 							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
 					})
 					
-					
 				} else {
 					
-					Text(viewModel.makHoly?.brewery.name ?? "")
+					Text(viewModel.makHoly.brewery.name)
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					
@@ -59,7 +58,8 @@ struct InfoLinkView: View {
 			DividerView()
 			
 			//판매 링크
-			if let url = viewModel.makHoly?.brewery.salesURL {
+			if let stringURL = viewModel.makHoly.brewery.salesURL,
+			   let url = URL(string: stringURL) {
 				
 				HStack(alignment: .center) {
 					Text("판매 링크")
@@ -67,7 +67,7 @@ struct InfoLinkView: View {
 						.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
 					Spacer()
 					
-					Link(destination: URL(string: url)!, label: {
+					Link(destination: url, label: {
 						Text("공식몰")
 							.font(.style(.SF14R))
 							.foregroundColor(Color(uiColor: .designSystem(.primary)!))

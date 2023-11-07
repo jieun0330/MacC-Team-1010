@@ -83,6 +83,25 @@ public struct MakHoly: Identifiable, Hashable {
 			self.myComment = myComment
 		}
 	
+	public init() {
+		self.id = ""
+		self.name = ""
+		self.imageId = ""
+		self.sweetness = -1
+		self.sourness = -1
+		self.thickness = -1
+		self.freshness = -1
+		self.price = -1
+		self.volume = -1
+		self.adv = -1
+		self.ingredients = ""
+		self.description = ""
+		self.brewery = Brewery(name: "", url: "", salesURL: "")
+		self.awards = []
+		self.isBookMarked = false
+		self.likeState = .none
+		self.myComment = nil
+	}
 	
 	// MakHoli Mini 정보
 	/// 막걸리 ID

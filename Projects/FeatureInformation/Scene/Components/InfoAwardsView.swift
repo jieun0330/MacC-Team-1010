@@ -15,7 +15,7 @@ struct InfoAwardsView: View {
 	@ObservedObject var viewModel: InformationViewModel
 	
 	var count: Int {
-		return viewModel.makHoly?.awards.count ?? 0
+		return viewModel.makHoly.awards.count
 	}
 	
 	var width: CGFloat {
@@ -44,9 +44,9 @@ struct InfoAwardsView: View {
 		if count > 0 {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 0) {
-					ForEach(viewModel.makHoly?.awards ?? []) { award in
+					ForEach(viewModel.makHoly.awards) { award in
 						infoAwardsSingleView(award: award)
-						if award != viewModel.makHoly?.awards.last {
+						if award != viewModel.makHoly.awards.last {
 							Divider()
 								.background(Color(uiColor: .designSystem(.w25)!))
 								.frame(width: 0.33, height: 42)

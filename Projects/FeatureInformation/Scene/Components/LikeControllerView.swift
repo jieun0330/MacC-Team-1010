@@ -30,14 +30,14 @@ extension LikeControllerView {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
 					.frame(height: 50)
-					.foregroundColor(viewModel.makHoly?.likeState == .like ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
+					.foregroundColor(viewModel.makHoly.likeState == .like ? Color(uiColor: .designSystem(.goldenyellow)!) : Color(uiColor: .designSystem(.w10)!))
 				
 				HStack(spacing: 3) {
 					Image(systemName: "hand.thumbsup.fill")
 					Text("좋았어요")
 				}
 				.font(.style(.SF17R))
-				.foregroundColor(viewModel.makHoly?.likeState == .like ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.w85)!))
+				.foregroundColor(viewModel.makHoly.likeState == .like ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.w85)!))
 			}
 		})
 		
@@ -51,14 +51,14 @@ extension LikeControllerView {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
 					.frame(height: 50)
-					.foregroundColor(viewModel.makHoly?.likeState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
+					.foregroundColor(viewModel.makHoly.likeState == .dislike ? Color(uiColor: .designSystem(.lilac)!) : Color(uiColor: .designSystem(.w10)!))
 				
 				HStack(spacing: 3) {
 					Image(systemName: "hand.thumbsdown.fill")
 					Text("아쉬워요")
 				}
 				.font(.style(.SF17R))
-				.foregroundColor(viewModel.makHoly?.likeState == .dislike ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
+				.foregroundColor(viewModel.makHoly.likeState == .dislike ? Color(uiColor: .designSystem(.white)!) : Color(uiColor: .designSystem(.darkgrey)!))
 			}
 		})
 	}

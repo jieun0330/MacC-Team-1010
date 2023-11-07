@@ -12,13 +12,15 @@ import Core
 final class InformationViewModel: ObservableObject {
 	
 	let makHolyMini: MakHolyMini
+	// makId
 
 	init(makHolyMini: MakHolyMini) {
 		self.makHolyMini = makHolyMini
 	}
 	
-	@Published var makHoly: MakHoly? = nil
-	@Published var likeDetail: LikeDetail? = nil
+	@Published var isFetchCompleted: Bool = false
+	@Published var makHoly: MakHoly = MakHoly()
+	@Published var likeDetail: LikeDetail = LikeDetail()
 	@Published var comments: [VisibleComment] = []
 	
 	@Published var showActionSheet: Bool = false
@@ -43,38 +45,38 @@ final class InformationViewModel: ObservableObject {
 		
 		self.likeDetail = LikeDetail(totalCount: 10, likeCount: 5, dislikeCount: 5)
 		
-		self.comments.append(VisibleComment(userName: "유저-1", isLiked: .like, content: "맛있어요", date: "2023-11-04"))
-		self.comments.append(VisibleComment(userName: "유저-2", isLiked: .like, content: "맛없어", date: "2023-11-05"))
-		self.comments.append(VisibleComment(userName: "유저-3", isLiked: .none, content: "한번쯤은..", date: "2023-11-06"))
+		self.comments.append(VisibleComment(userName: "유저-1", isLiked: true, content: "맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요", date: "2023-11-04"))
+		self.comments.append(VisibleComment(userName: "유저-2", isLiked: false, content: "맛없어", date: "2023-11-05"))
+		self.comments.append(VisibleComment(userName: "유저-3", isLiked: nil, content: "한번쯤은..", date: "2023-11-06"))
 		
 	}
 	
 	// Comment Visibe 변경
 	func toggleCommentVisible() {
 		
-		self.makHoly?.myComment?.isVisible.toggle()
+		self.makHoly.myComment?.isVisible.toggle()
 		
 		// Comment Visible 업데이트 API 연결
 	}
 	
 	func likeButtonTapped() {
 		
-		switch self.makHoly?.likeState {
+		switch self.makHoly.likeState {
 		case .like:
-			self.makHoly?.likeState = .none
+			self.makHoly.likeState = .none
 		default:
-			self.makHoly?.likeState = .like
+			self.makHoly.likeState = .like
 		}
 		
 	}
 	
 	func dislikeButtonTapped() {
 		
-		switch self.makHoly?.likeState {
+		switch self.makHoly.likeState {
 		case .dislike:
-			self.makHoly?.likeState = .none
+			self.makHoly.likeState = .none
 		default:
-			self.makHoly?.likeState = .dislike
+			self.makHoly.likeState = .dislike
 		}
 		
 	}

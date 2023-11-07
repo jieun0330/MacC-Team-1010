@@ -16,7 +16,7 @@ public struct VisibleComment: Identifiable, Hashable {
 	/// 유저 이름
 	public let userName: String
 	/// 좋아요 여부
-	public let isLiked: LikeState
+	public let isLiked: Bool?
 	/// 리뷰 내용
 	public let content: String
 	/// 코멘트 작성 날짜
@@ -24,7 +24,7 @@ public struct VisibleComment: Identifiable, Hashable {
 	
 	public init(
 		userName: String,
-		isLiked: LikeState,
+		isLiked: Bool?,
 		content: String,
 		date: String) {
 		self.userName = userName
