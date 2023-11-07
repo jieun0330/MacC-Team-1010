@@ -14,6 +14,8 @@ public protocol MakgeolliRepository {
 	func fetchMakgeolliList(lastMakNum: Int?,
 							categories: [String]?,
 							sort: String?) async throws -> MakgeolliListResponse
+	func fetchMakgeolliLikesAndComments(
+		makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
@@ -26,17 +28,17 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		var parameters: [String: Any] = [:]
 		var tempParameters: [[String: Any]] = []
 		
-		if lastMakNum != nil {
-			tempParameters.append(["lastMakNum": lastMakNum!])
+		if let lastMakNum {
+			tempParameters.append(["lastMakNum": lastMakNum])
 		}
 		
-		if categories != nil {
-			let categoriesString = categories!.joined(separator: ",")
+		if let categories {
+			let categoriesString = categories.joined(separator: ",")
 			tempParameters.append(["category": categoriesString])
 		}
 		
-		if sort != nil {
-			tempParameters.append(["sort": sort!])
+		if let sort {
+			tempParameters.append(["sort": sort])
 		}
 		
 		for item in tempParameters {
@@ -58,6 +60,29 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakgeolliInfo(
 			parameter: request), dataType: MakgeolliInfoResponse.self
 		)
-		return response.result!.toEntity
+		if let result = response.result {
+			return result.toEntity
+		}
+		
+		// 에릭이 MakHoly emptyView init 만들면 그걸로 수정하기
+		return MakHoly(makHolyMini: MakHolyMini.test1,
+					   comments: [],
+					   awards: [],
+					   likeUsers: [],
+					   dislikeUsers: [],
+					   bookmarkUsers: [],
+					   ingredients: "",
+					   description: "",
+					   brewery: Brewery.mockADA)
+	}
+	
+	public func fetchMakgeolliLikesAndComments(makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse {
+		let request: [String: Any] = try MakgeolliLikesAndCommentsRequest(
+			makNumber: makNumber
+		).asDictionary()
+		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakgeolliLikesAndComments(
+			parameter: request), dataType: MakgeolliLikesAndCommentResponse.self
+		)
+		return response
 	}
 }

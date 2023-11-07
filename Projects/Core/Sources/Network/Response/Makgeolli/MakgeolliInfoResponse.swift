@@ -9,8 +9,8 @@
 import Foundation
 
 public struct MakgeolliInfoResponse: Codable {
-	public let resultCode: Int?
-	public let resultMsg: String?
+	public let resultCode: Int
+	public let resultMsg: String
 	public let result: MakgeolliDetail?
 }
 

@@ -1,23 +1,22 @@
 //
-//  MakgeolliAPI.swift
+//  HomeAPI.swift
 //  Core
 //
-//  Created by Kim SungHun on 2023/11/02.
+//  Created by Kim SungHun on 2023/11/07.
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
 import Foundation
 import Moya
 
-public enum MakgeolliAPI {
-	case fetchMakgeolliList(parameters: [String: Any]?)
-	case fetchMakgeolliInfo(parameter: [String: Any])
-	case fetchMakgeolliLikesAndComments(parameter: [String: Any])
+public enum HomeAPI {
+	case recentComments
+	case newMakList
 }
 
-extension MakgeolliAPI: TargetType {
+extension HomeAPI: TargetType {
 	public var baseURL: URL {
-		if let url = Bundle.main.infoDictionary?["Makgeolli_API_URL"] as? String {
+		if let url = Bundle.main.infoDictionary?["HOME_API_URL"] as? String {
 			return URL(string: url)!
 		}
 		return URL(string: "")!
@@ -25,12 +24,10 @@ extension MakgeolliAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		case .fetchMakgeolliList:
-			return ""
-		case .fetchMakgeolliInfo:
-			return "/detail"
-		case .fetchMakgeolliLikesAndComments:
-			return "/makLikesAndComments"
+		case .recentComments:
+			return "/recentComments"
+		case .newMakList:
+			return "/newMakList"
 		}
 	}
 	
@@ -39,16 +36,7 @@ extension MakgeolliAPI: TargetType {
 	}
 	
 	public var task: Moya.Task {
-		switch self {
-		case .fetchMakgeolliList(parameters: .none):
-			return .requestPlain
-		case .fetchMakgeolliList(let parameter):
-			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
-		case .fetchMakgeolliInfo(let parameter):
-			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
-		case .fetchMakgeolliLikesAndComments(let parameter):
-			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
-		}
+		return .requestPlain
 	}
 	
 	public var headers: [String : String]? {
@@ -56,10 +44,10 @@ extension MakgeolliAPI: TargetType {
 	}
 }
 
-extension MakgeolliAPI {
-	static public func request<T: Decodable>(target: MakgeolliAPI, dataType: T.Type) async throws -> T {
+extension HomeAPI {
+	static public func request<T: Decodable>(target: HomeAPI, dataType: T.Type) async throws -> T {
 		return try await withCheckedThrowingContinuation { continuation in
-			let provider = MoyaProvider<MakgeolliAPI>()
+			let provider = MoyaProvider<HomeAPI>()
 			provider.request(target) { result in
 				switch result {
 				case .success(let response):
@@ -77,9 +65,9 @@ extension MakgeolliAPI {
 		}
 	}
 	
-	static public func request(target: MakgeolliAPI) async throws -> Response {
+	static public func request(target: HomeAPI) async throws -> Response {
 		return try await withCheckedThrowingContinuation { continuation in
-			let provider = MoyaProvider<MakgeolliAPI>(plugins: [MoyaCacheablePlugin()])
+			let provider = MoyaProvider<HomeAPI>(plugins: [MoyaCacheablePlugin()])
 			provider.request(target) { result in
 				switch result {
 				case .success(let response):
