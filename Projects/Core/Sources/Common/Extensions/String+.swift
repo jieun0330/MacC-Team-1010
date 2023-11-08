@@ -12,4 +12,8 @@ extension String {
 	public static func formattedSet(adv: Double, volume: Int, price: Int) -> String {
 		return adv.formattedAdv() + " ・ " + volume.formattedVolume() +  " ・ " + price.formattedPrice()
 	}
+	
+	public static func formattedSet(makHoly: MakHoly) -> String {
+		return makHoly.adv.formattedAdv() + " ・ " + makHoly.volume.formattedVolume() +  " ・ " + makHoly.price.formattedPrice()
+	}
 }
