@@ -52,6 +52,13 @@ public enum TENTENAsset {
 		case heart
 		case person
 		
+		case profileSweet
+		case profileSour
+		case profileAspartameFree
+		case profileCarbonicAcid
+		case profileHighlyHydrated
+		case profileThick
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -125,6 +132,19 @@ public enum TENTENAsset {
 				return "heart"
 			case .person:
 				return "person"
+				
+			case .profileSweet:
+				return "profileSweet"
+			case .profileSour:
+				return "profileSour"
+			case .profileAspartameFree:
+				return "profileAspartameFree"
+			case .profileCarbonicAcid:
+				return "profileCarbonicAcid"
+			case .profileHighlyHydrated:
+				return "profileHighlyHydrated"
+			case .profileThick:
+				return "profileThick"
 			}
 		}
 	}
