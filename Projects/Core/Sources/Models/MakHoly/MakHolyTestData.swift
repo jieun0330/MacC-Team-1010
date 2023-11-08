@@ -86,14 +86,15 @@ extension Comment {
 }
 
 extension User {
-	
+    
 	public static var user1: User = User(
 		id: "u-1",
-		name: "아지",
+		name: "신디",
 		bookmarks: ["m-1", "m-7", "m-8", "m-9", "m-10", "m-11"],
 		likes: ["m-1", "m-2", "m-6", "m-5", "m-12", "m-13"],
 		dislikes: ["m-3", "m-4"],
-		comments: ["c-1", "c-6"])
+		comments: ["c-1", "c-6", "m-12", "m-13"])
+    
 	
 	public static var user2: User = User(
 		id: "u-2",
@@ -105,7 +106,7 @@ extension User {
 	
 	public static var user3: User = User(
 		id: "u-3",
-		name: "신디",
+		name: "아지",
 		bookmarks: [],
 		likes: [],
 		dislikes: ["m-1", "m-2", "m-3", "m-4", "m-5", "m-6", "m-7"],

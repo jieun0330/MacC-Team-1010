@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 public struct TabMenuView: View {
     
@@ -17,33 +18,32 @@ public struct TabMenuView: View {
     public var body: some View {
         
         NavigationStack {
-            ZStack {
+            VStack {
+                TabNameView(index: $index)
+                
+
+                
+
                 TabView(selection: $index) {
                     ForEach (0..<5) { pageId in
                         switch pageId {
-                            
                         case 0:
                             EncyclopediaView()
                         case 1:
-                            GoodView()
-                        case 2:
-                            BadView()
-                        case 3:
                             LikeView()
+                        case 2:
+                            DislikeView()
+                        case 3:
+                            BookmarkView()
                         default:
                             CommentView()
                         }
                     }
                 }
-//                                .tabViewStyle(.page(indexDisplayMode: .never))
-                VStack {
-                    TabNameView(index: $index)
-                        .background(Color.black)
-                    Spacer()
-                }
+//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
             .navigationTitle("내 막걸리")
-            .navigationBarTitleDisplayMode(.automatic)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

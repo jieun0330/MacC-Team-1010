@@ -13,13 +13,14 @@ struct TabNameView: View {
     
     @Binding var index: Int
     
-    var titles = ["전체", "좋았어요","아쉬워요","찜","코멘트"]
+    var titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
     
     var body: some View {
         
         ScrollViewReader { proxy in
             
             HStack(spacing: 10) {
+                
                 ForEach(titles.indices) {id in
                     let title = Text(titles[id])
                         .frame(width: 52)
@@ -33,7 +34,7 @@ struct TabNameView: View {
                             .foregroundColor(self.index == id ? .white : .gray)
                         Capsule()
                             .frame(width: 68, height: 2)
-                            .foregroundColor(self.index == id ? Color(uiColor: .designSystem(.goldenyellow)!) : .black)
+                            .foregroundColor(self.index == id ? Color(uiColor: .designSystem(.primary2)!) : .black)
                     }
                 }
                 .font(.style(.SF14R))

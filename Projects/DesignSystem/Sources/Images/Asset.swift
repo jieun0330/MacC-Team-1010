@@ -51,6 +51,13 @@ public enum TENTENAsset {
 		case search
 		case heart
 		case person
+        
+        case comment
+        case likeLarge
+        case sorryLarge
+        case heartSmall
+        case heartSmallNoColor
+        case noComment
 		
 		public var description: String {
 			switch self {
@@ -125,6 +132,19 @@ public enum TENTENAsset {
 				return "heart"
 			case .person:
 				return "person"
+                
+            case .comment:
+                return "comment"
+            case .likeLarge:
+                return "likeLarge"
+            case .sorryLarge:
+                return "sorryLarge"
+            case .heartSmall:
+                return "heartSmall"
+            case .heartSmallNoColor:
+                return "heartSmallNoColor"
+            case .noComment:
+                return "noComment"
 			}
 		}
 	}
