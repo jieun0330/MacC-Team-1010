@@ -10,28 +10,26 @@ import SwiftUI
 import DesignSystem
 
 struct InfoIngredientsView: View {
-	@ObservedObject var viewModel: InformationViewModel
+	let ingredients: String
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
-			
 			HStack {
 				Text("원재료")
-					.font(.style(.SF20B))
-					.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					.SF20B()
+					.foregroundColor(.White)
 				Spacer()
-
 			}
 			.padding(.vertical, 20)
 			
-			Text(viewModel.makHoly.description)
-				.font(.style(.SF14R))
-				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
+			Text(ingredients)
+				.SF14R()
+				.foregroundColor(.W85)
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)
 				.fixedSize(horizontal: false, vertical: true)
 				.padding(.bottom, 20)
-			
 		}
+		.padding(.horizontal, 16)
 	}
 }
