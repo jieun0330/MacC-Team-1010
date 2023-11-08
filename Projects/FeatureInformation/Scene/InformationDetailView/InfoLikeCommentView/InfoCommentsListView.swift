@@ -1,27 +1,32 @@
 //
-//  InfoReactionsView.swift
+//  InfoCommentsListView.swift
 //  FeatureInformation
 //
-//  Created by Eric Lee on 11/7/23.
+//  Created by Eric Lee on 11/8/23.
 //  Copyright © 2023 com.tenten. All rights reserved.
 //
 
 import SwiftUI
-import DesignSystem
 import Core
+import DesignSystem
 
-struct InfoReactionsView: View {
+struct InfoCommentsListView: View {
 	@ObservedObject var viewModel: InformationViewModel
     var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			
-			Spacer()
-				.frame(width: 16)
-			
-			if viewModel.comments.count == 0 {
-				noReactionSingleView()
+			if viewModel.comments.isEmpty {
+				Button(action: {
+					viewModel.showCommentSheet.toggle()
+				}, label: {
+					noReactionSingleView()
+				})
 			} else {
 				HStack(spacing: 16) {
+					
+					Rectangle()
+						.frame(width: 0, height: 0)
+					
 					ForEach(viewModel.comments) { comment in
 						reactionSingleView(comment: comment)
 					}
@@ -32,8 +37,7 @@ struct InfoReactionsView: View {
     }
 }
 
-
-extension InfoReactionsView {
+extension InfoCommentsListView {
 	@ViewBuilder
 	func reactionSingleView(comment: VisibleComment) -> some View {
 		VStack(alignment: .leading, spacing: 10) {
