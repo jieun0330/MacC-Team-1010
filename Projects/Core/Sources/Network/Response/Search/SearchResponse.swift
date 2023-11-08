@@ -11,16 +11,16 @@ import Foundation
 public struct SearchResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: [SearchMakgeolli]?
+	public let result: [SearchResult]?
 }
 
-public struct SearchMakgeolli: Codable {
+public struct SearchResult: Codable {
 	public let makNumber: Int?
 	public let makName: String?
 	public let makType: String?
 	public let makImageNumber: String?
 	public let mainDetail: SearchMainDetail?
-	public let taste: Taste?
+	public let taste: SearchTaste?
 }
 
 public struct SearchMainDetail: Codable {
@@ -29,7 +29,7 @@ public struct SearchMainDetail: Codable {
 	public let makPrice: Int?
 }
 
-public struct Taste: Codable {
+public struct SearchTaste: Codable {
 	public let makTasteSweet: Int?
 	public let makTasteSour: Int?
 	public let makTasteThick: Int?

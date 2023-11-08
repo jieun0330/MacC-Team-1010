@@ -8,13 +8,13 @@
 
 import Foundation
 
-public struct MakgeolliListResponse: Codable {
+public struct MakListResponse: Codable {
 	public let resultCode: Int
 	public let resultMsg: String
-	public let result: MakgeolliListResult?
+	public let result: MakListResult?
 }
 
-public struct MakgeolliListResult: Codable {
+public struct MakListResult: Codable {
 	public let contents: [MakgeolliItem]?
 	public let totalCount: Int?
 	public let nextCursor: Int?

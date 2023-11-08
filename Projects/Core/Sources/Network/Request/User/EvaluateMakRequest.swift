@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct EvaluateRequest: Codable {
+public struct EvaluateMakRequest: Codable {
 	let userId: Int
 	let makNumber: Int
 	let likeMak: String

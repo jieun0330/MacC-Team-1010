@@ -26,11 +26,21 @@ final class HomeViewModel: ObservableObject {
 	func fetchNewMakgeolli() {
 		Task {
 			do {
-//				let response = try await makgeolliRepository.fetchMakgeolliList()
-//				newItems = (response.result?.contents)!
+				//				let response = try await makgeolliRepository.fetchMakgeolliList()
+				//				newItems = (response.result?.contents)!
+				
+//				let response = try await makgeolliRepository.findByFeatures(
+//					FindByFeaturesRequest(sort: 5,
+//												   category: nil,
+//												   pageable: FindByFeaturesPageable(page: 0, size: 0, sort: []))
+//				)
+//				print("response \(response)")
+				
 				fetchLoading = false
 			} catch {
 				// error
+				
+				Logger.debug(error: error, message: "")
 			}
 		}
 	}

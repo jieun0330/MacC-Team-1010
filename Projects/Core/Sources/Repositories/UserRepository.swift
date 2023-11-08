@@ -12,10 +12,12 @@ import Utils
 public protocol UserRepository {
 	func skipSignin(_ request: UserRequest) async throws -> UserResponse
 	func updateComment(_ request: UpdateCommentRequest) async throws -> CommentResponse
-	func evaluateMak(_ request: EvaluateRequest) async throws -> EvaluateResponse
+	func evaluateMak(_ request: EvaluateMakRequest) async throws -> EvaluateMakResponse
 	func addWishList(_ request: WishListRequest) async throws -> WishListResponse
 	func deleteWishList(_ request: WishListRequest) async throws -> WishListResponse
-	func getUserMakFolder(_ request: GetUserMakFolderRequest) async throws -> GetUserMakFolderResponse
+	func getUserMakFolder(
+		_ request: GetUserMakFolderRequest
+	) async throws -> GetUserMakFolderResponse
 }
 
 public final class DefaultUserRepository: UserRepository {
@@ -48,10 +50,10 @@ public final class DefaultUserRepository: UserRepository {
 		)
 		return response
 	}
-
-	public func evaluateMak(_ request: EvaluateRequest) async throws -> EvaluateResponse {
+	
+	public func evaluateMak(_ request: EvaluateMakRequest) async throws -> EvaluateMakResponse {
 		let response = try await UserAPI.request(target: UserAPI.evaluateMak(
-			parameter: request), dataType: EvaluateResponse.self
+			parameter: request), dataType: EvaluateMakResponse.self
 		)
 		return response
 	}
@@ -70,7 +72,9 @@ public final class DefaultUserRepository: UserRepository {
 		return response
 	}
 	
-	public func getUserMakFolder(_ request: GetUserMakFolderRequest) async throws -> GetUserMakFolderResponse {
+	public func getUserMakFolder(
+		_ request: GetUserMakFolderRequest
+	) async throws -> GetUserMakFolderResponse {
 		let request: [String: Any] = try request.asDictionary()
 		let response = try await UserAPI.request(target: UserAPI.getUserMakFolder(
 			parameter: request), dataType: GetUserMakFolderResponse.self

@@ -11,10 +11,10 @@ import Foundation
 public struct UserResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: UserData?
+	public let result: UserResult?
 }
 
-public struct UserData: Codable {
+public struct UserResult: Codable {
 	public let userID: Int?
 	public let userNickName: String?
 	public let userSex: String?

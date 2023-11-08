@@ -8,13 +8,13 @@
 
 import Foundation
 
-public struct EvaluateResponse: Codable {
+public struct EvaluateMakResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: EvaluateResult?
+	public let result: EvaluateMakResult?
 }
 
-public struct EvaluateResult: Codable {
+public struct EvaluateMakResult: Codable {
 	public let isSuccess: Bool?
 	public let message: String?
 }

@@ -8,34 +8,32 @@
 
 import Foundation
 
-import Foundation
-
-public struct MakgeolliFindByFeaturesResponse: Codable {
+public struct FindByFeaturesResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: MakInfoResult?
+	public let result: FindByFeaturesResult?
 }
 
-public struct MakInfoResult: Codable {
+public struct FindByFeaturesResult: Codable {
 	public let recordCounts: Int?
-	public let makInfo: MakInfoContent?
-	public let pageable: MakInfoPageable?
+	public let makInfo: FindByFeaturesContent?
+	public let pageable: FindByFeaturesResponsePageable?
 	public let totalPages: Int?
 	public let totalElements: Int?
 	public let last: Bool?
 	public let size: Int?
 	public let number: Int?
-	public let sort: MakInfoSort?
+	public let sort: FindByFeaturesSort?
 	public let numberOfElements: Int?
 	public let first: Bool?
 	public let empty: Bool?
 }
 
-public struct MakInfoContent: Codable {
-	public let content: [MakInfoDetail]?
+public struct FindByFeaturesContent: Codable {
+	public let content: [FindByFeaturesDetail]?
 }
 
-public struct MakInfoDetail: Codable {
+public struct FindByFeaturesDetail: Codable {
 	public let makSeq: Int?
 	public let makName: String?
 	public let makType: String?
@@ -49,16 +47,16 @@ public struct MakInfoDetail: Codable {
 	public let makImageNumber: String?
 }
 
-public struct MakInfoPageable: Codable {
+public struct FindByFeaturesResponsePageable: Codable {
 	public let pageNumber: Int?
 	public let pageSize: Int?
-	public let sort: MakInfoSort?
+	public let sort: FindByFeaturesSort?
 	public let offset: Int?
 	public let paged: Bool?
 	public let unpaged: Bool?
 }
 
-public struct MakInfoSort: Codable {
+public struct FindByFeaturesSort: Codable {
 	public let empty: Bool?
 	public let sorted: Bool?
 	public let unsorted: Bool?

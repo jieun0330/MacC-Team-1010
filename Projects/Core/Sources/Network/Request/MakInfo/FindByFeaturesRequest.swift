@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct MakgeolliFindByFeaturesRequest: Codable {
+public struct FindByFeaturesRequest: Codable {
 	let sort: Int
 	let offset: Int
 	let category: [String]?
-	let pageable: MakgeolliFindByFeaturesPageable
+	let pageable: FindByFeaturesRequestPageable
 	
 	public init(sort: Int, offset: Int = 0,
-				category: [String]?, pageable: MakgeolliFindByFeaturesPageable) {
+				category: [String]?, pageable: FindByFeaturesRequestPageable) {
 		self.sort = sort
 		self.offset = offset
 		self.category = category
@@ -23,7 +23,7 @@ public struct MakgeolliFindByFeaturesRequest: Codable {
 	}
 }
 
-public struct MakgeolliFindByFeaturesPageable: Codable {
+public struct FindByFeaturesRequestPageable: Codable {
 	let page: Int
 	let size: Int
 	let sort: [String]

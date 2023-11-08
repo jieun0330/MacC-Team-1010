@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 public enum SearchAPI {
-	case getSearch(parameters: [String: Any]?)
+	case fetchSearch(parameters: [String: Any]?)
 }
 
 extension SearchAPI: TargetType {
@@ -23,7 +23,7 @@ extension SearchAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		case .getSearch:
+		case .fetchSearch:
 			return ""
 		}
 	}
@@ -34,9 +34,9 @@ extension SearchAPI: TargetType {
 	
 	public var task: Moya.Task {
 		switch self {
-		case .getSearch(parameters: .none):
+		case .fetchSearch(parameters: .none):
 			return .requestPlain
-		case .getSearch(let parameter):
+		case .fetchSearch(let parameter):
 			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
 		}
 	}

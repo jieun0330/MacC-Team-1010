@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MakgeolliListRequest: Codable {
+public struct MakListRequest: Codable {
 	let lastMakNum: Int?
 	let categories: [String]?
 	let sort: String?
