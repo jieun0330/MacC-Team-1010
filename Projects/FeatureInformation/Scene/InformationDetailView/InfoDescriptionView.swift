@@ -10,7 +10,7 @@ import SwiftUI
 import DesignSystem
 
 struct InfoDescriptionView: View {
-	@ObservedObject var viewModel: InformationViewModel
+	let description: String
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
@@ -23,7 +23,7 @@ struct InfoDescriptionView: View {
 			}
 			.padding(.vertical, 20)
 			
-			Text(viewModel.makHoly.description)
+			Text(description)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 				.multilineTextAlignment(.leading)
@@ -32,6 +32,7 @@ struct InfoDescriptionView: View {
 				.padding(.bottom, 20)
 			
 		}
+		.padding(.horizontal, 16)
     }
 }
 
