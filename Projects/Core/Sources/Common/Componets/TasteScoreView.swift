@@ -59,6 +59,17 @@ public struct TasteScoreView: View {
 		self.freshness = freshness
 	}
 	
+	public init(
+		type: TasteScoreViewType,
+		makHoly: MakHoly) {
+			self.type = type
+			self.style = TasteScoreViewStyle(scoreType: type)
+			self.sweetness = makHoly.sweetness
+			self.sourness = makHoly.sourness
+			self.thickness = makHoly.thickness
+			self.freshness = makHoly.freshness
+		}
+	
 	public var body: some View {
 		HStack(spacing: self.style.outerSpacing) {
 			scoreSingleView(description: "단맛", score: sweetness)
