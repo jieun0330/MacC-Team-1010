@@ -26,6 +26,7 @@ public struct HomeView: View {
 				.tint(Color(uiColor: .designSystem(.white)!))
 				.onAppear {
 					viewModel.fetchNewMakList()
+					viewModel.fetchRecentComments()
 				}
 		} else {
 			NavigationStack {

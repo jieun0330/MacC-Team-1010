@@ -11,9 +11,9 @@ import Utils
 
 public protocol MakgeolliRepository {
 	func fetchDetail(makNumber: Int) async throws -> MakHoly
-	func fetchMakList(lastMakNum: Int?,
-							categories: [String]?,
-							sort: String?) async throws -> MakListResponse
+//	func fetchMakList(lastMakNum: Int?,
+//					  categories: [String]?,
+//					  sort: String?) async throws -> MakListResponse
 	func fetchMakLikesAndComments(
 		makNumber: Int) async throws -> MakLikesAndCommentsResponse
 	func fetchFindByFeatures(
@@ -25,37 +25,37 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	public init() { }
 	
 	/// 막걸리 리스트 가져오기
-	public func fetchMakList(lastMakNum: Int? = nil,
-								   categories: [String]? = nil,
-								   sort: String? = nil) async throws -> MakListResponse {
-		var parameters: [String: Any] = [:]
-		var tempParameters: [[String: Any]] = []
-		
-		if let lastMakNum {
-			tempParameters.append(["lastMakNum": lastMakNum])
-		}
-		
-		if let categories {
-			let categoriesString = categories.joined(separator: ",")
-			tempParameters.append(["category": categoriesString])
-		}
-		
-		if let sort {
-			tempParameters.append(["sort": sort])
-		}
-		
-		for item in tempParameters {
-			for (key, value) in item {
-				parameters[key] = value
-			}
-		}
-		
-		let response = try await MakgeolliAPI.request(
-			target: MakgeolliAPI.fetchMakList(parameters: parameters),
-			dataType: MakListResponse.self
-		)
-		return response
-	}
+//	public func fetchMakList(lastMakNum: Int? = nil,
+//							 categories: [String]? = nil,
+//							 sort: String? = nil) async throws -> MakListResponse {
+//		var parameters: [String: Any] = [:]
+//		var tempParameters: [[String: Any]] = []
+//
+//		if let lastMakNum {
+//			tempParameters.append(["lastMakNum": lastMakNum])
+//		}
+//
+//		if let categories {
+//			let categoriesString = categories.joined(separator: ",")
+//			tempParameters.append(["category": categoriesString])
+//		}
+//
+//		if let sort {
+//			tempParameters.append(["sort": sort])
+//		}
+//
+//		for item in tempParameters {
+//			for (key, value) in item {
+//				parameters[key] = value
+//			}
+//		}
+//
+//		let response = try await MakgeolliAPI.request(
+//			target: MakgeolliAPI.fetchMakList(parameters: parameters),
+//			dataType: MakListResponse.self
+//		)
+//		return response
+//	}
 	
 	/// 서버에서 막걸리 정보 가져오기
 	public func fetchDetail(makNumber: Int) async throws -> MakHoly {

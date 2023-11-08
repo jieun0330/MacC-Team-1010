@@ -12,7 +12,7 @@ import Core
 final class HomeViewModel: ObservableObject {
 	@Published var fetchLoading = true
 	@Published var newItems: [NewMakListMakgeolliDetail] = []
-	@Published var comments: [Comment] = Comment.mokDatas
+	@Published var comments: [RecentComment] = []
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
 	let homeRepository: DefaultHomeRepository
@@ -29,11 +29,27 @@ final class HomeViewModel: ObservableObject {
 	func fetchNewMakList() {
 		Task {
 			do {
-				let response = try await homeRepository.fetchNewMakList()
-				newItems = response.result ?? []
+//				let response = try await homeRepository.fetchNewMakList()
+//				newItems = response.result ?? []
 				fetchLoading = false
 			} catch {
-				// error
+				Logger.debug(error: error, message: "")
+			}
+		}
+	}
+	
+	@MainActor
+	func fetchRecentComments() {
+		Task {
+			do {
+				let response = try await makgeolliRepository.fetchFindByFeatures(FindByFeaturesRequest(sort: 0, category: nil, pageable: FindByFeaturesRequestPageable(page: 0, size: 0, sort: [])))
+				print("response \(response)")
+				
+				
+//				let response = try await homeRepository.fetchRecentComment()
+//				comments = response.result ?? []
+				fetchLoading = false
+			} catch {
 				Logger.debug(error: error, message: "")
 			}
 		}

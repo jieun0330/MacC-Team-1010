@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 public enum MakgeolliAPI {
-	case fetchMakList(parameters: [String: Any]?)
+//	case fetchMakList(parameters: [String: Any]?)
 	case fetchDetail(parameter: [String: Any])
 	case fetchMakLikesAndComments(parameter: [String: Any])
 	case fetchFindByFeatures(parameter: [String: Any])
@@ -26,12 +26,12 @@ extension MakgeolliAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		case .fetchMakList:
-			return ""
+//		case .fetchMakList:
+//			return ""
 		case .fetchDetail:
-			return "/detail"
+			return "/userSearch/detail"
 		case .fetchMakLikesAndComments:
-			return "/makLikesAndComments"
+			return "/userSearch/makLikesAndComments"
 		case .fetchFindByFeatures:
 			return "/findByFeatures"
 		}
@@ -43,10 +43,10 @@ extension MakgeolliAPI: TargetType {
 	
 	public var task: Moya.Task {
 		switch self {
-		case .fetchMakList(parameters: .none):
-			return .requestPlain
-		case .fetchMakList(let parameter):
-			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
+//		case .fetchMakList(parameters: .none):
+//			return .requestPlain
+//		case .fetchMakList(let parameter):
+//			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
 		case .fetchDetail(let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		case .fetchMakLikesAndComments(let parameter):

@@ -10,16 +10,20 @@ import Foundation
 import Core
 
 final class CategoryViewModel: ObservableObject {
-	@Published var fetchLoading = false
+	@Published var fetchLoading = true
+	@Published var fetchCommentLoading = true
 	@Published var makHolys: [MakHolyMini] = MakHolyMini.mokDatas
-	@Published var comments: [Comment] = Comment.mockDatas
+	@Published var comments: [RecentComment] = []
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
+	let homeRepository: DefaultHomeRepository
 	
 	init(
-		makgeolliRepository: DefaultMakgeolliRepository
+		makgeolliRepository: DefaultMakgeolliRepository,
+		homeRepository: DefaultHomeRepository
 	) {
 		self.makgeolliRepository = makgeolliRepository
+		self.homeRepository = homeRepository
 	}
 	
 	@MainActor
@@ -28,11 +32,11 @@ final class CategoryViewModel: ObservableObject {
 		Task {
 			do {
 				// 서버 통신 data
-				//				let stringCategory = categories.map { $0.rawValue }
-				//				let response = try await makgeolliRepository.fetchMakgeolliList(
-				//					categories: stringCategory.isEmpty ? nil : stringCategory
-				//				)
-				//				makgeollis = (response.result?.contents)!
+//				let stringCategory = categories.map { $0.rawValue }
+//				let response = try await makgeolliRepository.fetchMakgeolliList(
+//					categories: stringCategory.isEmpty ? nil : stringCategory
+//				)
+//				makgeollis = (response.result?.contents)!
 				
 				// mock data
 				var categories = categories
@@ -78,4 +82,19 @@ final class CategoryViewModel: ObservableObject {
 		//					categories: ["sweet", "sour"]
 		//				)
 	}
+	
+	@MainActor
+	func fetchRecentComments() {
+		fetchCommentLoading = true
+		Task {
+			do {
+				let response = try await homeRepository.fetchRecentComment()
+				comments = response.result ?? []
+				fetchCommentLoading = false
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+		}
+	}
+
 }

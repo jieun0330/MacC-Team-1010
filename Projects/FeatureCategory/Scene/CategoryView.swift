@@ -12,7 +12,8 @@ import FeatureInformation
 
 public struct CategoryView: View {
 	@StateObject private var viewModel = CategoryViewModel(
-		makgeolliRepository: DefaultMakgeolliRepository()
+		makgeolliRepository: DefaultMakgeolliRepository(),
+		homeRepository: DefaultHomeRepository()
 	)
 	
 	@State var targetTitle: [CharacteristicsType]
@@ -34,8 +35,8 @@ public struct CategoryView: View {
 				.navigationBarItems(leading: CustomBackButton())
 				.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 				.onAppear {
-					if viewModel.fetchLoading {
-						viewModel.fetchCategoryMakgeolli(categories: targetTitle)
+					if viewModel.fetchCommentLoading {
+						viewModel.fetchRecentComments()
 					}
 				}
 		} else {

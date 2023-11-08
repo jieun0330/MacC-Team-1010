@@ -11,14 +11,14 @@ import Core
 import DesignSystem
 
 struct NewCommentView: View {
-	let comments: [Comment]
+	let comments: [RecentComment]
 	
 	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
 			VStack(spacing: 0) {
 				Spacer()
 					.frame(height: 16)
-				ForEach(comments) { comment in
+				ForEach(comments, id: \.self) { comment in
 					VStack(spacing: 0) {
 						NewCommentSingleView(comment: comment)
 						DividerView()
