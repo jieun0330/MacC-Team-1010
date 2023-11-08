@@ -14,7 +14,7 @@ public enum UserAPI {
 	case updateComment(parameter: UpdateCommentRequest)
 	case insertComment(parameter: InsertCommentRequest)
 	case deleteComment(parameter: DeleteCommentRequest)
-	case evaluateMak(parameter: EvaluateRequest)
+	case evaluateMak(parameter: EvaluateMakRequest)
 	case addWishList(parameter: WishListRequest)
 	case deleteWishList(parameter: WishListRequest)
 	

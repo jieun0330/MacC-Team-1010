@@ -9,8 +9,8 @@
 import Foundation
 
 public struct WishListRequest: Codable {
-	public let userId: Int
-	public let makNumber: Int
+	let userId: Int
+	let makNumber: Int
 	
 	public init(userId: Int, makNumber: Int) {
 		self.userId = userId

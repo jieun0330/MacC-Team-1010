@@ -10,8 +10,8 @@ import Foundation
 import Moya
 
 public enum HomeAPI {
-	case recentComments
-	case newMakList
+	case fetchRecentComments
+	case fetchNewMakList
 }
 
 extension HomeAPI: TargetType {
@@ -24,9 +24,9 @@ extension HomeAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		case .recentComments:
+		case .fetchRecentComments:
 			return "/recentComments"
-		case .newMakList:
+		case .fetchNewMakList:
 			return "/newMakList"
 		}
 	}

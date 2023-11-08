@@ -10,9 +10,10 @@ import Foundation
 import Moya
 
 public enum MakgeolliAPI {
-	case fetchMakgeolliList(parameters: [String: Any]?)
-	case fetchMakgeolliInfo(parameter: [String: Any])
-	case fetchMakgeolliLikesAndComments(parameter: [String: Any])
+	case fetchMakList(parameters: [String: Any]?)
+	case fetchDetail(parameter: [String: Any])
+	case fetchMakLikesAndComments(parameter: [String: Any])
+	case fetchFindByFeatures(parameter: [String: Any])
 }
 
 extension MakgeolliAPI: TargetType {
@@ -25,12 +26,14 @@ extension MakgeolliAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		case .fetchMakgeolliList:
+		case .fetchMakList:
 			return ""
-		case .fetchMakgeolliInfo:
+		case .fetchDetail:
 			return "/detail"
-		case .fetchMakgeolliLikesAndComments:
+		case .fetchMakLikesAndComments:
 			return "/makLikesAndComments"
+		case .fetchFindByFeatures:
+			return "/findByFeatures"
 		}
 	}
 	
@@ -40,13 +43,15 @@ extension MakgeolliAPI: TargetType {
 	
 	public var task: Moya.Task {
 		switch self {
-		case .fetchMakgeolliList(parameters: .none):
+		case .fetchMakList(parameters: .none):
 			return .requestPlain
-		case .fetchMakgeolliList(let parameter):
+		case .fetchMakList(let parameter):
 			return .requestParameters(parameters: parameter!, encoding: URLEncoding.queryString)
-		case .fetchMakgeolliInfo(let parameter):
+		case .fetchDetail(let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
-		case .fetchMakgeolliLikesAndComments(let parameter):
+		case .fetchMakLikesAndComments(let parameter):
+			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+		case .fetchFindByFeatures(parameter: let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		}
 	}
@@ -66,8 +71,10 @@ extension MakgeolliAPI {
 					print("request 1 didFinishRequest URL [\(response.request?.url?.absoluteString ?? "")]")
 					do {
 						let data = try JSONDecoder().decode(T.self, from: response.data)
+						print("data \(data)")
 						continuation.resume(returning: data)
 					} catch {
+						print("error \(error)")
 						continuation.resume(throwing: error)
 					}
 				case .failure(let error):

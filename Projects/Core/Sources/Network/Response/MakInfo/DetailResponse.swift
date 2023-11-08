@@ -8,31 +8,31 @@
 
 import Foundation
 
-public struct MakgeolliInfoResponse: Codable {
+public struct DetailResponse: Codable {
 	public let resultCode: Int
 	public let resultMsg: String
-	public let result: MakgeolliDetail?
+	public let result: DetailResult?
 }
 
-public struct MakgeolliDetail: Codable {
+public struct DetailResult: Codable {
 	public let makSeq: Int?
 	public let makType: String?
 	public let makName: String?
 	public let makImageNumber: String?
-	public let attributes: [MakgeolliAttribute]?
+	public let attributes: [DetailAttribute]?
 	
 	public var toEntity: MakHoly {
 		return MakHoly.test1
 	}
 }
 
-public struct MakgeolliAttribute: Codable {
+public struct DetailAttribute: Codable {
 	public let mainDetail: [MainDetail]?
-	public let taste: [TasteInfo]?
+	public let taste: [DetailTasteInfo]?
 	public let makContent: String?
 	public let makAwards: [String]?
 	public let makRaw: String?
-	public let breweryInfo: [BreweryInfo]?
+	public let breweryInfo: [DetailBreweryInfo]?
 }
 
 public struct MainDetail: Codable {
@@ -41,14 +41,14 @@ public struct MainDetail: Codable {
 	public let makPrice: Int?
 }
 
-public struct TasteInfo: Codable {
+public struct DetailTasteInfo: Codable {
 	public let makTasteSweet: Double?
 	public let makTasteSour: Double?
 	public let makTasteThick: Double?
 	public let makTasteFresh: Double?
 }
 
-public struct BreweryInfo: Codable {
+public struct DetailBreweryInfo: Codable {
 	public let makBrewery: String?
 	public let makBreweryLink: String?
 	public let makSalesLink: String?

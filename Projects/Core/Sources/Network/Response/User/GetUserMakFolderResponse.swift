@@ -11,10 +11,10 @@ import Foundation
 public struct GetUserMakFolderResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: GetUserMakFolderResponseResultData?
+	public let result: GetUserMakFolderResult?
 }
 
-public struct GetUserMakFolderResponseResultData: Codable {
+public struct GetUserMakFolderResult: Codable {
 	public let userId: String?
 	public let makInfo: [MakInfo]?
 	public let totalCounts: Int?

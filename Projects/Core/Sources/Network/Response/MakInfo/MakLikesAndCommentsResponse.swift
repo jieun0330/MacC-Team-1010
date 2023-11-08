@@ -8,13 +8,13 @@
 
 import Foundation
 
-public struct MakgeolliLikesAndCommentResponse: Codable {
+public struct MakLikesAndCommentsResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: ResultData?
+	public let result: MakLikesAndCommentsResult?
 }
 
-public struct ResultData: Codable {
+public struct MakLikesAndCommentsResult: Codable {
 	public let makEvaluateInfo: MakEvaluateInfo?
 	public let comments: [Comments]?
 	public let pageableInfo: PageableInfo?

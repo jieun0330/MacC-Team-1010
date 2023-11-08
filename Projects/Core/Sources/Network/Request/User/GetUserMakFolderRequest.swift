@@ -9,10 +9,10 @@
 import Foundation
 
 public struct GetUserMakFolderRequest: Codable {
-	public let userId: Int
-	public let segmentName: String
-	public let lastmakNum: Int
-	public let pageable: GetUserMakFolderPageable
+	let userId: Int
+	let segmentName: String
+	let lastmakNum: Int
+	let pageable: GetUserMakFolderPageable
 	
 	public init(userId: Int, segmentName: String = "entire", lastmakNum: Int = 300000,
 				pageable: GetUserMakFolderPageable) {
@@ -24,9 +24,9 @@ public struct GetUserMakFolderRequest: Codable {
 }
 
 public struct GetUserMakFolderPageable: Codable {
-	public let page: Int
-	public let size: Int
-	public let sort: [String]
+	let page: Int
+	let size: Int
+	let sort: [String]
 	
 	public init(page: Int, size: Int, sort: [String]) {
 		self.page = page

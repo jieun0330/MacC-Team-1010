@@ -10,21 +10,23 @@ import Foundation
 import Utils
 
 public protocol HomeRepository {
-	func getRecentComment() async throws -> RecentCommentsResponse
-	func getNewMakList() async throws -> NewMakListResponse
+	func fetchRecentComment() async throws -> RecentCommentsResponse
+	func fetchNewMakList() async throws -> NewMakListResponse
 }
 
 public final class DefaultHomeRepository: HomeRepository {
 	public init() { }
 	
-	public func getRecentComment() async throws -> RecentCommentsResponse {
-		let response = try await HomeAPI.request(target: HomeAPI.recentComments, dataType: RecentCommentsResponse.self
+	public func fetchRecentComment() async throws -> RecentCommentsResponse {
+		let response = try await HomeAPI.request(target: HomeAPI.fetchRecentComments,
+												 dataType: RecentCommentsResponse.self
 		)
 		return response
 	}
 	
-	public func getNewMakList() async throws -> NewMakListResponse {
-		let response = try await HomeAPI.request(target: HomeAPI.newMakList, dataType: NewMakListResponse.self
+	public func fetchNewMakList() async throws -> NewMakListResponse {
+		let response = try await HomeAPI.request(target: HomeAPI.fetchNewMakList,
+												 dataType: NewMakListResponse.self
 		)
 		return response
 	}

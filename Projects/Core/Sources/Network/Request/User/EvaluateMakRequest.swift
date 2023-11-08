@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct EvaluateRequest: Codable {
-	public let userId: Int
-	public let makNumber: Int
-	public let likeMak: String
+public struct EvaluateMakRequest: Codable {
+	let userId: Int
+	let makNumber: Int
+	let likeMak: String
 	
 	public init(userId: Int, makNumber: Int, likeMak: String) {
 		self.userId = userId

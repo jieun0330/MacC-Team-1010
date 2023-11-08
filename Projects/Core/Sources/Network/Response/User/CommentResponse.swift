@@ -11,10 +11,10 @@ import Foundation
 public struct CommentResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
-	public let result: ResultCommentData?
+	public let result: CommentResult?
 }
 
-public struct ResultCommentData: Codable {
+public struct CommentResult: Codable {
 	public let isSuccess: Bool?
 	public let message: String?
 }

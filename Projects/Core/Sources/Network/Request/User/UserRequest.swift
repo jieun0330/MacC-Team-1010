@@ -9,9 +9,9 @@
 import Foundation
 
 public struct UserRequest: Codable {
-	public let userNickName: String
-	public let userSex: String
-	public let userAgeRange: String
+	let userNickName: String
+	let userSex: String
+	let userAgeRange: String
 	
 	public init(userNickName: String, userSex: String, userAgeRange: String) {
 		self.userNickName = userNickName

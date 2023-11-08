@@ -10,21 +10,24 @@ import Foundation
 import Utils
 
 public protocol MakgeolliRepository {
-	func fetchMakgeolliInfo(makNumber: Int) async throws -> MakHoly
-	func fetchMakgeolliList(lastMakNum: Int?,
+	func fetchDetail(makNumber: Int) async throws -> MakHoly
+	func fetchMakList(lastMakNum: Int?,
 							categories: [String]?,
-							sort: String?) async throws -> MakgeolliListResponse
-	func fetchMakgeolliLikesAndComments(
-		makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse
+							sort: String?) async throws -> MakListResponse
+	func fetchMakLikesAndComments(
+		makNumber: Int) async throws -> MakLikesAndCommentsResponse
+	func fetchFindByFeatures(
+		_ request: FindByFeaturesRequest
+	) async throws -> FindByFeaturesResponse
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	public init() { }
 	
 	/// 막걸리 리스트 가져오기
-	public func fetchMakgeolliList(lastMakNum: Int? = nil,
+	public func fetchMakList(lastMakNum: Int? = nil,
 								   categories: [String]? = nil,
-								   sort: String? = nil) async throws -> MakgeolliListResponse {
+								   sort: String? = nil) async throws -> MakListResponse {
 		var parameters: [String: Any] = [:]
 		var tempParameters: [[String: Any]] = []
 		
@@ -48,17 +51,17 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		}
 		
 		let response = try await MakgeolliAPI.request(
-			target: MakgeolliAPI.fetchMakgeolliList(parameters: parameters),
-			dataType: MakgeolliListResponse.self
+			target: MakgeolliAPI.fetchMakList(parameters: parameters),
+			dataType: MakListResponse.self
 		)
 		return response
 	}
 	
 	/// 서버에서 막걸리 정보 가져오기
-	public func fetchMakgeolliInfo(makNumber: Int) async throws -> MakHoly {
-		let request: [String: Any] = try MakgeolliInfoRequest(makNumber: makNumber).asDictionary()
-		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakgeolliInfo(
-			parameter: request), dataType: MakgeolliInfoResponse.self
+	public func fetchDetail(makNumber: Int) async throws -> MakHoly {
+		let request: [String: Any] = try DetailRequest(makNumber: makNumber).asDictionary()
+		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchDetail(
+			parameter: request), dataType: DetailResponse.self
 		)
 		if let result = response.result {
 			return result.toEntity
@@ -76,12 +79,22 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 					   brewery: Brewery.mockADA)
 	}
 	
-	public func fetchMakgeolliLikesAndComments(makNumber: Int) async throws -> MakgeolliLikesAndCommentResponse {
-		let request: [String: Any] = try MakgeolliLikesAndCommentsRequest(
+	public func fetchMakLikesAndComments(makNumber: Int) async throws -> MakLikesAndCommentsResponse {
+		let request: [String: Any] = try MakLikesAndCommentsRequest(
 			makNumber: makNumber
 		).asDictionary()
-		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakgeolliLikesAndComments(
-			parameter: request), dataType: MakgeolliLikesAndCommentResponse.self
+		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakLikesAndComments(
+			parameter: request), dataType: MakLikesAndCommentsResponse.self
+		)
+		return response
+	}
+	
+	public func fetchFindByFeatures(
+		_ request: FindByFeaturesRequest
+	) async throws -> FindByFeaturesResponse {
+		let request: [String: Any] = try request.asDictionary()
+		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchFindByFeatures(
+			parameter: request), dataType: FindByFeaturesResponse.self
 		)
 		return response
 	}

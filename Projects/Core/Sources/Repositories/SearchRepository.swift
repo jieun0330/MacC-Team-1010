@@ -10,22 +10,22 @@ import Foundation
 import Utils
 
 public protocol SearchRepository {
-	func getSearch(keyword: String?) async throws -> SearchResponse
+	func fetchSearch(keyword: String?) async throws -> SearchResponse
 }
 
 public final class DefaultSearchRepository: SearchRepository {
 	public init() { }
 	
-	public func getSearch(keyword: String?) async throws -> SearchResponse {
+	public func fetchSearch(keyword: String?) async throws -> SearchResponse {
 		if let keyword {
 			let response = try await SearchAPI.request(
-				target: SearchAPI.getSearch(parameters: ["keyword": keyword]),
+				target: SearchAPI.fetchSearch(parameters: ["keyword": keyword]),
 				dataType: SearchResponse.self
 			)
 			return response
 		}
 		let response = try await SearchAPI.request(
-			target: SearchAPI.getSearch(parameters: .none),
+			target: SearchAPI.fetchSearch(parameters: .none),
 			dataType: SearchResponse.self
 		)
 		return response
