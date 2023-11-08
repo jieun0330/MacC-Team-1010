@@ -25,6 +25,7 @@ struct InfoMyCommentView: View {
 			}
 			
 		}
+		.padding(.horizontal, 16)
 	}
 }
 
@@ -34,8 +35,8 @@ extension InfoMyCommentView {
 		
 		HStack {
 			Text("내 코멘트")
-				.font(.style(.SF12B))
-				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
+				.SF12B()
+				.foregroundColor(.W85)
 			
 			Spacer()
 			
@@ -45,14 +46,15 @@ extension InfoMyCommentView {
 					viewModel.toggleCommentVisible()
 					
 				}, label: {
-					HStack(spacing: 1) {
+					HStack(spacing: 0) {
 						
 						Text(myComment.isVisible ? "전체 공개" : "비공개")
+							.SF12R()
 						Image(systemName: myComment.isVisible ? "checkmark" : "lock.fill")
+							.font(.style(.SF12R))
 						
 					}
-					.font(.style(.SF12R))
-					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+					.foregroundColor(.W50)
 					.padding(.leading, 30)
 				})
 			}
@@ -83,16 +85,13 @@ extension InfoMyCommentView {
 				)
 		}
 		.disabled(viewModel.makHoly.myComment != nil )
-		
-		
 	}
 	
 	func footerView(date: String) -> some View {
-		
 		HStack {
 			Text("\(date)")
-				.font(.style(.SF12R))
-				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				.SF12R()
+				.foregroundColor(.W50)
 			
 			Spacer()
 			
@@ -100,12 +99,11 @@ extension InfoMyCommentView {
 				viewModel.showActionSheet.toggle()
 			}, label: {
 				Text("수정")
-					.font(.style(.SF12R))
-					.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+					.SF12R()
+					.foregroundColor(.Primary)
 					.padding(.leading, 60)
 			})
 		}
 		.padding(.horizontal, 3)
-		
 	}
 }
