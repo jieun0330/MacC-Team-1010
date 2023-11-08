@@ -9,10 +9,7 @@
 import Foundation
 
 public enum KeyChainAccount {
-	case accessToken
-	case accesstokenExpiredTime
-	case refreshToken
-	case refreshTokenExpiredTime
+	case userId
 	
 	var description: String {
 		return String(describing: self)
@@ -20,13 +17,7 @@ public enum KeyChainAccount {
 	
 	var keyChainClass: CFString {
 		switch self {
-		case .accessToken:
-			return kSecClassGenericPassword
-		case .accesstokenExpiredTime:
-			return kSecClassGenericPassword
-		case .refreshToken:
-			return kSecClassGenericPassword
-		case .refreshTokenExpiredTime:
+		case .userId:
 			return kSecClassGenericPassword
 		}
 	}
