@@ -11,11 +11,10 @@ import DesignSystem
 import Core
 
 struct InfoAwardsView: View {
-	
-	@ObservedObject var viewModel: InformationViewModel
+	let awards: [Award]
 	
 	var count: Int {
-		return viewModel.makHoly.awards.count
+		return awards.count
 	}
 	
 	var width: CGFloat {
@@ -40,15 +39,18 @@ struct InfoAwardsView: View {
 	}
 	
 	var body: some View {
-		
-		if count > 0 {
+		VStack(spacing: 0) {
+			DividerView()
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 0) {
-					ForEach(viewModel.makHoly.awards) { award in
+					Rectangle()
+						.frame(width: 16, height: 0)
+					ForEach(awards) { award in
+						
 						infoAwardsSingleView(award: award)
-						if award != viewModel.makHoly.awards.last {
+						if award != awards.last {
 							Divider()
-								.background(Color(uiColor: .designSystem(.w25)!))
+								.foregroundColor(.W25)
 								.frame(width: 0.33, height: 42)
 						}
 					}
@@ -60,19 +62,18 @@ struct InfoAwardsView: View {
 }
 
 extension InfoAwardsView {
-	
 	@ViewBuilder
 	func infoAwardsSingleView(award: Award) -> some View {
-		VStack(alignment: .center, spacing: 1) {
+		VStack(alignment: .center, spacing: 0) {
 			Text(String(award.year))
-				.font(.style(.SF12R))
-				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				.SF12R()
+				.foregroundColor(.W50)
 			Text(award.name)
-				.font(.style(.SF12R))
-				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				.SF12R()
+				.foregroundColor(.W50)
 			Text(award.type)
-				.font(.style(.SF17R))
-				.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+				.SF17R()
+				.foregroundColor(.W85)
 		}
 		.frame(width: self.width)
 		.padding(.vertical, 24)
