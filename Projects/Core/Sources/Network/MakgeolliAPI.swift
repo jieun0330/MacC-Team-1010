@@ -13,6 +13,7 @@ public enum MakgeolliAPI {
 	case fetchMakgeolliList(parameters: [String: Any]?)
 	case fetchMakgeolliInfo(parameter: [String: Any])
 	case fetchMakgeolliLikesAndComments(parameter: [String: Any])
+	case findByFeatures(parameter: [String: Any])
 }
 
 extension MakgeolliAPI: TargetType {
@@ -31,6 +32,8 @@ extension MakgeolliAPI: TargetType {
 			return "/detail"
 		case .fetchMakgeolliLikesAndComments:
 			return "/makLikesAndComments"
+		case .findByFeatures:
+			return "/findByFeatures"
 		}
 	}
 	
@@ -47,6 +50,8 @@ extension MakgeolliAPI: TargetType {
 		case .fetchMakgeolliInfo(let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		case .fetchMakgeolliLikesAndComments(let parameter):
+			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+		case .findByFeatures(parameter: let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		}
 	}
@@ -66,8 +71,10 @@ extension MakgeolliAPI {
 					print("request 1 didFinishRequest URL [\(response.request?.url?.absoluteString ?? "")]")
 					do {
 						let data = try JSONDecoder().decode(T.self, from: response.data)
+						print("data \(data)")
 						continuation.resume(returning: data)
 					} catch {
+						print("error \(error)")
 						continuation.resume(throwing: error)
 					}
 				case .failure(let error):
