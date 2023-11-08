@@ -19,36 +19,27 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
-		ScrollView(showsIndicators: false) {
-			VStack(spacing: 10) {
+		ScrollView(.vertical, showsIndicators: false) {
+			VStack(spacing: 0) {
+				ZStack {
+					LinearGradient(
+						stops: [
+							Gradient.Stop(color: .NightSky2Top, location: 0.00),
+							Gradient.Stop(color: .NightSky2Bottom, location: 1.00),
+						],
+						startPoint: UnitPoint(x: 0.45, y: 0),
+						endPoint: UnitPoint(x: 0.45, y: 1)
+					)
+					.ignoresSafeArea(.all, edges: .top)
+					InformationCardView(viewModel: viewModel)
+					
+				}
 				
-				TasteScoreView(type: .large,
-							   sweetness: viewModel.makHolyMini.sweetness,
-							   sourness: viewModel.makHolyMini.sourness,
-							   thickness: viewModel.makHolyMini.thickness,
-							   freshness: viewModel.makHolyMini.freshness)
-				
-				InfoMyCommentView(viewModel: viewModel)
-				
-				LikeControllerView(viewModel: viewModel)
-					.padding(.horizontal, 16)
-				
-				InfoAwardsView(viewModel: viewModel)
-					.padding(.leading, 16)
-				
-				InfoReactionsView(viewModel: viewModel)
-				
-				InfoDescriptionView(viewModel: viewModel)
-					.padding(.horizontal, 16)
-				
-				InfoIngredientsView(viewModel: viewModel)
-					.padding(.horizontal, 16)
-				
-				InfoLinkView(viewModel: viewModel)
-					.padding(.horizontal, 16)
-				
+				InformationDetailView(viewModel: viewModel)
 			}
 		}
+//		.ignoresSafeArea(.all, edges: .top)
+		.navigationBarTitleDisplayMode(.inline)
 		.onAppear(perform: {
 			viewModel.fetchMakHoly()
 			viewModel.fetchReactions()
