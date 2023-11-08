@@ -19,7 +19,7 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			VStack(spacing: 10) {
 				
 				TasteScoreView(type: .large,
@@ -35,6 +35,8 @@ public struct InformationView: View {
 				
 				InfoAwardsView(viewModel: viewModel)
 					.padding(.leading, 16)
+				
+				InfoReactionsView(viewModel: viewModel)
 				
 				InfoDescriptionView(viewModel: viewModel)
 					.padding(.horizontal, 16)
