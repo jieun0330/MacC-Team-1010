@@ -29,7 +29,7 @@ public struct CategoryView: View {
 			NewCommentView(comments: viewModel.comments)
 				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.navigationTitle(type.description)
-				.navigationBarTitleDisplayMode(.large)
+				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarBackButtonHidden(true)
 				.navigationBarItems(leading: CustomBackButton())
 				.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
@@ -57,7 +57,7 @@ public struct CategoryView: View {
 			}
 			.background(Color(uiColor: .designSystem(.darkbase)!))
 			.navigationTitle(type.description)
-			.navigationBarTitleDisplayMode(type == .characteristics ? .inline : .large)
+			.navigationBarTitleDisplayMode(.inline)
 			.navigationBarBackButtonHidden(true)
 			.navigationBarItems(leading: CustomBackButton())
 			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
