@@ -14,13 +14,22 @@ public struct NewMakListResponse: Codable {
 	public let result: [NewMakListMakgeolliDetail]?
 }
 
-public struct NewMakListMakgeolliDetail: Codable {
+public struct NewMakListMakgeolliDetail: Hashable, Codable {
 	public let makNumber: Int?
 	public let makName: String?
 	public let makType: String?
 	public let makImageNumber: String?
 	public let mainDetail: NewMakListMainDetail?
 	public let taste: NewMakListTaste?
+	
+	public static func == (lhs: NewMakListMakgeolliDetail,
+						   rhs: NewMakListMakgeolliDetail) -> Bool {
+		return lhs.makNumber == rhs.makNumber
+	}
+	
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(makNumber)
+	}
 }
 
 public struct NewMakListMainDetail: Codable {
@@ -30,8 +39,8 @@ public struct NewMakListMainDetail: Codable {
 }
 
 public struct NewMakListTaste: Codable {
-	public let makTasteSweet: Double?
-	public let makTasteSour: Double?
-	public let makTasteThick: Double?
-	public let makTasteFresh: Double?
+	public let makTasteSweet: Int?
+	public let makTasteSour: Int?
+	public let makTasteThick: Int?
+	public let makTasteFresh: Int?
 }

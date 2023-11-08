@@ -11,7 +11,8 @@ import DesignSystem
 
 public struct HomeView: View {
 	@StateObject var viewModel = HomeViewModel(
-		makgeolliRepository: DefaultMakgeolliRepository()
+		makgeolliRepository: DefaultMakgeolliRepository(),
+		homeRepository: DefaultHomeRepository()
 	)
 	
 	@State var viewOpacityValue = 0.0
@@ -24,7 +25,7 @@ public struct HomeView: View {
 				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 				.tint(Color(uiColor: .designSystem(.white)!))
 				.onAppear {
-					viewModel.fetchNewMakgeolli()
+					viewModel.fetchNewMakList()
 				}
 		} else {
 			NavigationStack {
