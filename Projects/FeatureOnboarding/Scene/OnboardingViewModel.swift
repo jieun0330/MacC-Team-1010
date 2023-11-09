@@ -30,7 +30,13 @@ final class OnboardingViewModel: ObservableObject {
 				let response = try await userRepository.skipSignin(UserRequest(userNickName: nickname,
 																			   userSex: sex,
 																			   userAgeRange: ageRange))
-				try KeyChainManager.shared.create(account: .userId, data: response.result!.userID!)
+				do {
+					if let response = response.result {
+						try KeyChainManager.shared.create(account: .userId, data: response.userID!)
+					}
+				} catch {
+					Logger.debug(error: error, message: "")
+				}
 				fetchLoading = false
 				navigationState = true
 			} catch {

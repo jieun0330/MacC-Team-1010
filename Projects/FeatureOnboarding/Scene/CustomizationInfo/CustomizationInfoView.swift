@@ -42,7 +42,7 @@ struct CustomizationInfoView: View {
 				Spacer()
 					.frame(height: 40)
 				
-				TextField("2023 (출생년도)", text: $yearOfBirth)
+				TextField("2004 (출생년도)", text: $yearOfBirth)
 					.font(.style(.SF20B))
 					.keyboardType(.numberPad)
 					.onReceive(Just(yearOfBirth)) { newValue in
