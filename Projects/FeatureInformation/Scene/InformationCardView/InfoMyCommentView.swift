@@ -20,7 +20,7 @@ struct InfoMyCommentView: View {
 			
 			contentView()
 			
-			if let data = viewModel.makHoly.myComment?.date {
+			if let data = viewModel.makHoly.myReaction.comment?.date {
 				footerView(date: data)
 			}
 			
@@ -40,7 +40,7 @@ extension InfoMyCommentView {
 			
 			Spacer()
 			
-			if let myComment = viewModel.makHoly.myComment {
+			if let myComment = viewModel.makHoly.myReaction.comment {
 				Button(action: {
 					
 					viewModel.toggleCommentVisible()
@@ -70,11 +70,11 @@ extension InfoMyCommentView {
 			
 		} label: {
 			
-			let contents = viewModel.makHoly.myComment?.contents ?? "터치해서 코멘트를 남겨보세요!"
+			let contents = viewModel.makHoly.myReaction.comment?.contents ?? "터치해서 코멘트를 남겨보세요!"
 			
 			Text(contents)
 				.font(.style(.SF14R))
-				.foregroundColor(Color(uiColor: viewModel.makHoly.myComment != nil ? .designSystem(.white)! : .designSystem(.w85)!))
+				.foregroundColor(Color(uiColor: viewModel.makHoly.myReaction.comment != nil ? .designSystem(.white)! : .designSystem(.w85)!))
 				.frame(maxWidth: .infinity)
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)
@@ -84,7 +84,7 @@ extension InfoMyCommentView {
 						.foregroundColor(Color(uiColor: .designSystem(.w10)!))
 				)
 		}
-		.disabled(viewModel.makHoly.myComment != nil )
+		.disabled(viewModel.makHoly.myReaction.comment != nil )
 	}
 	
 	func footerView(date: String) -> some View {

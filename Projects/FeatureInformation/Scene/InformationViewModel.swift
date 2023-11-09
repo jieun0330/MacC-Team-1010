@@ -35,7 +35,6 @@ final class InformationViewModel: ObservableObject {
 	// makLikesAndComments  api
 	func fetchReactions() {
 		
-		self.likeDetail = LikeDetail(totalCount: 10, likeCount: 5, dislikeCount: 5)
 		
 		self.comments.append(VisibleComment(userName: "유저-1", isLiked: true, content: "맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요", date: "2023-11-04"))
 		self.comments.append(VisibleComment(userName: "유저-2", isLiked: false, content: "맛없어", date: "2023-11-05"))

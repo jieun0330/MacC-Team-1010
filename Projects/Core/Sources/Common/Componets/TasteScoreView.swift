@@ -64,10 +64,10 @@ public struct TasteScoreView: View {
 		makHoly: MakHoly) {
 			self.type = type
 			self.style = TasteScoreViewStyle(scoreType: type)
-			self.sweetness = makHoly.sweetness
-			self.sourness = makHoly.sourness
-			self.thickness = makHoly.thickness
-			self.freshness = makHoly.freshness
+			self.sweetness = makHoly.taste.sweetness
+			self.sourness = makHoly.taste.sourness
+			self.thickness = makHoly.taste.thickness
+			self.freshness = makHoly.taste.freshness
 		}
 	
 	public var body: some View {

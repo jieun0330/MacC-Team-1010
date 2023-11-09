@@ -33,7 +33,7 @@ struct MakgeolliInfoSingleView: View {
 								.lineLimit(1)
 								.font(.style(.SF12R))
 							
-							Text(String.formattedSet(adv: makHoly.adv,
+							Text(BasicInfo.formattedSet(adv: makHoly.adv,
 													 volume: makHoly.volume, price: makHoly.price))
 							.font(.style(.SF10R))
 							.foregroundColor(Color(uiColor: .designSystem(.w50)!))
