@@ -17,6 +17,10 @@ public struct FindByFeaturesResponse: Codable {
 public struct FindByFeaturesResult: Codable {
 	public let recordCounts: Int?
 	public let makInfo: FindByFeaturesContent?
+}
+
+public struct FindByFeaturesContent: Codable {
+	public let content: [MakContent]?
 	public let pageable: FindByFeaturesResponsePageable?
 	public let totalPages: Int?
 	public let totalElements: Int?
@@ -29,11 +33,7 @@ public struct FindByFeaturesResult: Codable {
 	public let empty: Bool?
 }
 
-public struct FindByFeaturesContent: Codable {
-	public let content: [FindByFeaturesDetail]?
-}
-
-public struct FindByFeaturesDetail: Codable {
+public struct MakContent: Hashable, Codable {
 	public let makSeq: Int?
 	public let makName: String?
 	public let makType: String?
