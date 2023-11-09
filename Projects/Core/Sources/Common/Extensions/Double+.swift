@@ -14,9 +14,9 @@ extension Double {
 		let decimalPart = self - Double(intValue)
 		
 		if decimalPart == 0.0 {
-			return String(intValue) + "도"
+			return String(intValue)
 		} else {
-			return String(format: "%.1f", self) + "도"
+			return String(format: "%.1f", self)
 		}
 	}
 }
