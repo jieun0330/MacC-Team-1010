@@ -10,7 +10,7 @@ import Foundation
 import Utils
 
 public protocol MakgeolliRepository {
-	func fetchDetail(makNumber: Int) async throws -> MakHoly
+	func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly
 	func fetchMakList(lastMakNum: Int?,
 							categories: [String]?,
 							sort: String?) async throws -> MakListResponse
@@ -58,16 +58,17 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	}
 	
 	/// 서버에서 막걸리 정보 가져오기
-	public func fetchDetail(makNumber: Int) async throws -> MakHoly {
-		let request: [String: Any] = try DetailRequest(makNumber: makNumber).asDictionary()
-		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchDetail(
-			parameter: request), dataType: DetailResponse.self
+	public func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly {
+		let request: [String: Any] = try DetailRequest(makNumber: makNumber, userId: userId).asDictionary()
+		
+		let response = try await MakgeolliAPI.request(
+			target: MakgeolliAPI.fetchDetail(parameter: request),
+			dataType: DetailResponse.self
 		)
+		
 		if let result = response.result {
 			return result.toEntity
 		}
-		
-		// 에릭이 MakHoly emptyView init 만들면 그걸로 수정하기
 		return MakHoly()
 	}
 	

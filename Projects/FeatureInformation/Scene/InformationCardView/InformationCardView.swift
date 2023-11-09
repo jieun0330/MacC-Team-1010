@@ -19,7 +19,7 @@ struct InformationCardView: View {
 				.padding(.bottom, 32)
 			
 			InfoNameView(name: viewModel.makHoly.name,
-						 description: String.formattedSet(makHoly: viewModel.makHoly))
+						 description: viewModel.makHoly.basicInfo.description)
 			.padding(.bottom, 15)
 			
 			TasteScoreView(type: .large, makHoly: viewModel.makHoly)

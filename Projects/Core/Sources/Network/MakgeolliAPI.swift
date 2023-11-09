@@ -29,7 +29,7 @@ extension MakgeolliAPI: TargetType {
 		case .fetchMakList:
 			return ""
 		case .fetchDetail:
-			return "/detail"
+			return "userSearch/detail"
 		case .fetchMakLikesAndComments:
 			return "/makLikesAndComments"
 		case .fetchFindByFeatures:
