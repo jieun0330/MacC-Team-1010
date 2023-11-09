@@ -14,107 +14,79 @@ import FeatureHome
 public struct CommentView: View {
     
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    
-    let type = EncyclopediaType.comment
-    
-//    extension ThumbnailView {
-//        self.makId = makId
-//    }
-    
-//    let comment: Comment
+    @State private var showActionSheet = false
+    @State private var showModal = false
     
     public var body: some View {
-        
         ScrollView {
-            
             VStack {
                 HStack {
                     Text("\((User.user1.comments).count)개의 막걸리에 코멘트를 남겼어요")
-                        .font(.style(.SF12R))
-                        .foregroundColor(Color(uiColor: .designSystem(.w50)!))
-    //                    .multilineTextAlignment(.leading)
+                        .SF12R()
+                        .foregroundColor(.W50)
                     Spacer()
                 }
                 .padding(.vertical, 10)
                 .padding(.leading, 5)
-                
-                
-//                ForEach(User.user1.comments, id: \.self) { makId in
-                    HStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(uiColor: .designSystem(.darkgrey)!))
-                            .frame(width: 60, height: 80)
-                            .padding(.trailing, 16)
-                        
-                        VStack {
+                ForEach(User.user1.comments, id: \.self) { makId in
+                    
+                    ForEach(Comment.mokDatas, id: \.self) { comment in
+                        if comment.makHolyId == makId {
                             HStack {
-                                Text(ThumbnailView(makId: $makId))
+                                RoundedRectangle(cornerRadius: 12)
+                                    .foregroundColor(.DarkGrey)
+                                    .frame(width: 60, height: 80)
+                                    .padding(.trailing, 16)
+                                VStack(alignment: .leading) {
                                     
+                                    HStack {
+                                        Text(makId)
+                                            .SF14R()
+                                        Image(uiImage: .designSystem(.like)!)
+                                            .padding(.leading, 4)
+                                        Spacer()
+                                    }
+                                    .padding(.bottom, 3)
+                                    
+                                    Text(comment.description)
+                                        .SF14R()
+                                        .lineLimit(2)
+                                        .foregroundColor(.W85)
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Text(comment.date)
+                                            .SF14R()
+                                            .foregroundColor(.W25)
+                                        
+                                        Spacer()
+                                        
+                                        Button {
+                                            showActionSheet = true
+                                        } label: {
+                                            Text("수정")
+                                                .SF12R()
+                                                .foregroundColor(.primary)
+                                        }
+                                        .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
+                                            
+                                            Button("수정하기") { self.showModal = true }
+                                                .sheet(isPresented: self.$showModal) {
+                                                    CommentEditView()
+                                                }
+                                            Button("삭제하기", role: .destructive) { }
+                                            Button("취소하기", role: .cancel) { }
+                                            
+                                        }
+                                    }
+                                }
                             }
+                            Divider()
                         }
-                        
-                        Spacer()
-                        
-                        
                     }
-//                }
-                
-
-                
-                //                ForEach(User.user1.comments, id: \.self) { makId in
-                //
-                //
-                //                    ThumbnailView(makId: makId, type: .comment)
-                //                }
-                
-//                HStack(spacing: 0) {
-//                    RoundedRectangle(cornerRadius: 12)
-//                        .fill(Color(uiColor: .designSystem(.darkgrey)!))
-//                        .frame(width: 60, height: 80)
-//                        .padding(.trailing, 16)
-//
-//                    VStack(alignment: .leading, spacing: 0) {
-//                        HStack(spacing: 0) {
-//                            Text(comment.makHolyId)
-//                                .font(.style(.SF14R))
-//                                .foregroundColor(Color(uiColor: .designSystem(.white)!))
-//                            Image(uiImage: .designSystem(.like)!)
-//                                .padding(.leading, 4)
-//                            Spacer()
-//                            Text(comment.userId)
-//                                .font(.style(.SF14R))
-//                                .foregroundColor(Color(uiColor: .designSystem(.w25)!))
-//                        }
-//                        .padding(.bottom, 3)
-//                        Text(comment.description)
-//                            .lineLimit(2)
-//                            .font(.style(.SF14R))
-//                            .foregroundColor(Color(uiColor: .designSystem(.w85)!))
-//                        Spacer()
-//                        Text(comment.date)
-//                            .font(.style(.SF14R))
-//                            .foregroundColor(Color(uiColor: .designSystem(.w25)!))
-//                    }
-//                    Spacer()
-//                }
-                
-//                HStack {
-//                   LatestCommentSingleView()
-//                }
-                
-                
+                }
             }
-            
-//            LazyVGrid(columns: columns, spacing: 16, content: {
-//
-//
-//
-//                ForEach(User.user1.comments, id: \.self) { makId in
-//
-//
-//                    ThumbnailView(makId: makId, type: .comment)
-//                }
-//            })
         }
     }
 }

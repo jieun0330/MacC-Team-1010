@@ -46,7 +46,7 @@ extension Comment {
 	
 	public static var mock2: Comment = Comment(
 		id: "c-2",
-		makHolyId: "m-1",
+		makHolyId: "c-1",
 		userId: "u-2",
 		isOpened: false,
 		description: "너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다... 너무 맛있어요 사람들이 왜 찾는지 알겠음 그렇게 또 사먹어서 안녕하세요 아무말입니다...",
@@ -54,7 +54,7 @@ extension Comment {
 	
 	public static var mock3: Comment = Comment(
 		id: "c-3",
-		makHolyId: "m-1",
+		makHolyId: "c-6",
 		userId: "u-3",
 		isOpened: false,
 		description: "우웩 별로에요.. 다신 안 먹음",
@@ -93,7 +93,7 @@ extension User {
 		bookmarks: ["m-1", "m-7", "m-8", "m-9", "m-10", "m-11"],
 		likes: ["m-1", "m-2", "m-6", "m-5", "m-12", "m-13"],
 		dislikes: ["m-3", "m-4"],
-		comments: ["c-1", "c-6", "m-12", "m-13"])
+		comments: ["c-1", "c-6", "m-12", "m-13", "m-1"])
     
 	
 	public static var user2: User = User(

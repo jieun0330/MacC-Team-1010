@@ -12,7 +12,6 @@ import DesignSystem
 public struct TabMenuView: View {
     
     public init() { }
-    
     @State var index = 0
     
     public var body: some View {
@@ -21,9 +20,6 @@ public struct TabMenuView: View {
             VStack {
                 TabNameView(index: $index)
                 
-
-                
-
                 TabView(selection: $index) {
                     ForEach (0..<5) { pageId in
                         switch pageId {
@@ -40,7 +36,7 @@ public struct TabMenuView: View {
                         }
                     }
                 }
-//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
             .navigationTitle("내 막걸리")
             .navigationBarTitleDisplayMode(.inline)

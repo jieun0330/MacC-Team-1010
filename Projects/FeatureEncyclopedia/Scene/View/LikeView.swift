@@ -17,13 +17,10 @@ public struct LikeView: View {
     public var body: some View {
         
         ScrollView {
-            
             HStack {
                 Text("\((User.user1.likes).count)개의 막걸리가 좋았어요")
-                
-                    .font(.style(.SF12R))
-                    .foregroundColor(Color(uiColor: .designSystem(.w50)!))
-//                    .multilineTextAlignment(.leading)
+                    .SF12R()
+                    .foregroundColor(.W50)
                 Spacer()
             }
             .padding(.vertical, 10)

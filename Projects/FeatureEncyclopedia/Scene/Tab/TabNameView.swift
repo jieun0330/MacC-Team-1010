@@ -12,7 +12,6 @@ import DesignSystem
 struct TabNameView: View {
     
     @Binding var index: Int
-    
     var titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
     
     var body: some View {
@@ -23,6 +22,7 @@ struct TabNameView: View {
                 
                 ForEach(titles.indices) {id in
                     let title = Text(titles[id])
+                        .SF14R()
                         .frame(width: 52)
                         .onTapGesture {
                             index = id
@@ -34,10 +34,9 @@ struct TabNameView: View {
                             .foregroundColor(self.index == id ? .white : .gray)
                         Capsule()
                             .frame(width: 68, height: 2)
-                            .foregroundColor(self.index == id ? Color(uiColor: .designSystem(.primary2)!) : .black)
+                            .foregroundColor(self.index == id ? .Primary2 : .black)
                     }
                 }
-                .font(.style(.SF14R))
             }
             .frame(maxWidth: .infinity)
         }
