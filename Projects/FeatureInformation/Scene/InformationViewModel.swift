@@ -40,7 +40,7 @@ final class InformationViewModel: ObservableObject {
 				print("fetchMakHoly Completed : ------- \n \(makHoly) \n -------")
 				self.isFetchCompleted = true
 			} catch {
-				print("fetchMakHoly 오류")
+				Logger.debug(error: error, message: "")
 			}
 			
 		}
