@@ -31,8 +31,8 @@ final class OnboardingViewModel: ObservableObject {
 																			   userSex: sex,
 																			   userAgeRange: ageRange))
 				do {
-					if let response = response.result {
-						try KeyChainManager.shared.create(account: .userId, data: response.userID!)
+					if let response = response.result, let userID = response.userID {
+						try KeyChainManager.shared.create(account: .userId, data: "\(userID)")
 					}
 				} catch {
 					Logger.debug(error: error, message: "")
