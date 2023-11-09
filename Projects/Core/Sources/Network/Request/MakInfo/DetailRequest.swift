@@ -10,8 +10,10 @@ import Foundation
 
 public struct DetailRequest: Codable {
 	let makNumber: Int
+	let userId: Int
 	
-	public init(makNumber: Int) {
+	public init(makNumber: Int, userId: Int) {
 		self.makNumber = makNumber
+		self.userId = userId
 	}
 }
