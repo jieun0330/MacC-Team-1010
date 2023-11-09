@@ -29,6 +29,26 @@ final class InformationViewModel: ObservableObject {
 	
 	private var user: User = User.user1
 	
+	@MainActor
+	func fetchDatas() {
+		Task {
+			await withTaskGroup(of: Void.self) { group in
+				group.addTask {
+					await self.fetchMakHoly()
+				}
+				group.addTask {
+					await self.fetchReactions()
+				}
+				
+				for _ in 0..<2 {
+					await group.next()
+				}
+				
+				isFetchCompleted = true
+			}
+		}
+	}
+	
 	// detail api
 	@MainActor
 	func fetchMakHoly() {
