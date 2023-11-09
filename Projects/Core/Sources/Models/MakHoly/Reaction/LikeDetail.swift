@@ -24,9 +24,7 @@ public struct LikeDetail {
 		}
 	
 	public init() {
-		self.totalCount = 0
-		self.likeCount = 0
-		self.dislikeCount = 0
+		self.init(totalCount: 0, likeCount: 0, dislikeCount: 0)
 	}
 	
 	public var isEnough: Bool {
