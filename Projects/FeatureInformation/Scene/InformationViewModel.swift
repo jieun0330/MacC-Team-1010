@@ -11,11 +11,10 @@ import Core
 
 final class InformationViewModel: ObservableObject {
 	
-	let makHolyMini: MakHolyMini
-	// makId
-
-	init(makHolyMini: MakHolyMini) {
-		self.makHolyMini = makHolyMini
+	let makHolyId: Int
+	
+	init(makHolyId: Int) {
+		self.makHolyId = makHolyId
 	}
 	
 	@Published var isFetchCompleted: Bool = false
@@ -30,13 +29,6 @@ final class InformationViewModel: ObservableObject {
 	
 	// detail api
 	func fetchMakHoly() {
-		
-		for makHoly in MakHoly.mockDatas {
-			if self.makHolyMini.id == makHoly.id {
-				self.makHoly = makHoly
-				break
-			}
-		}
 		
 	}
 	

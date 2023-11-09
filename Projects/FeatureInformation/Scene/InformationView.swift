@@ -14,8 +14,8 @@ public struct InformationView: View {
 	
 	@StateObject var viewModel: InformationViewModel
 	
-	public init(makHolyMini: MakHolyMini) {
-		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyMini: makHolyMini))
+	public init(makHolyId: Int) {
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId))
 	}
 	
 	public var body: some View {
@@ -49,8 +49,3 @@ public struct InformationView: View {
 	}
 }
 
-struct InformationView_Previews: PreviewProvider {
-	static var previews: some View {
-		InformationView(makHolyMini: MakHolyMini.test1)
-	}
-}

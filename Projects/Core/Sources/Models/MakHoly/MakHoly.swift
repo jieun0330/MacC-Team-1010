@@ -19,7 +19,7 @@ public struct MakHoly: Identifiable, Hashable {
 	}
 	
 	public init(
-		id: String,
+		id: Int,
 		name: String,
 		imageId: String,
 		sweetness: Int,
@@ -64,7 +64,7 @@ public struct MakHoly: Identifiable, Hashable {
 		isBookMarked: Bool,
 		likeState: LikeState,
 		myComment: MyComment?) {
-			self.id = makHolyMini.id
+			self.id = Int(makHolyMini.id) ?? -1
 			self.name = makHolyMini.name
 			self.imageId = makHolyMini.imageId
 			self.sweetness = makHolyMini.sweetness
@@ -84,7 +84,7 @@ public struct MakHoly: Identifiable, Hashable {
 		}
 	
 	public init() {
-		self.id = ""
+		self.id = -1
 		self.name = ""
 		self.imageId = ""
 		self.sweetness = -1
@@ -105,7 +105,7 @@ public struct MakHoly: Identifiable, Hashable {
 	
 	// MakHoli Mini 정보
 	/// 막걸리 ID
-	public let id: String
+	public let id: Int
 	/// 막걸리 이름
 	public let name: String
 	/// 이미지 Id
