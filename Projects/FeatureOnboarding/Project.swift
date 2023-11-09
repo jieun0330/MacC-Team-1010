@@ -7,7 +7,11 @@ let project = Project.makeModule(
 //	product: .app,
 	dependencies: [
 		.Project.Core,
-		.Project.DesignSystem
+		.Project.DesignSystem,
+		.Project.FeatureHome,
+		.Project.FeatureSearch,
+		.Project.FeatureEncyclopedia,
+		.Project.FeatureProfile
 	],
 	sources: ["Scene/**"]
 )
