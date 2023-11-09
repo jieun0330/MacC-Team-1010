@@ -24,14 +24,13 @@ struct MakgeolliInfoSingleView: View {
 					.frame(height: 320)
 					.overlay {
 						VStack(spacing: 0) {
-							Image(uiImage: .designSystem(.mockMakgeolli)!)
-								.resizable()
-								.aspectRatio(contentMode: .fit)
+							MakHolyImageView(imageId: makHoly.makImageNumber!, type: .large)
 								.padding(.bottom, 16)
 							
 							Text(makHoly.makName ?? "")
 								.lineLimit(1)
 								.font(.style(.SF12R))
+								.padding(.horizontal, 16)
 							
 							Text(String.formattedSet(adv: makHoly.makAlcoholPercentage ?? 0.0,
 													 volume: makHoly.makVolume ?? 0,
