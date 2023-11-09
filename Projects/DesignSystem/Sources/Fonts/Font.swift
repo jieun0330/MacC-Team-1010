@@ -12,7 +12,7 @@ public enum TENTENFont {
 	
 	case SFTitle
 	case SF24B
-	case SF22B
+	case SF20B
 	case SF17R
 	case SF14R
 	case SF12B

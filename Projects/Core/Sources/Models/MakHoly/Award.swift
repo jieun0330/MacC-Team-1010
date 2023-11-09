@@ -8,7 +8,8 @@
 
 import Foundation
 
-public struct Award: Hashable {
+public struct Award: Identifiable, Hashable {
+	public var id = UUID()
 	public let year: Int
 	public let name: String
 	public let type: String

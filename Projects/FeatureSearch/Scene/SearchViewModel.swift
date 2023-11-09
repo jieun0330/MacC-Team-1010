@@ -13,7 +13,7 @@ import Combine
 final class SearchViewModel: ObservableObject {
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
-	@Published var resultMakHolies: [MakHoly] = []
+	@Published var resultMakHolies: [MakHolyMini] = []
 	@Published var fetchLoading = true
 	
 	private var cancellables = Set<AnyCancellable>()
@@ -72,17 +72,8 @@ final class SearchViewModel: ObservableObject {
 	}
 	
 	func searchMakHolies(searchText: String) {
-		resultMakHolies = []
 		
-		for makHoly in MakHoly.mockDatas {
-			if makHoly.name.contains(searchText) ||
-				makHoly.brewery.name.contains(searchText) ||
-				makHoly.ingredients.contains(searchText) ||
-				makHoly.awards.contains(where: { $0.name.contains(searchText) })
-			{
-				self.resultMakHolies.append(makHoly)
-			}
-		}
+		resultMakHolies = MakHolyMini.mokDatas
 		
 	}
 }

@@ -28,7 +28,7 @@ public struct DividerView: View {
 	
 	public var body: some View {
 		Divider()
-			.background(Color(uiColor: .designSystem(.w25)!))
+			.foregroundColor(.W25)
 			.frame(height: 0.33)
 			.padding(.top, topPadding)
 			.padding(.bottom, bottomPadding)

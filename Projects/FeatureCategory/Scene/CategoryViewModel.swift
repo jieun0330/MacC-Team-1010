@@ -12,7 +12,7 @@ import Core
 final class CategoryViewModel: ObservableObject {
 	@Published var fetchLoading = false
 	@Published var makHolys: [MakHolyMini] = MakHolyMini.mokDatas
-	@Published var comments: [Comment] = Comment.mokDatas
+	@Published var comments: [Comment] = Comment.mockDatas
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
 	

@@ -68,15 +68,7 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		}
 		
 		// 에릭이 MakHoly emptyView init 만들면 그걸로 수정하기
-		return MakHoly(makHolyMini: MakHolyMini.test1,
-					   comments: [],
-					   awards: [],
-					   likeUsers: [],
-					   dislikeUsers: [],
-					   bookmarkUsers: [],
-					   ingredients: "",
-					   description: "",
-					   brewery: Brewery.mockADA)
+		return MakHoly()
 	}
 	
 	public func fetchMakLikesAndComments(makNumber: Int) async throws -> MakLikesAndCommentsResponse {
