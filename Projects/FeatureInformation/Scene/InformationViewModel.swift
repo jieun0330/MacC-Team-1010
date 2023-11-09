@@ -80,7 +80,7 @@ final class InformationViewModel: ObservableObject {
 				print("comments : \(comments)")
 				print("----------------------------------")
 			} catch {
-				print("fetchReactions 오류")
+				Logger.debug(error: error, message: "")
 			}
 			
 		}
