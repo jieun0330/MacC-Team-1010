@@ -47,8 +47,23 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	// makLikesAndComments  api
+	@MainActor
 	func fetchReactions() {
-				
+		Task {
+			
+			do {
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 5)
+				self.likeDetail = result.0
+				self.comments = result.1
+				print("fetchReactions Completed : -------")
+				print("likeDetail : \(likeDetail)")
+				print("comments : \(comments)")
+				print("----------------------------------")
+			} catch {
+				print("fetchReactions 오류")
+			}
+			
+		}
 	}
 	
 	// Comment Visibe 변경
