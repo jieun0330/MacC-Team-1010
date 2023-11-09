@@ -12,7 +12,7 @@ import DesignSystem
 struct InfoNameView: View {
 	let name: String
 	let description: String
-    var body: some View {
+	var body: some View {
 		VStack(spacing: 0) {
 			Text(name)
 				.SF24B()
@@ -21,5 +21,5 @@ struct InfoNameView: View {
 				.SF15R()
 				.foregroundColor(.W50)
 		}
-    }
+	}
 }

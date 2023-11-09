@@ -10,7 +10,7 @@ import SwiftUI
 
 struct InformationDetailView: View {
 	@ObservedObject var viewModel: InformationViewModel
-    var body: some View {
+	var body: some View {
 		VStack(spacing: 20) {
 			
 			InfoDescriptionView(description: viewModel.makHoly.description)
@@ -22,5 +22,5 @@ struct InformationDetailView: View {
 			InfoLinkView(brewery: viewModel.makHoly.brewery)
 			
 		}
-    }
+	}
 }

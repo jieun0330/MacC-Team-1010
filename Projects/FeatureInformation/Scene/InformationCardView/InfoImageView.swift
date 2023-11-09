@@ -13,7 +13,7 @@ import Core
 struct InfoImageView: View {
 	let imageId: String
 	
-    var body: some View {
+	var body: some View {
 		VStack(spacing: 0) {
 			ZStack {
 				VStack {
@@ -37,5 +37,5 @@ struct InfoImageView: View {
 				}
 			}
 		}
-    }
+	}
 }

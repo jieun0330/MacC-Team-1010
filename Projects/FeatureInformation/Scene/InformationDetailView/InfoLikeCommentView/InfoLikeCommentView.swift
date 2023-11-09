@@ -13,7 +13,7 @@ import DesignSystem
 struct InfoLikeCommentView: View {
 	@ObservedObject var viewModel: InformationViewModel
 	
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			
 			HStack(alignment: .center, spacing: 3) {
@@ -35,6 +35,6 @@ struct InfoLikeCommentView: View {
 				.padding(.bottom, 20)
 			
 		}
-    }
+	}
 }
 

@@ -12,7 +12,7 @@ import DesignSystem
 
 struct InfoCommentsListView: View {
 	@ObservedObject var viewModel: InformationViewModel
-    var body: some View {
+	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			
 			if viewModel.comments.isEmpty {
@@ -34,7 +34,7 @@ struct InfoCommentsListView: View {
 			}
 		}
 		.scrollDisabled(viewModel.comments.count < 2)
-    }
+	}
 }
 
 extension InfoCommentsListView {

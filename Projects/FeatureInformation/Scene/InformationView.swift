@@ -38,7 +38,6 @@ public struct InformationView: View {
 				InformationDetailView(viewModel: viewModel)
 			}
 		}
-//		.ignoresSafeArea(.all, edges: .top)
 		.navigationBarTitleDisplayMode(.inline)
 		.onAppear(perform: {
 			viewModel.fetchMakHoly()

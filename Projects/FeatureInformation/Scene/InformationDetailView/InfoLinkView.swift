@@ -23,7 +23,7 @@ struct InfoLinkView: View {
 					.SF20B()
 					.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				Spacer()
-
+				
 			}
 			.padding(.vertical, 20)
 			
@@ -38,13 +38,13 @@ struct InfoLinkView: View {
 				DividerView()
 				
 				salesView(url: url)
-				.padding(.vertical, 10)
+					.padding(.vertical, 10)
 				
 			}
 		}
 		.padding(.horizontal, 16)
 		.padding(.bottom, 40)
-    }
+	}
 }
 
 extension InfoLinkView {

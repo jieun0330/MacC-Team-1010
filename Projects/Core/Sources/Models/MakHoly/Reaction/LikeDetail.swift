@@ -18,10 +18,10 @@ public struct LikeDetail {
 		totalCount: Int,
 		likeCount: Int,
 		dislikeCount: Int) {
-		self.totalCount = totalCount
-		self.likeCount = likeCount
-		self.dislikeCount = dislikeCount
-	}
+			self.totalCount = totalCount
+			self.likeCount = likeCount
+			self.dislikeCount = dislikeCount
+		}
 	
 	public init() {
 		self.totalCount = 0

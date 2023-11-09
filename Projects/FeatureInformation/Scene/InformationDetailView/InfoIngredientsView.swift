@@ -12,7 +12,7 @@ import DesignSystem
 struct InfoIngredientsView: View {
 	let ingredients: String
 	
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			HStack {
 				Text("원재료")

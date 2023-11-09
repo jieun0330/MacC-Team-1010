@@ -13,13 +13,13 @@ import DesignSystem
 struct InfoLikePercentageView: View {
 	let likeDetail: LikeDetail
 	
-    var body: some View {
+	var body: some View {
 		VStack(spacing: 5) {
 			percentageView()
 			descriptionView()
 		}
 		.padding(.horizontal, 16)
-    }
+	}
 }
 
 extension InfoLikePercentageView {

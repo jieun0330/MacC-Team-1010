@@ -12,7 +12,7 @@ import DesignSystem
 struct InfoDescriptionView: View {
 	let description: String
 	
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			
 			HStack {
@@ -33,6 +33,6 @@ struct InfoDescriptionView: View {
 			
 		}
 		.padding(.horizontal, 16)
-    }
+	}
 }
 
