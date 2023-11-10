@@ -61,12 +61,12 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let makHoly = try await maHolyRepo.fetchDetail(makNumber: 5, userId: 1)
+				let makHoly = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
 				self.makHoly = makHoly
 				print("fetchMakHoly Completed : ------- \n \(makHoly) \n -------")
 				self.isFetchCompleted = true
 			} catch {
-				Logger.debug(error: error, message: "")
+				Logger.debug(error: error, message: "InformationViewModel -fetchMakHoly()")
 			}
 			
 		}
@@ -78,7 +78,7 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 5)
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 1)
 				self.likeDetail = result.0
 				self.comments = result.1
 				print("fetchReactions Completed : -------")
@@ -86,7 +86,7 @@ final class InformationViewModel: ObservableObject {
 				print("comments : \(comments)")
 				print("----------------------------------")
 			} catch {
-				Logger.debug(error: error, message: "")
+				Logger.debug(error: error, message: "InformationViewModel -fetchReactions()")
 			}
 			
 		}
