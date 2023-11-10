@@ -17,7 +17,6 @@ public struct User: Identifiable, Hashable {
 	public let bookmarks: [String]
 	/// 좋았어요 막걸리 ID 리스트
 	public let likes: [String]
-//    public let likes: [String]
 	/// 아쉬워요 막걸리 ID 리스트
 	public let dislikes: [String]
 	/// 코멘트 막걸리 ID 리스트
