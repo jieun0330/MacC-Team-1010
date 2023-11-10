@@ -26,6 +26,7 @@ extension InfoLikeView {
 	func likeButton() -> some View {
 		Button(action: {
 			viewModel.likeButtonTapped()
+			viewModel.postLikeState()
 		}, label: {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
@@ -47,6 +48,7 @@ extension InfoLikeView {
 	func dislikeButton() -> some View {
 		Button(action: {
 			viewModel.dislikeButtonTapped()
+			viewModel.postLikeState()
 		}, label: {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
