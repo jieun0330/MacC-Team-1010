@@ -180,7 +180,22 @@ final class InformationViewModel: ObservableObject {
 			}
 		}
 	}
-	
+
+	@MainActor
+	func deleteComment() {
+		Task {
+			do {
+//				let commentId = makHoly.myReaction.comment?.id
+				let commentId = "541f0386-6d73-4200-b00a-64f9c624f4e0"
+				let response = try await userRepo.deleteComment(DeleteCommentRequest(commentId: commentId))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+			}
+		}
+	}
 }
 
 
