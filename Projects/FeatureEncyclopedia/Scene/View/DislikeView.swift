@@ -7,12 +7,12 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
 
+// 아쉬워요 뷰
 public struct DislikeView: View {
     
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         
@@ -28,7 +28,7 @@ public struct DislikeView: View {
             .padding(.leading, 5)
             
             LazyVGrid(columns: columns, spacing: 16, content: {
-                                
+                
                 ForEach(User.user1.dislikes, id: \.self) { makId in
                     ThumbnailView(makId: makId, type: .dislike)
                 }

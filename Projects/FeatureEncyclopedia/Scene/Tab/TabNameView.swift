@@ -7,12 +7,11 @@
 //
 
 import SwiftUI
-import DesignSystem
 
 struct TabNameView: View {
     
     @Binding var index: Int
-    var titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
+    private let titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
     
     var body: some View {
         

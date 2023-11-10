@@ -7,13 +7,13 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
 
+// 좋았어요 뷰
 public struct LikeView: View {
     
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-        
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
     public var body: some View {
         
         ScrollView {

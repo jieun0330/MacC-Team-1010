@@ -7,15 +7,21 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
-import FeatureHome
 
+// 코멘트 뷰
 public struct CommentView: View {
     
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    init() {
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
+            .tintColor = UIColor(named: "Primary")
+    }
+    
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
     @State private var showActionSheet = false
     @State private var showModal = false
+    @State private var showingAlert = false
     
     public var body: some View {
         ScrollView {
@@ -28,8 +34,8 @@ public struct CommentView: View {
                 }
                 .padding(.vertical, 10)
                 .padding(.leading, 5)
+                
                 ForEach(User.user1.comments, id: \.self) { makId in
-                    
                     ForEach(Comment.mokDatas, id: \.self) { comment in
                         if comment.makHolyId == makId {
                             HStack {
@@ -45,8 +51,10 @@ public struct CommentView: View {
                                         Image(uiImage: .designSystem(.like)!)
                                             .padding(.leading, 4)
                                         Spacer()
+                                        Image(uiImage: .designSystem(.lock)!)
                                     }
-                                    .padding(.bottom, 3)
+                                    
+                                    Spacer()
                                     
                                     Text(comment.description)
                                         .SF14R()
@@ -63,21 +71,22 @@ public struct CommentView: View {
                                         Spacer()
                                         
                                         Button {
-                                            showActionSheet = true
+                                            showActionSheet.toggle()
                                         } label: {
                                             Text("수정")
                                                 .SF12R()
-                                                .foregroundColor(.primary)
                                         }
                                         .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
                                             
-                                            Button("수정하기") { self.showModal = true }
-                                                .sheet(isPresented: self.$showModal) {
-                                                    CommentEditView()
-                                                }
-                                            Button("삭제하기", role: .destructive) { }
-                                            Button("취소하기", role: .cancel) { }
+                                            Button("수정하기") {
+                                                showModal = true
+                                            }
                                             
+                                            Button("삭제하기", role: .destructive) {
+                                                showingAlert = true
+                                            }
+                                            
+                                            Button("취소하기", role: .cancel) { }
                                         }
                                     }
                                 }
@@ -87,6 +96,20 @@ public struct CommentView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showModal) {
+            CommentEditView(showModal: $showModal)
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("코멘트 삭제"),
+                  message: Text("코멘트를 삭제하시겠어요?"),
+                  primaryButton: .default(
+                    Text("취소")
+                  ),
+                  secondaryButton: .destructive(
+                    Text("삭제하기")
+                  )
+            )
         }
     }
 }

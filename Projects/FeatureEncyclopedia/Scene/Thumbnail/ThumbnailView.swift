@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
 
 public struct ThumbnailView: View {
@@ -37,17 +36,18 @@ public struct ThumbnailView: View {
                         // like -> 노란색
                         if User.user1.likes.contains(makId) {
                             Image(uiImage: .designSystem(.likeLarge)!)
-                            
-                        // dislike -> 보라색
-                        } else {
+                            // dislike -> 보라색
+                        } else if User.user1.dislikes.contains(makId) {
                             Image(uiImage: .designSystem(.sorryLarge)!)
+                            // 아무것도 안눌렀을 시
+                        } else {
+                            Image(uiImage: .designSystem(.nothingLike)!)
                         }
                         
                         // 코멘트 색깔있는거
                         if User.user1.comments.contains(makId) {
                             Image(uiImage: .designSystem(.comment)!)
-
-                        // 코멘트 색깔없는거
+                            // 코멘트 색깔없는거
                         } else {
                             Image(uiImage: .designSystem(.noComment)!)
                         }
@@ -55,8 +55,7 @@ public struct ThumbnailView: View {
                         // 찜 색깔있는거
                         if User.user1.bookmarks.contains(makId) {
                             Image(uiImage: .designSystem(.heartSmall)!)
-                            
-                        // 찜 색깔없는거
+                            // 찜 색깔없는거
                         } else {
                             Image(uiImage: .designSystem(.heartSmallNoColor)!)
                         }

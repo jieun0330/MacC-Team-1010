@@ -62,7 +62,7 @@ extension Comment {
 	
 	public static var mock4: Comment = Comment(
 		id: "c-4",
-		makHolyId: "m-1",
+		makHolyId: "c-2",
 		userId: "u-4",
 		isOpened: false,
 		description: "부모님께 좋은 막걸리 드리느랴 구입했습니다. 감미료가 들어간게 익숙하셔서 그런지 단맛은 덜하다고 하지만 제 입맛엔 꽤 달달한 막걸리입니다. 그만큼 단맛에 길들여지면 맛이 맹맹할 수 있습니다. ^^ 건강에 좋은 막걸리 한 잔 하시죠.",
@@ -93,7 +93,7 @@ extension User {
 		bookmarks: ["m-1", "m-7", "m-8", "m-9", "m-10", "m-11"],
 		likes: ["m-1", "m-2", "m-6", "m-5", "m-12", "m-13"],
 		dislikes: ["m-3", "m-4"],
-		comments: ["c-1", "c-6", "m-12", "m-13", "m-1"])
+		comments: ["c-1", "c-6"])
     
 	
 	public static var user2: User = User(

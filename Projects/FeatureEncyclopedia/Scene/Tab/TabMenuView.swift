@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import DesignSystem
 
 public struct TabMenuView: View {
     

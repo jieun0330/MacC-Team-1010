@@ -58,6 +58,10 @@ public enum TENTENAsset {
         case heartSmall
         case heartSmallNoColor
         case noComment
+        case isSelectedFalse
+        case isSelectedTrue
+        case lock
+        case nothingLike
 		
 		public var description: String {
 			switch self {
@@ -145,6 +149,14 @@ public enum TENTENAsset {
                 return "heartSmallNoColor"
             case .noComment:
                 return "noComment"
+            case .isSelectedTrue:
+                return "isSelectedTrue"
+            case .isSelectedFalse:
+                return "isSelectedFalse"
+            case .lock:
+                return "lock"
+            case .nothingLike:
+                return "nothingLike"
 			}
 		}
 	}
