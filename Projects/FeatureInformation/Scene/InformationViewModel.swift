@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Combine
 import Core
 
 final class InformationViewModel: ObservableObject {
@@ -16,8 +15,6 @@ final class InformationViewModel: ObservableObject {
 	let userId: Int = 1578568449
 	let maHolyRepo: DefaultMakgeolliRepository
 	let userRepo: DefaultUserRepository
-	
-	private var cancellables: Set<AnyCancellable> = []
 	
 	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
 		self.makHolyId = 1
