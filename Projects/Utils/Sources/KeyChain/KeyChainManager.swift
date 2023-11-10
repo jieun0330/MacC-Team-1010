@@ -15,7 +15,7 @@ public final class KeyChainManager {
 	
 	public init() { }
 	
-	public func create(account: KeyChainAccount, data: Int) throws {
+	public func create(account: KeyChainAccount, data: String) throws {
 		let query = [
 			kSecClass: account.keyChainClass,
 			kSecAttrService: KeyChainManager.serviceName,

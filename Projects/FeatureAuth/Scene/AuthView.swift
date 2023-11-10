@@ -18,7 +18,7 @@ public struct AuthView: View {
 		Button {
 			Task {
 				try KeyChainManager.shared.create(account: .userId,
-												  data: 0)
+												  data: UUID().uuidString)
 				keychainCreated = true
 			}
 		} label: {

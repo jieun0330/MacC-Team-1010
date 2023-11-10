@@ -10,72 +10,97 @@ import Foundation
 import Core
 
 final class CategoryViewModel: ObservableObject {
-	@Published var fetchLoading = false
-	@Published var makHolys: [MakHolyMini] = MakHolyMini.mokDatas
-	@Published var comments: [Comment] = Comment.mockDatas
+	@Published var fetchLoading = true
+	@Published var fetchCommentLoading = true
+	@Published var makHolys: [MakContent] = []
+	@Published var comments: [RecentComment] = []
+	
+	var currentOffset: Int = 0
+	var isLastPage = false
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
+	let homeRepository: DefaultHomeRepository
 	
 	init(
-		makgeolliRepository: DefaultMakgeolliRepository
+		makgeolliRepository: DefaultMakgeolliRepository,
+		homeRepository: DefaultHomeRepository
 	) {
 		self.makgeolliRepository = makgeolliRepository
+		self.homeRepository = homeRepository
 	}
 	
 	@MainActor
-	func fetchCategoryMakgeolli(categories: [CharacteristicsType]) {
+	func initFetchCategoryMakgeolli(sort: String?,
+									offset: Int?,
+									categories: [CharacteristicsType]?) {
 		fetchLoading = true
 		Task {
 			do {
-				// 서버 통신 data
-				//				let stringCategory = categories.map { $0.rawValue }
-				//				let response = try await makgeolliRepository.fetchMakgeolliList(
-				//					categories: stringCategory.isEmpty ? nil : stringCategory
-				//				)
-				//				makgeollis = (response.result?.contents)!
-				
-				// mock data
-				var categories = categories
-				if let index = categories.firstIndex(where: {$0 == .additive}) {
-					categories.remove(at: index)
-					// 아스파탐이 없는 true
-				} else {
-					// 아스파탐이 없는 false
-				}
-				let stringCategory = categories.map { $0.scoreDescription }
-				if stringCategory.isEmpty {
-					makHolys = MakHolyMini.mokDatas
-				} else {
-					makHolys = MakHolyMini.mokDatas
-					let filteredMakHolys = makHolys.filter { makHoly in
-						return stringCategory.allSatisfy { category in
-							if category == "sweetness" {
-								return makHoly.sweetness >= 3
-							} else if category == "sourness" {
-								return makHoly.sourness >= 3
-							} else if category == "thickness" {
-								return makHoly.thickness >= 3
-							} else if category == "freshness" {
-								return makHoly.freshness >= 3
-							}
-							return false
-						}
+				makHolys = []
+				var stringCategory: [String] = []
+				if let categories {
+					if !categories.isEmpty {
+						stringCategory = categories.map { $0.rawValue }
 					}
-					makHolys = filteredMakHolys
 				}
+				
+				let response = try await self.makgeolliRepository.fetchFindByFeatures(
+					sort: sort, offset: 0, category: stringCategory
+				)
+				
+				self.currentOffset = 0
+				self.isLastPage = response.result?.makInfo?.last ?? true
+				
+				makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
+				
 				fetchLoading = false
 			} catch {
-				// error
+				Logger.debug(error: error, message: "")
 			}
 		}
 	}
 	
-	// 페이지네이션, sort 우선 뒤로
 	@MainActor
-	func fetchSortMakgeolli() {
-		//				let response = try await makgeolliRepository.fetchMakgeolliInfo(
-		//					lastMakNum: 5,
-		//					categories: ["sweet", "sour"]
-		//				)
+	func nextFetchCategoryMakgeolli(sort: String?,
+									offset: Int?,
+									categories: [CharacteristicsType]?) {
+		fetchLoading = true
+		Task {
+			do {
+				var stringCategory: [String] = []
+				if let categories {
+					if !categories.isEmpty {
+						stringCategory = categories.map { $0.rawValue }
+					}
+				}
+				
+				let response = try await self.makgeolliRepository.fetchFindByFeatures(
+					sort: sort, offset: offset, category: stringCategory
+				)
+				
+				self.currentOffset = offset ?? 0
+				self.isLastPage = response.result?.makInfo?.last ?? true
+				
+				makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
+				
+				fetchLoading = false
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+		}
+	}
+	
+	@MainActor
+	func fetchRecentComments() {
+		fetchCommentLoading = true
+		Task {
+			do {
+				let response = try await homeRepository.fetchRecentComment()
+				comments = response.result ?? []
+				fetchCommentLoading = false
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+		}
 	}
 }

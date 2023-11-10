@@ -11,35 +11,41 @@ import Core
 
 final class HomeViewModel: ObservableObject {
 	@Published var fetchLoading = true
-	@Published var newItems: [MakHolyMini] = MakHolyMini.mokDatas
-	@Published var comments: [Comment] = Comment.mockDatas
+	@Published var newItems: [NewMakListMakgeolliDetail] = []
+	@Published var comments: [RecentComment] = []
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
+	let homeRepository: DefaultHomeRepository
 	
 	init(
-		makgeolliRepository: DefaultMakgeolliRepository
+		makgeolliRepository: DefaultMakgeolliRepository,
+		homeRepository: DefaultHomeRepository
 	) {
 		self.makgeolliRepository = makgeolliRepository
+		self.homeRepository = homeRepository
 	}
 	
 	@MainActor
-	func fetchNewMakgeolli() {
+	func fetchNewMakList() {
 		Task {
 			do {
-				//				let response = try await makgeolliRepository.fetchMakgeolliList()
-				//				newItems = (response.result?.contents)!
-				
-//				let response = try await makgeolliRepository.findByFeatures(
-//					FindByFeaturesRequest(sort: 5,
-//												   category: nil,
-//												   pageable: FindByFeaturesPageable(page: 0, size: 0, sort: []))
-//				)
-//				print("response \(response)")
-				
+				let response = try await homeRepository.fetchNewMakList()
+				newItems = response.result ?? []
 				fetchLoading = false
 			} catch {
-				// error
-				
+				Logger.debug(error: error, message: "")
+			}
+		}
+	}
+	
+	@MainActor
+	func fetchRecentComments() {
+		Task {
+			do {
+				let response = try await homeRepository.fetchRecentComment()
+				comments = response.result ?? []
+				fetchLoading = false
+			} catch {
 				Logger.debug(error: error, message: "")
 			}
 		}

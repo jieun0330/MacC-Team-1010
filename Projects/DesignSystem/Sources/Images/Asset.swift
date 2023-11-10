@@ -59,6 +59,8 @@ public enum TENTENAsset {
 		case profileHighlyHydrated
 		case profileThick
 		
+		case banner
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -145,6 +147,9 @@ public enum TENTENAsset {
 				return "profileHighlyHydrated"
 			case .profileThick:
 				return "profileThick"
+				
+			case .banner:
+				return "banner"
 			}
 		}
 	}

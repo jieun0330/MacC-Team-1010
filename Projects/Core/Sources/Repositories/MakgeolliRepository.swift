@@ -10,52 +10,15 @@ import Foundation
 import Utils
 
 public protocol MakgeolliRepository {
+	func fetchFindByFeatures(sort: String?, offset: Int?,
+							 category: [String]?) async throws -> FindByFeaturesResponse
 	func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly
-	func fetchMakList(lastMakNum: Int?,
-							categories: [String]?,
-							sort: String?) async throws -> MakListResponse
 	func fetchMakLikesAndComments(
 		makNumber: Int) async throws -> (LikeDetail, [VisibleComment])
-	func fetchFindByFeatures(
-		_ request: FindByFeaturesRequest
-	) async throws -> FindByFeaturesResponse
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	public init() { }
-	
-	/// 막걸리 리스트 가져오기
-	public func fetchMakList(lastMakNum: Int? = nil,
-								   categories: [String]? = nil,
-								   sort: String? = nil) async throws -> MakListResponse {
-		var parameters: [String: Any] = [:]
-		var tempParameters: [[String: Any]] = []
-		
-		if let lastMakNum {
-			tempParameters.append(["lastMakNum": lastMakNum])
-		}
-		
-		if let categories {
-			let categoriesString = categories.joined(separator: ",")
-			tempParameters.append(["category": categoriesString])
-		}
-		
-		if let sort {
-			tempParameters.append(["sort": sort])
-		}
-		
-		for item in tempParameters {
-			for (key, value) in item {
-				parameters[key] = value
-			}
-		}
-		
-		let response = try await MakgeolliAPI.request(
-			target: MakgeolliAPI.fetchMakList(parameters: parameters),
-			dataType: MakListResponse.self
-		)
-		return response
-	}
 	
 	/// 서버에서 막걸리 정보 가져오기
 	public func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly {
@@ -87,12 +50,33 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		return (LikeDetail(), [])
 	}
 	
-	public func fetchFindByFeatures(
-		_ request: FindByFeaturesRequest
-	) async throws -> FindByFeaturesResponse {
-		let request: [String: Any] = try request.asDictionary()
+	public func fetchFindByFeatures(sort: String?,
+									offset: Int?,
+									category: [String]?) async throws -> FindByFeaturesResponse {
+		var parameters: [String: Any] = [:]
+		var tempParameters: [[String: Any]] = []
+		
+		if let sort {
+			tempParameters.append(["sort": sort])
+		}
+		
+		if let category {
+			let categoriesString = category.joined(separator: ",")
+			tempParameters.append(["category": categoriesString])
+		}
+		
+		if let offset {
+			tempParameters.append(["offset": offset])
+		}
+		
+		for item in tempParameters {
+			for (key, value) in item {
+				parameters[key] = value
+			}
+		}
+		
 		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchFindByFeatures(
-			parameter: request), dataType: FindByFeaturesResponse.self
+			parameter: parameters), dataType: FindByFeaturesResponse.self
 		)
 		return response
 	}

@@ -12,7 +12,8 @@ import FeatureInformation
 
 public struct CategoryView: View {
 	@StateObject private var viewModel = CategoryViewModel(
-		makgeolliRepository: DefaultMakgeolliRepository()
+		makgeolliRepository: DefaultMakgeolliRepository(),
+		homeRepository: DefaultHomeRepository()
 	)
 	
 	@State var targetTitle: [CharacteristicsType]
@@ -34,8 +35,8 @@ public struct CategoryView: View {
 				.navigationBarItems(leading: CustomBackButton())
 				.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 				.onAppear {
-					if viewModel.fetchLoading {
-						viewModel.fetchCategoryMakgeolli(categories: targetTitle)
+					if viewModel.fetchCommentLoading {
+						viewModel.fetchRecentComments()
 					}
 				}
 		} else {
@@ -51,7 +52,7 @@ public struct CategoryView: View {
 						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				} else {
-					MakgeolliInfoView(viewModel: viewModel, type: type)
+					MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
 						.padding(.horizontal, 8)
 				}
 			}
@@ -62,7 +63,9 @@ public struct CategoryView: View {
 			.navigationBarItems(leading: CustomBackButton())
 			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 			.onAppear {
-				viewModel.fetchCategoryMakgeolli(categories: targetTitle)
+				if viewModel.fetchLoading {
+					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
+				}
 			}
 		}
 	}

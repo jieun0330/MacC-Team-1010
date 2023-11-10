@@ -17,6 +17,8 @@ struct _App: App {
 			RootView()
 				.onAppear {
 					UITabBar.appearance().backgroundColor = .designSystem(.darkwindow)!
+					UIView.appearance(whenContainedInInstancesOf:
+										[UIAlertController.self]).tintColor = .designSystem(.primary)!
 				}
 				.accentColor(Color(uiColor: .designSystem(.primary)!))
 		}
