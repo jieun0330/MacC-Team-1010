@@ -36,6 +36,9 @@ public struct InformationView: View {
 					InformationCardView(viewModel: viewModel)
 				}
 				InformationDetailView(viewModel: viewModel)
+					.onTapGesture {
+						viewModel.showActionSheet.toggle()
+					}
 			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
@@ -57,6 +60,32 @@ public struct InformationView: View {
 		.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {
 			InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
 		})
+		.confirmationDialog("", isPresented: $viewModel.showActionSheet) {
+			Button {
+				viewModel.showActionSheet.toggle()
+			} label: {
+				Text("수정하기")
+					.SF17R()
+					.foregroundColor(.Primary)
+			}
+			
+			Button {
+				viewModel.deleteComment()
+			} label: {
+				Text("삭제하기")
+					.SF17R()
+					.foregroundColor(.Alert)
+			}
+			
+			Button(role: .cancel) {
+				print("취소하기")
+			} label: {
+				Text("취소하기")
+					.SF17R()
+					.foregroundColor(.Primary)
+			}
+			
+		}
 	}
 }
 
