@@ -12,7 +12,7 @@ import Core
 // 코멘트 뷰
 public struct CommentView: View {
     
-    init() {
+    public init() {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
             .tintColor = UIColor(named: "Primary")
     }
@@ -36,7 +36,7 @@ public struct CommentView: View {
                 .padding(.leading, 5)
                 
                 ForEach(User.user1.comments, id: \.self) { makId in
-                    ForEach(Comment.mokDatas, id: \.self) { comment in
+                    ForEach(Comment.mockDatas, id: \.self) { comment in
                         if comment.makHolyId == makId {
                             HStack {
                                 RoundedRectangle(cornerRadius: 12)
