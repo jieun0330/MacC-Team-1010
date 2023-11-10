@@ -13,7 +13,7 @@ struct InfoBookMarkButton: View {
 	@ObservedObject var viewModel: InformationViewModel
     var body: some View {
 		Button(action: {
-			viewModel.myReaction.isBookMarked.toggle()
+			viewModel.toggleBookMark()
 		}, label: {
 			Image(uiImage: viewModel.myReaction.isBookMarked ? .designSystem(.bookMarkedTrue)! : .designSystem(.bookMarkedFalse)!)
 		})
