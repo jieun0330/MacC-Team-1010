@@ -10,7 +10,7 @@ import Foundation
 
 public struct WishListResponse: Codable {
 	public let status: Int
-	public let resultMsg: String
+	public let resultMsg: String?
 	public let result: WishListResult?
 }
 
