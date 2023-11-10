@@ -39,13 +39,22 @@ public struct InformationView: View {
 			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
+		.navigationBarBackButtonHidden(true)
+		.toolbar{
+			ToolbarItem(placement: .topBarLeading) {
+				InfoBackButton()
+			}
+			ToolbarItem(placement: .topBarTrailing) {
+				InfoBookMarkButton(viewModel: viewModel)
+			}
+		}
 		.onAppear(perform: {
-			viewModel.fetchMakHoly()
-			viewModel.fetchReactions()
+			viewModel.fetchDatas()
 		})
 		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
 			ActionSheet(title: Text("Action Sheet title"))
 		})
 	}
 }
+
 
