@@ -12,7 +12,7 @@ import DesignSystem
 import FeatureInformation
 
 struct MakgeolliInfoSingleView: View {
-	let makHoly: MakHolyMini
+	let makHoly: MakContent
 	
 	var body: some View {
 		NavigationLink {
@@ -24,24 +24,26 @@ struct MakgeolliInfoSingleView: View {
 					.frame(height: 320)
 					.overlay {
 						VStack(spacing: 0) {
-							Image(uiImage: .designSystem(.mockMakgeolli)!)
-								.resizable()
-								.aspectRatio(contentMode: .fit)
+							MakHolyImageView(imageId: makHoly.makImageNumber!, type: .large)
 								.padding(.bottom, 16)
 							
-							Text(makHoly.name)
+							Text(makHoly.makName ?? "")
 								.lineLimit(1)
 								.font(.style(.SF12R))
+								.padding(.horizontal, 16)
 							
-							Text(String.formattedSet(adv: makHoly.adv,
-													 volume: makHoly.volume, price: makHoly.price))
+							Text(BasicInfo.formattedSet(adv: makHoly.makAlcoholPercentage ?? 0.0,
+													 volume: makHoly.makVolume ?? 0,
+													 price: makHoly.makPrice ?? 0))
 							.font(.style(.SF10R))
 							.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 							.padding(.top, 2)
 							
-							TasteScoreView(type: .mini, sweetness: makHoly.sweetness,
-										   sourness: makHoly.sourness, thickness: makHoly.thickness,
-										   freshness: makHoly.freshness)
+							TasteScoreView(type: .mini,
+										   sweetness: Int(makHoly.makTasteSweet ?? -1.0),
+										   sourness: Int(makHoly.makTasteSour ?? -1.0),
+										   thickness: Int(makHoly.makTasteThick ?? -1.0),
+										   freshness: Int(makHoly.makTasteFresh ?? -1.0))
 							.padding(.top, 10)
 						}
 						.padding(.vertical, 32)

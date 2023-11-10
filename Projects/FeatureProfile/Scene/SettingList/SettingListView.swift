@@ -17,7 +17,7 @@ struct SettingListView: View {
 					.font(.style(.SF17R))
 				Spacer()
 				Image(systemName: "chevron.right")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 			}
 			.padding(.bottom, 14)
 			Divider()
@@ -32,7 +32,7 @@ struct SettingListView: View {
 					.font(.style(.SF17R))
 				Spacer()
 				Image(systemName: "chevron.right")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 			}
 			.padding(.bottom, 14)
 			Divider()
@@ -46,7 +46,7 @@ struct SettingListView: View {
 					.font(.style(.SF17R))
 				Spacer()
 				Image(systemName: "chevron.right")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 			}
 			.padding(.bottom, 14)
 			Divider()
@@ -60,7 +60,7 @@ struct SettingListView: View {
 					.font(.style(.SF17R))
 				Spacer()
 				Image(systemName: "chevron.right")
-					.font(.style(.SF22B))
+					.font(.style(.SF20B))
 			}
 			.padding(.bottom, 14)
 			Divider()

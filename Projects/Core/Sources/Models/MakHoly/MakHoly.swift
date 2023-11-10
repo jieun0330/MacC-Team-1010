@@ -18,76 +18,80 @@ public struct MakHoly: Identifiable, Hashable {
 		hasher.combine(id)
 	}
 	
-	public init (
-		makHolyMini: MakHolyMini,
-		comments: [Comment],
-		awards: [Award],
-		likeUsers: [String],
-		dislikeUsers: [String],
-		bookmarkUsers: [String],
+	public init(
+		id: Int,
+		name: String,
+		imageId: String,
+		taste: Taste,
+		basicInfo: BasicInfo,
 		ingredients: String,
 		description: String,
-		brewery: Brewery
-	) {
-		self.id = makHolyMini.id
-		self.name = makHolyMini.name
-		self.imageId = makHolyMini.imageId
-		self.sweetness = makHolyMini.sweetness
-		self.sourness = makHolyMini.sourness
-		self.thickness = makHolyMini.thickness
-		self.freshness = makHolyMini.freshness
-		self.price = makHolyMini.price
-		self.volume = makHolyMini.volume
-		self.adv = makHolyMini.adv
-		self.ingredients = ingredients
-		self.description = description
-		
-		self.brewery = brewery
-		
-		self.comments = comments
-		self.awards = awards
-		
-		self.likeUsers = likeUsers
-		self.dislikeUsers = dislikeUsers
-		self.bookmarkUsers = bookmarkUsers
+		brewery: Brewery,
+		awards: [Award],
+		myReaction: MyReaction) {
+			self.id = id
+			self.name = name
+			self.imageId = imageId
+			self.taste = taste
+			self.basicInfo = basicInfo
+			self.ingredients = ingredients
+			self.description = description
+			self.brewery = brewery
+			self.awards = awards
+			self.myReaction = myReaction
+		}
+	
+	public init() {
+		self.init(
+			id: -1,
+			name: "",
+			imageId: "",
+			taste: Taste(),
+			basicInfo: BasicInfo(),
+			ingredients: "",
+			description: "",
+			brewery: Brewery(),
+			awards: [],
+			myReaction: MyReaction())
 	}
+	
+	//mokData Initializer
+//	public init(makHolyMini: MakHolyMini, 
+//				ingredients: String,
+//				description: String,
+//				brewery: Brewery,
+//				awards: [Award],
+//				isBookMarked: Bool,
+//		  likeState: LikeState,
+//		  myComment: MyComment?) {
+//		
+//	}
+	
+	// MakHoli Mini 정보
 	/// 막걸리 ID
-	public let id: String
+	public let id: Int
 	/// 막걸리 이름
 	public let name: String
 	/// 이미지 Id
 	public let imageId: String
-	/// 단맛 점수
-	public let sweetness: Int
-	/// 신맛 점수
-	public let sourness: Int
-	/// 걸쭉 점수
-	public let thickness: Int
-	/// 청량 점수
-	public let freshness: Int
-	/// 가격
-	public let price: Int
-	/// 용량
-	public let volume: Int
-	/// 도수
-	public let adv: Double
+	
+	/// 맛 정보
+	public let taste: Taste
+	
+	/// 기본정보 (용량, 도수, 가격)
+	public let basicInfo: BasicInfo
+	
+	// 막걸리 상세 정보
 	/// 원재료
 	public let ingredients: String
 	/// 막걸리 설명
 	public let description: String
-	
 	/// 양조장
 	public let brewery: Brewery
-	
-	/// 코멘트 배열
-	public let comments: [Comment]
 	/// 수상 배열
 	public let awards: [Award]
 	
-	/// 좋아요 유저 ID 배열
-	public let likeUsers: [String]
-	/// 싫어요 유저 ID 배열
-	public let dislikeUsers: [String]
-	/// 북마크 유저 ID 배열
-	public let bookmarkUsers: [String]
+	// 나의 Reaction : 북마크, 평가, 코멘트
+	public var myReaction: MyReaction
+	
 }

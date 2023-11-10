@@ -63,6 +63,15 @@ public enum TENTENAsset {
         case lock
         case nothingLike
 		
+		case profileSweet
+		case profileSour
+		case profileAspartameFree
+		case profileCarbonicAcid
+		case profileHighlyHydrated
+		case profileThick
+		
+		case banner
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -136,27 +145,43 @@ public enum TENTENAsset {
 				return "heart"
 			case .person:
 				return "person"
-                
-            case .comment:
-                return "comment"
-            case .likeLarge:
-                return "likeLarge"
-            case .sorryLarge:
-                return "sorryLarge"
-            case .heartSmall:
-                return "heartSmall"
-            case .heartSmallNoColor:
-                return "heartSmallNoColor"
-            case .noComment:
-                return "noComment"
-            case .isSelectedTrue:
-                return "isSelectedTrue"
-            case .isSelectedFalse:
-                return "isSelectedFalse"
-            case .lock:
-                return "lock"
-            case .nothingLike:
-                return "nothingLike"
+
+      case .comment:
+          return "comment"
+      case .likeLarge:
+          return "likeLarge"
+      case .sorryLarge:
+          return "sorryLarge"
+      case .heartSmall:
+          return "heartSmall"
+      case .heartSmallNoColor:
+          return "heartSmallNoColor"
+      case .noComment:
+          return "noComment"
+      case .isSelectedTrue:
+          return "isSelectedTrue"
+      case .isSelectedFalse:
+          return "isSelectedFalse"
+      case .lock:
+          return "lock"
+      case .nothingLike:
+          return "nothingLike"
+        
+			case .profileSweet:
+				return "profileSweet"
+			case .profileSour:
+				return "profileSour"
+			case .profileAspartameFree:
+				return "profileAspartameFree"
+			case .profileCarbonicAcid:
+				return "profileCarbonicAcid"
+			case .profileHighlyHydrated:
+				return "profileHighlyHydrated"
+			case .profileThick:
+				return "profileThick"
+				
+			case .banner:
+				return "banner"
 			}
 		}
 	}

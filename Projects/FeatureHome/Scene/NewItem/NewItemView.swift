@@ -20,7 +20,7 @@ struct NewItemView: View {
 			} label: {
 				HStack(spacing: 4) {
 					Text("새로 나왔어요")
-						.font(.style(.SF22B))
+						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
@@ -30,7 +30,7 @@ struct NewItemView: View {
 			}
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 16) {
-					ForEach(viewModel.newItems, id: \.self) { item in
+					ForEach(viewModel.newItems.prefix(10), id: \.self) { item in
 						NewItemSingleView(item: item)
 					}
 				}

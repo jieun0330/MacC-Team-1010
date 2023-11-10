@@ -29,7 +29,7 @@ struct HashtagSingleView: View {
 			withAnimation {
 				proxy.scrollTo(type, anchor: .center)
 			}
-			viewModel.fetchCategoryMakgeolli(categories: targetTitle)
+			viewModel.initFetchCategoryMakgeolli(sort: nil, offset: 0, categories: targetTitle)
 		} label: {
 			Text(type.description)
 				.font(.style(.SF15R))

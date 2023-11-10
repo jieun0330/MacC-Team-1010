@@ -11,7 +11,7 @@ import Core
 import DesignSystem
 
 struct NewItemSingleView: View {
-	let item: MakHolyMini
+	let item: NewMakListMakgeolliDetail
 	
 	var body: some View {
 		NavigationLink {
@@ -37,26 +37,27 @@ struct NewItemSingleView: View {
 							), lineWidth: 3)
 						.overlay {
 							VStack {
-								Rectangle()
-									.fill(Color(uiColor: .designSystem(.goldenyellow)!))
+								MakHolyImageView(imageId: item.makImageNumber ?? "-1",
+												 type: .middle)
 								
 								Spacer()
 									.frame(height: 12)
 								
-								Text(item.name)
+								Text(item.makName!)
 									.font(.style(.SF12R))
 									.lineLimit(1)
 								
 								Spacer()
 									.frame(height: 12)
 								
-								TasteGraphView(scores: [item.sweetness, item.sourness,
-														item.thickness, item.freshness])
+								TasteGraphView(scores: [item.taste?.makTasteSweet ?? -1,
+														item.taste?.makTasteSour ?? -1,
+														item.taste?.makTasteThick ?? -1,
+														item.taste?.makTasteFresh ?? -1])
 							}
 							.padding(.vertical, 12)
 							.padding(.horizontal, 8)
 						}
-					
 				)
 		}
 	}

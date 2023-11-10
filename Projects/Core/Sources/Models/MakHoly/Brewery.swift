@@ -21,4 +21,8 @@ public struct Brewery: Hashable {
 		self.url = url
 		self.salesURL = salesURL
 	}
+	
+	public init() {
+		self.init(name: "", url: nil, salesURL: nil)
+	}
 }

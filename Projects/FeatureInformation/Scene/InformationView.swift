@@ -12,36 +12,40 @@ import DesignSystem
 
 public struct InformationView: View {
 	
-	public init() {
+	@StateObject var viewModel: InformationViewModel
+	
+	public init(makHolyId: Int) {
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository()))
 	}
-    
-//    public init() { }
 	
 	public var body: some View {
-		ScrollView {
-			VStack(spacing: 10) {
+		ScrollView(.vertical, showsIndicators: false) {
+			VStack(spacing: 0) {
+				ZStack {
+					LinearGradient(
+						stops: [
+							Gradient.Stop(color: .NightSky2Top, location: 0.00),
+							Gradient.Stop(color: .NightSky2Bottom, location: 1.00),
+						],
+						startPoint: UnitPoint(x: 0.45, y: 0),
+						endPoint: UnitPoint(x: 0.45, y: 1)
+					)
+					.ignoresSafeArea(.all, edges: .top)
+					InformationCardView(viewModel: viewModel)
+					
+				}
 				
-				TasteScoreView(type: .large, sweetness: -1, sourness: 1, thickness: 2, freshness: 5)
-				
-				LikeControllerView()
-					.padding(.horizontal, 16)
-				
-				InfoAwardsView()
-					.padding(.leading, 16)
-				
-				InfoIngredientsView()
-					.padding(.horizontal, 16)
-				
-				InfoLinkView(brewery: Brewery.mockADA)
-					.padding(.horizontal, 16)
-				
+				InformationDetailView(viewModel: viewModel)
 			}
 		}
+		.navigationBarTitleDisplayMode(.inline)
+		.onAppear(perform: {
+			viewModel.fetchMakHoly()
+			viewModel.fetchReactions()
+		})
+		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
+			ActionSheet(title: Text("Action Sheet title"))
+		})
 	}
 }
 
-struct InformationView_Previews: PreviewProvider {
-	static var previews: some View {
-		InformationView()
-	}
-}

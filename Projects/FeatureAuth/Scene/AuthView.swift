@@ -17,7 +17,7 @@ public struct AuthView: View {
 	public var body: some View {
 		Button {
 			Task {
-				try KeyChainManager.shared.create(account: .accessToken,
+				try KeyChainManager.shared.create(account: .userId,
 												  data: UUID().uuidString)
 				keychainCreated = true
 			}

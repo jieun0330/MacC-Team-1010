@@ -12,6 +12,12 @@ public struct UserResponse: Codable {
 	public let status: Int
 	public let resultMsg: String
 	public let result: UserResult?
+	
+	public init(status: Int = 0, resultMsg: String = "", result: UserResult? = nil) {
+		self.status = status
+		self.resultMsg = resultMsg
+		self.result = result
+	}
 }
 
 public struct UserResult: Codable {

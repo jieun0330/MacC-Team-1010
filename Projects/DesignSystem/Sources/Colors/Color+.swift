@@ -51,4 +51,14 @@ extension Color {
 	// MARK: - Point
 	public static let Alert = Color(hex: "#FF1F70")
 	public static let Ivory = Color(hex: "#FFE5A5")
+	
+	// MARK: - Linear Gradient
+	public static let SunriseTop = Color(hex: "#DFA100")
+	public static let SunriseBottom = Color(hex: "#7676D3")
+	
+	public static let NightSkyTop = Color(hex: "#B6A87B")
+	public static let NightSkyBottom = Color(hex: "#2F2F64")
+	
+	public static let NightSky2Top = Color(hex: "#736D70")
+	public static let NightSky2Bottom = Color(hex: "#252545")
 }

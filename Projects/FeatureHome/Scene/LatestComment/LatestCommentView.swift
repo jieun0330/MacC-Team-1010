@@ -21,7 +21,7 @@ struct LatestCommentView: View {
 			} label: {
 				HStack(spacing: 4) {
 					Text("코멘트가 달렸어요")
-						.font(.style(.SF22B))
+						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
 						.font(.system(size: 22, weight: .bold))
@@ -30,7 +30,7 @@ struct LatestCommentView: View {
 				}
 			}
 			VStack(spacing: 16) {
-				ForEach(viewModel.comments, id: \.self) { comment in
+				ForEach(viewModel.comments.prefix(4), id: \.self) { comment in
 					LatestCommentSingleView(comment: comment)
 				}
 			}

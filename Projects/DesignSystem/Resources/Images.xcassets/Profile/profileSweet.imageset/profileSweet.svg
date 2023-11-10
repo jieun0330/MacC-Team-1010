@@ -1,0 +1,16 @@
+<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1173_130679" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="70" height="70">
+<rect width="70" height="70" rx="35" fill="#FFC431"/>
+</mask>
+<g mask="url(#mask0_1173_130679)">
+<rect width="70" height="70" fill="url(#paint0_linear_1173_130679)"/>
+<rect x="22.5215" y="27.1187" width="39.0116" height="82.0572" rx="19.5058" transform="rotate(-45 22.5215 27.1187)" fill="white"/>
+<rect x="-38.2666" y="12.1853" width="39.0116" height="82.0572" rx="19.5058" transform="rotate(-45 -38.2666 12.1853)" fill="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1173_130679" x1="35" y1="0" x2="35" y2="70" gradientUnits="userSpaceOnUse">
+<stop stop-color="#ADADFF"/>
+<stop offset="0.442708" stop-color="#7676D3"/>
+</linearGradient>
+</defs>
+</svg>

@@ -34,7 +34,7 @@ extension Brewery {
 }
 
 extension Comment {
-	public static var mokDatas: [Comment] = [mock1, mock2, mock3, mock4]
+	public static var mockDatas: [Comment] = [mock1, mock2, mock3, mock4, mock5, mock6]
 	
 	public static var mock1: Comment = Comment(
 		id: "c-1",
@@ -308,208 +308,199 @@ extension MakHolyMini {
 
 extension MakHoly {
 	public static var mockDatas: [MakHoly] = [
-		test1, test2, test3, test4, test5, test6, test7,
-		test8, test9, test10, test11, test12, test13, test14
+		MakHoly(), MakHoly()
 	]
-	
-	public static var test1: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test1,
-		comments: [Comment.mock1, Comment.mock2, Comment.mock3, Comment.mock4],
-		awards: [Award("2022 대한민국 주류대상 대상")],
-		likeUsers: ["u-1", "u-2", "u-4"],
-		dislikeUsers: ["u-3"],
-		bookmarkUsers: ["u-1", "u-4", "u-5"],
-		ingredients: "정제수, 쌀, 누룩(밀), 아밀라아제(효소제), 아스파탐",
-		description: "프리미엄 막걸리 맑은내일 발효막걸리 Signature 는 한국 전통 누룩으로 빚어 걸쭉하면서 진하고 누룩 함량이 높아 부드럽고 깊은 향이 일품이다. 묵직한 누룩맛과 부드러운 텍스처, 유산균이 빚어내는 오묘한 산미와 단맛의 조화가 특징이다.  제품이 완성된 후에도 효모는 발효되기 때문에 시간의 경과에 따라 다른 맛과 느낌으로 즐길 수 있다.",
-		brewery: Brewery(
-			name: "우포의 아침",
-			url: "https://www.good-tomorrow.co.kr",
-			salesURL: "https://www.good-tomorrow.co.kr/shop/item.php?it_id=1646725796")
-	)
-	
-	public static var test2: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test2,
-		comments: [Comment.mock5, Comment.mock6],
-		awards: [Award("2021 대한민국 주류대상 대상")],
-		likeUsers: ["u-1", "u-2", "u-5"],
-		dislikeUsers: ["u-3"],
-		bookmarkUsers: ["u-4"],
-		ingredients: "정제수, 멥쌀(국내산), 찹쌀(국내산), 누룩",
-		description: "역전주는 역전회관에서 자체 기획 및 전통방식으로 소량 생산하는 private brand 로 100% 국내산 쌀과 찹쌀, 누룩, 물만으로 빚어 저온 발효와 숙성을 거쳐 쌀 본연의 은은한 단맛과 산미가 특징이다. 인공감미료나 첨가물을 넣지 않고 약 100일간의 자연발효과 저온숙성을 거치면서 계절의 온도와 쌀의 풍미가 오롯이 담긴 막걸리다. 알콜도수는 9도로 음식과 함께 즐기기에 좋고, 목넘김이 부드러운 것이 특징이다.",
-		brewery: Brewery(
-			name: "국순당",
-			url: "http://drink.ksdb.co.kr/",
-			salesURL: nil)
-	)
-	
-	public static var test3: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test3,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	
-	public static var test4: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test4,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test5: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test5,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test6: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test6,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test7: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test7,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test8: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test8,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test9: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test9,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test10: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test10,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test11: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test11,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test12: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test12,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test13: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test13,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
-	public static var test14: MakHoly = MakHoly(
-		makHolyMini: MakHolyMini.test14,
-		comments: [],
-		awards: [],
-		likeUsers: [],
-		dislikeUsers: [],
-		bookmarkUsers: [],
-		ingredients: "",
-		description: "",
-		brewery: Brewery(
-			name: "임시",
-			url: nil,
-			salesURL: nil)
-	)
+//	
+//	public static var test1: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test1,
+//		ingredients: "정제수, 쌀, 누룩(밀), 아밀라아제(효소제), 아스파탐",
+//		description: "프리미엄 막걸리 맑은내일 발효막걸리 Signature 는 한국 전통 누룩으로 빚어 걸쭉하면서 진하고 누룩 함량이 높아 부드럽고 깊은 향이 일품이다. 묵직한 누룩맛과 부드러운 텍스처, 유산균이 빚어내는 오묘한 산미와 단맛의 조화가 특징이다.  제품이 완성된 후에도 효모는 발효되기 때문에 시간의 경과에 따라 다른 맛과 느낌으로 즐길 수 있다.",
+//		brewery: Brewery(
+//			name: "우포의 아침",
+//			url: "https://www.good-tomorrow.co.kr",
+//			salesURL: "https://www.good-tomorrow.co.kr/shop/item.php?it_id=1646725796"),
+//		awards: [Award("2022 대한민국 주류대상 대상")],
+//		isBookMarked: true, 
+//		likeState: .like,
+//		myComment: MyComment(
+//			id: "c-1",
+//			isVisible: true,
+//			contents: "맑은내일 맛있어요!!",
+//			date: "2022-10-10"))
+//	
+//	public static var test2: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test2,
+//		ingredients: "정제수, 멥쌀(국내산), 찹쌀(국내산), 누룩",
+//		description: "역전주는 역전회관에서 자체 기획 및 전통방식으로 소량 생산하는 private brand 로 100% 국내산 쌀과 찹쌀, 누룩, 물만으로 빚어 저온 발효와 숙성을 거쳐 쌀 본연의 은은한 단맛과 산미가 특징이다. 인공감미료나 첨가물을 넣지 않고 약 100일간의 자연발효과 저온숙성을 거치면서 계절의 온도와 쌀의 풍미가 오롯이 담긴 막걸리다. 알콜도수는 9도로 음식과 함께 즐기기에 좋고, 목넘김이 부드러운 것이 특징이다.",
+//		brewery: Brewery(
+//			name: "국순당",
+//			url: "http://drink.ksdb.co.kr/",
+//			salesURL: nil),
+//		awards: [Award("2021 대한민국 주류대상 대상")],
+//		isBookMarked: false,
+//		likeState: .like,
+//		myComment: MyComment(
+//			id: "c-1",
+//			isVisible: false,
+//			contents: "괜찮아요! 맛 조아요",
+//			date: "2022-10-11"))
+//	
+//	public static var test3: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test3,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	
+//	public static var test4: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test4,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test5: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test5,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test6: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test6,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test7: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test7,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test8: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test8,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test9: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test9,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test10: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test10,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test11: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test11,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test12: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test12,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test13: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test13,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
+//	public static var test14: MakHoly = MakHoly(
+//		makHolyMini: MakHolyMini.test14,
+//		ingredients: "",
+//		description: "",
+//		brewery:  Brewery(
+//			name: "임시",
+//			url: nil,
+//			salesURL: nil),
+//		awards: [],
+//		isBookMarked: false,
+//		likeState: .none,
+//		myComment: nil
+//	)
 	
 }
