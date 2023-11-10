@@ -7,16 +7,22 @@
 //
 
 import SwiftUI
+import Combine
 import Core
 
 final class InformationViewModel: ObservableObject {
 	
 	let makHolyId: Int
+	let userId: Int = 1578568449
 	let maHolyRepo: DefaultMakgeolliRepository
+	let userRepo: DefaultUserRepository
 	
-	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository) {
-		self.makHolyId = makHolyId
+	private var cancellables: Set<AnyCancellable> = []
+	
+	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
+		self.makHolyId = 1
 		self.maHolyRepo = maHolyRepo
+		self.userRepo = userRepo
 	}
 	
 	@Published var isFetchCompleted: Bool = false
@@ -114,6 +120,23 @@ final class InformationViewModel: ObservableObject {
 			self.makHoly.myReaction.likeState = .dislike
 		}
 		
+	}
+	
+	@MainActor
+	func postLikeState() {
+		Task {
+			do {
+				let response = try await userRepo.evaluateMak(EvaluateMakRequest(
+					userId: self.userId,
+					makNumber: self.makHolyId,
+					likeState: self.makHoly.myReaction.likeState))
+				print("postLikeState Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -postLikeState()")
+			}
+		}
 	}
 	
 }
