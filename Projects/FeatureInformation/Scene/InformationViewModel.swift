@@ -24,11 +24,14 @@ final class InformationViewModel: ObservableObject {
 	
 	@Published var isFetchCompleted: Bool = false
 	@Published var makHoly: MakHoly = MakHoly()
+	@Published var myReaction: MyReaction = MyReaction()
 	@Published var likeDetail: LikeDetail = LikeDetail()
 	@Published var comments: [VisibleComment] = []
 	
 	@Published var showActionSheet: Bool = false
 	@Published var showCommentSheet: Bool = false
+	
+	@Published var commentText: String = ""
 	
 	private var user: User = User.user1
 	
@@ -58,10 +61,13 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let makHoly = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
-				self.makHoly = makHoly
-				print("fetchMakHoly Completed : ------- \n \(makHoly) \n -------")
-				self.isFetchCompleted = true
+				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+				self.makHoly = result.0
+				self.myReaction = result.1
+				print("fetchMakHoly Completed : -------")
+				print("makHoly : \(makHoly)")
+				print("myReaction : \(myReaction)")
+				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -fetchMakHoly()")
 			}
@@ -92,29 +98,29 @@ final class InformationViewModel: ObservableObject {
 	// Comment Visibe 변경
 	func toggleCommentVisible() {
 		
-		self.makHoly.myReaction.comment?.isVisible.toggle()
+		self.myReaction.comment?.isVisible.toggle()
 		
 		// Comment Visible 업데이트 API 연결
 	}
 	
 	func likeButtonTapped() {
 		
-		switch self.makHoly.myReaction.likeState {
+		switch self.myReaction.likeState {
 		case .like:
-			self.makHoly.myReaction.likeState = .none
+			self.myReaction.likeState = .none
 		default:
-			self.makHoly.myReaction.likeState = .like
+			self.myReaction.likeState = .like
 		}
 		
 	}
 	
 	func dislikeButtonTapped() {
 		
-		switch self.makHoly.myReaction.likeState {
+		switch self.myReaction.likeState {
 		case .dislike:
-			self.makHoly.myReaction.likeState = .none
+			self.myReaction.likeState = .none
 		default:
-			self.makHoly.myReaction.likeState = .dislike
+			self.myReaction.likeState = .dislike
 		}
 		
 	}
@@ -126,7 +132,7 @@ final class InformationViewModel: ObservableObject {
 				let response = try await userRepo.evaluateMak(EvaluateMakRequest(
 					userId: self.userId,
 					makNumber: self.makHolyId,
-					likeState: self.makHoly.myReaction.likeState))
+					likeState: self.myReaction.likeState))
 				print("postLikeState Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
