@@ -13,9 +13,17 @@ public struct EvaluateMakRequest: Codable {
 	let makNumber: Int
 	let likeMak: String
 	
-	public init(userId: Int, makNumber: Int, likeMak: String) {
+	public init(userId: Int, makNumber: Int, likeState: LikeState) {
 		self.userId = userId
 		self.makNumber = makNumber
-		self.likeMak = likeMak
+		switch likeState {
+		case .none:
+			self.likeMak = "D"
+		case .like:
+			self.likeMak = "Y"
+		case .dislike:
+			self.likeMak = "N"
+		}
+		
 	}
 }

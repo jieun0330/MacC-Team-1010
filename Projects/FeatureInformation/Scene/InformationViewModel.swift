@@ -12,11 +12,14 @@ import Core
 final class InformationViewModel: ObservableObject {
 	
 	let makHolyId: Int
+	let userId: Int = 1578568449
 	let maHolyRepo: DefaultMakgeolliRepository
+	let userRepo: DefaultUserRepository
 	
-	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository) {
-		self.makHolyId = makHolyId
+	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
+		self.makHolyId = 1
 		self.maHolyRepo = maHolyRepo
+		self.userRepo = userRepo
 	}
 	
 	@Published var isFetchCompleted: Bool = false
@@ -55,12 +58,12 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let makHoly = try await maHolyRepo.fetchDetail(makNumber: 5, userId: 1)
+				let makHoly = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
 				self.makHoly = makHoly
 				print("fetchMakHoly Completed : ------- \n \(makHoly) \n -------")
 				self.isFetchCompleted = true
 			} catch {
-				Logger.debug(error: error, message: "")
+				Logger.debug(error: error, message: "InformationViewModel -fetchMakHoly()")
 			}
 			
 		}
@@ -72,7 +75,7 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 5)
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 1)
 				self.likeDetail = result.0
 				self.comments = result.1
 				print("fetchReactions Completed : -------")
@@ -80,7 +83,7 @@ final class InformationViewModel: ObservableObject {
 				print("comments : \(comments)")
 				print("----------------------------------")
 			} catch {
-				Logger.debug(error: error, message: "")
+				Logger.debug(error: error, message: "InformationViewModel -fetchReactions()")
 			}
 			
 		}
@@ -114,6 +117,23 @@ final class InformationViewModel: ObservableObject {
 			self.makHoly.myReaction.likeState = .dislike
 		}
 		
+	}
+	
+	@MainActor
+	func postLikeState() {
+		Task {
+			do {
+				let response = try await userRepo.evaluateMak(EvaluateMakRequest(
+					userId: self.userId,
+					makNumber: self.makHolyId,
+					likeState: self.makHoly.myReaction.likeState))
+				print("postLikeState Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -postLikeState()")
+			}
+		}
 	}
 	
 }

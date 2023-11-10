@@ -10,7 +10,7 @@ import Foundation
 
 public struct EvaluateMakResponse: Codable {
 	public let status: Int
-	public let resultMsg: String
+	public let resultMsg: String?
 	public let result: EvaluateMakResult?
 }
 
