@@ -39,7 +39,7 @@ public struct RootView: View {
 						Text("검색")
 							.font(.style(.SF10B))
 					}
-				EncyclopediaView()
+				TabMenuView()
 					.tabItem {
 						Image(uiImage: .designSystem(.heart)!)
 						Text("내 막걸리")

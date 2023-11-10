@@ -7,40 +7,61 @@
 //
 
 import SwiftUI
-import DesignSystem
 import Core
 
 public struct ThumbnailView: View {
     
-    let model: Thumbnail
+    let makId: String
+    let type: EncyclopediaType
+    
+    init(makId: String, type: EncyclopediaType) {
+        self.makId = makId
+        self.type = type
+    }
     
     public var body: some View {
-        
-        VStack(alignment: .leading) {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
-                .cornerRadius(10)
-                .frame(height: 190)
-                .overlay(
-                    VStack {
-                        HStack {
-                            model.comment
-                            Spacer()
-                            model.save
-                                .foregroundColor(Color(uiColor: .designSystem(.goldenyellow)!))
+        Rectangle()
+            .foregroundColor(.DarkGrey)
+            .cornerRadius(18)
+            .frame(width: 110, height: 210)
+            .overlay {
+                VStack {
+                    Rectangle()
+                        .frame(width: 56, height: 114)
+                    Text(makId)
+                        .SF12R()
+                    
+                    HStack(spacing: 14) {
+                        
+                        // like -> 노란색
+                        if User.user1.likes.contains(makId) {
+                            Image(uiImage: .designSystem(.likeLarge)!)
+                            // dislike -> 보라색
+                        } else if User.user1.dislikes.contains(makId) {
+                            Image(uiImage: .designSystem(.sorryLarge)!)
+                            // 아무것도 안눌렀을 시
+                        } else {
+                            Image(uiImage: .designSystem(.nothingLike)!)
                         }
-                        .padding(.horizontal, 10)
-                        model.makgeolliImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 66, height: 136)
+                        
+                        // 코멘트 색깔있는거
+                        if User.user1.comments.contains(makId) {
+                            Image(uiImage: .designSystem(.comment)!)
+                            // 코멘트 색깔없는거
+                        } else {
+                            Image(uiImage: .designSystem(.noComment)!)
+                        }
+                        
+                        // 찜 색깔있는거
+                        if User.user1.bookmarks.contains(makId) {
+                            Image(uiImage: .designSystem(.heartSmall)!)
+                            // 찜 색깔없는거
+                        } else {
+                            Image(uiImage: .designSystem(.heartSmallNoColor)!)
+                        }
                     }
-                )
-            HStack {
-                model.liked
-                Text(model.title)
+                }
             }
-            .font(.style(.SF14R))
-        }
     }
 }
+

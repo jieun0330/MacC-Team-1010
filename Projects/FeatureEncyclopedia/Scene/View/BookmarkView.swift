@@ -1,5 +1,5 @@
 //
-//  LikeView.swift
+//  BookmarkView.swift
 //  FeatureEncyclopedia
 //
 //  Created by 박지은 on 2023/10/31.
@@ -9,8 +9,8 @@
 import SwiftUI
 import Core
 
-// 좋았어요 뷰
-public struct LikeView: View {
+// 찜 뷰
+public struct BookmarkView: View {
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
@@ -18,7 +18,7 @@ public struct LikeView: View {
         
         ScrollView {
             HStack {
-                Text("\((User.user1.likes).count)개의 막걸리가 좋았어요")
+                Text("\((User.user1.bookmarks).count)개의 막걸리를 찜했어요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -27,8 +27,9 @@ public struct LikeView: View {
             .padding(.leading, 5)
             
             LazyVGrid(columns: columns, spacing: 16, content: {
-                ForEach(User.user1.likes, id: \.self) { makId in
-                    ThumbnailView(makId: makId, type: .like)
+                
+                ForEach(User.user1.bookmarks, id: \.self) { makId in
+                    ThumbnailView(makId: makId, type: .bookmark)
                 }
             })
         }
