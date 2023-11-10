@@ -36,6 +36,7 @@ public struct HomeView: View {
 							let global = proxy.frame(in: .global)
 							Image(uiImage: .designSystem(.banner)!)
 								.resizable()
+								.aspectRatio(contentMode: .fill)
 								.offset(y: global.minY > 0 ? -global.minY : 0)
 								.frame(
 									height: global.minY > 0 ?

@@ -30,7 +30,7 @@ struct NewItemView: View {
 			}
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 16) {
-					ForEach(viewModel.newItems, id: \.self) { item in
+					ForEach(viewModel.newItems.prefix(10), id: \.self) { item in
 						NewItemSingleView(item: item)
 					}
 				}
