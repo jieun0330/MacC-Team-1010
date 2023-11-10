@@ -34,7 +34,6 @@ struct CommentEditView: View {
                         self.isSelected.toggle()
                     } label: {
                         isSelected ? Image(uiImage: .designSystem(.isSelectedTrue)!) : Image(uiImage: .designSystem(.isSelectedFalse)!)
-                        
                     }
                 }
                 .padding()
