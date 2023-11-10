@@ -33,13 +33,6 @@ struct SearchResultSingleView: View {
 	}
 }
 
-struct SearchResultSingleView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchResultSingleView(makHoly: MakHolyMini.test1)
-	}
-}
-
-
 extension SearchResultSingleView {
 	func imageView() -> some View {
 		ZStack {

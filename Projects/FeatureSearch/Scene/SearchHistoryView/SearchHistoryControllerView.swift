@@ -32,9 +32,3 @@ struct SearchHistoryControllerView: View {
 		
 	}
 }
-
-struct SearchHistoryControllerView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchHistoryControllerView(searchViewModel: SearchViewModel())
-	}
-}

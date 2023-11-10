@@ -53,9 +53,3 @@ private extension SearchHistoryListView {
 		.padding(.vertical, 15)
 	}
 }
-
-struct SearchHistoryListView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchHistoryListView(searchViewModel: SearchViewModel())
-	}
-}
