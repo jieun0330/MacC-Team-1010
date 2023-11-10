@@ -14,19 +14,32 @@ struct SearchResultView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
-		ScrollView(showsIndicators: false) {
-			ForEach(searchViewModel.resultMakHolies, id: \.makNumber) { makHoly in
-				NavigationLink {
-					InformationView(makHolyId: Int(makHoly.makNumber ?? 0))
-						.onAppear {
-							searchViewModel.addSearchHistory()
-						}
-				} label: {
-					SearchResultSingleView(makHoly: makHoly)
-				}
-				
-				if makHoly != searchViewModel.resultMakHolies.last {
-					DividerView()
+		if searchViewModel.fetchLoading {
+			ProgressView()
+				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
+		} else if searchViewModel.resultMakHolies.isEmpty {
+			VStack(spacing: 20) {
+				Text("검색 결과가 없어요..")
+					.SF17R()
+					.foregroundColor(.W50)
+				Image(uiImage: .designSystem(.character)!)
+			}
+		} else {
+			ScrollView(showsIndicators: false) {
+				ForEach(searchViewModel.resultMakHolies, id: \.makNumber) { makHoly in
+					NavigationLink {
+						InformationView(makHolyId: Int(makHoly.makNumber ?? 0))
+							.onAppear {
+								searchViewModel.addSearchHistory()
+							}
+					} label: {
+						SearchResultSingleView(makHoly: makHoly)
+					}
+					
+					if makHoly != searchViewModel.resultMakHolies.last {
+						DividerView()
+					}
 				}
 			}
 		}

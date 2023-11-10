@@ -17,6 +17,7 @@ final class SearchViewModel: ObservableObject {
 	@Published var fetchLoading = true
 	
 	private var cancellables = Set<AnyCancellable>()
+	var searchState = false
 	
 	let searchRepository: DefaultSearchRepository
 	
@@ -27,10 +28,11 @@ final class SearchViewModel: ObservableObject {
 	
 	private func addSubscribers() {
 		$searchText
-			.debounce(for: 0.5, scheduler: DispatchQueue.main)
+			.debounce(for: 1.0, scheduler: DispatchQueue.main)
 			.sink { [weak self] (searchText) in
-				if searchText != "" {
+				if searchText != "" && self!.searchState {
 					self?.searchMakHolies(searchText: searchText)
+					self!.searchState = false
 				}
 			}
 			.store(in: &cancellables)
@@ -76,11 +78,13 @@ final class SearchViewModel: ObservableObject {
 	}
 	
 	func searchMakHolies(searchText: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await searchRepository.fetchSearch(keyword: searchText)
-				DispatchQueue.main.async {
-					self.resultMakHolies = response.result ?? []
+				DispatchQueue.main.async { [weak self] in
+					self?.resultMakHolies = response.result ?? []
+					self?.fetchLoading = false
 				}
 			} catch {
 				Logger.debug(error: error, message: "")

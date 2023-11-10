@@ -19,11 +19,20 @@ public struct SearchView: View {
 	public var body: some View {
 		NavigationStack {
 			SearchSuggestionView(searchViewModel: searchViewModel)
-				.searchable(text: $searchViewModel.searchText)
+				.searchable(
+					text: $searchViewModel.searchText,
+					prompt: "막걸리 이름, 양조장 ..."
+				)
+				.onChange(of: searchViewModel.searchText) { newValue in
+					searchViewModel.searchState = true
+				}
 				.onSubmit(of: .search) {
-					
+					searchViewModel.searchState = false
+					searchViewModel.searchMakHolies(searchText: searchViewModel.searchText)
 				}
 				.onAppear {
+					UIBarButtonItem.appearance(
+						whenContainedInInstancesOf: [UISearchBar.self]).title = "취소"
 					UISearchBar.appearance().tintColor = .designSystem(.primary)
 				}
 		}
