@@ -156,7 +156,7 @@ final class InformationViewModel: ObservableObject {
 	func addBookMark() {
 		Task {
 			do {
-				let response = try await userRepo.addWishList(WishListRequest(userId: self.userId, makNumber: 5))
+				let response = try await userRepo.addWishList(WishListRequest(userId: self.userId, makNumber: 1))
 				print("addBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -170,7 +170,7 @@ final class InformationViewModel: ObservableObject {
 	func deleteBookMark() {
 		Task {
 			do {
-				let response = try await userRepo.deleteWishList(WishListRequest(userId: self.userId, makNumber: 5))
+				let response = try await userRepo.deleteWishList(WishListRequest(userId: self.userId, makNumber: 1))
 				print("deleteBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
