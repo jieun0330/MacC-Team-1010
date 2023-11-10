@@ -32,7 +32,7 @@ struct MakgeolliInfoSingleView: View {
 								.font(.style(.SF12R))
 								.padding(.horizontal, 16)
 							
-							Text(String.formattedSet(adv: makHoly.makAlcoholPercentage ?? 0.0,
+							Text(BasicInfo.formattedSet(makHoly.makAlcoholPercentage ?? 0.0,
 													 volume: makHoly.makVolume ?? 0,
 													 price: makHoly.makPrice ?? 0))
 							.font(.style(.SF10R))

@@ -30,4 +30,8 @@ public struct MyComment: Identifiable, Hashable {
 		self.date = date
 	}
 	
+	public init() {
+		self.init(id: "", isVisible: false, contents: "", date: "")
+	}
+	
 }

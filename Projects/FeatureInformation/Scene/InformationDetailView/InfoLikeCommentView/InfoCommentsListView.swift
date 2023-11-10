@@ -45,8 +45,8 @@ extension InfoCommentsListView {
 			// 상단 유저 이름 & 평가 아이콘
 			HStack(alignment: .center, spacing: 4) {
 				
-				if let isLiked = comment.isLiked {
-					Image(uiImage: isLiked ? .designSystem(.like)! : .designSystem(.sorry)!)
+				if comment.isLiked != .none {
+					Image(uiImage: (comment.isLiked == .like) ? .designSystem(.like)! : .designSystem(.sorry)!)
 						.resizable()
 						.scaledToFit()
 						.frame(width: 10, height: 10)

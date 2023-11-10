@@ -22,86 +22,50 @@ public struct MakHoly: Identifiable, Hashable {
 		id: Int,
 		name: String,
 		imageId: String,
-		sweetness: Int,
-		sourness: Int,
-		thickness: Int,
-		freshness: Int,
-		price: Int,
-		volume: Int,
-		adv: Double,
+		taste: Taste,
+		basicInfo: BasicInfo,
 		ingredients: String,
 		description: String,
 		brewery: Brewery,
 		awards: [Award],
-		isBookMarked: Bool,
-		likeState: LikeState,
-		myComment: MyComment?) {
+		myReaction: MyReaction) {
 			self.id = id
 			self.name = name
 			self.imageId = imageId
-			self.sweetness = sweetness
-			self.sourness = sourness
-			self.thickness = thickness
-			self.freshness = freshness
-			self.price = price
-			self.volume = volume
-			self.adv = adv
+			self.taste = taste
+			self.basicInfo = basicInfo
 			self.ingredients = ingredients
 			self.description = description
 			self.brewery = brewery
 			self.awards = awards
-			self.isBookMarked = isBookMarked
-			self.likeState = likeState
-			self.myComment = myComment
-		}
-	
-	public init(
-		makHolyMini: MakHolyMini,
-		ingredients: String,
-		description: String,
-		brewery: Brewery,
-		awards: [Award],
-		isBookMarked: Bool,
-		likeState: LikeState,
-		myComment: MyComment?) {
-			self.id = Int(makHolyMini.id) ?? -1
-			self.name = makHolyMini.name
-			self.imageId = makHolyMini.imageId
-			self.sweetness = makHolyMini.sweetness
-			self.sourness = makHolyMini.sourness
-			self.thickness = makHolyMini.thickness
-			self.freshness = makHolyMini.freshness
-			self.price = makHolyMini.price
-			self.volume = makHolyMini.volume
-			self.adv = makHolyMini.adv
-			self.ingredients = ingredients
-			self.description = description
-			self.brewery = brewery
-			self.awards = awards
-			self.isBookMarked = isBookMarked
-			self.likeState = likeState
-			self.myComment = myComment
+			self.myReaction = myReaction
 		}
 	
 	public init() {
-		self.id = -1
-		self.name = ""
-		self.imageId = ""
-		self.sweetness = -1
-		self.sourness = -1
-		self.thickness = -1
-		self.freshness = -1
-		self.price = -1
-		self.volume = -1
-		self.adv = -1
-		self.ingredients = ""
-		self.description = ""
-		self.brewery = Brewery(name: "", url: "", salesURL: "")
-		self.awards = []
-		self.isBookMarked = false
-		self.likeState = .none
-		self.myComment = nil
+		self.init(
+			id: -1,
+			name: "",
+			imageId: "",
+			taste: Taste(),
+			basicInfo: BasicInfo(),
+			ingredients: "",
+			description: "",
+			brewery: Brewery(),
+			awards: [],
+			myReaction: MyReaction())
 	}
+	
+	//mokData Initializer
+//	public init(makHolyMini: MakHolyMini, 
+//				ingredients: String,
+//				description: String,
+//				brewery: Brewery,
+//				awards: [Award],
+//				isBookMarked: Bool,
+//		  likeState: LikeState,
+//		  myComment: MyComment?) {
+//		
+//	}
 	
 	// MakHoli Mini 정보
 	/// 막걸리 ID
@@ -110,20 +74,12 @@ public struct MakHoly: Identifiable, Hashable {
 	public let name: String
 	/// 이미지 Id
 	public let imageId: String
-	/// 단맛 점수
-	public let sweetness: Int
-	/// 신맛 점수
-	public let sourness: Int
-	/// 걸쭉 점수
-	public let thickness: Int
-	/// 청량 점수
-	public let freshness: Int
-	/// 가격
-	public let price: Int
-	/// 용량
-	public let volume: Int
-	/// 도수
-	public let adv: Double
+	
+	/// 맛 정보
+	public let taste: Taste
+	
+	/// 기본정보 (용량, 도수, 가격)
+	public let basicInfo: BasicInfo
 	
 	// 막걸리 상세 정보
 	/// 원재료
@@ -135,12 +91,7 @@ public struct MakHoly: Identifiable, Hashable {
 	/// 수상 배열
 	public let awards: [Award]
 	
-	// 나의 Reaction
-	/// 북마크 여부
-	public var isBookMarked: Bool
-	/// 평가 내용
-	public var likeState: LikeState
-	/// 코멘트
-	public var myComment: MyComment?
+	// 나의 Reaction : 북마크, 평가, 코멘트
+	public var myReaction: MyReaction
 	
 }

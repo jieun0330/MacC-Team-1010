@@ -10,36 +10,44 @@ import Foundation
 import Utils
 
 public protocol MakgeolliRepository {
-	func fetchDetail(makNumber: Int) async throws -> MakHoly
-	func fetchMakLikesAndComments(
-		makNumber: Int) async throws -> MakLikesAndCommentsResponse
 	func fetchFindByFeatures(sort: String?, offset: Int?,
 							 category: [String]?) async throws -> FindByFeaturesResponse
+	func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly
+	func fetchMakLikesAndComments(
+		makNumber: Int) async throws -> (LikeDetail, [VisibleComment])
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	public init() { }
 	
 	/// 서버에서 막걸리 정보 가져오기
-	public func fetchDetail(makNumber: Int) async throws -> MakHoly {
-		let request: [String: Any] = try DetailRequest(makNumber: makNumber).asDictionary()
-		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchDetail(
-			parameter: request), dataType: DetailResponse.self
+	public func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly {
+		let request: [String: Any] = try DetailRequest(makNumber: makNumber, userId: userId).asDictionary()
+		
+		let response = try await MakgeolliAPI.request(
+			target: MakgeolliAPI.fetchDetail(parameter: request),
+			dataType: DetailResponse.self
 		)
+		
 		if let result = response.result {
 			return result.toEntity
 		}
 		return MakHoly()
 	}
 	
-	public func fetchMakLikesAndComments(makNumber: Int) async throws -> MakLikesAndCommentsResponse {
+	public func fetchMakLikesAndComments(makNumber: Int) async throws -> (LikeDetail, [VisibleComment]) {
 		let request: [String: Any] = try MakLikesAndCommentsRequest(
 			makNumber: makNumber
 		).asDictionary()
 		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakLikesAndComments(
 			parameter: request), dataType: MakLikesAndCommentsResponse.self
 		)
-		return response
+		
+		if let result = response.result {
+			return result.toEntity()
+		}
+		
+		return (LikeDetail(), [])
 	}
 	
 	public func fetchFindByFeatures(sort: String?,

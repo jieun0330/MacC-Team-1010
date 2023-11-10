@@ -12,9 +12,11 @@ import Core
 final class InformationViewModel: ObservableObject {
 	
 	let makHolyId: Int
+	let maHolyRepo: DefaultMakgeolliRepository
 	
-	init(makHolyId: Int) {
+	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository) {
 		self.makHolyId = makHolyId
+		self.maHolyRepo = maHolyRepo
 	}
 	
 	@Published var isFetchCompleted: Bool = false
@@ -27,48 +29,89 @@ final class InformationViewModel: ObservableObject {
 	
 	private var user: User = User.user1
 	
+	@MainActor
+	func fetchDatas() {
+		Task {
+			await withTaskGroup(of: Void.self) { group in
+				group.addTask {
+					await self.fetchMakHoly()
+				}
+				group.addTask {
+					await self.fetchReactions()
+				}
+				
+				for _ in 0..<2 {
+					await group.next()
+				}
+				
+				isFetchCompleted = true
+			}
+		}
+	}
+	
 	// detail api
+	@MainActor
 	func fetchMakHoly() {
-		
+		Task {
+			
+			do {
+				let makHoly = try await maHolyRepo.fetchDetail(makNumber: 5, userId: 1)
+				self.makHoly = makHoly
+				print("fetchMakHoly Completed : ------- \n \(makHoly) \n -------")
+				self.isFetchCompleted = true
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+			
+		}
 	}
 	
 	// makLikesAndComments  api
+	@MainActor
 	func fetchReactions() {
-		
-		self.likeDetail = LikeDetail(totalCount: 10, likeCount: 5, dislikeCount: 5)
-		
-		self.comments.append(VisibleComment(userName: "유저-1", isLiked: true, content: "맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요맛있어요", date: "2023-11-04"))
-		self.comments.append(VisibleComment(userName: "유저-2", isLiked: false, content: "맛없어", date: "2023-11-05"))
-		self.comments.append(VisibleComment(userName: "유저-3", isLiked: nil, content: "한번쯤은..", date: "2023-11-06"))
-		
+		Task {
+			
+			do {
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 5)
+				self.likeDetail = result.0
+				self.comments = result.1
+				print("fetchReactions Completed : -------")
+				print("likeDetail : \(likeDetail)")
+				print("comments : \(comments)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+			
+		}
 	}
 	
 	// Comment Visibe 변경
 	func toggleCommentVisible() {
 		
-		self.makHoly.myComment?.isVisible.toggle()
+		self.makHoly.myReaction.comment?.isVisible.toggle()
 		
 		// Comment Visible 업데이트 API 연결
 	}
 	
 	func likeButtonTapped() {
 		
-		switch self.makHoly.likeState {
+		switch self.makHoly.myReaction.likeState {
 		case .like:
-			self.makHoly.likeState = .none
+			self.makHoly.myReaction.likeState = .none
 		default:
-			self.makHoly.likeState = .like
+			self.makHoly.myReaction.likeState = .like
 		}
 		
 	}
 	
 	func dislikeButtonTapped() {
 		
-		switch self.makHoly.likeState {
+		switch self.makHoly.myReaction.likeState {
 		case .dislike:
-			self.makHoly.likeState = .none
+			self.makHoly.myReaction.likeState = .none
 		default:
-			self.makHoly.likeState = .dislike
+			self.makHoly.myReaction.likeState = .dislike
 		}
 		
 	}
