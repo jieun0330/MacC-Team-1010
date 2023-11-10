@@ -16,10 +16,8 @@ struct MyInformationView: View {
 			let global = proxy.frame(in: .global)
 			LinearGradient(
 				stops: [
-					Gradient.Stop(color: Color(red: 0.71, green: 0.66, blue: 0.48),
-								  location: 0.00),
-					Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),
-								  location: 1.00),
+					Gradient.Stop(color: Color(red: 0.45, green: 0.43, blue: 0.44), location: 0.00),
+					Gradient.Stop(color: Color(red: 0.15, green: 0.15, blue: 0.27), location: 1.00),
 				],
 				startPoint: UnitPoint(x: 0.45, y: 0),
 				endPoint: UnitPoint(x: 0.45, y: 1)
