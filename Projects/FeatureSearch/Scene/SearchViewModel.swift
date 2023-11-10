@@ -13,20 +13,25 @@ import Combine
 final class SearchViewModel: ObservableObject {
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
-	@Published var resultMakHolies: [MakHolyMini] = []
+	@Published var resultMakHolies: [SearchResult] = []
 	@Published var fetchLoading = true
 	
 	private var cancellables = Set<AnyCancellable>()
 	
-	init() {
+	let searchRepository: DefaultSearchRepository
+	
+	init(searchRepository: DefaultSearchRepository) {
+		self.searchRepository = searchRepository
 		addSubscribers()
 	}
 	
 	private func addSubscribers() {
 		$searchText
-			.debounce(for: 0.3, scheduler: DispatchQueue.main)
+			.debounce(for: 0.5, scheduler: DispatchQueue.main)
 			.sink { [weak self] (searchText) in
-				self?.searchMakHolies(searchText: searchText)
+				if searchText != "" {
+					self?.searchMakHolies(searchText: searchText)
+				}
 			}
 			.store(in: &cancellables)
 	}
@@ -64,7 +69,6 @@ final class SearchViewModel: ObservableObject {
 	
 	func setCompletion(_ completion: String) {
 		self.searchText = completion
-		self.addSearchHistory()
 	}
 	
 	func saveSearchHistorys() {
@@ -72,8 +76,15 @@ final class SearchViewModel: ObservableObject {
 	}
 	
 	func searchMakHolies(searchText: String) {
-		
-		resultMakHolies = MakHolyMini.mokDatas
-		
+		Task {
+			do {
+				let response = try await searchRepository.fetchSearch(keyword: searchText)
+				DispatchQueue.main.async {
+					self.resultMakHolies = response.result ?? []
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+			}
+		}
 	}
 }

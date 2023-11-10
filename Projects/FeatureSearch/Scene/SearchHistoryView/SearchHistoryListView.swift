@@ -13,15 +13,12 @@ struct SearchHistoryListView: View {
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
-			
 			VStack(spacing: 0) {
 				ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
-					
-						searchHistoryListSingleView(searchHistory: searchHistory)
-						Divider()
-							.foregroundColor(Color(uiColor: .designSystem(.w25)!))
-							.frame(height: 0.33)
-					
+					searchHistoryListSingleView(searchHistory: searchHistory)
+					Divider()
+						.foregroundColor(Color(uiColor: .designSystem(.w25)!))
+						.frame(height: 0.33)
 				}
 			}
 		}

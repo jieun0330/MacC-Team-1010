@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import Core
 
 public struct SearchView: View {
-	@StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
+	@StateObject private var searchViewModel = SearchViewModel(
+		searchRepository: DefaultSearchRepository()
+	)
 	
 	public init() { }
 	
@@ -18,7 +21,7 @@ public struct SearchView: View {
 			SearchSuggestionView(searchViewModel: searchViewModel)
 				.searchable(text: $searchViewModel.searchText)
 				.onSubmit(of: .search) {
-					searchViewModel.addSearchHistory()
+					
 				}
 				.onAppear {
 					UISearchBar.appearance().tintColor = .designSystem(.primary)

@@ -15,9 +15,9 @@ struct SearchResultView: View {
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
-			ForEach(searchViewModel.resultMakHolies) { makHoly in
+			ForEach(searchViewModel.resultMakHolies, id: \.makNumber) { makHoly in
 				NavigationLink {
-					InformationView(makHolyId: Int(makHoly.id) ?? -1)
+					InformationView(makHolyId: Int(makHoly.makNumber ?? 0))
 						.onAppear {
 							searchViewModel.addSearchHistory()
 						}
@@ -28,7 +28,6 @@ struct SearchResultView: View {
 				if makHoly != searchViewModel.resultMakHolies.last {
 					DividerView()
 				}
-				
 			}
 		}
 	}
