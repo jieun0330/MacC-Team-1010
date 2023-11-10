@@ -15,7 +15,7 @@ public struct InformationView: View {
 	@StateObject var viewModel: InformationViewModel
 	
 	public init(makHolyId: Int) {
-		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository()))
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository(), userRepo: DefaultUserRepository()))
 	}
 	
 	public var body: some View {
