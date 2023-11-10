@@ -32,6 +32,7 @@ final class OnboardingViewModel: ObservableObject {
 																			   userAgeRange: ageRange))
 				do {
 					if let response = response.result, let userID = response.userID {
+						UserDefaultsSetting.nickname = nickname
 						try KeyChainManager.shared.create(account: .userId, data: "\(userID)")
 					}
 				} catch {
