@@ -51,17 +51,17 @@ public enum TENTENAsset {
 		case search
 		case heart
 		case person
-        
-        case comment
-        case likeLarge
-        case sorryLarge
-        case heartSmall
-        case heartSmallNoColor
-        case noComment
-        case isSelectedFalse
-        case isSelectedTrue
-        case lock
-        case nothingLike
+		
+		case comment
+		case likeLarge
+		case sorryLarge
+		case heartSmall
+		case heartSmallNoColor
+		case noComment
+		case isSelectedFalse
+		case isSelectedTrue
+		case lock
+		case nothingLike
 		
 		case profileSweet
 		case profileSour
@@ -72,6 +72,8 @@ public enum TENTENAsset {
 		
 		case banner
 		
+		case character
+    
 		case bookMarkedTrue
 		case bookMarkedFalse
 		case infoBackButton
@@ -149,28 +151,28 @@ public enum TENTENAsset {
 				return "heart"
 			case .person:
 				return "person"
-
-      case .comment:
-          return "comment"
-      case .likeLarge:
-          return "likeLarge"
-      case .sorryLarge:
-          return "sorryLarge"
-      case .heartSmall:
-          return "heartSmall"
-      case .heartSmallNoColor:
-          return "heartSmallNoColor"
-      case .noComment:
-          return "noComment"
-      case .isSelectedTrue:
-          return "isSelectedTrue"
-      case .isSelectedFalse:
-          return "isSelectedFalse"
-      case .lock:
-          return "lock"
-      case .nothingLike:
-          return "nothingLike"
-        
+				
+			case .comment:
+				return "comment"
+			case .likeLarge:
+				return "likeLarge"
+			case .sorryLarge:
+				return "sorryLarge"
+			case .heartSmall:
+				return "heartSmall"
+			case .heartSmallNoColor:
+				return "heartSmallNoColor"
+			case .noComment:
+				return "noComment"
+			case .isSelectedTrue:
+				return "isSelectedTrue"
+			case .isSelectedFalse:
+				return "isSelectedFalse"
+			case .lock:
+				return "lock"
+			case .nothingLike:
+				return "nothingLike"
+				
 			case .profileSweet:
 				return "profileSweet"
 			case .profileSour:
@@ -186,6 +188,10 @@ public enum TENTENAsset {
 				
 			case .banner:
 				return "banner"
+				
+			case .character:
+				return "character"
+
 			case .bookMarkedTrue:
 				return "bookMarked"
 			case .bookMarkedFalse:

@@ -11,7 +11,7 @@ import DesignSystem
 import Core
 
 struct SearchResultSingleView: View {
-	let makHoly: MakHolyMini
+	let makHoly: SearchResult
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: 0) {
@@ -25,22 +25,18 @@ struct SearchResultSingleView: View {
 			
 			Spacer()
 			
-			TasteScoreView(type: .mini, sweetness: makHoly.sweetness, sourness: makHoly.sourness, thickness: makHoly.thickness, freshness: makHoly.freshness)
-			
+			TasteScoreView(type: .mini,
+						   sweetness: makHoly.taste?.makTasteSweet ?? -1,
+						   sourness: makHoly.taste?.makTasteSour ?? -1,
+						   thickness: makHoly.taste?.makTasteThick ?? -1,
+						   freshness: makHoly.taste?.makTasteFresh ?? -1)
 		}
 		.frame(height: 80)
 		.padding(.vertical, 10)
 	}
 }
 
-struct SearchResultSingleView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchResultSingleView(makHoly: MakHolyMini.test1)
-	}
-}
-
-
-extension SearchResultSingleView {
+private extension SearchResultSingleView {
 	func imageView() -> some View {
 		ZStack {
 			RoundedRectangle(cornerRadius: 13)
@@ -55,13 +51,15 @@ extension SearchResultSingleView {
 	
 	func descriptionView() -> some View {
 		VStack(alignment: .leading, spacing: 0) {
-			Text(makHoly.name)
+			Text(makHoly.makName ?? "")
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
-			Text(BasicInfo.formattedSet(adv: makHoly.adv, volume: makHoly.volume, price: makHoly.price))
-				.font(.style(.SF12R))
-				.foregroundColor(Color(uiColor: .designSystem(.white)!))
-				.opacity(0.5)
+			Text(BasicInfo.formattedSet(adv: makHoly.mainDetail?.makAlcoholPercentage ?? 0.0,
+										volume: makHoly.mainDetail?.makVolume ?? 0,
+										price: makHoly.mainDetail?.makPrice ?? 0))
+			.font(.style(.SF12R))
+			.foregroundColor(Color(uiColor: .designSystem(.white)!))
+			.opacity(0.5)
 		}
 	}
 }

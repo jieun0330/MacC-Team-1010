@@ -31,13 +31,17 @@ struct MakgeolliInfoView: View {
 						Text("리스트 순서가 궁금하신가요")
 							.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 					}
-					.alert(isPresented: $showAlert) {
-						Alert(title: Text("추천순으로 정렬"), message: Text("데이터베이스에 등록된 순서대로 리스트에 보여져요. 추천순으로 보여드릴 수 있도록 준비중이니 업데이트 될 때까지 조금만 기다려주세요!"),
-							  dismissButton: .default(Text("확인")))
-					}
 					Spacer()
-					Text("추천순")
-						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+					Button {
+						showAlert = true
+					} label: {
+						Text("추천순")
+							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+					}
+				}
+				.alert(isPresented: $showAlert) {
+					Alert(title: Text("추천순으로 정렬"), message: Text("데이터베이스에 등록된 순서대로 리스트에 보여져요. 추천순으로 보여드릴 수 있도록 준비중이니 업데이트 될 때까지 조금만 기다려주세요!"),
+						  dismissButton: .default(Text("확인")))
 				}
 				.font(.style(.SF12R))
 				.padding(.horizontal, 8)

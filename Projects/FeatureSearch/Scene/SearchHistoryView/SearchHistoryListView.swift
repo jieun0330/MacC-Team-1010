@@ -13,15 +13,12 @@ struct SearchHistoryListView: View {
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
-			
 			VStack(spacing: 0) {
 				ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
-					
-						searchHistoryListSingleView(searchHistory: searchHistory)
-						Divider()
-							.foregroundColor(Color(uiColor: .designSystem(.w25)!))
-							.frame(height: 0.33)
-					
+					searchHistoryListSingleView(searchHistory: searchHistory)
+					Divider()
+						.foregroundColor(Color(uiColor: .designSystem(.w25)!))
+						.frame(height: 0.33)
 				}
 			}
 		}
@@ -51,11 +48,5 @@ private extension SearchHistoryListView {
 			})
 		}
 		.padding(.vertical, 15)
-	}
-}
-
-struct SearchHistoryListView_Previews: PreviewProvider {
-	static var previews: some View {
-		SearchHistoryListView(searchViewModel: SearchViewModel())
 	}
 }
