@@ -73,6 +73,10 @@ public enum TENTENAsset {
 		case banner
 		
 		case character
+    
+		case bookMarkedTrue
+		case bookMarkedFalse
+		case infoBackButton
 		
 		public var description: String {
 			switch self {
@@ -187,6 +191,13 @@ public enum TENTENAsset {
 				
 			case .character:
 				return "character"
+
+			case .bookMarkedTrue:
+				return "bookMarked"
+			case .bookMarkedFalse:
+				return "notBookMarked"
+			case .infoBackButton:
+				return "informtaionBackButton"
 			}
 		}
 	}

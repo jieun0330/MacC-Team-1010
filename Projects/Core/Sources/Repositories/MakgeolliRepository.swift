@@ -12,7 +12,7 @@ import Utils
 public protocol MakgeolliRepository {
 	func fetchFindByFeatures(sort: String?, offset: Int?,
 							 category: [String]?) async throws -> FindByFeaturesResponse
-	func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly
+	func fetchDetail(makNumber: Int, userId: Int) async throws -> (MakHoly, MyReaction)
 	func fetchMakLikesAndComments(
 		makNumber: Int) async throws -> (LikeDetail, [VisibleComment])
 }
@@ -21,7 +21,7 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 	public init() { }
 	
 	/// 서버에서 막걸리 정보 가져오기
-	public func fetchDetail(makNumber: Int, userId: Int) async throws -> MakHoly {
+	public func fetchDetail(makNumber: Int, userId: Int) async throws -> (MakHoly, MyReaction) {
 		let request: [String: Any] = try DetailRequest(makNumber: makNumber, userId: userId).asDictionary()
 		
 		let response = try await MakgeolliAPI.request(
@@ -30,9 +30,9 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		)
 		
 		if let result = response.result {
-			return result.toEntity
+			return result.toEntity()
 		}
-		return MakHoly()
+		return (MakHoly(), MyReaction())
 	}
 	
 	public func fetchMakLikesAndComments(makNumber: Int) async throws -> (LikeDetail, [VisibleComment]) {

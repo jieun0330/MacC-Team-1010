@@ -27,8 +27,7 @@ public struct MakHoly: Identifiable, Hashable {
 		ingredients: String,
 		description: String,
 		brewery: Brewery,
-		awards: [Award],
-		myReaction: MyReaction) {
+		awards: [Award]) {
 			self.id = id
 			self.name = name
 			self.imageId = imageId
@@ -38,7 +37,6 @@ public struct MakHoly: Identifiable, Hashable {
 			self.description = description
 			self.brewery = brewery
 			self.awards = awards
-			self.myReaction = myReaction
 		}
 	
 	public init() {
@@ -51,8 +49,7 @@ public struct MakHoly: Identifiable, Hashable {
 			ingredients: "",
 			description: "",
 			brewery: Brewery(),
-			awards: [],
-			myReaction: MyReaction())
+			awards: [])
 	}
 	
 	//mokData Initializer
@@ -90,8 +87,4 @@ public struct MakHoly: Identifiable, Hashable {
 	public let brewery: Brewery
 	/// 수상 배열
 	public let awards: [Award]
-	
-	// 나의 Reaction : 북마크, 평가, 코멘트
-	public var myReaction: MyReaction
-	
 }

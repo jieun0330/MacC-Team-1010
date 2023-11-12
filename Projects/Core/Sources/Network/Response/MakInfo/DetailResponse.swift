@@ -22,7 +22,7 @@ public struct DetailResult: Codable {
 	public let attributes: [DetailAttribute]?
 	public let userAction: UserAction?
 	
-	public var toEntity: MakHoly {
+	public func toEntity() -> (MakHoly, MyReaction) {
 		
 		let id = makSeq ?? -1
 		let name = makName ?? ""
@@ -38,7 +38,7 @@ public struct DetailResult: Codable {
 		
 		let myReaction = userAction?.toEnity ?? MyReaction()
 		
-		return MakHoly(
+		return (MakHoly(
 			id: id,
 			name: name,
 			imageId: imageId,
@@ -47,8 +47,8 @@ public struct DetailResult: Codable {
 			ingredients: ingredients,
 			description: description,
 			brewery: brewery,
-			awards: awards,
-			myReaction: myReaction)
+			awards: awards),
+				myReaction)
 	}
 	
 }
@@ -71,12 +71,12 @@ public struct UserAction: Codable {
 		
 		if isInMyComment == "Y",
 		let commentId = commentId,
-		let commentId = commentContents,
+		let commentContents = commentContents,
 		let date = writeDate{
 			comment = MyComment(
 				id: commentId,
 				isVisible: isCommentVisible == "Y" ? true : false ,
-				contents: commentId,
+				contents: commentContents,
 				date: date)
 		}
 		

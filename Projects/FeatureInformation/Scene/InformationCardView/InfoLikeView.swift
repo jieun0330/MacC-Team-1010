@@ -31,7 +31,7 @@ extension InfoLikeView {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
 					.frame(height: 50)
-					.foregroundColor(viewModel.makHoly.myReaction.likeState == .like ? .GoldenYellow : .W10)
+					.foregroundColor(viewModel.myReaction.likeState == .like ? .GoldenYellow : .W10)
 				
 				HStack(spacing: 4) {
 					Image(systemName: "hand.thumbsup.fill")
@@ -39,7 +39,7 @@ extension InfoLikeView {
 					Text("좋았어요")
 						.SF17R()
 				}
-				.foregroundColor(viewModel.makHoly.myReaction.likeState == .like ? .white : .W85)
+				.foregroundColor(viewModel.myReaction.likeState == .like ? .white : .W85)
 			}
 		})
 		
@@ -53,7 +53,7 @@ extension InfoLikeView {
 			ZStack{
 				RoundedRectangle(cornerRadius: 12)
 					.frame(height: 50)
-					.foregroundColor(viewModel.makHoly.myReaction.likeState == .dislike ? .Lilac : .W10)
+					.foregroundColor(viewModel.myReaction.likeState == .dislike ? .Lilac : .W10)
 				
 				HStack(spacing: 4) {
 					Image(systemName: "hand.thumbsdown.fill")
@@ -62,7 +62,7 @@ extension InfoLikeView {
 						.SF17R()
 				}
 				.font(.style(.SF17R))
-				.foregroundColor(viewModel.makHoly.myReaction.likeState == .dislike ? .white : .W85)
+				.foregroundColor(viewModel.myReaction.likeState == .dislike ? .white : .W85)
 			}
 		})
 	}

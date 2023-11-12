@@ -19,6 +19,7 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
+		
 		ScrollView(.vertical, showsIndicators: false) {
 			VStack(spacing: 0) {
 				ZStack {
@@ -31,21 +32,29 @@ public struct InformationView: View {
 						endPoint: UnitPoint(x: 0.45, y: 1)
 					)
 					.ignoresSafeArea(.all, edges: .top)
-					InformationCardView(viewModel: viewModel)
 					
+					InformationCardView(viewModel: viewModel)
 				}
-				
 				InformationDetailView(viewModel: viewModel)
 			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
+		.navigationBarBackButtonHidden(true)
+		.toolbar{
+			ToolbarItem(placement: .topBarLeading) {
+				InfoBackButton()
+			}
+			ToolbarItem(placement: .topBarTrailing) {
+				InfoBookMarkButton(viewModel: viewModel)
+			}
+		}
 		.onAppear(perform: {
-			viewModel.fetchMakHoly()
-			viewModel.fetchReactions()
+			viewModel.fetchDatas()
 		})
 		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
 			ActionSheet(title: Text("Action Sheet title"))
 		})
 	}
 }
+
 

@@ -21,6 +21,7 @@ struct InfoCommentsListView: View {
 				}, label: {
 					noReactionSingleView()
 				})
+				.padding(.leading, 16)
 			} else {
 				HStack(spacing: 16) {
 					
