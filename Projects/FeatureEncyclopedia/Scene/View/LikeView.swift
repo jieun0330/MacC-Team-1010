@@ -18,7 +18,7 @@ public struct LikeView: View {
         
         ScrollView {
             HStack {
-                Text("\((viewModel.testModel.filter {$0.reactionLike == "LIKE"}).count )개의 막걸리가 좋았어요")
+                Text("\((viewModel.makModel.filter {$0.reactionLike == "LIKE"}).count )개의 막걸리가 좋았어요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -27,7 +27,7 @@ public struct LikeView: View {
             .padding(.leading, 5)
             
             LazyVGrid(columns: columns, spacing: 16, content: {
-                ForEach(viewModel.testModel, id: \.self) { mak in
+                ForEach(viewModel.makModel, id: \.self) { mak in
                     if mak.reactionLike == "LIKE" {
                         ThumbnailView(mak: mak, type: .like)
                     }

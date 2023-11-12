@@ -24,7 +24,7 @@ public struct CommentView: View {
             VStack {
                 HStack {
                     
-                    Text("\((viewModel.testModel.filter {$0.reactionComment != nil}).count )개의 막걸리에 코멘트를 남겼어요")
+                    Text("\((viewModel.makModel.filter {$0.reactionComment != nil}).count )개의 막걸리에 코멘트를 남겼어요")
                         .SF12R()
                         .foregroundColor(.W50)
                     Spacer()
@@ -32,7 +32,7 @@ public struct CommentView: View {
                 .padding(.vertical, 10)
                 .padding(.leading, 5)
                 
-                ForEach(viewModel.testModel, id: \.self) { mak in
+                ForEach(viewModel.makModel, id: \.self) { mak in
                     if mak.reactionComment != nil {
                         HStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -44,6 +44,7 @@ public struct CommentView: View {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Text(mak.makNm!)
+                                        .foregroundColor(.White)
                                         .SF14R()
                                     Image(uiImage: .designSystem(.like)!)
                                         .padding(.leading, 4)

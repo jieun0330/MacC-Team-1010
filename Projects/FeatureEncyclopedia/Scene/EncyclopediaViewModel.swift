@@ -11,7 +11,7 @@ import Core
 import Utils
 
 final class EncyclopediaViewModel: ObservableObject {
-    @Published var testModel: [GetUserMakFolderContent] = []
+    @Published var makModel: [GetUserMakFolderContent] = []
     
     var fetchLoading = false
     
@@ -27,9 +27,13 @@ final class EncyclopediaViewModel: ObservableObject {
         Task {
             do {
                 let response = try await self.userRepository.getUserMakFolder(GetUserMakFolderRequest(userId: 1578568449))
-                testModel = (response.result?.makUserTable!.content!) ?? []
-                print("resposne = \(response)")
                 
+                if let content = response.result?.makUserTable?.content {
+                    makModel = content
+                } else {
+                    makModel = []
+                }
+                                
                 fetchLoading = true
             } catch {
                 Logger.debug(error: error, message: "")

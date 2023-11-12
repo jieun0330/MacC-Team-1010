@@ -31,7 +31,7 @@ struct AllView: View {
         
         ScrollView(showsIndicators: false) {
             HStack {
-                Text("\(viewModel.testModel.count)개 중 \((viewModel.testModel.filter { $0.reactionLike == "LIKE" } + viewModel.testModel.filter { $0.reactionLike == "DISLIKE" }).count )개를 마셔봤어요!")
+                Text("\(viewModel.makModel.count)개 중 \((viewModel.makModel.filter { $0.reactionLike == "LIKE" } + viewModel.makModel.filter { $0.reactionLike == "DISLIKE" }).count )개를 마셔봤어요!")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -40,7 +40,7 @@ struct AllView: View {
             .padding(.leading, 5)
             
             LazyVGrid(columns: columns, spacing: 16, content: {
-                ForEach(viewModel.testModel, id: \.self) { mak in
+                ForEach(viewModel.makModel, id: \.self) { mak in
                     ThumbnailView(mak: mak, type: .all)
                 }
             }

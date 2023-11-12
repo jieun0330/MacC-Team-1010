@@ -20,7 +20,7 @@ public struct DislikeView: View {
         
         ScrollView {
             HStack {
-                Text("\((viewModel.testModel.filter {$0.reactionLike == "DISLIKE"}).count )개의 막걸리가 아쉬워요")
+                Text("\((viewModel.makModel.filter {$0.reactionLike == "DISLIKE"}).count )개의 막걸리가 아쉬워요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -30,7 +30,7 @@ public struct DislikeView: View {
             
             LazyVGrid(columns: columns, spacing: 16, content: {
                 
-                ForEach(viewModel.testModel, id: \.self) { mak in
+                ForEach(viewModel.makModel, id: \.self) { mak in
                     if mak.reactionLike == "DISLIKE" {
                         ThumbnailView(mak: mak, type: .dislike)
                     }

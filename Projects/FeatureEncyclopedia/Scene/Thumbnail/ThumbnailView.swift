@@ -30,6 +30,7 @@ public struct ThumbnailView: View {
                     
                     Text(mak.makNm!)
                         .SF12R()
+                        .foregroundColor(.White)
                         .lineLimit(1)
                         .padding(.horizontal)
                     
