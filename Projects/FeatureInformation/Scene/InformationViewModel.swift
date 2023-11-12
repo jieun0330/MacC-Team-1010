@@ -142,6 +142,44 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
+	@MainActor 
+	func toggleBookMark() {
+		myReaction.isBookMarked.toggle()
+		if self.myReaction.isBookMarked {
+			addBookMark()
+		} else {
+			deleteBookMark()
+		}
+	}
+	
+	@MainActor
+	func addBookMark() {
+		Task {
+			do {
+				let response = try await userRepo.addWishList(WishListRequest(userId: self.userId, makNumber: 1))
+				print("addBookMark Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
+			}
+		}
+	}
+	
+	@MainActor
+	func deleteBookMark() {
+		Task {
+			do {
+				let response = try await userRepo.deleteWishList(WishListRequest(userId: self.userId, makNumber: 1))
+				print("deleteBookMark Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
+			}
+		}
+	}
+	
 }
 
 

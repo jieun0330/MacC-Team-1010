@@ -72,6 +72,10 @@ public enum TENTENAsset {
 		
 		case banner
 		
+		case bookMarkedTrue
+		case bookMarkedFalse
+		case infoBackButton
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -182,6 +186,12 @@ public enum TENTENAsset {
 				
 			case .banner:
 				return "banner"
+			case .bookMarkedTrue:
+				return "bookMarked"
+			case .bookMarkedFalse:
+				return "notBookMarked"
+			case .infoBackButton:
+				return "informtaionBackButton"
 			}
 		}
 	}
