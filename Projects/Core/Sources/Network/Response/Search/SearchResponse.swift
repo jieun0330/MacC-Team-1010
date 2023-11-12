@@ -16,7 +16,9 @@ public struct SearchResponse: Codable {
 
 public struct SearchResult: Hashable, Codable {
 	public let makNumber: Int?
-	public let makName, makType, makImageNumber: String?
+	public let makName: String?
+	public let makType: String?
+	public let makImageNumber: String?
 	public let mainDetail: SearchMainDetail?
 	public let taste: SearchTaste?
 	
@@ -31,10 +33,13 @@ public struct SearchResult: Hashable, Codable {
 
 public struct SearchMainDetail: Codable {
 	public let makAlcoholPercentage: Double?
-	public let makVolume, makPrice: Int?
+	public let makVolume: Int?
+	public let makPrice: Int?
 }
 
 public struct SearchTaste: Codable {
-	public let makTasteSweet, makTasteSour: Int?
-	public let makTasteThick, makTasteFresh: Int?
+	public let makTasteSweet: Int?
+	public let makTasteSour: Int?
+	public let makTasteThick: Int?
+	public let makTasteFresh: Int?
 }
