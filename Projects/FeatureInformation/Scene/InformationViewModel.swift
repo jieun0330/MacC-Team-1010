@@ -106,7 +106,7 @@ final class InformationViewModel: ObservableObject {
 		guard let comment = myReaction.comment else {
 			return
 		}
-		self.updateComment(content: comment.contents, isVisible: comment.isVisible)
+		self.updateComment(myComment: MyComment(isVisible: comment.isVisible, contents: comment.contents, date: "데이트 추가"))
 	}
 	
 	func likeButtonTapped() {
@@ -203,14 +203,32 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func updateComment(content: String, isVisible: Bool) {
+	func updateComment(myComment: MyComment) {
 		Task {
 			do {
 				let response = try await userRepo.updateComment(
-					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: content, isVisible: isVisible))
+					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				//TODO: reponse 확인 로직
+				self.myReaction.comment = myComment
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+			}
+		}
+	}
+	
+	@MainActor
+	func insertComment(myComment: MyComment) {
+		Task {
+			do {
+				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+				//TODO: reponse 확인 로직
+				self.myReaction.comment = myComment
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
