@@ -54,15 +54,15 @@ public struct InformationView: View {
 		.onAppear(perform: {
 			viewModel.fetchDatas()
 		})
-		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
-			ActionSheet(title: Text("Action Sheet title"))
-		})
+		//코멘트 상세 Modal 화면
 		.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {
 			InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
 		})
+		// 코멘트 수정 ActionSheet
 		.confirmationDialog("", isPresented: $viewModel.showActionSheet) {
 			Button {
 				viewModel.showActionSheet.toggle()
+				viewModel.showCommentSheet.toggle()
 			} label: {
 				Text("수정하기")
 					.SF17R()
@@ -70,7 +70,8 @@ public struct InformationView: View {
 			}
 			
 			Button {
-				viewModel.deleteComment()
+				viewModel.showActionSheet = false
+				viewModel.showDeleteAlert = true
 			} label: {
 				Text("삭제하기")
 					.SF17R()
@@ -86,6 +87,26 @@ public struct InformationView: View {
 			}
 			
 		}
+		//코멘트 작성 Modal Sheet
+		.sheet(isPresented: $viewModel.showCommentSheet, content: {
+			CommentEditSheet(isPresented: $viewModel.showCommentSheet, myComment: $viewModel.myReaction.comment, saveCompletion: { text in
+				print(text)
+			})
+		})
+		.alert(isPresented: $viewModel.showDeleteAlert) {
+			Alert(title: Text("코멘트 삭제"), message: Text("코멘트를 삭제하시겠어요?"),
+				  primaryButton: .cancel(
+					Text("취소"),
+					action: {}
+				  ), secondaryButton: .default(
+					Text("삭제하기"),
+					action: {
+						viewModel.deleteComment()
+					}
+				  ))
+		}
+		
+		
 	}
 }
 

@@ -31,7 +31,7 @@ final class InformationViewModel: ObservableObject {
 	@Published var showActionSheet: Bool = false
 	@Published var showCommentSheet: Bool = false
 	@Published var showDetailCommentListSheet: Bool = false
-	
+	@Published var showDeleteAlert: Bool = false
 	@Published var commentText: String = ""
 	
 	private var user: User = User.user1
@@ -194,6 +194,7 @@ final class InformationViewModel: ObservableObject {
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				//TODO: reponse 확인 로직
 				self.myReaction.comment = nil
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
@@ -215,6 +216,7 @@ final class InformationViewModel: ObservableObject {
 			}
 		}
 	}
+	
 }
 
 
