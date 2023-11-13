@@ -89,9 +89,26 @@ public struct InformationView: View {
 		}
 		//코멘트 작성 Modal Sheet
 		.sheet(isPresented: $viewModel.showCommentSheet, content: {
-			CommentEditSheet(isPresented: $viewModel.showCommentSheet, myComment: $viewModel.myReaction.comment, saveCompletion: { text in
-				print(text)
-			})
+			if let comment = viewModel.myReaction.comment {
+				// 코멘트 수정
+				CommentEditSheet(
+					state: .update,
+					isPresented: $viewModel.showCommentSheet,
+					comment: comment, 
+					saveCompletion: { myComment in
+					viewModel.updateComment(myComment: myComment)
+				})
+			} else {
+				// 코멘트 추가
+				CommentEditSheet(
+					state: .insert,
+					isPresented: $viewModel.showCommentSheet,
+					comment: MyComment(),
+					saveCompletion: { myComment in
+					viewModel.insertComment(myComment: myComment)
+				})
+			}
+			
 		})
 		.alert(isPresented: $viewModel.showDeleteAlert) {
 			Alert(title: Text("코멘트 삭제"), message: Text("코멘트를 삭제하시겠어요?"),
