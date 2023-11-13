@@ -11,8 +11,8 @@ import Core
 
 // 찜 뷰
 public struct BookmarkView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
+    
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {

@@ -11,7 +11,6 @@ import Core
 
 // 좋았어요 뷰
 public struct LikeView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)

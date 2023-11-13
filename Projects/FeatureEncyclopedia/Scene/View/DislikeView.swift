@@ -11,8 +11,8 @@ import Core
 
 // 아쉬워요 뷰
 public struct DislikeView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
+    
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {

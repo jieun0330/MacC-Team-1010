@@ -20,7 +20,6 @@ enum EncyclopediaType {
 
 // 전체 뷰
 struct AllView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)

@@ -11,8 +11,9 @@ import Core
 
 public struct EncyclopediaView: View {
     
-    @StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
     @State var index = 0
+    @StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
+    
     private let titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
     
     public init() { }
