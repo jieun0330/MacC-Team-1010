@@ -41,11 +41,16 @@ public struct CommentEditSheet: View {
 				VStack {
 					headerView()
 						.padding(.top, 15)
-					TextField("막걸리에 대한 생각을 자유롭게 적어주세요.",  text: $comment.contents)
-							.font(.style(.SF17R))
-							.foregroundColor(.W25)
-							.padding(.horizontal, 16)
-							.frame(minHeight: 0, maxHeight: .infinity)
+					TextField("",  text: $comment.contents)
+						.placeholder(when: comment.contents.isEmpty) {
+							Text("막걸리에 대한 생각을 자유롭게 적어주세요.")
+								.font(.style(.SF17R))
+								.foregroundColor(.W25)
+						}
+						.font(.style(.SF17R))
+						.foregroundColor(.W85)
+						.padding(.horizontal, 16)
+						.frame(minHeight: 0, maxHeight: .infinity)
 					Spacer()
 				}
 				
