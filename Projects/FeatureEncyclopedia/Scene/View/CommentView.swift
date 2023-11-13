@@ -11,12 +11,14 @@ import Core
 
 // 코멘트 뷰
 public struct CommentView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
     @State private var showActionSheet = false
     @State private var showModal = false
     @State private var showingAlert = false
+    @State var targetMak: GetUserMakFolderContent? = nil
+    
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         ScrollView {
@@ -46,8 +48,11 @@ public struct CommentView: View {
                                         .SF14R()
                                     Image(uiImage: .designSystem(.like)!)
                                         .padding(.leading, 4)
+                                    Spacer()
                                     
-                                    Image(uiImage: .designSystem(.lock)!)
+                                    if mak.cmVisibility! == "N" {
+                                        Image(uiImage: .designSystem(.lock)!)
+                                    }
                                 }
                                 
                                 Spacer()
@@ -74,9 +79,11 @@ public struct CommentView: View {
                                     }
                                     .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
                                         Button("수정하기") {
+                                            self.targetMak = mak
                                             showModal = true
                                         }
                                         Button("삭제하기", role: .destructive) {
+                                            self.targetMak = mak
                                             showingAlert = true
                                         }
                                         Button("취소하기", role: .cancel) { }
@@ -91,12 +98,11 @@ public struct CommentView: View {
             }
         }
         .sheet(isPresented: $showModal) {
-            ForEach(viewModel.makModel.filter { $0.reactionComment != nil }, id: \.self) { mak in
-                CommentEditView(showModal: $showModal,
-                                initialComment: mak.reactionComment!,
-                                viewModel: viewModel,
-                                mak: mak)
-            }
+            CommentEditView(showModal: $showModal,
+                            initialComment: targetMak!.reactionComment!,
+                            viewModel: viewModel,
+                            mak: targetMak!,
+                            isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("코멘트 삭제"),
@@ -105,7 +111,10 @@ public struct CommentView: View {
                     Text("취소")
                   ),
                   secondaryButton: .destructive(
-                    Text("삭제하기")
+                    Text("삭제하기"),
+                    action: {
+                        viewModel.deleteComment(makSeq: targetMak!.makSeq!)
+                    }
                   )
             )
         }
