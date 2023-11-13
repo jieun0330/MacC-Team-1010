@@ -97,11 +97,16 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	// Comment Visibe 변경
+	@MainActor 
 	func toggleCommentVisible() {
 		
 		self.myReaction.comment?.isVisible.toggle()
 		
 		// Comment Visible 업데이트 API 연결
+		guard let comment = myReaction.comment else {
+			return
+		}
+		self.updateComment(content: comment.contents, isVisible: comment.isVisible)
 	}
 	
 	func likeButtonTapped() {
@@ -197,10 +202,11 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func updateComment() {
+	func updateComment(content: String, isVisible: Bool) {
 		Task {
 			do {
-				let response = try await userRepo.deleteComment(DeleteCommentRequest(userId: self.userId, makNumber: makHolyId))
+				let response = try await userRepo.updateComment(
+					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: content, isVisible: isVisible))
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
