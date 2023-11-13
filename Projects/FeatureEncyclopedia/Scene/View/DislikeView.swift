@@ -13,14 +13,13 @@ import Core
 public struct DislikeView: View {
     
     @ObservedObject var viewModel: EncyclopediaViewModel
-    
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         
         ScrollView {
             HStack {
-                Text("\((viewModel.makModel.filter {$0.reactionLike == "DISLIKE"}).count )개의 막걸리가 아쉬워요")
+                Text("\((viewModel.makModel.filter { $0.reactionLike == "DISLIKE" }).count)개의 막걸리가 아쉬워요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()

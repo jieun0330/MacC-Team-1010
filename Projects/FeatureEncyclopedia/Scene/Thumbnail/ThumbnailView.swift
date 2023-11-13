@@ -28,7 +28,7 @@ public struct ThumbnailView: View {
                 VStack {
                     MakHolyImageView(imageId: mak.makImg!, type: .middle)
                     
-                    Text(mak.makNm!)
+                    Text(mak.makNm ?? "")
                         .SF12R()
                         .foregroundColor(.White)
                         .lineLimit(1)

@@ -31,7 +31,7 @@ struct AllView: View {
         
         ScrollView(showsIndicators: false) {
             HStack {
-                Text("\(viewModel.makModel.count)개 중 \((viewModel.makModel.filter { $0.reactionLike == "LIKE" } + viewModel.makModel.filter { $0.reactionLike == "DISLIKE" }).count )개를 마셔봤어요!")
+                Text("\(viewModel.makModel.count)개 중 \((viewModel.makModel.filter { $0.reactionLike == "LIKE" } + viewModel.makModel.filter { $0.reactionLike == "DISLIKE" }).count)개를 마셔봤어요!")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()

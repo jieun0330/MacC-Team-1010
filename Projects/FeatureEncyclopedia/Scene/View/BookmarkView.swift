@@ -13,14 +13,13 @@ import Core
 public struct BookmarkView: View {
     
     @ObservedObject var viewModel: EncyclopediaViewModel
-    
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         
         ScrollView {
             HStack {
-                Text("\((viewModel.makModel.filter {$0.reactionWish == "WISH"}).count )개의 막걸리를 찜했어요")
+                Text("\((viewModel.makModel.filter { $0.reactionWish == "WISH" }).count)개의 막걸리를 찜했어요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()

@@ -11,6 +11,7 @@ import Core
 
 // 좋았어요 뷰
 public struct LikeView: View {
+    
     @ObservedObject var viewModel: EncyclopediaViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
@@ -18,7 +19,7 @@ public struct LikeView: View {
         
         ScrollView {
             HStack {
-                Text("\((viewModel.makModel.filter {$0.reactionLike == "LIKE"}).count )개의 막걸리가 좋았어요")
+                Text("\((viewModel.makModel.filter { $0.reactionLike == "LIKE" }).count)개의 막걸리가 좋았어요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()

@@ -11,10 +11,9 @@ import Core
 
 // 코멘트 뷰
 public struct CommentView: View {
+    
     @ObservedObject var viewModel: EncyclopediaViewModel
-    
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    
     @State private var showActionSheet = false
     @State private var showModal = false
     @State private var showingAlert = false
@@ -23,8 +22,7 @@ public struct CommentView: View {
         ScrollView {
             VStack {
                 HStack {
-                    
-                    Text("\((viewModel.makModel.filter {$0.reactionComment != nil}).count )개의 막걸리에 코멘트를 남겼어요")
+                    Text("\((viewModel.makModel.filter { $0.reactionComment != nil }).count)개의 막걸리에 코멘트를 남겼어요")
                         .SF12R()
                         .foregroundColor(.W50)
                     Spacer()
@@ -43,18 +41,18 @@ public struct CommentView: View {
                                 )
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text(mak.makNm!)
+                                    Text(mak.makNm ?? "")
                                         .foregroundColor(.White)
                                         .SF14R()
                                     Image(uiImage: .designSystem(.like)!)
                                         .padding(.leading, 4)
-                                    Spacer()
+                                    
                                     Image(uiImage: .designSystem(.lock)!)
                                 }
                                 
                                 Spacer()
                                 
-                                Text(mak.reactionComment!)
+                                Text(mak.reactionComment ?? "")
                                     .SF14R()
                                     .lineLimit(2)
                                     .foregroundColor(.W85)
@@ -62,7 +60,7 @@ public struct CommentView: View {
                                 Spacer()
                                 
                                 HStack {
-                                    Text(mak.reactionCommentDate!)
+                                    Text(mak.reactionCommentDate ?? "")
                                         .SF14R()
                                         .foregroundColor(.W25)
                                     
@@ -75,15 +73,12 @@ public struct CommentView: View {
                                             .SF12R()
                                     }
                                     .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
-                                        
                                         Button("수정하기") {
                                             showModal = true
                                         }
-                                        
                                         Button("삭제하기", role: .destructive) {
                                             showingAlert = true
                                         }
-                                        
                                         Button("취소하기", role: .cancel) { }
                                     }
                                 }
@@ -95,12 +90,13 @@ public struct CommentView: View {
                 }
             }
         }
-        .onAppear {
-            UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
-                .tintColor = UIColor(named: "Primary")
-        }
         .sheet(isPresented: $showModal) {
-            CommentEditView(showModal: $showModal)
+            ForEach(viewModel.makModel.filter { $0.reactionComment != nil }, id: \.self) { mak in
+                CommentEditView(showModal: $showModal,
+                                initialComment: mak.reactionComment!,
+                                viewModel: viewModel,
+                                mak: mak)
+            }
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("코멘트 삭제"),
