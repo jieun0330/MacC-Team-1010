@@ -14,7 +14,8 @@ struct SearchHistoryView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	
 	var body: some View {
-		if UserDefaults.standard.array(forKey: "searchHistorys")!.isEmpty {
+		if UserDefaults.standard.array(forKey: "searchHistorys") == nil ||
+			UserDefaults.standard.array(forKey: "searchHistorys")!.isEmpty {
 			VStack(spacing: 20) {
 				Text("막걸리 이름으로 검색해보세요!")
 					.SF17R()
