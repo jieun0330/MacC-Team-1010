@@ -34,9 +34,6 @@ struct InfoLikeCommentView: View {
 					viewModel.showDetailCommentListSheet = true
 				}
 			}
-			.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {
-				InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
-			})
 			
 			InfoLikePercentageView(likeDetail: viewModel.likeDetail)
 				.padding(.bottom, 20)
