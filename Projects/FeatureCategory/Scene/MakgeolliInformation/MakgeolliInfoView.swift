@@ -48,19 +48,21 @@ struct MakgeolliInfoView: View {
 				.padding(.vertical, 16)
 				
 				LazyVGrid(columns: columns) {
-					ForEach(viewModel.makHolys, id: \.self) { data in
+					ForEach(type == .event ? MakContent.mockDatas : viewModel.makHolys, id: \.self) { data in
 						MakgeolliInfoSingleView(makHoly: data)
 							.padding(.horizontal, 8)
 							.padding(.bottom, 30)
 							.onAppear {
-								if data == viewModel.makHolys.last {
-									if !viewModel.isLastPage {
-										var offset = viewModel.currentOffset
-										offset += 1
-										withAnimation {
-											viewModel.nextFetchCategoryMakgeolli(sort: nil,
-																				 offset: offset,
-																				 categories: targetTitle)
+								if type != .event {
+									if data == viewModel.makHolys.last {
+										if !viewModel.isLastPage {
+											var offset = viewModel.currentOffset
+											offset += 1
+											withAnimation {
+												viewModel.nextFetchCategoryMakgeolli(sort: nil,
+																					 offset: offset,
+																					 categories: targetTitle)
+											}
 										}
 									}
 								}

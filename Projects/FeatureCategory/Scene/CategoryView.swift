@@ -47,13 +47,20 @@ public struct CategoryView: View {
 					.padding(.leading, 16)
 					.padding(.bottom, 10)
 				}
-				if viewModel.fetchLoading {
-					ProgressView()
-						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-						.foregroundColor(Color(uiColor: .designSystem(.white)!))
-				} else {
+				
+				switch type {
+				case .event:
 					MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
 						.padding(.horizontal, 8)
+				default:
+					if viewModel.fetchLoading {
+						ProgressView()
+							.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+							.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					} else {
+						MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
+							.padding(.horizontal, 8)
+					}
 				}
 			}
 			.background(Color(uiColor: .designSystem(.darkbase)!))
@@ -63,7 +70,7 @@ public struct CategoryView: View {
 			.navigationBarItems(leading: CustomBackButton())
 			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 			.onAppear {
-				if viewModel.fetchLoading {
+				if viewModel.fetchLoading && type != .event {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
 				}
 			}
