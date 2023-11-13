@@ -36,9 +36,6 @@ public struct InformationView: View {
 					InformationCardView(viewModel: viewModel)
 				}
 				InformationDetailView(viewModel: viewModel)
-					.onTapGesture {
-						viewModel.showActionSheet.toggle()
-					}
 			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
