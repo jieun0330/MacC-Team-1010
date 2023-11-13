@@ -30,6 +30,7 @@ final class InformationViewModel: ObservableObject {
 	
 	@Published var showActionSheet: Bool = false
 	@Published var showCommentSheet: Bool = false
+	@Published var showDetailCommentListSheet: Bool = false
 	
 	@Published var commentText: String = ""
 	

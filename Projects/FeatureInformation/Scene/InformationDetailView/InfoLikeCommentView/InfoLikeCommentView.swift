@@ -20,13 +20,23 @@ struct InfoLikeCommentView: View {
 				Text("평가 및 코멘트")
 					.SF20B()
 					.foregroundColor(.White)
-				Image(systemName: "chevron.right")
-					.font(.system(size: 20, weight: .bold))
-					.foregroundColor(.White)
+				if viewModel.comments.count > 1 {
+					Image(systemName: "chevron.right")
+						.font(.system(size: 20, weight: .bold))
+						.foregroundColor(.White)
+				}
 				Spacer()
 			}
 			.padding(.vertical, 20)
 			.padding(.horizontal, 16)
+			.onTapGesture {
+				if viewModel.comments.count > 1 {
+					viewModel.showDetailCommentListSheet = true
+				}
+			}
+			.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {
+				InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
+			})
 			
 			InfoLikePercentageView(likeDetail: viewModel.likeDetail)
 				.padding(.bottom, 20)

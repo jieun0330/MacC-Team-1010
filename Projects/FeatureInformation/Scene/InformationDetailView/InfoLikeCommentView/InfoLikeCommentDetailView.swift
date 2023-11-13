@@ -12,11 +12,7 @@ import Core
 struct InfoLikeCommentDetailView: View {
 	@Binding public var isPresented: Bool
 	
-	let comments: [VisibleComment] = [
-		VisibleComment(userName: "나", isLiked: .like, content: "와 즁말 맛있다", date: "10월 28일"),
-		VisibleComment(userName: "너", isLiked: .dislike, content: "와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어", date: "10월 28일"),
-		VisibleComment(userName: "이이이이이이이이름", isLiked: .dislike, content: "와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어 와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어 와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어 와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어 와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어 와 좀 길게 작성하고 싶은데 냉탕에 상어가 살거라 믿었어", date: "10월 28일")
-	]
+	let comments: [VisibleComment]
 	let makHolyName: String
     var body: some View {
 		VStack {
