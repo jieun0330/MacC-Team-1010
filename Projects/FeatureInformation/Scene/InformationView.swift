@@ -41,10 +41,10 @@ public struct InformationView: View {
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)
 		.toolbar{
-			ToolbarItem(placement: .topBarLeading) {
+			ToolbarItem(placement: .navigationBarLeading) {
 				InfoBackButton()
 			}
-			ToolbarItem(placement: .topBarTrailing) {
+			ToolbarItem(placement: .navigationBarTrailing) {
 				InfoBookMarkButton(viewModel: viewModel)
 			}
 		}
