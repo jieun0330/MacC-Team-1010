@@ -15,24 +15,38 @@ struct InfoLikeCommentDetailView: View {
 	let comments: [VisibleComment]
 	let makHolyName: String
     var body: some View {
-		VStack {
-			// Header
-			headerView()
-				.padding(.top, 15)
-			// 내용 ListView
-			ScrollView(showsIndicators: false) {
-				VStack(spacing: 0) {
-					HStack {
-						Text("\(comments.count)개의 코멘트가 있어요")
-						Spacer()
-					}
-					ForEach(comments) { comment in
-						reactionSingleView(comment: comment)
-					}
-				}
-				.padding(.horizontal, 16)
-			}
+		
+		ZStack {
 			
+			Color.DarkGrey.ignoresSafeArea()
+			
+			VStack {
+				// Header
+				headerView()
+					.padding(.top, 15)
+				// 내용 ListView
+				ScrollView(showsIndicators: false) {
+					VStack(spacing: 0) {
+						HStack {
+							Text("\(comments.count)개의 코멘트가 있어요")
+								.SF12R()
+								.foregroundColor(.W50)
+							Spacer()
+						}
+						.padding(.top, 16)
+						.padding(.bottom, 6)
+						ForEach(comments) { comment in
+							reactionSingleView(comment: comment)
+								.padding(.vertical, 10)
+							if comment != comments.last {
+								Divider()
+							}
+						}
+					}
+					.padding(.horizontal, 16)
+				}
+				
+			}
 		}
     }
 }
@@ -97,7 +111,7 @@ extension InfoLikeCommentDetailView {
 				
 				Spacer()
 				
-				Text(makHolyName)
+				Text(comment.userName)
 					.SF14R()
 					.foregroundColor(.W25)
 			}
