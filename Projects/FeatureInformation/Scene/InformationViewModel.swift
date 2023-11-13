@@ -82,7 +82,7 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 1)
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: self.makHolyId)
 				self.likeDetail = result.0
 				self.comments = result.1
 				print("fetchReactions Completed : -------")
@@ -185,9 +185,22 @@ final class InformationViewModel: ObservableObject {
 	func deleteComment() {
 		Task {
 			do {
-//				let commentId = makHoly.myReaction.comment?.id
-				let commentId = "541f0386-6d73-4200-b00a-64f9c624f4e0"
-				let response = try await userRepo.deleteComment(DeleteCommentRequest(commentId: commentId))
+				let response = try await userRepo.deleteComment(DeleteCommentRequest(userId: self.userId, makNumber: self.makHolyId))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+				self.myReaction.comment = nil
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+			}
+		}
+	}
+	
+	@MainActor
+	func updateComment() {
+		Task {
+			do {
+				let response = try await userRepo.deleteComment(DeleteCommentRequest(userId: self.userId, makNumber: makHolyId))
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
