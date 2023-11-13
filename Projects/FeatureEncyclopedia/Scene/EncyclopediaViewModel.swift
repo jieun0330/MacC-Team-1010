@@ -11,10 +11,9 @@ import Core
 import Utils
 
 final class EncyclopediaViewModel: ObservableObject {
+    
     @Published var makModel: [GetUserMakFolderContent] = []
-    
-    var fetchLoading = false
-    
+    var fetchLoading = false    
     let userRepository: DefaultUserRepository
     
     init(userRepository: DefaultUserRepository) {
@@ -27,15 +26,35 @@ final class EncyclopediaViewModel: ObservableObject {
         Task {
             do {
                 let response = try await self.userRepository.getUserMakFolder(GetUserMakFolderRequest(userId: 1578568449))
+                print("getUserMakFolder response \(response)")
                 
                 if let content = response.result?.makUserTable?.content {
                     makModel = content
                 } else {
                     makModel = []
                 }
-                                
                 fetchLoading = true
             } catch {
+                Logger.debug(error: error, message: "")
+            }
+        }
+    }
+    
+    @MainActor
+    func updateComment(makSeq: Int, contents: String, isVisible: String) {
+        Task { // 비동기처리
+            do {
+                // do -> 여기서 통신
+                let response = try await self.userRepository.updateComment(UpdateCommentRequest(userId: 1578568449,
+                                                                                                makNumber: makSeq,
+                                                                                                contents: contents,
+                                                                                                isVisible: isVisible))
+                if response.status == 200 {
+                    self.getUserMakFolder()
+                }
+                
+            } catch {
+                // error 처리
                 Logger.debug(error: error, message: "")
             }
         }
