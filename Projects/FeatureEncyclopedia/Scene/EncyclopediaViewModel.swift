@@ -11,8 +11,8 @@ import Core
 import Utils
 
 final class EncyclopediaViewModel: ObservableObject {
-    
     @Published var makModel: [GetUserMakFolderContent] = []
+    
     var fetchLoading = false    
     let userRepository: DefaultUserRepository
     
@@ -59,4 +59,23 @@ final class EncyclopediaViewModel: ObservableObject {
             }
         }
     }
+    
+    @MainActor
+    func deleteComment(makSeq: Int) {
+        Task { // 비동기처리
+            do {
+                // do -> 여기서 통신
+                let response = try await self.userRepository.deleteComment(DeleteCommentRequest(userId: 1578568449,
+                                                                                                makNumber: makSeq))
+                if response.status == 200 {
+                    self.getUserMakFolder()
+                }
+                
+            } catch {
+                // error 처리
+                Logger.debug(error: error, message: "")
+            }
+        }
+    }
+    
 }

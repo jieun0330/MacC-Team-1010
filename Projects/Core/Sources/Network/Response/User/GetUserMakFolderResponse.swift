@@ -38,6 +38,7 @@ public struct GetUserMakFolderContent: Hashable, Codable {
     public let reactionLikeDate: String?
     public let reactionWishDate: String?
     public let reactionCommentDate: String?
+    public let cmVisibility: String?
 }
 
 public struct Pageable: Codable {

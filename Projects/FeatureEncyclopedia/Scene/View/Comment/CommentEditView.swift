@@ -10,26 +10,33 @@ import SwiftUI
 import Core
 
 struct CommentEditView: View {
-    
     @ObservedObject var viewModel: EncyclopediaViewModel
-    var mak: GetUserMakFolderContent
+    
     @Environment(\.presentationMode) var presentation
-    @Binding var showModal: Bool
-    @State var isSecretSelected: Bool = false
-    var initialComment: String
+    
+    @State var isSecretSelected: Bool
     @State private var commentBox: String
     @FocusState private var focusField: Field?
+    @Binding var showModal: Bool
+    
+    var mak: GetUserMakFolderContent
+    var initialComment: String
     
     enum Field: Hashable {
         case text
     }
     
-    init(showModal: Binding<Bool>, initialComment: String, viewModel: EncyclopediaViewModel, mak: GetUserMakFolderContent) {
+    init(showModal: Binding<Bool>,
+         initialComment: String,
+         viewModel: EncyclopediaViewModel,
+         mak: GetUserMakFolderContent,
+         isSecretSelected: Bool) {
         _showModal = showModal
         self.initialComment = initialComment
         self._commentBox = State(initialValue: initialComment)
         self.viewModel = viewModel
         self.mak = mak
+        self._isSecretSelected = State(initialValue: isSecretSelected)
     }
     
     var body: some View {

@@ -37,11 +37,11 @@ public struct UpdateCommentRequest: Codable {
 }
 
 public struct DeleteCommentRequest: Codable {
-    public let commentId: String
-    public let isUserDeleteComment: String
-    
-    public init(commentId: String, isUserDeleteComment: String) {
-        self.commentId = commentId
-        self.isUserDeleteComment = isUserDeleteComment
+    public let userId: Int
+    public let makNumber: Int
+
+    public init(userId:Int, makNumber: Int) {
+        self.userId = userId
+        self.makNumber = makNumber
     }
 }
