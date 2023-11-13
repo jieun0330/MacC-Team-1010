@@ -125,7 +125,7 @@ public struct MainDetail: Codable {
 	public var toEntity: BasicInfo {
 		let adv = makAlcoholPercentage ?? -1.0
 		let volume = makVolume ?? -1
-		let price = makVolume ?? -1
+		let price = makPrice ?? -1
 		return BasicInfo(adv: adv, volume: volume, price: price)
 	}
 }
