@@ -9,19 +9,39 @@
 import Foundation
 
 public struct InsertCommentRequest: Codable {
-	let userId: String
-	let makNumber: Int
-	let contents: String
-	let isVisible: String
+    public let userId: String
+    public let makNumber: Int
+    public let contents: String
+    public let isVisible: String
+    
+    public init(userId: String, makNumber: Int, contents: String, isVisible: String) {
+        self.userId = userId
+        self.makNumber = makNumber
+        self.contents = contents
+        self.isVisible = isVisible
+    }
 }
 
 public struct UpdateCommentRequest: Codable {
-	let commentId: String
-	let contents: String
-	let isVisible: String
+    public let userId: Int
+    public let makNumber: Int
+    public let contents: String
+    public let isVisible: String
+    
+    public init(userId: Int, makNumber: Int, contents: String, isVisible: String) {
+        self.userId = userId
+        self.makNumber = makNumber
+        self.contents = contents
+        self.isVisible = isVisible
+    }
 }
 
 public struct DeleteCommentRequest: Codable {
-	let commentId: String
-	let isUserDeleteComment: String
+    public let userId: Int
+    public let makNumber: Int
+
+    public init(userId:Int, makNumber: Int) {
+        self.userId = userId
+        self.makNumber = makNumber
+    }
 }

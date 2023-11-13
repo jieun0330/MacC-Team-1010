@@ -7,55 +7,85 @@
 //
 
 import SwiftUI
+import Core
 
 struct CommentEditView: View {
+    @ObservedObject var viewModel: EncyclopediaViewModel
     
     @Environment(\.presentationMode) var presentation
+    
+    @State var isSecretSelected: Bool
+    @State private var commentBox: String
+    @FocusState private var focusField: Field?
     @Binding var showModal: Bool
-    @State private var commentBox: String = ""
-    @State private var isSelected: Bool = false
+    
+    var mak: GetUserMakFolderContent
+    var initialComment: String
+    
+    enum Field: Hashable {
+        case text
+    }
+    
+    init(showModal: Binding<Bool>,
+         initialComment: String,
+         viewModel: EncyclopediaViewModel,
+         mak: GetUserMakFolderContent,
+         isSecretSelected: Bool) {
+        _showModal = showModal
+        self.initialComment = initialComment
+        self._commentBox = State(initialValue: initialComment)
+        self.viewModel = viewModel
+        self.mak = mak
+        self._isSecretSelected = State(initialValue: isSecretSelected)
+    }
     
     var body: some View {
         
-        NavigationStack {
-            VStack {
-                TextField("막걸리에 대한 생각을 자유롭게 적어주세요.", text: $commentBox)
-                    .frame(height: 300)
-                    .padding()
-                Spacer()
-                Divider()
-                HStack {
-                    Spacer()
-                    Text("비공개")
-                        .SF14R()
-                        .foregroundColor(.W50)
-                    
-                    Button {
-                        self.isSelected.toggle()
-                    } label: {
-                        isSelected ? Image(uiImage: .designSystem(.isSelectedTrue)!) : Image(uiImage: .designSystem(.isSelectedFalse)!)
-                        
-                    }
+        HStack {
+            Button(action: {
+                showModal = false }) {
+                    Text("취소").SF17B()
                 }
-                .padding()
-                Spacer()
+                .accentColor(.Primary)
+            Spacer()
+            Text("코멘트 수정")
+                .SF17B()
+            Spacer()
+            Button(action: {
+                viewModel.updateComment(makSeq: mak.makSeq!, contents: commentBox, isVisible: isSecretSelected ? "N" : "Y")
+                showModal = false
+            }) {
+                Text("저장").SF17B()
             }
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("취소", role: .cancel) {
-                        showModal = false
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("코멘트 수정")
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button("저장") {
-                        showModal = false
-                    }
-                }
-            }
+            .accentColor(.Primary)
         }
-        .accentColor(.Primary)
+        .padding()
+        
+        VStack {
+            Section {
+                TextField("막걸리에 대한 생각을 자유롭게 적어주세요.", text: $commentBox, axis: .vertical)
+                    .padding()
+                    .focused($focusField, equals: .text)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        focusField = .text
+                    }
+            }
+            Spacer()
+            Divider()
+            HStack {
+                Spacer()
+                Text("비공개")
+                    .SF14R()
+                    .foregroundColor(.W50)
+                Button {
+                    self.isSecretSelected.toggle()
+                } label: {
+                    isSecretSelected ? Image(uiImage: .designSystem(.isSelectedTrue)!) : Image(uiImage: .designSystem(.isSelectedFalse)!)
+                }
+            }
+            .padding()
+            Spacer()
+        }
     }
 }

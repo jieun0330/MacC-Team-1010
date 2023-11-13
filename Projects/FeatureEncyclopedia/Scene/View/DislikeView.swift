@@ -11,15 +11,15 @@ import Core
 
 // 아쉬워요 뷰
 public struct DislikeView: View {
+    @ObservedObject var viewModel: EncyclopediaViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         
         ScrollView {
-            
             HStack {
-                Text("\((User.user1.dislikes).count)개의 막걸리가 아쉬워요")
+                Text("\((viewModel.makModel.filter { $0.reactionLike == "DISLIKE" }).count)개의 막걸리가 아쉬워요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -29,8 +29,10 @@ public struct DislikeView: View {
             
             LazyVGrid(columns: columns, spacing: 16, content: {
                 
-                ForEach(User.user1.dislikes, id: \.self) { makId in
-                    ThumbnailView(makId: makId, type: .dislike)
+                ForEach(viewModel.makModel, id: \.self) { mak in
+                    if mak.reactionLike == "DISLIKE" {
+                        ThumbnailView(mak: mak, type: .dislike)
+                    }
                 }
             })
         }

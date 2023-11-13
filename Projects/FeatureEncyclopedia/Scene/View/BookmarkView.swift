@@ -11,6 +11,7 @@ import Core
 
 // 찜 뷰
 public struct BookmarkView: View {
+    @ObservedObject var viewModel: EncyclopediaViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
@@ -18,7 +19,7 @@ public struct BookmarkView: View {
         
         ScrollView {
             HStack {
-                Text("\((User.user1.bookmarks).count)개의 막걸리를 찜했어요")
+                Text("\((viewModel.makModel.filter { $0.reactionWish == "WISH" }).count)개의 막걸리를 찜했어요")
                     .SF12R()
                     .foregroundColor(.W50)
                 Spacer()
@@ -28,8 +29,11 @@ public struct BookmarkView: View {
             
             LazyVGrid(columns: columns, spacing: 16, content: {
                 
-                ForEach(User.user1.bookmarks, id: \.self) { makId in
-                    ThumbnailView(makId: makId, type: .bookmark)
+                ForEach(viewModel.makModel, id: \.self) { mak in
+                    
+                    if mak.reactionWish == "WISH" {
+                        ThumbnailView(mak: mak, type: .bookmark)
+                    }
                 }
             })
         }

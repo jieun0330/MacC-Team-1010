@@ -9,30 +9,45 @@
 import Foundation
 
 public struct GetUserMakFolderResponse: Codable {
-	public let status: Int
-	public let resultMsg: String
-	public let result: GetUserMakFolderResult?
+    public let status: Int
+    public let resultMsg: String
+    public let result: GetUserMakFolderResult?
 }
 
 public struct GetUserMakFolderResult: Codable {
-	public let userId: String?
-	public let makInfo: [MakInfo]?
-	public let totalCounts: Int?
-	public let nextCursor: Int?
-	public let pageInfo: GetUserMakFolderResponsePageInfo?
+    public let userId: Int?
+    public let makUserTable: MakUserTable?
 }
 
-public struct MakInfo: Codable {
-	public let makNumber: Int?
-	public let makName: String?
-	public let makImage: String?
+public struct MakUserTable: Codable {
+    public let content: [GetUserMakFolderContent]?
+    public let pageable: Pageable?
+    public let totalPages, totalElements: Int?
+    public let last: Bool?
+    public let size, number: Int?
+    public let sort: Sort?
+    public let numberOfElements: Int?
+    public let first, empty: Bool?
 }
 
-public struct GetUserMakFolderResponsePageInfo: Codable {
-	public let currentPage: Int?
-	public let size: Int?
-	public let first: Bool?
-	public let last: Bool?
-	public let totalMakElements: Int?
-	public let totalPages: Int?
+public struct GetUserMakFolderContent: Hashable, Codable {
+    public let makSeq: Int?
+    public let makNm, makImg: String?
+    public let reactionLike, reactionWish: String?
+    public let reactionComment: String?
+    public let reactionLikeDate: String?
+    public let reactionWishDate: String?
+    public let reactionCommentDate: String?
+    public let cmVisibility: String?
+}
+
+public struct Pageable: Codable {
+    public let pageNumber, pageSize: Int?
+    public let sort: Sort?
+    public let offset: Int?
+    public let paged, unpaged: Bool?
+}
+
+public struct Sort: Codable {
+    public let empty, sorted, unsorted: Bool?
 }

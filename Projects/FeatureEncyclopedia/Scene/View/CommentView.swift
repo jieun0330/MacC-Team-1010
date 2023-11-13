@@ -11,23 +11,20 @@ import Core
 
 // 코멘트 뷰
 public struct CommentView: View {
-    
-    public init() {
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
-            .tintColor = UIColor(named: "Primary")
-    }
-    
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    @ObservedObject var viewModel: EncyclopediaViewModel
     
     @State private var showActionSheet = false
     @State private var showModal = false
     @State private var showingAlert = false
+    @State var targetMak: GetUserMakFolderContent? = nil
+    
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     public var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("\((User.user1.comments).count)개의 막걸리에 코멘트를 남겼어요")
+                    Text("\((viewModel.makModel.filter { $0.reactionComment != nil }).count)개의 막걸리에 코멘트를 남겼어요")
                         .SF12R()
                         .foregroundColor(.W50)
                     Spacer()
@@ -35,70 +32,77 @@ public struct CommentView: View {
                 .padding(.vertical, 10)
                 .padding(.leading, 5)
                 
-                ForEach(User.user1.comments, id: \.self) { makId in
-                    ForEach(Comment.mockDatas, id: \.self) { comment in
-                        if comment.makHolyId == makId {
-                            HStack {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .foregroundColor(.DarkGrey)
-                                    .frame(width: 60, height: 80)
-                                    .padding(.trailing, 16)
-                                VStack(alignment: .leading) {
+                ForEach(viewModel.makModel, id: \.self) { mak in
+                    if mak.reactionComment != nil {
+                        HStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundColor(.DarkGrey)
+                                .frame(width: 60, height: 80)
+                                .overlay(
+                                    MakHolyImageView(imageId: mak.makImg!, type: .mini)
+                                )
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text(mak.makNm ?? "")
+                                        .foregroundColor(.White)
+                                        .SF14R()
+                                    Image(uiImage: .designSystem(.like)!)
+                                        .padding(.leading, 4)
+                                    Spacer()
                                     
-                                    HStack {
-                                        Text(makId)
-                                            .SF14R()
-                                        Image(uiImage: .designSystem(.like)!)
-                                            .padding(.leading, 4)
-                                        Spacer()
+                                    if mak.cmVisibility! == "N" {
                                         Image(uiImage: .designSystem(.lock)!)
                                     }
-                                    
-                                    Spacer()
-                                    
-                                    Text(comment.description)
+                                }
+                                
+                                Spacer()
+                                
+                                Text(mak.reactionComment ?? "")
+                                    .SF14R()
+                                    .lineLimit(2)
+                                    .foregroundColor(.W85)
+                                
+                                Spacer()
+                                
+                                HStack {
+                                    Text(mak.reactionCommentDate ?? "")
                                         .SF14R()
-                                        .lineLimit(2)
-                                        .foregroundColor(.W85)
+                                        .foregroundColor(.W25)
                                     
                                     Spacer()
                                     
-                                    HStack {
-                                        Text(comment.date)
-                                            .SF14R()
-                                            .foregroundColor(.W25)
-                                        
-                                        Spacer()
-                                        
-                                        Button {
-                                            showActionSheet.toggle()
-                                        } label: {
-                                            Text("수정")
-                                                .SF12R()
+                                    Button {
+                                        showActionSheet.toggle()
+                                    } label: {
+                                        Text("수정")
+                                            .SF12R()
+                                    }
+                                    .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
+                                        Button("수정하기") {
+                                            self.targetMak = mak
+                                            showModal = true
                                         }
-                                        .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
-                                            
-                                            Button("수정하기") {
-                                                showModal = true
-                                            }
-                                            
-                                            Button("삭제하기", role: .destructive) {
-                                                showingAlert = true
-                                            }
-                                            
-                                            Button("취소하기", role: .cancel) { }
+                                        Button("삭제하기", role: .destructive) {
+                                            self.targetMak = mak
+                                            showingAlert = true
                                         }
+                                        Button("취소하기", role: .cancel) { }
                                     }
                                 }
                             }
-                            Divider()
                         }
+                        .padding(.horizontal)
+                        Divider()
                     }
                 }
             }
         }
         .sheet(isPresented: $showModal) {
-            CommentEditView(showModal: $showModal)
+            CommentEditView(showModal: $showModal,
+                            initialComment: targetMak!.reactionComment!,
+                            viewModel: viewModel,
+                            mak: targetMak!,
+                            isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("코멘트 삭제"),
@@ -107,7 +111,10 @@ public struct CommentView: View {
                     Text("취소")
                   ),
                   secondaryButton: .destructive(
-                    Text("삭제하기")
+                    Text("삭제하기"),
+                    action: {
+                        viewModel.deleteComment(makSeq: targetMak!.makSeq!)
+                    }
                   )
             )
         }
