@@ -54,6 +54,9 @@ public struct InformationView: View {
 		.actionSheet(isPresented: $viewModel.showActionSheet, content: {
 			ActionSheet(title: Text("Action Sheet title"))
 		})
+		.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {
+			InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
+		})
 	}
 }
 

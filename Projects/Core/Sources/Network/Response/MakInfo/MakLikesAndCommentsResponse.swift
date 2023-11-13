@@ -15,19 +15,31 @@ public struct MakLikesAndCommentsResponse: Codable {
 }
 
 public struct MakLikesAndCommentsResult: Codable {
-	public let makEvaluateInfo: MakEvaluateInfo?
-	public let comments: [VisibleCommentResponse]?
+	public let content: [MakLikeCommentContent]?
 	public let pageableInfo: PageableInfo?
 	
 	// TODO: pageableInfo 로직
 	public func toEntity() -> (LikeDetail, [VisibleComment]) {
-		let likeDetail = makEvaluateInfo?.toEntity ?? LikeDetail()
 		
+		if let content = content?[0] {
+			let result = content
+			return (result.toEntity())
+		}
+		
+		return (LikeDetail(), [])
+	}
+}
+
+public struct MakLikeCommentContent: Codable {
+	public let makEvaluateInfo: MakEvaluateInfo?
+	public let comments : [VisibleCommentResponse]?
+	
+	public func toEntity() -> (LikeDetail, [VisibleComment]) {
+		let likeDetail = makEvaluateInfo?.toEntity ?? LikeDetail()
 		var visibleComments: [VisibleComment] = []
 		if let comments = comments {
 			visibleComments = comments.compactMap { $0.toEntity }
 		}
-		
 		return (likeDetail, visibleComments)
 	}
 }
