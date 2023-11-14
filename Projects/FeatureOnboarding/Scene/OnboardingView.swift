@@ -52,9 +52,21 @@ public struct OnboardingView: View {
 					
 					Spacer()
 					
-					Text("이용약관과 개인정보처리방침에 동의하고 시작합니다.")
-						.SF12B()
-						.padding(.bottom, 16)
+					HStack(spacing: 0) {
+						Text("이용약관")
+							.foregroundColor(.Primary)
+							.SF12B()
+						Text("과 ")
+							.foregroundColor(.W50)
+							.SF12B()
+						Text("개인정보처리방침")
+							.foregroundColor(.Primary)
+							.SF12B()
+						Text("에 동의하고 시작합니다.")
+							.foregroundColor(.W50)
+							.SF12B()
+					}
+					.padding(.bottom, 16)
 					
 					NavigationLink {
 						CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
@@ -93,7 +105,7 @@ private extension OnboardingView {
 	@ViewBuilder
 	func MakeProfileView(name: Binding<String>) -> some View {
 		Spacer()
-			.frame(height: 64)
+			.frame(height: 100)
 		
 		HStack(spacing: 0) {
 			Text(name.wrappedValue)

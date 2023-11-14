@@ -68,7 +68,7 @@ struct CustomizationInfoView: View {
 						)
 						.frame(height: 50)
 						.overlay {
-							Text("입력완료")
+							Text("완료")
 								.foregroundColor(.white)
 								.SF17R()
 						}
@@ -114,7 +114,7 @@ private extension CustomizationInfoView {
 	@ViewBuilder
 	func MakeProfileView() -> some View {
 		Spacer()
-			.frame(height: 20)
+			.frame(height: 56)
 		
 		HStack(spacing: 0) {
 			Text(nickname)
@@ -132,6 +132,7 @@ private extension CustomizationInfoView {
 			.frame(height: 10)
 		
 		Text("더 나은 막걸리를 추천해드릴게요")
+			.foregroundColor(.W50)
 			.SF14R()
 	}
 	
@@ -143,7 +144,7 @@ private extension CustomizationInfoView {
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color(uiColor: .designSystem(sexType == .male
-													   ? .goldenyellow : .w10)!))
+													   ? .lilac : .w10)!))
 					.frame(height: 50)
 					.overlay {
 						Text("남성")
@@ -156,7 +157,7 @@ private extension CustomizationInfoView {
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color(uiColor: .designSystem(sexType == .female
-													   ? .goldenyellow : .w10)!))
+													   ? .lilac : .w10)!))
 					.frame(height: 50)
 					.overlay {
 						Text("여성")
@@ -169,7 +170,7 @@ private extension CustomizationInfoView {
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color(uiColor: .designSystem(sexType == .etc
-													   ? .goldenyellow : .w10)!))
+													   ? .lilac : .w10)!))
 					.frame(height: 50)
 					.overlay {
 						Text("기타")
