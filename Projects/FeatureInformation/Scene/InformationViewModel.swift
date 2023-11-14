@@ -17,7 +17,7 @@ final class InformationViewModel: ObservableObject {
 	let userRepo: DefaultUserRepository
 	
 	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
-		self.makHolyId = 1
+		self.makHolyId = makHolyId
 		self.maHolyRepo = maHolyRepo
 		self.userRepo = userRepo
 	}
