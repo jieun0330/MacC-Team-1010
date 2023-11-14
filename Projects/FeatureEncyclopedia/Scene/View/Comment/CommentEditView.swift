@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import Combine
 
 struct CommentEditView: View {
     @ObservedObject var viewModel: EncyclopediaViewModel
@@ -18,6 +19,8 @@ struct CommentEditView: View {
     @State private var commentBox: String
     @FocusState private var focusField: Field?
     @Binding var showModal: Bool
+    
+    let textLimit = 250
     
     var mak: GetUserMakFolderContent
     var initialComment: String
@@ -52,8 +55,15 @@ struct CommentEditView: View {
                 .SF17B()
             Spacer()
             Button(action: {
-                viewModel.updateComment(makSeq: mak.makSeq!, contents: commentBox, isVisible: isSecretSelected ? "N" : "Y")
-                showModal = false
+                
+                if commentBox.isEmpty {
+                    print("입력이 없어")
+                } else {
+                    viewModel.updateComment(makSeq: mak.makSeq!, contents: commentBox, isVisible: isSecretSelected ? "N" : "Y")
+                    showModal = false
+                }
+                
+
             }) {
                 Text("저장").SF17B()
             }
@@ -64,6 +74,7 @@ struct CommentEditView: View {
         VStack {
             Section {
                 TextField("막걸리에 대한 생각을 자유롭게 적어주세요.", text: $commentBox, axis: .vertical)
+                    .onReceive(Just(commentBox)) { _ in limitText(textLimit) }
                     .padding()
                     .focused($focusField, equals: .text)
                     .contentShape(Rectangle())
@@ -88,4 +99,11 @@ struct CommentEditView: View {
             Spacer()
         }
     }
+    
+    func limitText(_ upper: Int) {
+        if commentBox.count > upper {
+            commentBox = String(commentBox.prefix(upper))
+        }
+    }
+    
 }
