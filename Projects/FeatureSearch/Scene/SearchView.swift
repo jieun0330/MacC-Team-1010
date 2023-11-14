@@ -25,6 +25,7 @@ public struct SearchView: View {
 				)
 				.onChange(of: searchViewModel.searchText) { newValue in
 					searchViewModel.searchState = true
+					searchViewModel.fetchLoading = true
 				}
 				.onSubmit(of: .search) {
 					searchViewModel.searchState = false
