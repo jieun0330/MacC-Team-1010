@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 public struct CommentEditSheet: View {
 	
@@ -15,6 +16,7 @@ public struct CommentEditSheet: View {
 	@State public var comment: MyComment
 	
 	var state: CommentEditState
+	let textLimit = 250
 	
 	public typealias saveHandler = (MyComment) -> Void
 	public var saveCompletion: saveHandler
@@ -46,6 +48,7 @@ public struct CommentEditSheet: View {
 						.font(.style(.SF17R))
 						.foregroundColor(.W25)
 				}
+				.onReceive(Just(comment.contents)) { _ in limitText(textLimit) }
 				.frame(maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .topLeading)
 				.font(.style(.SF17R))
 				.foregroundColor(.W85)
@@ -55,6 +58,12 @@ public struct CommentEditSheet: View {
 				.padding(.bottom, keyboardHeight)
 			
 			Spacer()
+		}
+	}
+	
+	func limitText(_ upper: Int) {
+		if comment.contents.count > upper {
+			comment.contents = String(comment.contents.prefix(upper))
 		}
 	}
 }
