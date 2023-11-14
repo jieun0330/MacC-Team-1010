@@ -35,6 +35,11 @@ public struct SearchView: View {
 						whenContainedInInstancesOf: [UISearchBar.self]).title = "취소"
 					UISearchBar.appearance().tintColor = .designSystem(.primary)
 				}
+				.background(Color(uiColor: .designSystem(.darkbase)!))
+				.toolbarBackground(
+					Color.DarkBase,
+					for: .navigationBar
+				)
 		}
 	}
 }
