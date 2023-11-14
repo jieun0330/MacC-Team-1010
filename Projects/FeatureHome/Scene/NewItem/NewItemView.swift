@@ -14,7 +14,7 @@ struct NewItemView: View {
 	@ObservedObject var viewModel: HomeViewModel
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			NavigationLink {
 				CategoryView(type: .new, targetTitle: [])
 			} label: {
@@ -23,19 +23,24 @@ struct NewItemView: View {
 						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
-						.font(.system(size: 22, weight: .bold))
+						.font(.system(size: 20, weight: .bold))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
+				.padding(.leading, 16)
 			}
+			Spacer()
+				.frame(height: 20)
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 16) {
+					Spacer()
+						.frame(width: 16, height: 1)
+						.padding(.trailing, -16)
 					ForEach(viewModel.newItems.prefix(10), id: \.self) { item in
 						NewItemSingleView(item: item)
 					}
 				}
 			}
 		}
-		.padding(.leading, 16)
 	}
 }

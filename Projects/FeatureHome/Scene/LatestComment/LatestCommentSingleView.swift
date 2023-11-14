@@ -21,14 +21,15 @@ struct LatestCommentSingleView: View {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color(uiColor: .designSystem(.darkgrey)!))
 					.frame(width: 60, height: 80)
-					.padding(.trailing, 16)
 					.overlay {
 						MakHolyImageView(imageId: comment.makImageNumber ?? "-1", type: .mini)
 					}
+					.padding(.trailing, 16)
 				
 				VStack(alignment: .leading, spacing: 0) {
 					HStack(spacing: 0) {
 						Text(comment.makName ?? "")
+							.lineLimit(1)
 							.font(.style(.SF14R))
 							.foregroundColor(Color(uiColor: .designSystem(.white)!))
 						Image(uiImage: .designSystem(.like)!)
@@ -45,7 +46,7 @@ struct LatestCommentSingleView: View {
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 					Spacer()
-					Text(comment.commentInfo?.writeDate ?? "")
+					Text(comment.commentInfo?.writeDate?.extractDateFromISOString() ?? "")
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.w25)!))
 				}

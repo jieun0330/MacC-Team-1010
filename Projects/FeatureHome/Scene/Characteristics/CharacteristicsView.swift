@@ -22,15 +22,19 @@ struct CharacteristicsView: View {
 						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
-						.font(.system(size: 22, weight: .bold))
+						.font(.system(size: 20, weight: .bold))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
+				.padding(.leading, 16)
 			}
 			Spacer()
-				.frame(height: 16)
+				.frame(height: 20)
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack(spacing: 16) {
+					Spacer()
+						.frame(width: 16, height: 1)
+						.padding(.trailing, -16)
 					ForEach(CharacteristicsType.allCases, id: \.self) { characteristic in
 						NavigationLink {
 							CategoryView(type: .characteristics,
@@ -45,6 +49,5 @@ struct CharacteristicsView: View {
 				}
 			}
 		}
-		.padding(.leading, 16)
 	}
 }

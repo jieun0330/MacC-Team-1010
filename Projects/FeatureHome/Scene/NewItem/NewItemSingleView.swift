@@ -20,6 +20,7 @@ struct NewItemSingleView: View {
 			Rectangle()
 				.foregroundColor(.clear)
 				.frame(width: 110, height: 230)
+				.background(Color(uiColor: .designSystem(.darkgrey)!))
 				.cornerRadius(18)
 				.overlay(
 					RoundedRectangle(cornerRadius: 18)
@@ -44,6 +45,7 @@ struct NewItemSingleView: View {
 									.frame(height: 12)
 								
 								Text(item.makName!)
+									.foregroundColor(.White)
 									.font(.style(.SF12R))
 									.lineLimit(1)
 								

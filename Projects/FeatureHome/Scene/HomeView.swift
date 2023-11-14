@@ -38,19 +38,24 @@ public struct HomeView: View {
 						} label: {
 							Image(uiImage: .designSystem(.banner)!)
 								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.padding(.bottom, 20)
+								.aspectRatio(contentMode: .fit)
+								.padding(.bottom, 30)
 						}
 						
 						CharacteristicsView()
 						
-						DividerView(topPadding: 10, bottomPadding: 20)
+						Spacer()
+							.frame(height: 40)
 						
 						NewItemView(viewModel: viewModel)
 						
-						DividerView(topPadding: 10, bottomPadding: 20)
+						Spacer()
+							.frame(height: 40)
 						
 						LatestCommentView(viewModel: viewModel)
+						
+						Spacer()
+							.frame(height: 20)
 					}
 				}
 				.ignoresSafeArea(.all, edges: .top)

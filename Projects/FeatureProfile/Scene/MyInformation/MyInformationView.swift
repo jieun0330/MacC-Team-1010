@@ -25,14 +25,13 @@ struct MyInformationView: View {
 			.offset(y: global.minY > 0 ? -global.minY : 0)
 			.frame(
 				height: global.minY > 0 ?
-				(UIScreen.main.bounds.height/2.5) + global.minY
-				: UIScreen.main.bounds.height/2.5
+				(UIScreen.main.bounds.height/3.0) + global.minY
+				: UIScreen.main.bounds.height/3.0
 			)
 		}
-		.frame(height: UIScreen.main.bounds.height / 2.5)
+		.frame(height: UIScreen.main.bounds.height / 3.0)
 		.overlay {
 			VStack(spacing: 0) {
-				Spacer()
 				ProfileImageView()
 					.padding(.bottom, 24)
 				Text(UserDefaultsSetting.nickname)
@@ -42,24 +41,6 @@ struct MyInformationView: View {
 					.font(.style(.SF14R))
 					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 					.padding(.bottom, 24)
-				// 추후 추가
-				//				RoundedRectangle(cornerRadius: 12)
-				//					.fill(Color(uiColor: .designSystem(.w10)!))
-				//					.frame(height: 50)
-				//					.overlay {
-				//						Text("프로필 편집")
-				//							.font(.style(.SF17R))
-				//					}
-				Spacer()
-				HStack {
-					Text("데이터를 안전하게 관리")
-						.font(.style(.SF14R))
-					Spacer()
-					Text("데이터 저장/불러오기")
-						.font(.style(.SF12B))
-						.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-				}
-				.padding(.bottom, 16)
 			}
 			.onAppear {
 				print("ddd \(UserDefaultsSetting.profileImage)")

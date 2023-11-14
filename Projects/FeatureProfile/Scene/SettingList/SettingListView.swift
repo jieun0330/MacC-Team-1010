@@ -22,6 +22,7 @@ struct SettingListView: View {
 			.padding(.bottom, 14)
 			Divider()
 				.frame(height: 1)
+				.padding(.bottom, 14)
 		}
 		.padding(.top, 16)
 		.padding(.horizontal, 16)
@@ -37,6 +38,7 @@ struct SettingListView: View {
 			.padding(.bottom, 14)
 			Divider()
 				.frame(height: 1)
+				.padding(.bottom, 14)
 		}
 		.padding(.horizontal, 16)
 		
@@ -51,6 +53,7 @@ struct SettingListView: View {
 			.padding(.bottom, 14)
 			Divider()
 				.frame(height: 1)
+				.padding(.bottom, 14)
 		}
 		.padding(.horizontal, 16)
 		
@@ -65,6 +68,7 @@ struct SettingListView: View {
 			.padding(.bottom, 14)
 			Divider()
 				.frame(height: 1)
+				.padding(.bottom, 14)
 		}
 		.padding(.horizontal, 16)
 		
@@ -77,15 +81,6 @@ struct SettingListView: View {
 					.font(.style(.SF12B))
 			}
 		}
-		.padding(.horizontal, 16)
-		
-		HStack {
-			Text("탈퇴하기")
-				.font(.style(.SF12B))
-				.foregroundColor(Color(uiColor: .designSystem(.alert)!))
-			Spacer()
-		}
-		.padding(.top, 30)
 		.padding(.horizontal, 16)
 	}
 }
