@@ -21,8 +21,8 @@ struct InfoImageView: View {
 						.fill(
 							LinearGradient(
 								stops: [
-									Gradient.Stop(color: .NightSkyTop, location: 0.00),
-									Gradient.Stop(color: .NightSkyBottom, location: 1.00),
+									Gradient.Stop(color: .CircleTop, location: 0.00),
+									Gradient.Stop(color: .CircleBottom, location: 1.00),
 								],
 								startPoint: UnitPoint(x: 0.45, y: 0),
 								endPoint: UnitPoint(x: 0.45, y: 1)
@@ -36,6 +36,7 @@ struct InfoImageView: View {
 					MakHolyImageView(imageId: imageId, type: .large)
 				}
 			}
+			.frame(height: 282)
 		}
 	}
 }
