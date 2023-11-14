@@ -207,13 +207,20 @@ final class InformationViewModel: ObservableObject {
 	func updateComment(myComment: MyComment) {
 		Task {
 			do {
+				// insert comment
 				let response = try await userRepo.updateComment(
-					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+					UpdateCommentRequest(
+						userId: self.userId,
+						makNumber: self.makHolyId,
+						contents: myComment.contents,
+						isVisible: myComment.isVisible))
+				
+				// fetch updated comment
+				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+				self.myReaction = result.1
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = myComment
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
@@ -224,12 +231,15 @@ final class InformationViewModel: ObservableObject {
 	func insertComment(myComment: MyComment) {
 		Task {
 			do {
+				// insert comment
 				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+				
+				// fetch updated comment
+				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+				self.myReaction = result.1
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = myComment
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}

@@ -79,10 +79,10 @@ public struct InformationView: View {
 				CommentEditSheet(
 					state: .update,
 					isPresented: $viewModel.showCommentSheet,
-					comment: comment, 
+					comment: comment,
 					saveCompletion: { myComment in
-					viewModel.updateComment(myComment: myComment)
-				})
+						viewModel.updateComment(myComment: myComment)
+					})
 			} else {
 				// 코멘트 추가
 				CommentEditSheet(
@@ -90,8 +90,8 @@ public struct InformationView: View {
 					isPresented: $viewModel.showCommentSheet,
 					comment: MyComment(),
 					saveCompletion: { myComment in
-					viewModel.insertComment(myComment: myComment)
-				})
+						viewModel.insertComment(myComment: myComment)
+					})
 			}
 			
 		})
