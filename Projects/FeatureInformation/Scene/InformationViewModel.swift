@@ -216,8 +216,11 @@ final class InformationViewModel: ObservableObject {
 						isVisible: myComment.isVisible))
 				
 				// fetch updated comment
-				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
-				self.myReaction = result.1
+				if response.result?.isSuccess == true {
+					self.myReaction.comment = myComment
+				} else {
+					// 네트워크 확인 Alert
+				}
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -235,8 +238,13 @@ final class InformationViewModel: ObservableObject {
 				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
 				
 				// fetch updated comment
-				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
-				self.myReaction = result.1
+				if response.result?.isSuccess == true {
+					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+					self.myReaction = result.1
+				} else {
+					// 네트워크 확인 Alert
+				}
+				
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
