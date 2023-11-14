@@ -84,7 +84,7 @@ extension InfoMyCommentView {
 						.foregroundColor(Color(uiColor: .designSystem(.w10)!))
 				)
 		}
-		.disabled(viewModel.myReaction.comment != nil )
+		.disabled(viewModel.myReaction.comment != nil)
 	}
 	
 	func footerView(date: String) -> some View {

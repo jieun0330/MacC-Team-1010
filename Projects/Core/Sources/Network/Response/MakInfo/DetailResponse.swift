@@ -58,7 +58,6 @@ public struct UserAction: Codable {
 	public let isUserEvaluate: String
 	public let userEvaluateValue: String?
 	public let isInMyComment: String
-	public let commentId: String?
 	public let commentContents: String?
 	public let isCommentVisible: String?
 	public let writeDate: String?
@@ -70,11 +69,9 @@ public struct UserAction: Codable {
 		var likeState: LikeState = .none
 		
 		if isInMyComment == "Y",
-		let commentId = commentId,
 		let commentContents = commentContents,
 		let date = writeDate{
 			comment = MyComment(
-				id: commentId,
 				isVisible: isCommentVisible == "Y" ? true : false ,
 				contents: commentContents,
 				date: date)
@@ -128,7 +125,7 @@ public struct MainDetail: Codable {
 	public var toEntity: BasicInfo {
 		let adv = makAlcoholPercentage ?? -1.0
 		let volume = makVolume ?? -1
-		let price = makVolume ?? -1
+		let price = makPrice ?? -1
 		return BasicInfo(adv: adv, volume: volume, price: price)
 	}
 }

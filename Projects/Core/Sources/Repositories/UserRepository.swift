@@ -11,7 +11,9 @@ import Utils
 
 public protocol UserRepository {
 	func skipSignin(_ request: UserRequest) async throws -> UserResponse
+	func insertComment(_ request: InsertCommentRequest) async throws -> CommentResponse
 	func updateComment(_ request: UpdateCommentRequest) async throws -> CommentResponse
+	func deleteComment(_ request: DeleteCommentRequest) async throws -> CommentResponse
 	func evaluateMak(_ request: EvaluateMakRequest) async throws -> EvaluateMakResponse
 	func addWishList(_ request: WishListRequest) async throws -> WishListResponse
 	func deleteWishList(_ request: WishListRequest) async throws -> WishListResponse

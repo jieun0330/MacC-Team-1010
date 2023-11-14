@@ -31,7 +31,7 @@ final class InformationViewModel: ObservableObject {
 	@Published var showActionSheet: Bool = false
 	@Published var showCommentSheet: Bool = false
 	@Published var showDetailCommentListSheet: Bool = false
-	
+	@Published var showDeleteAlert: Bool = false
 	@Published var commentText: String = ""
 	
 	private var user: User = User.user1
@@ -82,7 +82,7 @@ final class InformationViewModel: ObservableObject {
 		Task {
 			
 			do {
-				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: 1)
+				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: self.makHolyId)
 				self.likeDetail = result.0
 				self.comments = result.1
 				print("fetchReactions Completed : -------")
@@ -97,11 +97,16 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	// Comment Visibe 변경
+	@MainActor 
 	func toggleCommentVisible() {
 		
 		self.myReaction.comment?.isVisible.toggle()
 		
 		// Comment Visible 업데이트 API 연결
+		guard let comment = myReaction.comment else {
+			return
+		}
+		self.updateComment(myComment: MyComment(isVisible: comment.isVisible, contents: comment.contents, date: "데이트 추가"))
 	}
 	
 	func likeButtonTapped() {
@@ -177,6 +182,55 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
+			}
+		}
+	}
+
+	@MainActor
+	func deleteComment() {
+		Task {
+			do {
+				let response = try await userRepo.deleteComment(DeleteCommentRequest(userId: self.userId, makNumber: self.makHolyId))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+				//TODO: reponse 확인 로직
+				self.myReaction.comment = nil
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+			}
+		}
+	}
+	
+	@MainActor
+	func updateComment(myComment: MyComment) {
+		Task {
+			do {
+				let response = try await userRepo.updateComment(
+					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+				//TODO: reponse 확인 로직
+				self.myReaction.comment = myComment
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+			}
+		}
+	}
+	
+	@MainActor
+	func insertComment(myComment: MyComment) {
+		Task {
+			do {
+				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+				print("deleteComment Completed : -------")
+				print("response : \(response)")
+				print("----------------------------------")
+				//TODO: reponse 확인 로직
+				self.myReaction.comment = myComment
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
 		}
 	}
