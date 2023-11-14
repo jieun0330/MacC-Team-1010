@@ -34,6 +34,8 @@ struct HashtagSingleView: View {
 			Text(type.description)
 				.font(.style(.SF15R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
+				.padding(.vertical, 2)
+				.padding(.horizontal, 2)
 		}
 		.cornerRadius(10)
 		.buttonStyle(.borderedProminent)
