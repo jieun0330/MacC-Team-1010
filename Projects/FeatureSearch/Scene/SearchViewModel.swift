@@ -43,11 +43,11 @@ final class SearchViewModel: ObservableObject {
 		saveSearchHistorys()
 	}
 	
-	func addSearchHistory() {
-		if let existingIndex = searchHistorys.firstIndex(of: searchText) {
+	func addSearchHistory(makName: String) {
+		if let existingIndex = searchHistorys.firstIndex(of: makName) {
 			searchHistorys.remove(at: existingIndex)
 		}
-		searchHistorys.append(searchText)
+		searchHistorys.append(makName)
 		
 		if searchHistorys.count > 10 {
 			searchHistorys.removeFirst()
