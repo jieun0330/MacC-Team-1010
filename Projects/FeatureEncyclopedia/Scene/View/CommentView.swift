@@ -60,7 +60,7 @@ public struct CommentView: View {
                                     .foregroundColor(.W85)
                                 
                                 Spacer()
-                                    .frame(height: 4)
+                                    .frame(height: 20)
                                 
                                 HStack {
                                     Text(mak.reactionCommentDate ?? "")
