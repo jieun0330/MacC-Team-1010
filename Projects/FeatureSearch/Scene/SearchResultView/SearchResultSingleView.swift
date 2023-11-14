@@ -52,6 +52,8 @@ private extension SearchResultSingleView {
 	func descriptionView() -> some View {
 		VStack(alignment: .leading, spacing: 0) {
 			Text(makHoly.makName ?? "")
+				.multilineTextAlignment(.leading)
+				.lineLimit(2)
 				.font(.style(.SF14R))
 				.foregroundColor(Color(uiColor: .designSystem(.white)!))
 			Text(BasicInfo.formattedSet(adv: makHoly.mainDetail?.makAlcoholPercentage ?? 0.0,
