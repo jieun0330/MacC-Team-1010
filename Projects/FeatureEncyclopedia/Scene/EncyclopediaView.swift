@@ -69,7 +69,7 @@ private extension EncyclopediaView {
                         Spacer()
                             .frame(height: 10)
                         title
-                            .foregroundColor(self.index == id ? .white : .gray)
+                            .foregroundColor(self.index == id ? .White : .W85)
                         Capsule()
                             .frame(width: 68, height: 2)
                             .foregroundColor(self.index == id ? .Primary2 : .DarkBase)
