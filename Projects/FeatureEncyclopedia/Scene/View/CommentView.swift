@@ -30,8 +30,8 @@ public struct CommentView: View {
                     Spacer()
                 }
                 .padding(.vertical, 10)
-                .padding(.leading, 5)
-                
+                .padding(.leading, 12)
+
                 ForEach(viewModel.makModel, id: \.self) { mak in
                     if mak.reactionComment != nil {
                         HStack(alignment: .top) {
@@ -46,8 +46,8 @@ public struct CommentView: View {
                                     Text(mak.makNm ?? "")
                                         .foregroundColor(.White)
                                         .SF14R()
+                                    
                                     Image(uiImage: .designSystem(.like)!)
-                                        .padding(.leading, 4)
                                     Spacer()
                                     
                                     if mak.cmVisibility! == "N" {
