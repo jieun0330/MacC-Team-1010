@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import Combine
 import DesignSystem
 import Utils
 
@@ -36,6 +37,11 @@ public struct OnboardingView: View {
 						.frame(height: 40)
 					
 					TextField("닉네임을 입력해주세요", text: $nickname)
+						.onReceive(Just(nickname)) { newValue in
+							if newValue.count > 6 {
+								nickname.removeLast()
+							}
+						}
 						.font(.style(.SF20B))
 						.underlined()
 					
