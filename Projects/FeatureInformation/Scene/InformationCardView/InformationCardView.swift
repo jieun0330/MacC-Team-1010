@@ -16,14 +16,14 @@ struct InformationCardView: View {
 	var body: some View {
 		VStack(spacing: 0) {
 			InfoImageView(imageId: viewModel.makHoly.imageId)
-				.padding(.bottom, 32)
+				.padding(.bottom, 36)
 			
 			InfoNameView(name: viewModel.makHoly.name,
 						 description: viewModel.makHoly.basicInfo.description)
-			.padding(.bottom, 15)
+			.padding(.bottom, 18)
 			
 			TasteScoreView(type: .large, makHoly: viewModel.makHoly)
-				.padding(.bottom, 33)
+				.padding(.bottom, 32)
 			
 			InfoLikeView(viewModel: viewModel)
 				.padding(.bottom, 15)
