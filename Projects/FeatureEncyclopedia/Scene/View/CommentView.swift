@@ -34,7 +34,7 @@ public struct CommentView: View {
                 
                 ForEach(viewModel.makModel, id: \.self) { mak in
                     if mak.reactionComment != nil {
-                        HStack {
+                        HStack(alignment: .top) {
                             RoundedRectangle(cornerRadius: 12)
                                 .foregroundColor(.DarkGrey)
                                 .frame(width: 60, height: 80)
@@ -55,13 +55,12 @@ public struct CommentView: View {
                                     }
                                 }
                                 
-                                Spacer()
-                                
                                 Text(mak.reactionComment ?? "")
                                     .SF14R()
                                     .foregroundColor(.W85)
                                 
                                 Spacer()
+                                    .frame(height: 4)
                                 
                                 HStack {
                                     Text(mak.reactionCommentDate ?? "")
@@ -89,8 +88,9 @@ public struct CommentView: View {
                                     }
                                 }
                             }
+                            .padding(.leading)
                         }
-                        .padding(.horizontal)
+                        .padding()
                         Divider()
                     }
                 }
