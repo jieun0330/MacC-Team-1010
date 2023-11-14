@@ -22,19 +22,7 @@ public struct InformationView: View {
 		
 		ScrollView(.vertical, showsIndicators: false) {
 			VStack(spacing: 0) {
-				ZStack {
-					LinearGradient(
-						stops: [
-							Gradient.Stop(color: .NightSky2Top, location: 0.00),
-							Gradient.Stop(color: .NightSky2Bottom, location: 1.00),
-						],
-						startPoint: UnitPoint(x: 0.45, y: 0),
-						endPoint: UnitPoint(x: 0.45, y: 1)
-					)
-					.ignoresSafeArea(.all, edges: .top)
-					
-					InformationCardView(viewModel: viewModel)
-				}
+				InformationCardView(viewModel: viewModel)
 				InformationDetailView(viewModel: viewModel)
 			}
 		}
