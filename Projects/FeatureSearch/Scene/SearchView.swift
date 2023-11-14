@@ -21,7 +21,7 @@ public struct SearchView: View {
 			SearchSuggestionView(searchViewModel: searchViewModel)
 				.searchable(
 					text: $searchViewModel.searchText,
-					prompt: "막걸리 이름, 양조장 ..."
+					prompt: "막걸리 이름 ..."
 				)
 				.onChange(of: searchViewModel.searchText) { newValue in
 					searchViewModel.searchState = true
