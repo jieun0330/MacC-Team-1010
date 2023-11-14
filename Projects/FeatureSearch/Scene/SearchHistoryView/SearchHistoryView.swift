@@ -25,7 +25,6 @@ struct SearchHistoryView: View {
 		} else {
 			VStack(spacing: 0) {
 				SearchHistoryControllerView(searchViewModel: searchViewModel)
-				DividerView()
 				SearchHistoryListView(searchViewModel: searchViewModel)
 			}
 			.onAppear {
