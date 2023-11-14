@@ -187,6 +187,10 @@ final class InformationViewModel: ObservableObject {
 				print("addBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				if response.result?.isSuccess == false {
+					myReaction.isBookMarked.toggle()
+					//TODO:  찜하기 실패 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
 			}
@@ -201,6 +205,10 @@ final class InformationViewModel: ObservableObject {
 				print("deleteBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				if response.result?.isSuccess == false {
+					myReaction.isBookMarked.toggle()
+					//TODO:  찜삭제 실패 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
 			}
@@ -215,8 +223,12 @@ final class InformationViewModel: ObservableObject {
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = nil
+				
+				if response.result?.isSuccess == true {
+					self.myReaction.comment = nil
+				} else {
+					// 네트워크 확인 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
