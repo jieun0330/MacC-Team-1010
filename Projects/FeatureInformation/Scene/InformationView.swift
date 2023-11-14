@@ -44,32 +44,22 @@ public struct InformationView: View {
 			InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
 		})
 		// 코멘트 수정 ActionSheet
-		.confirmationDialog("", isPresented: $viewModel.showActionSheet) {
-			Button {
+		.confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden) {
+			
+			Button("수정하기") {
 				viewModel.showActionSheet.toggle()
 				viewModel.showCommentSheet.toggle()
-			} label: {
-				Text("수정하기")
-					.SF17R()
-					.foregroundColor(.Primary)
 			}
 			
-			Button {
+			Button("삭제하기", role: .destructive) {
 				viewModel.showActionSheet = false
 				viewModel.showDeleteAlert = true
-			} label: {
-				Text("삭제하기")
-					.SF17R()
-					.foregroundColor(.Alert)
 			}
 			
-			Button(role: .cancel) {
+			Button("취소하기", role: .cancel) {
 				print("취소하기")
-			} label: {
-				Text("취소하기")
-					.SF17R()
-					.foregroundColor(.Primary)
 			}
+			
 			
 		}
 		//코멘트 작성 Modal Sheet
@@ -100,7 +90,7 @@ public struct InformationView: View {
 				  primaryButton: .cancel(
 					Text("취소"),
 					action: {}
-				  ), secondaryButton: .default(
+				  ), secondaryButton: .destructive(
 					Text("삭제하기"),
 					action: {
 						viewModel.deleteComment()
