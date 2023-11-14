@@ -46,8 +46,7 @@ public struct EncyclopediaView: View {
                     viewModel.getUserMakFolder()
                 }
             }
-            .navigationTitle("내 막걸리")
-            .navigationBarTitleDisplayMode(.inline)
+            .background(Color.DarkBase)
         }
     }
 }
@@ -73,11 +72,12 @@ private extension EncyclopediaView {
                             .foregroundColor(self.index == id ? .white : .gray)
                         Capsule()
                             .frame(width: 68, height: 2)
-                            .foregroundColor(self.index == id ? .Primary2 : .black)
+                            .foregroundColor(self.index == id ? .Primary2 : .DarkBase)
                     }
                 }
             }
             .frame(maxWidth: .infinity)
         }
+        .background(Color.DarkBase)
     }
 }
