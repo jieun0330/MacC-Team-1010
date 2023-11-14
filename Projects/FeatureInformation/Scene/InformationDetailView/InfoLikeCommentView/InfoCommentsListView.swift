@@ -61,15 +61,12 @@ extension InfoCommentsListView {
 			}
 			
 			// 리뷰 내용
-			// TODO: - 코멘트 5줄 미만인 경우 Alignment 오류
 			Text(comment.content)
 				.SF14R()
 				.foregroundColor(.W85)
-				.frame(maxWidth: .infinity, alignment: .leading)
-				.fixedSize(horizontal: false, vertical: false)
+				.frame(maxWidth: .infinity, minHeight: 100, maxHeight: 100, alignment: .topLeading)
 				.multilineTextAlignment(.leading)
 				.lineLimit(5)
-				.frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
 			
 			// 리뷰 작성 날짜
 			HStack {
