@@ -8,6 +8,143 @@
 
 import Foundation
 
+extension MakContent {
+	public static var mockDatas: [MakContent] = [test1, test2, test3,
+												 test4, test5, test6,
+												 test7, test8, test9,
+												 test10]
+	
+	public static var test1: MakContent = MakContent(
+		makSeq: 15,
+		makName: "올빚베리",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 750,
+		makPrice: 7000,
+		makTasteSweet: 3.0,
+		makTasteSour: 4.0,
+		makTasteThick: 2.0,
+		makTasteFresh: 3.0,
+		makImageNumber: "C37")
+	
+	public static var test2: MakContent = MakContent(
+		makSeq: 16,
+		makName: "지평생막걸리 쌀막걸리",
+		makType: "탁주",
+		makAlcoholPercentage: 5.0,
+		makVolume: 750,
+		makPrice: 1900,
+		makTasteSweet: 4.0,
+		makTasteSour: 1.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 4.0,
+		makImageNumber: "C38")
+	
+	public static var test3: MakContent = MakContent(
+		makSeq: 17,
+		makName: "쌀은 원래 달다",
+		makType: "탁주",
+		makAlcoholPercentage: 9.0,
+		makVolume: 500,
+		makPrice: 7500,
+		makTasteSweet: -1.0,
+		makTasteSour: -1.0,
+		makTasteThick: -1.0,
+		makTasteFresh: -1.0,
+		makImageNumber: "1070")
+	
+	public static var test4: MakContent = MakContent(
+		makSeq: 18,
+		makName: "봉평메밀막걸리",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 750,
+		makPrice: 2500,
+		makTasteSweet: 3.0,
+		makTasteSour: 3.0,
+		makTasteThick: 2.0,
+		makTasteFresh: 3.0,
+		makImageNumber: "C39")
+	
+	public static var test5: MakContent = MakContent(
+		makSeq: 20,
+		makName: "감천막걸리",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 750,
+		makPrice: 7000,
+		makTasteSweet: 3.0,
+		makTasteSour: 2.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 3.0,
+		makImageNumber: "943")
+	
+	public static var test6: MakContent = MakContent(
+		makSeq: 21,
+		makName: "마크홀리 오리지널 6.0",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 650,
+		makPrice: 7900,
+		makTasteSweet: 4.0,
+		makTasteSour: 1.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 1.0,
+		makImageNumber: "864")
+	
+	public static var test7: MakContent = MakContent(
+		makSeq: 22,
+		makName: "유톡자톡",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 800,
+		makPrice: 13000,
+		makTasteSweet: 3.0,
+		makTasteSour: 3.0,
+		makTasteThick: 2.0,
+		makTasteFresh: 5.0,
+		makImageNumber: "1086")
+	
+	public static var test8: MakContent = MakContent(
+		makSeq: 23,
+		makName: "나루 생 막걸리 11.5도",
+		makType: "탁주",
+		makAlcoholPercentage: 11.5,
+		makVolume: 500,
+		makPrice: 11000,
+		makTasteSweet: 4.0,
+		makTasteSour: 1.0,
+		makTasteThick: 5.0,
+		makTasteFresh: 1.0,
+		makImageNumber: "135")
+	
+	public static var test9: MakContent = MakContent(
+		makSeq: 24,
+		makName: "하늘담9 생막걸리",
+		makType: "탁주",
+		makAlcoholPercentage: 9.0,
+		makVolume: 750,
+		makPrice: 7500,
+		makTasteSweet: 2.0,
+		makTasteSour: 2.0,
+		makTasteThick: 4.0,
+		makTasteFresh: 3.0,
+		makImageNumber: "C40")
+	
+	public static var test10: MakContent = MakContent(
+		makSeq: 25,
+		makName: "만복 생 전통주",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 750,
+		makPrice: 1900,
+		makTasteSweet: -1.0,
+		makTasteSour: -1.0,
+		makTasteThick: -1.0,
+		makTasteFresh: -1.0,
+		makImageNumber: "C41")
+}
+
 extension Award {
 	public static var mockDatas: [Award] = [Award.mock1, Award.mock2, Award.mock3]
 	

@@ -15,6 +15,7 @@ public enum CharacteristicsType: String, CaseIterable, Hashable {
 	case sour
 	case fresh
 	case noAspartame
+	case none
 	
 	public var description: String {
 		switch self {
@@ -28,6 +29,8 @@ public enum CharacteristicsType: String, CaseIterable, Hashable {
 			return "탄삼감 좋은"
 		case .noAspartame:
 			return "아스파탐이 없는"
+		default:
+			return ""
 		}
 	}
 	
@@ -58,6 +61,8 @@ public enum CharacteristicsType: String, CaseIterable, Hashable {
 			return .designSystem(.refresh)!
 		case .noAspartame:
 			return .designSystem(.additive)!
+		default:
+			return UIImage()
 		}
 	}
 }

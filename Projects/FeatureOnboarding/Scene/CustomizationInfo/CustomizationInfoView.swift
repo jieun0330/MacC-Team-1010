@@ -61,7 +61,6 @@ struct CustomizationInfoView: View {
 				Button {
 					viewModel.skipSignin(nickname: nickname, sex: sexType.description,
 										 ageRange: yearOfBirth)
-					
 				} label: {
 					RoundedRectangle(cornerRadius: 12)
 						.fill(Color(uiColor: .designSystem(
@@ -76,7 +75,6 @@ struct CustomizationInfoView: View {
 				}
 				.padding(.bottom, 16)
 				.disabled(!yearOfBirth.isEmpty && sexType != .none ? false : true)
-				
 			}
 			.navigationDestination(isPresented: $viewModel.navigationState) {
 				TabView {

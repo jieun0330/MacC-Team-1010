@@ -8,6 +8,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import FeatureCategory
 
 public struct HomeView: View {
 	@StateObject var viewModel = HomeViewModel(
@@ -32,20 +33,25 @@ public struct HomeView: View {
 			NavigationStack {
 				ScrollView(showsIndicators: false) {
 					VStack {
-						GeometryReader { proxy in
-							let global = proxy.frame(in: .global)
-							Image(uiImage: .designSystem(.banner)!)
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.offset(y: global.minY > 0 ? -global.minY : 0)
-								.frame(
-									height: global.minY > 0 ?
-									(UIScreen.main.bounds.height/2.5) + global.minY
-									: UIScreen.main.bounds.height/2.5
-								)
+						NavigationLink {
+							CategoryView(type: .event, targetTitle: [.none])
+						} label: {
+							GeometryReader { proxy in
+								let global = proxy.frame(in: .global)
+								Image(uiImage: .designSystem(.banner)!)
+									.resizable()
+									.aspectRatio(contentMode: .fill)
+									.offset(y: global.minY > 0 ? -global.minY : 0)
+									.frame(
+										height: global.minY > 0 ?
+										(UIScreen.main.bounds.height/2.5) + global.minY
+										: UIScreen.main.bounds.height/2.5
+									)
+							}
+							.frame(height: UIScreen.main.bounds.height / 2.5)
+							.padding(.bottom, 20)
+
 						}
-						.frame(height: UIScreen.main.bounds.height / 2.5)
-						.padding(.bottom, 20)
 						
 						CharacteristicsView()
 						
