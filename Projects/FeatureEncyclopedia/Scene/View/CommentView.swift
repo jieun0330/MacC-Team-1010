@@ -59,7 +59,6 @@ public struct CommentView: View {
                                 
                                 Text(mak.reactionComment ?? "")
                                     .SF14R()
-                                    .lineLimit(2)
                                     .foregroundColor(.W85)
                                 
                                 Spacer()
