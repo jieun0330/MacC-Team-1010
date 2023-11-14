@@ -17,6 +17,7 @@ public struct OnboardingView: View {
 	
 	@State var nickname: String
 	@State var selectedImage: ImageName = .profileSweet
+	@State var isNavigation = false
 	
 	enum ImageName: String {
 		case profileSweet, profileHighlyHydrated, profileThick,
@@ -68,19 +69,11 @@ public struct OnboardingView: View {
 					}
 					.padding(.bottom, 16)
 					
-					NavigationLink {
-						CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
-							.background(Color(uiColor: .designSystem(.darkbase)!))
-							.navigationBarBackButtonHidden(true)
-							.navigationBarItems(leading: CustomBackButton())
-							.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!),
-											   for: .navigationBar)
-							.onAppear {
-								UserDefaultsSetting.profileImage = selectedImage.rawValue
-							}
+					Button {
+						isNavigation = true
 					} label: {
 						RoundedRectangle(cornerRadius: 12)
-							.fill(Color(uiColor: .designSystem(.goldenyellow)!))
+							.fill(Color(uiColor: .designSystem(nickname.isEmpty ? .w10 :.goldenyellow)!))
 							.frame(height: 50)
 							.overlay {
 								Text("다음")
@@ -89,10 +82,22 @@ public struct OnboardingView: View {
 							}
 							.padding(.bottom, 16)
 					}
+					.disabled(nickname.isEmpty ? true : false)
 				}
 				.padding(.horizontal, 16)
 				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.ignoresSafeArea(.keyboard)
+				.navigationDestination(isPresented: $isNavigation) {
+					CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
+						.background(Color(uiColor: .designSystem(.darkbase)!))
+						.navigationBarBackButtonHidden(true)
+						.navigationBarItems(leading: CustomBackButton())
+						.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!),
+										   for: .navigationBar)
+						.onAppear {
+							UserDefaultsSetting.profileImage = selectedImage.rawValue
+						}
+				}
 			}
 			.onTapGesture {
 				self.hideKeyboard()
