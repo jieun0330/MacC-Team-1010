@@ -72,17 +72,26 @@ struct CommentEditView: View {
         .padding()
         
         VStack {
-            Section {
-                TextField("막걸리에 대한 생각을 자유롭게 적어주세요.", text: $commentBox, axis: .vertical)
-                    .onReceive(Just(commentBox)) { _ in limitText(textLimit) }
-                    .padding()
-                    .focused($focusField, equals: .text)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        focusField = .text
-                    }
+            VStack(alignment: .leading) {
+                Section {
+                    TextField("막걸리에 대한 생각을 자유롭게 적어주세요.", text: $commentBox, axis: .vertical)
+                        
+    //                    .multilineTextAlignment(.leading)
+    //                .frame(height: 300)
+                        .onReceive(Just(commentBox)) { _ in limitText(textLimit) }
+                        .padding()
+                        .focused($focusField, equals: .text)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            focusField = .text
+                        }
+                }
             }
-            Spacer()
+            .frame(height: 300)
+
+//            .multilineTextAlignment(.leading)
+//            .frame(height: 300)
+//            Spacer()
             Divider()
             HStack {
                 Spacer()
