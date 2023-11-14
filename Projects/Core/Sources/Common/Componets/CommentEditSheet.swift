@@ -16,7 +16,8 @@ public struct CommentEditSheet: View {
 	@State public var comment: MyComment
 	
 	var state: CommentEditState
-	let textLimit = 250
+	private let textLimit = 250
+	private let lineLimit = 5
 	
 	public typealias saveHandler = (MyComment) -> Void
 	public var saveCompletion: saveHandler
@@ -48,7 +49,10 @@ public struct CommentEditSheet: View {
 						.font(.style(.SF17R))
 						.foregroundColor(.W25)
 				}
-				.onReceive(Just(comment.contents)) { _ in limitText(textLimit) }
+				.onReceive(Just(comment.contents)) { _ in
+					limitText()
+					limitLines()
+				}
 				.frame(maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .topLeading)
 				.font(.style(.SF17R))
 				.foregroundColor(.W85)
@@ -61,11 +65,22 @@ public struct CommentEditSheet: View {
 		}
 	}
 	
-	func limitText(_ upper: Int) {
-		if comment.contents.count > upper {
-			comment.contents = String(comment.contents.prefix(upper))
+	private func limitText() {
+		if comment.contents.count > textLimit {
+			comment.contents = String(comment.contents.prefix(textLimit))
 		}
 	}
+	
+	private func limitLines() {
+		let newlineCount = comment.contents.filter { $0 == "\n" }.count
+		if newlineCount > lineLimit {
+			let filteredText = comment.contents.split(separator: "\n", maxSplits: lineLimit + 1)
+				.prefix(lineLimit)
+				.joined(separator: "\n")
+			comment.contents = String(filteredText)
+		}
+	}
+
 }
 
 extension CommentEditSheet {
