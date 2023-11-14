@@ -8,16 +8,17 @@
 
 import SwiftUI
 import Core
+import Utils
 
 final class InformationViewModel: ObservableObject {
 	
 	let makHolyId: Int
-	let userId: Int = 1578568449
+	let userId: Int = Int(KeyChainManager.shared.read(account: .userId)) ?? -1
 	let maHolyRepo: DefaultMakgeolliRepository
 	let userRepo: DefaultUserRepository
 	
 	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
-		self.makHolyId = 1
+		self.makHolyId = makHolyId
 		self.maHolyRepo = maHolyRepo
 		self.userRepo = userRepo
 	}
