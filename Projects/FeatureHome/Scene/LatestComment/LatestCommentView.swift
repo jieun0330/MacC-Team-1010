@@ -34,7 +34,9 @@ struct LatestCommentView: View {
 			VStack(spacing: 16) {
 				ForEach(viewModel.comments.prefix(4), id: \.self) { comment in
 					LatestCommentSingleView(comment: comment)
-					DividerView()
+					if comment != viewModel.comments.prefix(4).last {
+						DividerView()
+					}
 				}
 			}
 		}
