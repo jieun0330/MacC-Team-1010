@@ -42,6 +42,7 @@ public struct InformationView: View {
 				InfoBookMarkButton(viewModel: viewModel)
 			}
 		}
+		.statusBarHidden(true)
 		.onAppear(perform: {
 			viewModel.fetchDatas()
 		})
