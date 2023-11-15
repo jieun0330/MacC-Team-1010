@@ -54,6 +54,9 @@ struct CommentEditView: View {
 				.SF17B()
 			Spacer()
 			Button(action: {
+                
+                commentBox = commentBox.removeTrailingSpaces()
+
 				if commentBox.isEmpty {
 					
 				} else {
@@ -66,6 +69,7 @@ struct CommentEditView: View {
 				Text("저장").SF17B()
 			}
 			.accentColor(.Primary)
+            .disabled(commentBox.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 		}
 		.padding()
 		
@@ -80,6 +84,7 @@ struct CommentEditView: View {
 						.onTapGesture {
 							focusField = .text
 						}
+                    Spacer()
 				}
 			}
 			.frame(height: 300)
