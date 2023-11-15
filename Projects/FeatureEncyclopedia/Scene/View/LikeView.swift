@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import FeatureInformation
 
 // 좋았어요 뷰
 public struct LikeView: View {
@@ -41,21 +42,30 @@ public struct LikeView: View {
 				LazyVGrid(columns: columns, spacing: 16, content: {
 					ForEach(viewModel.makModel, id: \.self) { mak in
 						if mak.reactionLike == "LIKE" {
-							ThumbnailView(mak: mak, type: .like)
-								.onAppear {
-									if mak == viewModel.makModel.last {
-										if !viewModel.isLastPage {
-											var offset = viewModel.currentOffset
-											offset += 1
-											withAnimation {
-												viewModel.getUserMakFolder(segmentName: "like", offset: offset)
+							Button {
+								if let id = mak.makSeq {
+									viewModel.resultMakHolyId = id
+								}
+							} label: {
+								ThumbnailView(mak: mak, type: .like)
+									.onAppear {
+										if mak == viewModel.makModel.last {
+											if !viewModel.isLastPage {
+												var offset = viewModel.currentOffset
+												offset += 1
+												withAnimation {
+													viewModel.getUserMakFolder(segmentName: "like", offset: offset)
+												}
 											}
 										}
 									}
-								}
+							}
 						}
 					}
 				})
+			}
+			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+				InformationView(makHolyId: makHolyId)
 			}
 		}
 	}

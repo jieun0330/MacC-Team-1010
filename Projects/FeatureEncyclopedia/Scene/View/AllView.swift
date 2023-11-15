@@ -9,6 +9,7 @@
 
 import SwiftUI
 import Core
+import FeatureInformation
 
 enum EncyclopediaType {
 	case all
@@ -52,22 +53,31 @@ struct AllView: View {
 				
 				LazyVGrid(columns: columns, spacing: 20, content: {
 					ForEach(viewModel.makModel, id: \.self) { mak in
-						ThumbnailView(mak: mak, type: .all)
-							.onAppear {
-								if mak == viewModel.makModel.last {
-									if !viewModel.isLastPage {
-										var offset = viewModel.currentOffset
-										offset += 1
-										withAnimation {
-											viewModel.nextGetUserMakFolder(offset: offset)
+						Button {
+							if let id = mak.makSeq {
+								viewModel.resultMakHolyId = id
+							}
+						} label: {
+							ThumbnailView(mak: mak, type: .all)
+								.onAppear {
+									if mak == viewModel.makModel.last {
+										if !viewModel.isLastPage {
+											var offset = viewModel.currentOffset
+											offset += 1
+											withAnimation {
+												viewModel.nextGetUserMakFolder(offset: offset)
+											}
 										}
 									}
 								}
-							}
+						}
 					}
 				}
 				)
 				.padding(.bottom)
+			}
+			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+				InformationView(makHolyId: makHolyId)
 			}
 		}
 	}

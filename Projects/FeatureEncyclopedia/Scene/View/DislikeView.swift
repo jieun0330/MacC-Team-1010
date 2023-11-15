@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import FeatureInformation
 
 // 아쉬워요 뷰
 public struct DislikeView: View {
@@ -40,20 +41,29 @@ public struct DislikeView: View {
 				.padding(.leading, 12)
 				LazyVGrid(columns: columns, spacing: 16, content: {
 					ForEach(viewModel.makModel, id: \.self) { mak in
-						ThumbnailView(mak: mak, type: .dislike)
-							.onAppear {
-								if mak == viewModel.makModel.last {
-									if !viewModel.isLastPage {
-										var offset = viewModel.currentOffset
-										offset += 1
-										withAnimation {
-											viewModel.getUserMakFolder(segmentName: "dislike", offset: offset)
+						Button {
+							if let id = mak.makSeq {
+								viewModel.resultMakHolyId = id
+							}
+						} label: {
+							ThumbnailView(mak: mak, type: .dislike)
+								.onAppear {
+									if mak == viewModel.makModel.last {
+										if !viewModel.isLastPage {
+											var offset = viewModel.currentOffset
+											offset += 1
+											withAnimation {
+												viewModel.getUserMakFolder(segmentName: "dislike", offset: offset)
+											}
 										}
 									}
 								}
-							}
+						}
 					}
 				})
+			}
+			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+				InformationView(makHolyId: makHolyId)
 			}
 		}
 	}
