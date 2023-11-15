@@ -16,12 +16,8 @@ struct InfoCommentsListView: View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			
 			if viewModel.comments.isEmpty {
-				Button(action: {
-					viewModel.showCommentSheet.toggle()
-				}, label: {
-					noReactionSingleView()
-				})
-				.padding(.leading, 16)
+				noReactionSingleView()
+					.padding(.leading, 16)
 			} else {
 				HStack(spacing: 16) {
 					
