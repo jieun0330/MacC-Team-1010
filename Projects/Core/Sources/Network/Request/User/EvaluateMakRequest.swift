@@ -24,6 +24,5 @@ public struct EvaluateMakRequest: Codable {
 		case .dislike:
 			self.likeMak = "N"
 		}
-		
 	}
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 public struct VisibleComment: Identifiable, Hashable {
-	
 	/// Comment Id
 	public let id: UUID = UUID()
 	
@@ -27,14 +26,13 @@ public struct VisibleComment: Identifiable, Hashable {
 		isLiked: LikeState,
 		content: String,
 		date: String) {
-		self.userName = userName
-		self.isLiked = isLiked
-		self.content = content
-		self.date = date
-	}
+			self.userName = userName
+			self.isLiked = isLiked
+			self.content = content
+			self.date = date
+		}
 	
 	public init() {
 		self.init(userName: "", isLiked: .none, content: "", date: "")
 	}
-	
 }

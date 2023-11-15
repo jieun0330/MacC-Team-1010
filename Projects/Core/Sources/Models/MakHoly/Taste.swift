@@ -23,11 +23,11 @@ public struct Taste {
 		sourness: Int,
 		thickness: Int,
 		freshness: Int) {
-		self.sweetness = sweetness
-		self.sourness = sourness
-		self.thickness = thickness
-		self.freshness = freshness
-	}
+			self.sweetness = sweetness
+			self.sourness = sourness
+			self.thickness = thickness
+			self.freshness = freshness
+		}
 	
 	public init() {
 		self.init(sweetness: -1, sourness: -1, thickness: -1, freshness: -1)

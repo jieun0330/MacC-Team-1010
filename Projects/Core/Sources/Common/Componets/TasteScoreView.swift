@@ -37,9 +37,8 @@ private struct TasteScoreViewStyle {
 }
 
 public struct TasteScoreView: View {
-	
-	let type: TasteScoreViewType
 	private let style: TasteScoreViewStyle
+	let type: TasteScoreViewType
 	
 	let sweetness: Int // 단맛 점수
 	let sourness: Int // 신맛 점수
@@ -51,13 +50,13 @@ public struct TasteScoreView: View {
 		sweetness: Int,
 		sourness: Int,
 		thickness: Int, freshness: Int) {
-		self.type = type
-		self.style = TasteScoreViewStyle(scoreType: type)
-		self.sweetness = sweetness
-		self.sourness = sourness
-		self.thickness = thickness
-		self.freshness = freshness
-	}
+			self.type = type
+			self.style = TasteScoreViewStyle(scoreType: type)
+			self.sweetness = sweetness
+			self.sourness = sourness
+			self.thickness = thickness
+			self.freshness = freshness
+		}
 	
 	public init(
 		type: TasteScoreViewType,
@@ -80,7 +79,7 @@ public struct TasteScoreView: View {
 	}
 }
 
-extension TasteScoreView {
+private extension TasteScoreView {
 	@ViewBuilder
 	func scoreSingleView(description: String, score: Int) -> some View {
 		VStack(spacing: self.style.innerSpacing) {
@@ -91,7 +90,7 @@ extension TasteScoreView {
 		}
 	}
 	
-	private func getImage(for type: TasteScoreViewType, score: Int) -> UIImage {
+	func getImage(for type: TasteScoreViewType, score: Int) -> UIImage {
 		switch type {
 		case .mini:
 			switch score {

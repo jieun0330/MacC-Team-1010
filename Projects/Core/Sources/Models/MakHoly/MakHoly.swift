@@ -9,7 +9,6 @@
 import Foundation
 
 public struct MakHoly: Identifiable, Hashable {
-	
 	public static func == (lhs: MakHoly, rhs: MakHoly) -> Bool {
 		return lhs.id == rhs.id
 	}
@@ -51,18 +50,6 @@ public struct MakHoly: Identifiable, Hashable {
 			brewery: Brewery(),
 			awards: [])
 	}
-	
-	//mokData Initializer
-//	public init(makHolyMini: MakHolyMini, 
-//				ingredients: String,
-//				description: String,
-//				brewery: Brewery,
-//				awards: [Award],
-//				isBookMarked: Bool,
-//		  likeState: LikeState,
-//		  myComment: MyComment?) {
-//		
-//	}
 	
 	// MakHoli Mini 정보
 	/// 막걸리 ID

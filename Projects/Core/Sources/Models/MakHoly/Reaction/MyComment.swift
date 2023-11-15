@@ -9,7 +9,6 @@
 import Foundation
 
 public struct MyComment {
-	
 	/// 공개 여부
 	public var isVisible: Bool
 	/// 코멘트 내용
@@ -21,13 +20,12 @@ public struct MyComment {
 		isVisible: Bool,
 		contents: String,
 		date: String) {
-		self.isVisible = isVisible
-		self.contents = contents
-		self.date = date
-	}
+			self.isVisible = isVisible
+			self.contents = contents
+			self.date = date
+		}
 	
 	public init() {
 		self.init(isVisible: false, contents: "", date: "")
 	}
-	
 }

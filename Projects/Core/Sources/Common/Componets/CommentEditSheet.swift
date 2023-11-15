@@ -10,18 +10,16 @@ import SwiftUI
 import Combine
 
 public struct CommentEditSheet: View {
+	@State public var comment: MyComment
+	@State private var keyboardHeight: CGFloat = 0
 	
 	@Binding public var isPresented: Bool
 	@FocusState private var textFieldFocused: Bool
 	
-	@State public var comment: MyComment
-	
 	var state: CommentEditState
-	private let textLimit = 250
-	
 	public typealias saveHandler = (MyComment) -> Void
+	private let textLimit = 250
 	public var saveCompletion: saveHandler
-	@State private var keyboardHeight: CGFloat = 0
 	
 	var isValid: Bool {
 		return !comment.contents.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -42,7 +40,7 @@ public struct CommentEditSheet: View {
 		VStack(spacing: 0) {
 			headerView()
 				.padding(.top, 15)
-		
+			
 			TextField("",  text: $comment.contents, axis: .vertical)
 				.placeholder(when: comment.contents.isEmpty) {
 					Text("막걸리에 대한 생각을 자유롭게 적어주세요.")
@@ -75,10 +73,9 @@ public struct CommentEditSheet: View {
 			comment.contents = String(comment.contents.prefix(textLimit))
 		}
 	}
-
 }
 
-extension CommentEditSheet {
+private extension CommentEditSheet {
 	@ViewBuilder
 	func headerView() -> some View {
 		VStack(spacing: 0) {
@@ -145,5 +142,4 @@ extension CommentEditSheet {
 			.padding(.horizontal, 16)
 		}
 	}
-	
 }

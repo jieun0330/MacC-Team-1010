@@ -9,7 +9,6 @@
 import Foundation
 
 public struct LikeDetail {
-	
 	private let totalCount: Int
 	private let likeCount: Int
 	private let dislikeCount: Int
@@ -55,5 +54,4 @@ public struct LikeDetail {
 			return "- %"
 		}
 	}
-	
 }

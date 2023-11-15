@@ -22,12 +22,12 @@ public struct InsertCommentRequest: Codable {
 	}
 	
 	public init(userId: Int, makNumber: Int, contents: String, isVisible: Bool) {
-		 self.init(
-			 userId: userId,
-			 makNumber: makNumber,
-			 contents: contents,
-			 isVisible: isVisible ? "Y" : "N")
-	 }
+		self.init(
+			userId: userId,
+			makNumber: makNumber,
+			contents: contents,
+			isVisible: isVisible ? "Y" : "N")
+	}
 }
 
 public struct UpdateCommentRequest: Codable {
@@ -44,20 +44,20 @@ public struct UpdateCommentRequest: Codable {
 	}
 	
 	public init(userId: Int, makNumber: Int, contents: String, isVisible: Bool) {
-		 self.init(
-			 userId: userId,
-			 makNumber: makNumber,
-			 contents: contents,
-			 isVisible: isVisible ? "Y" : "N")
-	 }
+		self.init(
+			userId: userId,
+			makNumber: makNumber,
+			contents: contents,
+			isVisible: isVisible ? "Y" : "N")
+	}
 }
 
 public struct DeleteCommentRequest: Codable {
-    public let userId: Int
-    public let makNumber: Int
-
-    public init(userId:Int, makNumber: Int) {
-        self.userId = userId
-        self.makNumber = makNumber
-    }
+	public let userId: Int
+	public let makNumber: Int
+	
+	public init(userId:Int, makNumber: Int) {
+		self.userId = userId
+		self.makNumber = makNumber
+	}
 }

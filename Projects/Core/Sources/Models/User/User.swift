@@ -21,7 +21,7 @@ public struct User: Identifiable, Hashable {
 	public let dislikes: [String]
 	/// 코멘트 ID 리스트
 	public let comments: [String]
-    
+	
 	public init(id: String,
 				name: String,
 				bookmarks: [String],

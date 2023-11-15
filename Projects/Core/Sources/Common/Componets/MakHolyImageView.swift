@@ -10,7 +10,6 @@ import SwiftUI
 import Kingfisher
 
 public struct MakHolyImageView: View {
-	
 	let imageId: String
 	let type: ImageType
 	let ratio: ImageRatioType
@@ -37,14 +36,12 @@ public struct MakHolyImageView: View {
 			.loadDiskFileSynchronously()
 			.cacheMemoryOnly()
 			.fade(duration: 0.15)
-//			.retry(maxCount: 3, interval: .seconds(5))
+			.retry(maxCount: 3, interval: .seconds(5))
 			.resizable()
 			.onFailure { error in
 				print("Image loading failed with error: \(error)")
 			}
 			.scaledToFit()
 			.frame(width: self.type.size.width, height: self.type.size.height)
-		
 	}
-	
 }

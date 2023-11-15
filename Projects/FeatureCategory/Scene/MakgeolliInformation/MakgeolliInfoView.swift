@@ -38,7 +38,7 @@ struct MakgeolliInfoView: View {
 					} label: {
 						Text("추천순")
 							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					}
+					}	
 				}
 				.alert(isPresented: $showAlert) {
 					Alert(title: Text("추천순으로 정렬"), message: Text("추천순으로 보여드릴 수 있도록 준비중이니 업데이트 될 때까지 조금만 기다려주세요!"),

@@ -69,8 +69,8 @@ public struct UserAction: Codable {
 		var likeState: LikeState = .none
 		
 		if isInMyComment == "Y",
-		let commentContents = commentContents,
-		let date = writeDate{
+		   let commentContents = commentContents,
+		   let date = writeDate{
 			comment = MyComment(
 				isVisible: isCommentVisible == "Y" ? true : false ,
 				contents: commentContents,
@@ -96,9 +96,9 @@ public struct UserAction: Codable {
 public struct DetailAttribute: Codable {
 	public let mainDetail: [MainDetail]?
 	public let taste: [DetailTasteInfo]?
-	public let makContent: String?  // descriptoon
-	public let makAwards: [String]? // awards
-	public let makRaw: String? // ingredients
+	public let makContent: String?
+	public let makAwards: [String]?
+	public let makRaw: String?
 	public let breweryInfo: [DetailBreweryInfo]?
 	
 	public func toEnities() -> (BasicInfo, Taste, String, [Award], String, Brewery) {

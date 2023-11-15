@@ -77,10 +77,6 @@ public struct CategoryView: View {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
 				}
 			}
-			.alert(isPresented: $viewModel.errorState) {
-				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-					  dismissButton: .default(Text("확인")))
-			}
 		}
 	}
 }

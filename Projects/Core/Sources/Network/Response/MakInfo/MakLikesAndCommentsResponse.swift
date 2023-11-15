@@ -24,7 +24,6 @@ public struct MakLikesAndCommentsResult: Codable {
 	public let numberOfElements: Int?
 	public let first, empty: Bool?
 	
-	// TODO: pageableInfo 로직
 	public func toEntity() -> (LikeDetail, [VisibleComment]) {
 		
 		if let content = content?[0] {

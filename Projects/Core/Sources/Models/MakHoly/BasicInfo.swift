@@ -20,10 +20,10 @@ public struct BasicInfo {
 		adv: Double,
 		volume: Int,
 		price: Int) {
-		self.adv = adv
-		self.volume = volume
-		self.price = price
-	}
+			self.adv = adv
+			self.volume = volume
+			self.price = price
+		}
 	
 	public init() {
 		self.init(adv: -1.0, volume: -1, price: -1)
