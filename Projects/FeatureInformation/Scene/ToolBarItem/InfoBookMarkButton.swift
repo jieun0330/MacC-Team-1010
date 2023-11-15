@@ -15,7 +15,9 @@ struct InfoBookMarkButton: View {
 		Button(action: {
 			viewModel.toggleBookMark()
 		}, label: {
-			Image(uiImage: viewModel.myReaction.isBookMarked ? .designSystem(.bookMarkedTrue)! : .designSystem(.bookMarkedFalse)!)
+			Image(systemName: viewModel.myReaction.isBookMarked ? "heart.fill" : "heart")
+				.font(.system(size: 24, weight: .bold))
+				.foregroundColor(viewModel.myReaction.isBookMarked ? .Alert : .W25)
 		})
     }
 }
