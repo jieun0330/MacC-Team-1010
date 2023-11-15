@@ -10,15 +10,21 @@ import SwiftUI
 import DesignSystem
 
 struct InfoBackButton: View {
-	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+	@Binding var isModelPresented: Bool
 	
 	public var body: some View {
 		Button(action: {
-			self.presentationMode.wrappedValue.dismiss()
+			self.isModelPresented = false
 		}) {
-			HStack(spacing: 3) {
-				Image(uiImage: .designSystem(.infoBackButton)!)
-			}
+			
+			Image(systemName: "xmark")
+				.font(.system(size: 17, weight: .bold))
+				.foregroundColor(.W85)
+				.padding(6)
+				.background(
+					.ultraThinMaterial,
+					in: Circle())
+			
 		}
 	}
 }
