@@ -72,36 +72,17 @@ private extension EncyclopediaView {
 		ScrollView(.vertical, showsIndicators: false) {
 			switch selectedType {
 			case .all:
-				AllView(viewModel: viewModel)
-					.onAppear {
-						viewModel.getUserMakFolder()
-					}
+				AllView()
 			case .like:
-				LikeView(viewModel: viewModel)
-					.onAppear {
-						viewModel.getUserMakFolder(segmentName: "like")
-					}
+				LikeView()
 			case .dislike:
-				DislikeView(viewModel: viewModel)
-					.onAppear {
-						viewModel.getUserMakFolder(segmentName: "dislike")
-					}
+				DislikeView()
 			case .bookmark:
-				BookmarkView(viewModel: viewModel)
-					.onAppear {
-						viewModel.getUserMakFolder(segmentName: "wish")
-					}
+				BookmarkView()
 			case .comment:
-				CommentView(viewModel: viewModel)
-					.onAppear {
-						viewModel.getUserMakFolder(segmentName: "comment")
-					}
+				CommentView()
 			}
 		}
 		.background(Color.DarkBase)
-		.alert(isPresented: $viewModel.errorState) {
-			Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-				  dismissButton: .default(Text("확인")))
-		}
 	}
 }

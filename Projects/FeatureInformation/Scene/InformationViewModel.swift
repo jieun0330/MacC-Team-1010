@@ -91,6 +91,7 @@ final class InformationViewModel: ObservableObject {
 					offset: offset
 				)
 				if offset == 0 {
+					self.comments = []
 					self.likeDetail = response.result?.toEntity().0 ?? LikeDetail()
 					self.comments = response.result?.toEntity().1 ?? []
 				} else {

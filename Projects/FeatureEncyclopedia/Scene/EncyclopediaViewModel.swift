@@ -14,27 +14,30 @@ final class EncyclopediaViewModel: ObservableObject {
 	@Published var makModel: [GetUserMakFolderContent] = []
 	@Published var errorState = false
 	
-	var fetchLoading = false
+	var fetchLoading = true
 	let userRepository: DefaultUserRepository
+	
+	var currentOffset: Int = 0
+	var isLastPage = false
 	
 	init(userRepository: DefaultUserRepository) {
 		self.userRepository = userRepository
 	}
 	
 	@MainActor
-	func getUserMakFolder(segmentName: String = "entire") {
+	func getUserMakFolder(segmentName: String = "entire", offset: Int = 0) {
 		fetchLoading = true
 		Task {
 			do {
+				makModel = []
 				let response = try await self.userRepository.getUserMakFolder(
-					GetUserMakFolderRequest(userId: 1546076304, segmentName: segmentName)
+					GetUserMakFolderRequest(userId: 1546076304,
+											segmentName: segmentName,
+											offset: offset)
 				)
-				if let content = response.result?.makUserTable?.content {
-					makModel = content
-				} else {
-					makModel = []
-				}
 				if response.status == 200 {
+					makModel = response.result?.makUserTable?.content ?? []
+					isLastPage = response.result?.makUserTable?.last ?? true
 					fetchLoading = false
 				} else {
 					errorState = true
@@ -47,7 +50,34 @@ final class EncyclopediaViewModel: ObservableObject {
 			}
 		}
 	}
-
+	
+	@MainActor
+	func nextGetUserMakFolder(segmentName: String = "entire", offset: Int) {
+		fetchLoading = true
+		Task {
+			do {
+				let response = try await self.userRepository.getUserMakFolder(
+					GetUserMakFolderRequest(userId: 1546076304,
+											segmentName: segmentName,
+											offset: offset)
+				)
+				self.currentOffset = offset
+				if response.status == 200 {
+					isLastPage = response.result?.makUserTable?.last ?? true
+					makModel.append(contentsOf: response.result?.makUserTable?.content ?? [])
+					fetchLoading = false
+				} else {
+					errorState = true
+					makModel = []
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				errorState = true
+				makModel = []
+			}
+		}
+	}
+	
 	@MainActor
 	func updateComment(makSeq: Int, contents: String, isVisible: String) {
 		Task {

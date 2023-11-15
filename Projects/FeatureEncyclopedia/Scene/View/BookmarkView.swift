@@ -11,7 +11,7 @@ import Core
 
 // 찜 뷰
 public struct BookmarkView: View {
-	@ObservedObject var viewModel: EncyclopediaViewModel
+	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
 	private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
 	
@@ -25,10 +25,13 @@ public struct BookmarkView: View {
 					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
 						  dismissButton: .default(Text("확인")))
 				}
+				.onAppear {
+					viewModel.getUserMakFolder(segmentName: "wish")
+				}
 		} else {
 			ScrollView {
 				HStack {
-					Text("\((viewModel.makModel.filter { $0.reactionWish == "WISH" }).count)개의 막걸리를 찜했어요")
+					Text("\((viewModel.makModel).count)개의 막걸리를 찜했어요")
 						.SF12R()
 						.foregroundColor(.W50)
 					Spacer()
@@ -39,10 +42,18 @@ public struct BookmarkView: View {
 				LazyVGrid(columns: columns, spacing: 16, content: {
 					
 					ForEach(viewModel.makModel, id: \.self) { mak in
-						
-						if mak.reactionWish == "WISH" {
-							ThumbnailView(mak: mak, type: .bookmark)
-						}
+						ThumbnailView(mak: mak, type: .bookmark)
+							.onAppear {
+								if mak == viewModel.makModel.last {
+									if !viewModel.isLastPage {
+										var offset = viewModel.currentOffset
+										offset += 1
+										withAnimation {
+											viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+										}
+									}
+								}
+							}
 					}
 				})
 			}

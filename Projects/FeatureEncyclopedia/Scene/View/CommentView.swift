@@ -10,7 +10,7 @@ import SwiftUI
 import Core
 
 public struct CommentView: View {
-	@ObservedObject var viewModel: EncyclopediaViewModel
+	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
 	@State private var showActionSheet = false
 	@State private var showModal = false
@@ -29,11 +29,14 @@ public struct CommentView: View {
 					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
 						  dismissButton: .default(Text("확인")))
 				}
+				.onAppear {
+					viewModel.getUserMakFolder(segmentName: "comment")
+				}
 		} else {
 			ScrollView {
 				VStack {
 					HStack {
-						Text("\((viewModel.makModel.filter { $0.reactionComment != nil }).count)개의 막걸리에 코멘트를 남겼어요")
+						Text("\((viewModel.makModel).count)개의 막걸리에 코멘트를 남겼어요")
 							.SF12R()
 							.foregroundColor(.W50)
 						Spacer()
@@ -42,57 +45,67 @@ public struct CommentView: View {
 					.padding(.leading, 12)
 					
 					ForEach(viewModel.makModel, id: \.self) { mak in
-						if mak.reactionComment != nil {
-							HStack(alignment: .top) {
-								RoundedRectangle(cornerRadius: 12)
-									.foregroundColor(.DarkGrey)
-									.frame(width: 60, height: 80)
-									.overlay(
-										MakHolyImageView(imageId: mak.makImg!, type: .mini)
-									)
-								VStack(alignment: .leading) {
-									HStack {
-										Text(mak.makNm ?? "")
-											.foregroundColor(.White)
-											.SF14R()
-										
-										Image(uiImage: .designSystem(.like)!)
-										Spacer()
-										
-										if mak.cmVisibility! == "N" {
-											Image(uiImage: .designSystem(.lock)!)
-										}
-									}
-									
-									Text(mak.reactionComment ?? "")
+						HStack(alignment: .top) {
+							RoundedRectangle(cornerRadius: 12)
+								.foregroundColor(.DarkGrey)
+								.frame(width: 60, height: 80)
+								.overlay(
+									MakHolyImageView(imageId: mak.makImg!, type: .mini)
+								)
+							VStack(alignment: .leading) {
+								HStack {
+									Text(mak.makNm ?? "")
+										.foregroundColor(.White)
 										.SF14R()
-										.foregroundColor(.W85)
 									
+									Image(uiImage: .designSystem(.like)!)
 									Spacer()
-										.frame(height: 20)
 									
-									HStack {
-										Text(mak.reactionCommentDate ?? "")
-											.SF14R()
-											.foregroundColor(.W25)
-										
-										Spacer()
-										
-										Button {
-											print("@@@ mak 11 \(mak)")
-											self.targetMak = mak
-											showActionSheet = true
-										} label: {
-											Text("수정")
-												.SF12R()
-										}
+									if mak.cmVisibility! == "N" {
+										Image(uiImage: .designSystem(.lock)!)
 									}
 								}
-								.padding(.leading)
+								
+								Text(mak.reactionComment ?? "")
+									.SF14R()
+									.foregroundColor(.W85)
+								
+								Spacer()
+									.frame(height: 20)
+								
+								HStack {
+									Text(mak.reactionCommentDate ?? "")
+										.SF14R()
+										.foregroundColor(.W25)
+									
+									Spacer()
+									
+									Button {
+										print("@@@ mak 11 \(mak)")
+										self.targetMak = mak
+										showActionSheet = true
+									} label: {
+										Text("수정")
+											.SF12R()
+									}
+								}
 							}
-							.padding()
-							Divider()
+							.padding(.leading)
 						}
+						.onAppear {
+							if mak == viewModel.makModel.last {
+								if !viewModel.isLastPage {
+									var offset = viewModel.currentOffset
+									offset += 1
+									withAnimation {
+										viewModel.getUserMakFolder(segmentName: "comment", offset: offset)
+									}
+								}
+							}
+						}
+						.padding()
+						Divider()
+						
 					}
 				}
 			}
