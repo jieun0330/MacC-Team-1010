@@ -69,7 +69,7 @@ extension InfoLikePercentageView {
 			}
 			else {
 				Spacer()
-				Text("평가가 10개 이상 모이면 그래프를 볼 수 있어요!")
+				Text("평가가 5개 이상 모이면 그래프를 볼 수 있어요!")
 					.SF14R()
 					.foregroundColor(.W50)
 				Spacer()
