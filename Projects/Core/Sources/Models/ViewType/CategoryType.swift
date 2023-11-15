@@ -23,7 +23,7 @@ public enum CategoryType {
 		case .characteristics:
 			return "특징으로 찾기"
 		case .event:
-			return "2023 대한민국 주류대상"
+			return "대한민국 주류대상"
 		case .new:
 			return "새로 나왔어요"
 		case .comment:

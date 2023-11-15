@@ -24,7 +24,7 @@ struct MakgeolliInfoSingleView: View {
 					.frame(height: 320)
 					.overlay {
 						VStack(spacing: 0) {
-							MakHolyImageView(imageId: makHoly.makImageNumber!, type: .large)
+							MakHolyImageView(imageId: makHoly.makImageNumber!, type: .middle)
 								.padding(.bottom, 16)
 							
 							Text(makHoly.makName ?? "")
