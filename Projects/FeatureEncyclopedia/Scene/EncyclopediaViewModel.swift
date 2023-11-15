@@ -31,7 +31,7 @@ final class EncyclopediaViewModel: ObservableObject {
 			do {
 				makModel = []
 				let response = try await self.userRepository.getUserMakFolder(
-					GetUserMakFolderRequest(userId: 1546076304,
+					GetUserMakFolderRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 											segmentName: segmentName,
 											offset: offset)
 				)
@@ -57,7 +57,7 @@ final class EncyclopediaViewModel: ObservableObject {
 		Task {
 			do {
 				let response = try await self.userRepository.getUserMakFolder(
-					GetUserMakFolderRequest(userId: 1546076304,
+					GetUserMakFolderRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 											segmentName: segmentName,
 											offset: offset)
 				)
@@ -83,7 +83,7 @@ final class EncyclopediaViewModel: ObservableObject {
 		Task {
 			do {
 				let response = try await self.userRepository.updateComment(
-					UpdateCommentRequest(userId: 1546076304,
+					UpdateCommentRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 										 makNumber: makSeq,
 										 contents: contents,
 										 isVisible: isVisible)
@@ -105,7 +105,7 @@ final class EncyclopediaViewModel: ObservableObject {
 		Task {
 			do {
 				let response = try await self.userRepository.deleteComment(
-					DeleteCommentRequest(userId: 1546076304,
+					DeleteCommentRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 										 makNumber: makSeq)
 				)
 				if response.status == 200 {
