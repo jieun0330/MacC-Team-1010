@@ -12,6 +12,8 @@ import Core
 
 struct SearchResultView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
+	@State private var isModelPresented: Bool = false
+	@State private var selectedMakHoly: SearchResult? = nil
 	
 	var body: some View {
 		if searchViewModel.fetchLoading {
@@ -28,11 +30,8 @@ struct SearchResultView: View {
 		} else {
 			ScrollView(showsIndicators: false) {
 				ForEach(searchViewModel.resultMakHolies, id: \.makNumber) { makHoly in
-					NavigationLink {
-						InformationView(makHolyId: Int(makHoly.makNumber ?? 0))
-							.onAppear {
-								searchViewModel.addSearchHistory(makName: makHoly.makName ?? "")
-							}
+					Button {
+						self.selectedMakHoly = makHoly
 					} label: {
 						SearchResultSingleView(makHoly: makHoly)
 					}
@@ -41,6 +40,14 @@ struct SearchResultView: View {
 						DividerView()
 					}
 				}
+			}
+			.fullScreenCover(item: $selectedMakHoly) { makHoly in
+				InformationView(makHolyId: makHoly.makNumber ?? 0)
+					.onAppear {
+						if let name = makHoly.makName {
+							searchViewModel.addSearchHistory(makName: name)
+						}
+					}
 			}
 		}
 	}

@@ -17,14 +17,14 @@ struct InfoDescriptionView: View {
 			
 			HStack {
 				Text("소개")
-					.font(.style(.SF20B))
+					.SF20B()
 					.foregroundColor(Color(uiColor: .designSystem(.white)!))
 				Spacer()
 			}
 			.padding(.vertical, 20)
 			
 			Text(description)
-				.font(.style(.SF14R))
+				.SF14R()
 				.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)

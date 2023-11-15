@@ -28,6 +28,8 @@ extension InfoLikePercentageView {
 		HStack(spacing: 12) {
 			
 			Text(likeDetail.likeText)
+				.SF14R()
+				.foregroundColor(.W85)
 			
 			if likeDetail.isEnough {
 				RoundedRectangle(cornerRadius: 11)
@@ -49,6 +51,8 @@ extension InfoLikePercentageView {
 			}
 			
 			Text(likeDetail.dislikeText)
+				.SF14R()
+				.foregroundColor(.W85)
 		}
 	}
 	

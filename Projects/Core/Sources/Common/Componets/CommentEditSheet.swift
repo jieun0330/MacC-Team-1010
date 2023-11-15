@@ -12,12 +12,12 @@ import Combine
 public struct CommentEditSheet: View {
 	
 	@Binding public var isPresented: Bool
+	@FocusState private var textFieldFocused: Bool
 	
 	@State public var comment: MyComment
 	
 	var state: CommentEditState
 	private let textLimit = 250
-	private let lineLimit = 5
 	
 	public typealias saveHandler = (MyComment) -> Void
 	public var saveCompletion: saveHandler
@@ -51,8 +51,8 @@ public struct CommentEditSheet: View {
 				}
 				.onReceive(Just(comment.contents)) { _ in
 					limitText()
-					limitLines()
 				}
+				.focused($textFieldFocused)
 				.frame(maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .topLeading)
 				.font(.style(.SF17R))
 				.foregroundColor(.W85)
@@ -63,21 +63,16 @@ public struct CommentEditSheet: View {
 			
 			Spacer()
 		}
+		.onAppear {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+				self.textFieldFocused = true
+			}
+		}
 	}
 	
 	private func limitText() {
 		if comment.contents.count > textLimit {
 			comment.contents = String(comment.contents.prefix(textLimit))
-		}
-	}
-	
-	private func limitLines() {
-		let newlineCount = comment.contents.filter { $0 == "\n" }.count
-		if newlineCount > lineLimit {
-			let filteredText = comment.contents.split(separator: "\n", maxSplits: lineLimit + 1)
-				.prefix(lineLimit)
-				.joined(separator: "\n")
-			comment.contents = String(filteredText)
 		}
 	}
 
@@ -113,6 +108,7 @@ extension CommentEditSheet {
 				Spacer()
 				
 				Button {
+					comment.contents = comment.contents.removeTrailingSpaces()
 					saveCompletion(comment)
 					isPresented = false
 				} label: {

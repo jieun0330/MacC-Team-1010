@@ -65,7 +65,7 @@ extension InfoCommentsListView {
 				}
 				
 				Text(comment.userName)
-					.font(.style(.SF14R))
+					.SF14R()
 					.foregroundColor(.W50)
 				
 				Spacer()
@@ -81,7 +81,7 @@ extension InfoCommentsListView {
 			
 			// 리뷰 작성 날짜
 			HStack {
-				Text(comment.date)
+				Text(comment.date.extractDateFromISOString() ?? "")
 					.SF14R()
 					.foregroundColor(.W50)
 				
@@ -93,14 +93,14 @@ extension InfoCommentsListView {
 		.padding(16)
 		.background(
 			RoundedRectangle(cornerRadius: 15)
-				.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
+				.foregroundColor(.DarkGrey)
 		)
 	}
 	
 	func noReactionSingleView() -> some View {
 		VStack{
 			Spacer()
-			Text("아직 코멘트가 없어요\n첫번째 코멘트를 남겨보세요")
+			Text("아직 공개된 코멘트가 없어요")
 				.SF12R()
 				.foregroundColor(.W50)
 				.multilineTextAlignment(.center)
@@ -110,7 +110,7 @@ extension InfoCommentsListView {
 		.padding(16)
 		.background(
 			RoundedRectangle(cornerRadius: 15)
-				.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
+				.foregroundColor(.DarkGrey)
 		)
 	}
 	

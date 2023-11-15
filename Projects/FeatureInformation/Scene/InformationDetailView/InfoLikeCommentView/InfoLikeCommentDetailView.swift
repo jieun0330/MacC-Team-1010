@@ -62,7 +62,7 @@ extension InfoLikeCommentDetailView {
 				Button {
 					isPresented = false
 				} label: {
-					Text("취소")
+					Text("뒤로")
 						.SF17R()
 						.foregroundColor(.Primary)
 				}
@@ -78,7 +78,7 @@ extension InfoLikeCommentDetailView {
 				Button {
 				
 				} label: {
-					Text("취소")
+					Text("뒤로")
 						.SF17R()
 						.foregroundColor(.Primary)
 				}
@@ -126,7 +126,7 @@ extension InfoLikeCommentDetailView {
 			
 			// 리뷰 작성 날짜
 			HStack {
-				Text(comment.date)
+				Text(comment.date.extractDateFromISOString() ?? "")
 					.SF14R()
 					.foregroundColor(.W50)
 				

@@ -21,7 +21,7 @@ struct InfoLinkView: View {
 			HStack {
 				Text("정보")
 					.SF20B()
-					.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					.foregroundColor(.White)
 				Spacer()
 				
 			}
@@ -60,7 +60,7 @@ extension InfoLinkView {
 				
 				Link(destination: url , label: {
 					Text(brewery.name)
-						.font(.style(.SF14R))
+						.SF14R()
 						.foregroundColor(.Primary)
 				})
 				

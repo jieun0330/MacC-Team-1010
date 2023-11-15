@@ -19,27 +19,37 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
-		
-		ScrollView(.vertical, showsIndicators: false) {
-			VStack(spacing: 0) {
-				InformationCardView(viewModel: viewModel)
-				InformationDetailView(viewModel: viewModel)
+		ZStack(alignment: viewModel.isFetchCompleted ? .top : .center) {
+			if viewModel.isFetchCompleted {
+				ScrollView(.vertical, showsIndicators: false) {
+					ZStack(alignment: .top) {
+						VStack(spacing: 0) {
+							InformationCardView(viewModel: viewModel)
+								.padding(.top, 28.5)
+							InformationDetailView(viewModel: viewModel)
+						}
+						HStack {
+							InfoBookMarkButton(viewModel: viewModel)
+							Spacer()
+						}
+						.padding(.horizontal, 16)
+					}
+				}
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
+				}
+			} else {
+				ProgressView()
 			}
-			.alert(isPresented: $viewModel.errorState) {
-				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-					  dismissButton: .default(Text("확인")))
-			}
-		}
-		.navigationBarTitleDisplayMode(.inline)
-		.navigationBarBackButtonHidden(true)
-		.toolbar{
-			ToolbarItem(placement: .navigationBarLeading) {
+			// 상단 고정 Back Button
+			HStack {
+				Spacer()
 				InfoBackButton()
 			}
-			ToolbarItem(placement: .navigationBarTrailing) {
-				InfoBookMarkButton(viewModel: viewModel)
-			}
+			.padding(.horizontal, 16)
 		}
+		.statusBarHidden(true)
 		.onAppear(perform: {
 			viewModel.fetchDatas()
 		})
@@ -49,7 +59,6 @@ public struct InformationView: View {
 		})
 		// 코멘트 수정 ActionSheet
 		.confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden) {
-			
 			Button("수정하기") {
 				viewModel.showActionSheet.toggle()
 				viewModel.showCommentSheet.toggle()
@@ -63,8 +72,6 @@ public struct InformationView: View {
 			Button("취소하기", role: .cancel) {
 				print("취소하기")
 			}
-			
-			
 		}
 		//코멘트 작성 Modal Sheet
 		.sheet(isPresented: $viewModel.showCommentSheet, content: {
@@ -101,9 +108,6 @@ public struct InformationView: View {
 					}
 				  ))
 		}
-
-		
-		
 	}
 }
 

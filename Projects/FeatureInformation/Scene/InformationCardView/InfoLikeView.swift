@@ -65,7 +65,6 @@ extension InfoLikeView {
 					Text("아쉬워요")
 						.SF17R()
 				}
-				.font(.style(.SF17R))
 				.foregroundColor(viewModel.myReaction.likeState == .dislike ? .white : .W85)
 			}
 		})
