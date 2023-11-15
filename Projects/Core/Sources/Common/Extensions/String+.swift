@@ -23,4 +23,8 @@ public extension String {
 		}
 		return "\(year)년 \(month)월 \(day)일"
 	}
+	
+	func removeTrailingSpaces() -> String {
+		return self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+	}
 }
