@@ -13,9 +13,11 @@ import DesignSystem
 public struct InformationView: View {
 	
 	@StateObject var viewModel: InformationViewModel
+	@Binding var isModelPresented: Bool
 	
-	public init(makHolyId: Int) {
+	public init(makHolyId: Int, isModelPresented: Binding<Bool>) {
 		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository(), userRepo: DefaultUserRepository()))
+		self._isModelPresented = isModelPresented
 	}
 	
 	public var body: some View {
