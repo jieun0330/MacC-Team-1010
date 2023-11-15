@@ -100,7 +100,7 @@ extension InfoCommentsListView {
 	func noReactionSingleView() -> some View {
 		VStack{
 			Spacer()
-			Text("아직 코멘트가 없어요\n첫번째 코멘트를 남겨보세요")
+			Text("아직 공개된 코멘트가 없어요")
 				.SF12R()
 				.foregroundColor(.W50)
 				.multilineTextAlignment(.center)
