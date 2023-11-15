@@ -43,6 +43,11 @@ struct SearchResultView: View {
 			}
 			.fullScreenCover(item: $selectedMakHoly) { makHoly in
 				InformationView(makHolyId: makHoly.makNumber ?? 0)
+					.onAppear {
+						if let name = makHoly.makName {
+							searchViewModel.addSearchHistory(makName: name)
+						}
+					}
 			}
 		}
 	}
