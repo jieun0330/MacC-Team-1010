@@ -11,6 +11,7 @@ import Core
 import Utils
 
 final class OnboardingViewModel: ObservableObject {
+	@Published var errorState = false
 	@Published var fetchLoading = false
 	@Published var navigationState = false
 	
@@ -34,14 +35,18 @@ final class OnboardingViewModel: ObservableObject {
 					if let response = response.result, let userID = response.userID {
 						UserDefaultsSetting.nickname = nickname
 						try KeyChainManager.shared.create(account: .userId, data: "\(userID)")
+						fetchLoading = false
+						navigationState = true
+					} else {
+						errorState = true
 					}
 				} catch {
 					Logger.debug(error: error, message: "")
+					errorState = true
 				}
-				fetchLoading = false
-				navigationState = true
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}

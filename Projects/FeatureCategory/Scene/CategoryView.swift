@@ -39,6 +39,10 @@ public struct CategoryView: View {
 						viewModel.fetchRecentComments()
 					}
 				}
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
+				}
 		} else {
 			VStack(spacing: 0) {
 				if type == .characteristics {
@@ -72,6 +76,10 @@ public struct CategoryView: View {
 				if viewModel.fetchLoading && type != .event {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
 				}
+			}
+			.alert(isPresented: $viewModel.errorState) {
+				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+					  dismissButton: .default(Text("확인")))
 			}
 		}
 	}

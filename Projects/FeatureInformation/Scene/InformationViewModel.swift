@@ -23,6 +23,7 @@ final class InformationViewModel: ObservableObject {
 		self.userRepo = userRepo
 	}
 	
+	@Published var errorState = false
 	@Published var isFetchCompleted: Bool = false
 	@Published var makHoly: MakHoly = MakHoly()
 	@Published var myReaction: MyReaction = MyReaction()
@@ -62,7 +63,6 @@ final class InformationViewModel: ObservableObject {
 	@MainActor
 	func fetchMakHoly() {
 		Task {
-			
 			do {
 				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
 				self.makHoly = result.0
@@ -73,8 +73,8 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -fetchMakHoly()")
+				errorState = true
 			}
-			
 		}
 	}
 	
@@ -93,13 +93,13 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -fetchReactions()")
+				errorState = true
 			}
-			
 		}
 	}
 	
 	// Comment Visibe 변경
-	@MainActor 
+	@MainActor
 	func toggleCommentVisible() {
 		
 		self.myReaction.comment?.isVisible.toggle()
@@ -110,7 +110,6 @@ final class InformationViewModel: ObservableObject {
 		}
 		Task {
 			do {
-				
 				let response = try await userRepo.updateComment(
 					UpdateCommentRequest(
 						userId: self.userId,
@@ -121,35 +120,31 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == false {
 					self.myReaction.comment?.isVisible.toggle()
 					// 네트워크 확인 Alert
+					errorState = true
 				}
-				
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -toggleCommentVisible()")
+				errorState = true
 			}
 		}
-		
 	}
 	
 	func likeButtonTapped() {
-		
 		switch self.myReaction.likeState {
 		case .like:
 			self.myReaction.likeState = .none
 		default:
 			self.myReaction.likeState = .like
 		}
-		
 	}
 	
 	func dislikeButtonTapped() {
-		
 		switch self.myReaction.likeState {
 		case .dislike:
 			self.myReaction.likeState = .none
 		default:
 			self.myReaction.likeState = .dislike
 		}
-		
 	}
 	
 	@MainActor
@@ -165,11 +160,12 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -postLikeState()")
+				errorState = true
 			}
 		}
 	}
 	
-	@MainActor 
+	@MainActor
 	func toggleBookMark() {
 		myReaction.isBookMarked.toggle()
 		if self.myReaction.isBookMarked {
@@ -189,10 +185,11 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
-					//TODO:  찜하기 실패 Alert
+					errorState = true
 				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
+				errorState = true
 			}
 		}
 	}
@@ -207,14 +204,15 @@ final class InformationViewModel: ObservableObject {
 				print("----------------------------------")
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
-					//TODO:  찜삭제 실패 Alert
+					errorState = true
 				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
+				errorState = true
 			}
 		}
 	}
-
+	
 	@MainActor
 	func deleteComment() {
 		Task {
@@ -228,9 +226,11 @@ final class InformationViewModel: ObservableObject {
 					self.myReaction.comment = nil
 				} else {
 					// 네트워크 확인 Alert
+					errorState = true
 				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+				errorState = true
 			}
 		}
 	}
@@ -252,12 +252,14 @@ final class InformationViewModel: ObservableObject {
 					self.myReaction.comment = myComment
 				} else {
 					// 네트워크 확인 Alert
+					errorState = true
 				}
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+				errorState = true
 			}
 		}
 	}
@@ -275,17 +277,15 @@ final class InformationViewModel: ObservableObject {
 					self.myReaction = result.1
 				} else {
 					// 네트워크 확인 Alert
+					errorState = true
 				}
-				
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
+				errorState = true
 			}
 		}
 	}
-	
 }
-
-

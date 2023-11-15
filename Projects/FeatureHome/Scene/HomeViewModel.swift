@@ -14,6 +14,7 @@ final class HomeViewModel: ObservableObject {
 	@Published var fetchLoading = true
 	@Published var makListLoading = true
 	@Published var commentsLoading = true
+	@Published var errorState = false
 	
 	@Published var newItems: [NewMakListMakgeolliDetail] = []
 	@Published var comments: [RecentComment] = []
@@ -45,9 +46,14 @@ final class HomeViewModel: ObservableObject {
 			do {
 				let response = try await homeRepository.fetchNewMakList()
 				newItems = response.result ?? []
-				makListLoading = false
+				if response.status == 200 {
+					makListLoading = false
+				} else {
+					errorState = true
+				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}
@@ -58,9 +64,14 @@ final class HomeViewModel: ObservableObject {
 			do {
 				let response = try await homeRepository.fetchRecentComment()
 				comments = response.result ?? []
-				commentsLoading = false
+				if response.status == 200 {
+					commentsLoading = false
+				} else {
+					errorState = true
+				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}
