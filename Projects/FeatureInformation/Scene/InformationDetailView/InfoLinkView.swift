@@ -32,8 +32,7 @@ struct InfoLinkView: View {
 				.padding(.vertical, 10)
 			
 			//판매 링크
-			if let stringURL = brewery.salesURL,
-			   let url = URL(string: stringURL) {
+			if let url = urlConverter(urlString: brewery.salesURL) {
 				
 				DividerView()
 				
@@ -57,8 +56,7 @@ extension InfoLinkView {
 			
 			Spacer()
 			
-			if let stringURL = brewery.url,
-			   let url = URL(string: stringURL) {
+			if let url = urlConverter(urlString: brewery.url) {
 				
 				Link(destination: url , label: {
 					Text(brewery.name)
@@ -88,5 +86,16 @@ extension InfoLinkView {
 					.foregroundColor(.Primary)
 			})
 		}
+	}
+	
+	func urlConverter(urlString: String?) -> URL? {
+		guard let urlString = urlString?.trimmingCharacters(in: .whitespacesAndNewlines), !urlString.isEmpty else { return nil }
+		
+		var cleanedURLString = urlString
+		if !cleanedURLString.hasPrefix("http://") && !cleanedURLString.hasPrefix("https://") {
+			cleanedURLString = "http://" + cleanedURLString
+		}
+		
+		return URL(string: urlString)
 	}
 }
