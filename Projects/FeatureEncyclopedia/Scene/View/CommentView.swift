@@ -20,106 +20,117 @@ public struct CommentView: View {
 	private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
 	
 	public var body: some View {
-		ScrollView {
-			VStack {
-				HStack {
-					Text("\((viewModel.makModel.filter { $0.reactionComment != nil }).count)개의 막걸리에 코멘트를 남겼어요")
-						.SF12R()
-						.foregroundColor(.W50)
-					Spacer()
+		if viewModel.fetchLoading {
+			ProgressView()
+				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
+				.background(Color.DarkBase)
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
 				}
-				.padding(.vertical, 10)
-				.padding(.leading, 12)
-				
-				ForEach(viewModel.makModel, id: \.self) { mak in
-					if mak.reactionComment != nil {
-						HStack(alignment: .top) {
-							RoundedRectangle(cornerRadius: 12)
-								.foregroundColor(.DarkGrey)
-								.frame(width: 60, height: 80)
-								.overlay(
-									MakHolyImageView(imageId: mak.makImg!, type: .mini)
-								)
-							VStack(alignment: .leading) {
-								HStack {
-									Text(mak.makNm ?? "")
-										.foregroundColor(.White)
+		} else {
+			ScrollView {
+				VStack {
+					HStack {
+						Text("\((viewModel.makModel.filter { $0.reactionComment != nil }).count)개의 막걸리에 코멘트를 남겼어요")
+							.SF12R()
+							.foregroundColor(.W50)
+						Spacer()
+					}
+					.padding(.vertical, 10)
+					.padding(.leading, 12)
+					
+					ForEach(viewModel.makModel, id: \.self) { mak in
+						if mak.reactionComment != nil {
+							HStack(alignment: .top) {
+								RoundedRectangle(cornerRadius: 12)
+									.foregroundColor(.DarkGrey)
+									.frame(width: 60, height: 80)
+									.overlay(
+										MakHolyImageView(imageId: mak.makImg!, type: .mini)
+									)
+								VStack(alignment: .leading) {
+									HStack {
+										Text(mak.makNm ?? "")
+											.foregroundColor(.White)
+											.SF14R()
+										
+										Image(uiImage: .designSystem(.like)!)
+										Spacer()
+										
+										if mak.cmVisibility! == "N" {
+											Image(uiImage: .designSystem(.lock)!)
+										}
+									}
+									
+									Text(mak.reactionComment ?? "")
 										.SF14R()
+										.foregroundColor(.W85)
 									
-									Image(uiImage: .designSystem(.like)!)
 									Spacer()
+										.frame(height: 20)
 									
-									if mak.cmVisibility! == "N" {
-										Image(uiImage: .designSystem(.lock)!)
+									HStack {
+										Text(mak.reactionCommentDate ?? "")
+											.SF14R()
+											.foregroundColor(.W25)
+										
+										Spacer()
+										
+										Button {
+											print("@@@ mak 11 \(mak)")
+											self.targetMak = mak
+											showActionSheet = true
+										} label: {
+											Text("수정")
+												.SF12R()
+										}
 									}
 								}
-								
-								Text(mak.reactionComment ?? "")
-									.SF14R()
-									.foregroundColor(.W85)
-								
-								Spacer()
-									.frame(height: 20)
-								
-								HStack {
-									Text(mak.reactionCommentDate ?? "")
-										.SF14R()
-										.foregroundColor(.W25)
-									
-									Spacer()
-									
-									Button {
-										showActionSheet.toggle()
-									} label: {
-										Text("수정")
-											.SF12R()
-									}
-									.confirmationDialog("", isPresented: $showActionSheet,
-														titleVisibility: .hidden) {
-										Button("수정하기") {
-											self.targetMak = mak
-											showModal = true
-										}
-										Button("삭제하기", role: .destructive) {
-											self.targetMak = mak
-											showingAlert = true
-										}
-										Button("취소하기", role: .cancel) { }
-									}
-								}
+								.padding(.leading)
 							}
-							.padding(.leading)
+							.padding()
+							Divider()
 						}
-						.padding()
-						Divider()
 					}
 				}
 			}
-		}
-		.sheet(isPresented: $showModal) {
-			CommentEditView(showModal: $showModal,
-							initialComment: targetMak!.reactionComment!,
-							viewModel: viewModel,
-							mak: targetMak!,
-							isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
-		}
-		.alert(isPresented: $showingAlert) {
-			Alert(title: Text("코멘트 삭제"),
-				  message: Text("코멘트를 삭제하시겠어요?"),
-				  primaryButton: .default(
-					Text("취소")
-				  ),
-				  secondaryButton: .destructive(
-					Text("삭제하기"),
-					action: {
-						viewModel.deleteComment(makSeq: targetMak!.makSeq!)
-					}
-				  )
-			)
-		}
-		.alert(isPresented: $viewModel.errorState) {
-			Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-				  dismissButton: .default(Text("확인")))
+			.alert(isPresented: $showingAlert) {
+				Alert(title: Text("코멘트 삭제"),
+					  message: Text("코멘트를 삭제하시겠어요?"),
+					  primaryButton: .default(
+						Text("취소")
+					  ),
+					  secondaryButton: .destructive(
+						Text("삭제하기"),
+						action: {
+							viewModel.deleteComment(makSeq: targetMak!.makSeq!)
+						}
+					  )
+				)
+			}
+			.alert(isPresented: $viewModel.errorState) {
+				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+					  dismissButton: .default(Text("확인")))
+			}
+			.sheet(isPresented: $showModal) {
+				CommentEditView(showModal: $showModal,
+								initialComment: targetMak!.reactionComment!,
+								viewModel: viewModel,
+								mak: targetMak!,
+								isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
+			}
+			.confirmationDialog("", isPresented: $showActionSheet,
+								titleVisibility: .hidden) {
+				Button("수정하기") {
+					showModal = true
+				}
+				Button("삭제하기", role: .destructive) {
+					showingAlert = true
+				}
+				Button("취소하기", role: .cancel) { }
+			}
 		}
 	}
 }

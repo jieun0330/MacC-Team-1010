@@ -22,11 +22,12 @@ final class EncyclopediaViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func getUserMakFolder() {
+	func getUserMakFolder(segmentName: String = "entire") {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await self.userRepository.getUserMakFolder(
-					GetUserMakFolderRequest(userId: 1546076304)
+					GetUserMakFolderRequest(userId: 1546076304, segmentName: segmentName)
 				)
 				if let content = response.result?.makUserTable?.content {
 					makModel = content
@@ -34,7 +35,7 @@ final class EncyclopediaViewModel: ObservableObject {
 					makModel = []
 				}
 				if response.status == 200 {
-					fetchLoading = true
+					fetchLoading = false
 				} else {
 					errorState = true
 					makModel = []
@@ -46,7 +47,7 @@ final class EncyclopediaViewModel: ObservableObject {
 			}
 		}
 	}
-	
+
 	@MainActor
 	func updateComment(makSeq: Int, contents: String, isVisible: String) {
 		Task {

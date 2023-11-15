@@ -11,31 +11,41 @@ import Core
 
 // 찜 뷰
 public struct BookmarkView: View {
-    @ObservedObject var viewModel: EncyclopediaViewModel
-    
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    
-    public var body: some View {
-        
-        ScrollView {
-            HStack {
-                Text("\((viewModel.makModel.filter { $0.reactionWish == "WISH" }).count)개의 막걸리를 찜했어요")
-                    .SF12R()
-                    .foregroundColor(.W50)
-                Spacer()
-            }
-            .padding(.vertical, 10)
-            .padding(.leading, 12)
-
-            LazyVGrid(columns: columns, spacing: 16, content: {
-                
-                ForEach(viewModel.makModel, id: \.self) { mak in
-                    
-                    if mak.reactionWish == "WISH" {
-                        ThumbnailView(mak: mak, type: .bookmark)
-                    }
-                }
-            })
-        }
-    }
+	@ObservedObject var viewModel: EncyclopediaViewModel
+	
+	private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+	
+	public var body: some View {
+		if viewModel.fetchLoading {
+			ProgressView()
+				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+				.foregroundColor(Color(uiColor: .designSystem(.white)!))
+				.background(Color.DarkBase)
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
+				}
+		} else {
+			ScrollView {
+				HStack {
+					Text("\((viewModel.makModel.filter { $0.reactionWish == "WISH" }).count)개의 막걸리를 찜했어요")
+						.SF12R()
+						.foregroundColor(.W50)
+					Spacer()
+				}
+				.padding(.vertical, 10)
+				.padding(.leading, 12)
+				
+				LazyVGrid(columns: columns, spacing: 16, content: {
+					
+					ForEach(viewModel.makModel, id: \.self) { mak in
+						
+						if mak.reactionWish == "WISH" {
+							ThumbnailView(mak: mak, type: .bookmark)
+						}
+					}
+				})
+			}
+		}
+	}
 }

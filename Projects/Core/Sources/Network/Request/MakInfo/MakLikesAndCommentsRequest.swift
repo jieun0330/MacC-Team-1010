@@ -10,8 +10,10 @@ import Foundation
 
 public struct MakLikesAndCommentsRequest: Codable {
 	let makNumber: Int
+	let offset: Int
 	
-	public init(makNumber: Int) {
+	public init(makNumber: Int, offset: Int = 0) {
 		self.makNumber = makNumber
+		self.offset = offset
 	}
 }

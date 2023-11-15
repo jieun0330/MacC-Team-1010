@@ -16,7 +16,13 @@ public struct MakLikesAndCommentsResponse: Codable {
 
 public struct MakLikesAndCommentsResult: Codable {
 	public let content: [MakLikeCommentContent]?
-	public let pageableInfo: PageableInfo?
+	public let pageable: MakLikesAndCommentsPageable?
+	public let totalPages, totalElements: Int?
+	public let last: Bool?
+	public let size, number: Int?
+	public let sort: MakLikesAndCommentsSort?
+	public let numberOfElements: Int?
+	public let first, empty: Bool?
 	
 	// TODO: pageableInfo 로직
 	public func toEntity() -> (LikeDetail, [VisibleComment]) {
@@ -81,11 +87,13 @@ public struct VisibleCommentResponse: Codable {
 	}
 }
 
-public struct PageableInfo: Codable {
-	public let currentPage: Int?
-	public let size: Int?
-	public let first: Bool?
-	public let last: Bool?
-	public let totalMakElements: Int?
-	public let totalPages: Int?
+public struct MakLikesAndCommentsPageable: Codable {
+	public let pageNumber, pageSize: Int?
+	public let sort: MakLikesAndCommentsSort?
+	public let offset: Int?
+	public let paged, unpaged: Bool?
+}
+
+public struct MakLikesAndCommentsSort: Codable {
+	public let empty, sorted, unsorted: Bool?
 }

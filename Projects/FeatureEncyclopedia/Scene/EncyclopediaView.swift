@@ -10,78 +10,98 @@ import SwiftUI
 import Core
 
 public struct EncyclopediaView: View {
-	
-	@State var index = 0
 	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
-	private let titles = ["전체", "좋았어요", "아쉬워요", "찜", "코멘트"]
+	@State private var selectedPicker: headerType = .all
+	
+	@Namespace private var animation
+	
+	enum headerType: String, CaseIterable {
+		case all = "전체"
+		case like = "좋았어요"
+		case dislike = "아쉬워요"
+		case bookmark = "찜"
+		case comment = "코멘트"
+	}
 	
 	public init() { }
 	
 	public var body: some View {
 		NavigationStack {
-			VStack {
-				TabNameView()
-				
-				TabView(selection: $index) {
-					ForEach (0..<5) { pageId in
-						switch pageId {
-						case 0:
-							AllView(viewModel: viewModel)
-						case 1:
-							LikeView(viewModel: viewModel)
-						case 2:
-							DislikeView(viewModel: viewModel)
-						case 3:
-							BookmarkView(viewModel: viewModel)
-						default:
-							CommentView(viewModel: viewModel)
-						}
-					}
-				}
-				.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-			}
-			.onAppear {
-				if !viewModel.fetchLoading {
-					viewModel.getUserMakFolder()
-				}
+			VStack(spacing: 0) {
+				HeaderView()
+				Spacer()
+					.frame(height: 16)
+				BodyView(selectedType: selectedPicker)
 			}
 			.background(Color.DarkBase)
-			.alert(isPresented: $viewModel.errorState) {
-				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-					  dismissButton: .default(Text("확인")))
-			}
 		}
 	}
 }
 
 private extension EncyclopediaView {
 	@ViewBuilder
-	func TabNameView() -> some View {
-		ScrollViewReader { proxy in
-			
-			HStack(spacing: 10) {
-				
-				ForEach(titles.indices, id: \.self) {id in
-					let title = Text(titles[id])
+	private func HeaderView() -> some View {
+		HStack {
+			ForEach(headerType.allCases, id: \.self) { item in
+				VStack {
+					Text(item.rawValue)
 						.SF14R()
-						.frame(width: 52)
-						.onTapGesture {
-							index = id
-						}
-					VStack {
-						Spacer()
-							.frame(height: 10)
-						title
-							.foregroundColor(self.index == id ? .White : .W85)
+						.frame(maxWidth: .infinity/5, minHeight: 42)
+						.foregroundColor(.White)
+					
+					if selectedPicker == item {
 						Capsule()
-							.frame(width: 68, height: 2)
-							.foregroundColor(self.index == id ? .Primary2 : .DarkBase)
+							.foregroundColor(.Lilac)
+							.frame(height: 3)
+							.matchedGeometryEffect(id: "id", in: animation)
+					}
+				}
+				.onTapGesture {
+					withAnimation(.easeInOut) {
+						self.selectedPicker = item
 					}
 				}
 			}
-			.frame(maxWidth: .infinity)
 		}
 		.background(Color.DarkBase)
+	}
+	
+	@ViewBuilder
+	func BodyView(selectedType: headerType) -> some View {
+		ScrollView(.vertical, showsIndicators: false) {
+			switch selectedType {
+			case .all:
+				AllView(viewModel: viewModel)
+					.onAppear {
+						viewModel.getUserMakFolder()
+					}
+			case .like:
+				LikeView(viewModel: viewModel)
+					.onAppear {
+						viewModel.getUserMakFolder(segmentName: "like")
+					}
+			case .dislike:
+				DislikeView(viewModel: viewModel)
+					.onAppear {
+						viewModel.getUserMakFolder(segmentName: "dislike")
+					}
+			case .bookmark:
+				BookmarkView(viewModel: viewModel)
+					.onAppear {
+						viewModel.getUserMakFolder(segmentName: "wish")
+					}
+			case .comment:
+				CommentView(viewModel: viewModel)
+					.onAppear {
+						viewModel.getUserMakFolder(segmentName: "comment")
+					}
+			}
+		}
+		.background(Color.DarkBase)
+		.alert(isPresented: $viewModel.errorState) {
+			Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+				  dismissButton: .default(Text("확인")))
+		}
 	}
 }

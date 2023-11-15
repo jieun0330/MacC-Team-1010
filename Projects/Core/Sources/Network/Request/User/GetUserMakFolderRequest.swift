@@ -10,8 +10,10 @@ import Foundation
 
 public struct GetUserMakFolderRequest: Codable {
 	public let userId: Int
-	
-	public init(userId: Int) {
+	public let segmentName: String
+
+	public init(userId: Int, segmentName: String) {
 		self.userId = userId
+		self.segmentName = segmentName
 	}
 }

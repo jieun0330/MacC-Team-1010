@@ -17,6 +17,9 @@ final class InformationViewModel: ObservableObject {
 	let maHolyRepo: DefaultMakgeolliRepository
 	let userRepo: DefaultUserRepository
 	
+	var currentOffset: Int = 0
+	var isLastPage = false
+	
 	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
 		self.makHolyId = makHolyId
 		self.maHolyRepo = maHolyRepo
@@ -80,13 +83,21 @@ final class InformationViewModel: ObservableObject {
 	
 	// makLikesAndComments  api
 	@MainActor
-	func fetchReactions() {
+	func fetchReactions(offset: Int = 0) {
 		Task {
-			
 			do {
-				let result = try await maHolyRepo.fetchMakLikesAndComments(makNumber: self.makHolyId)
-				self.likeDetail = result.0
-				self.comments = result.1
+				let response = try await maHolyRepo.fetchMakLikesAndComments(
+					makNumber: self.makHolyId,
+					offset: offset
+				)
+				if offset == 0 {
+					self.likeDetail = response.result?.toEntity().0 ?? LikeDetail()
+					self.comments = response.result?.toEntity().1 ?? []
+				} else {
+					self.comments.append(contentsOf: response.result?.toEntity().1 ?? [])
+				}
+				self.isLastPage = response.result?.last ?? true
+				self.currentOffset = response.result?.pageable?.offset ?? 0
 				print("fetchReactions Completed : -------")
 				print("likeDetail : \(likeDetail)")
 				print("comments : \(comments)")

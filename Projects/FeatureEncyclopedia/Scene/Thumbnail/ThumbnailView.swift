@@ -26,7 +26,7 @@ public struct ThumbnailView: View {
             .frame(width: 110, height: 210)
             .overlay {
                 VStack {
-                    MakHolyImageView(imageId: mak.makImg!, type: .middle)
+                    MakHolyImageView(imageId: mak.makImg!, type: .small)
                     
                     Text(mak.makNm ?? "")
                         .SF12R()
