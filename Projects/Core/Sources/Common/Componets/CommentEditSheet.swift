@@ -12,6 +12,7 @@ import Combine
 public struct CommentEditSheet: View {
 	
 	@Binding public var isPresented: Bool
+	@FocusState private var textFieldFocused: Bool
 	
 	@State public var comment: MyComment
 	
@@ -51,6 +52,7 @@ public struct CommentEditSheet: View {
 				.onReceive(Just(comment.contents)) { _ in
 					limitText()
 				}
+				.focused($textFieldFocused)
 				.frame(maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .topLeading)
 				.font(.style(.SF17R))
 				.foregroundColor(.W85)
@@ -60,6 +62,11 @@ public struct CommentEditSheet: View {
 				.padding(.bottom, keyboardHeight)
 			
 			Spacer()
+		}
+		.onAppear {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+				self.textFieldFocused = true
+			}
 		}
 	}
 	
