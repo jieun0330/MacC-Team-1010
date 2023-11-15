@@ -49,7 +49,6 @@ public struct InformationView: View {
 		})
 		// 코멘트 수정 ActionSheet
 		.confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden) {
-			
 			Button("수정하기") {
 				viewModel.showActionSheet.toggle()
 				viewModel.showCommentSheet.toggle()
@@ -63,8 +62,6 @@ public struct InformationView: View {
 			Button("취소하기", role: .cancel) {
 				print("취소하기")
 			}
-			
-			
 		}
 		//코멘트 작성 Modal Sheet
 		.sheet(isPresented: $viewModel.showCommentSheet, content: {

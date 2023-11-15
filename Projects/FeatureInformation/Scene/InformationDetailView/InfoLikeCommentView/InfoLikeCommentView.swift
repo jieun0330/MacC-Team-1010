@@ -13,6 +13,10 @@ import DesignSystem
 struct InfoLikeCommentView: View {
 	@ObservedObject var viewModel: InformationViewModel
 	
+	private var isEnough: Bool {
+		return viewModel.comments.count > 1
+	}
+	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			
@@ -20,7 +24,7 @@ struct InfoLikeCommentView: View {
 				Text("평가 및 코멘트")
 					.SF20B()
 					.foregroundColor(.White)
-				if viewModel.comments.count > 1 {
+				if isEnough {
 					Image(systemName: "chevron.right")
 						.font(.system(size: 20, weight: .bold))
 						.foregroundColor(.White)
@@ -30,7 +34,7 @@ struct InfoLikeCommentView: View {
 			.padding(.vertical, 20)
 			.padding(.horizontal, 16)
 			.onTapGesture {
-				if viewModel.comments.count > 1 {
+				if isEnough {
 					viewModel.showDetailCommentListSheet = true
 				}
 			}
