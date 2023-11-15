@@ -36,9 +36,9 @@ struct AllView: View {
                 Spacer()
             }
             .padding(.vertical, 10)
-            .padding(.leading, 5)
+            .padding(.leading, 12)
             
-            LazyVGrid(columns: columns, spacing: 16, content: {
+            LazyVGrid(columns: columns, spacing: 20, content: {
                 ForEach(viewModel.makModel, id: \.self) { mak in
                     ThumbnailView(mak: mak, type: .all)
                 }

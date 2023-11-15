@@ -33,6 +33,7 @@ public struct ThumbnailView: View {
                         .foregroundColor(.White)
                         .lineLimit(1)
                         .padding(.horizontal)
+                        .padding(.vertical, 4)
                     
                     HStack(spacing: 14) {
                         
@@ -64,6 +65,7 @@ public struct ThumbnailView: View {
                         }
                     }
                 }
+                .padding(.top, 4)
             }
     }
 }

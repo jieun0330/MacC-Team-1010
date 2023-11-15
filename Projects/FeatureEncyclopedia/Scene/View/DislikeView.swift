@@ -25,8 +25,8 @@ public struct DislikeView: View {
                 Spacer()
             }
             .padding(.vertical, 10)
-            .padding(.leading, 5)
-            
+            .padding(.leading, 12)
+
             LazyVGrid(columns: columns, spacing: 16, content: {
                 
                 ForEach(viewModel.makModel, id: \.self) { mak in
