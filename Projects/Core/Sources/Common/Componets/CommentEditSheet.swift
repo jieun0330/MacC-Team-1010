@@ -7,10 +7,7 @@
 //
 
 import SwiftUI
-public enum CommentEditState {
-	case insert
-	case update
-}
+import Combine
 
 public struct CommentEditSheet: View {
 	
@@ -19,10 +16,16 @@ public struct CommentEditSheet: View {
 	@State public var comment: MyComment
 	
 	var state: CommentEditState
+	private let textLimit = 250
+	private let lineLimit = 5
 	
 	public typealias saveHandler = (MyComment) -> Void
 	public var saveCompletion: saveHandler
 	@State private var keyboardHeight: CGFloat = 0
+	
+	var isValid: Bool {
+		return !comment.contents.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+	}
 	
 	public init(
 		state: CommentEditState,
@@ -37,43 +40,47 @@ public struct CommentEditSheet: View {
 	
 	public var body: some View {
 		VStack(spacing: 0) {
-			ZStack {
-				VStack {
-					headerView()
-						.padding(.top, 15)
-					TextField("",  text: $comment.contents)
-						.placeholder(when: comment.contents.isEmpty) {
-							Text("막걸리에 대한 생각을 자유롭게 적어주세요.")
-								.font(.style(.SF17R))
-								.foregroundColor(.W25)
-						}
+			headerView()
+				.padding(.top, 15)
+		
+			TextField("",  text: $comment.contents, axis: .vertical)
+				.placeholder(when: comment.contents.isEmpty) {
+					Text("막걸리에 대한 생각을 자유롭게 적어주세요.")
 						.font(.style(.SF17R))
-						.foregroundColor(.W85)
-						.padding(.horizontal, 16)
-						.frame(minHeight: 0, maxHeight: .infinity)
-					Spacer()
+						.foregroundColor(.W25)
 				}
-				
-				VStack {
-					Spacer()
-					footerView()
-						.padding(.bottom, keyboardHeight)
+				.onReceive(Just(comment.contents)) { _ in
+					limitText()
+					limitLines()
 				}
-			}
-		}
-		.onAppear {
+				.frame(maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .topLeading)
+				.font(.style(.SF17R))
+				.foregroundColor(.W85)
+				.padding(16)
 			
-			NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
-				if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-					keyboardHeight = keyboardSize.height
-				}
-			}
+			footerView()
+				.padding(.bottom, keyboardHeight)
 			
-			NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-				keyboardHeight = 0
-			}
+			Spacer()
 		}
 	}
+	
+	private func limitText() {
+		if comment.contents.count > textLimit {
+			comment.contents = String(comment.contents.prefix(textLimit))
+		}
+	}
+	
+	private func limitLines() {
+		let newlineCount = comment.contents.filter { $0 == "\n" }.count
+		if newlineCount > lineLimit {
+			let filteredText = comment.contents.split(separator: "\n", maxSplits: lineLimit + 1)
+				.prefix(lineLimit)
+				.joined(separator: "\n")
+			comment.contents = String(filteredText)
+		}
+	}
+
 }
 
 extension CommentEditSheet {
@@ -111,8 +118,9 @@ extension CommentEditSheet {
 				} label: {
 					Text("저장")
 						.SF17B()
-						.foregroundColor(.Primary)
+						.foregroundColor(isValid ? .Primary : .W50)
 				}
+				.disabled(comment.contents.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 				
 			}
 			.padding(.vertical, 11)
@@ -122,7 +130,7 @@ extension CommentEditSheet {
 	}
 	
 	func footerView() -> some View {
-		VStack(spacing: 0) {
+		VStack(spacing: 16) {
 			DividerView()
 			HStack(spacing: 0) {
 				Spacer()

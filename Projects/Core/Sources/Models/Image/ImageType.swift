@@ -23,7 +23,7 @@ public enum ImageType {
 		case .middle:
 			return CGSize(width: 56, height: 114)
 		case .large:
-			return CGSize(width: 77, height: 156)
+			return CGSize(width: 118, height: 244)
 		}
 	}
 	

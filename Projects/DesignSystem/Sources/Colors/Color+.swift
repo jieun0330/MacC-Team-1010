@@ -61,4 +61,7 @@ extension Color {
 	
 	public static let NightSky2Top = Color(hex: "#736D70")
 	public static let NightSky2Bottom = Color(hex: "#252545")
+	
+	public static let CircleTop = Color(hex: "3D3D72")
+	public static let CircleBottom = Color(hex: "000000", opacity: 0)
 }

@@ -13,25 +13,76 @@ import DesignSystem
 struct InfoMyCommentView: View {
 	@ObservedObject var viewModel: InformationViewModel
 	
+	var isCommented: Bool {
+		return viewModel.myReaction.comment != nil
+	}
+	
 	var body: some View {
-		VStack(spacing: 6) {
-			
-			headerView()
-			
-			contentView()
-			
-			if let data = viewModel.myReaction.comment?.date {
-				footerView(date: data)
-			}
-			
+		if let comment = viewModel.myReaction.comment {
+			commentedView(comment: comment)
+		} else {
+			noCommentedView()
 		}
-		.padding(.horizontal, 16)
 	}
 }
 
 extension InfoMyCommentView {
 	@ViewBuilder
-	func headerView() -> some View {
+	func noCommentedView() -> some View {
+		VStack(spacing: 6) {
+			HStack {
+				Text("내 코멘트")
+					.SF12B()
+					.foregroundColor(.W85)
+				
+				Spacer()
+			}
+			.padding(.horizontal, 3)
+			
+			Button {
+				viewModel.showCommentSheet.toggle()
+			} label: {
+				Text("터치해서 코멘트를 남겨보세요!")
+					.SF14R()
+					.foregroundColor(.W85)
+					.frame(maxWidth: .infinity)
+					.lineLimit(1)
+					.padding(16)
+					.background(
+						RoundedRectangle(cornerRadius: 12)
+							.foregroundColor(Color(uiColor: .designSystem(.w10)!))
+					)
+			}
+		}
+		.padding(.horizontal, 16)
+	}
+	
+	@ViewBuilder
+	func commentedView(comment: MyComment) -> some View {
+		VStack(spacing: 6) {
+			headerView(isVisible: comment.isVisible)
+			
+			Text(comment.contents)
+				.font(.style(.SF14R))
+				.foregroundColor(.White)
+				.frame(maxWidth: .infinity, alignment: .topLeading)
+				.multilineTextAlignment(.leading)
+				.lineLimit(nil)
+				.padding(16)
+				.background(
+					RoundedRectangle(cornerRadius: 12)
+						.foregroundColor(Color(uiColor: .designSystem(.w10)!))
+				)
+			
+			
+			footerView(date: comment.date)
+			
+		}
+		.padding(.horizontal, 16)
+	}
+	
+	@ViewBuilder
+	func headerView(isVisible: Bool) -> some View {
 		
 		HStack {
 			Text("내 코멘트")
@@ -40,53 +91,30 @@ extension InfoMyCommentView {
 			
 			Spacer()
 			
-			if let myComment = viewModel.myReaction.comment {
-				Button(action: {
+			
+			Button(action: {
+				
+				viewModel.toggleCommentVisible()
+				viewModel.fetchReactions()
+				
+			}, label: {
+				HStack(spacing: 0) {
 					
-					viewModel.toggleCommentVisible()
+					Text(isVisible ? "전체 공개" : "비공개")
+						.SF12R()
+					Image(systemName: isVisible ? "checkmark" : "lock.fill")
+						.font(.style(.SF12R))
 					
-				}, label: {
-					HStack(spacing: 0) {
-						
-						Text(myComment.isVisible ? "전체 공개" : "비공개")
-							.SF12R()
-						Image(systemName: myComment.isVisible ? "checkmark" : "lock.fill")
-							.font(.style(.SF12R))
-						
-					}
-					.foregroundColor(.W50)
-					.padding(.leading, 30)
-				})
-			}
+				}
+				.foregroundColor(.W50)
+				.padding(.leading, 30)
+			})
+			
 		}
 		.padding(.horizontal, 3)
-		
 	}
 	
-	func contentView() -> some View {
-		Button {
-			
-			viewModel.showCommentSheet.toggle()
-			
-		} label: {
-			
-			let contents = viewModel.myReaction.comment?.contents ?? "터치해서 코멘트를 남겨보세요!"
-			
-			Text(contents)
-				.font(.style(.SF14R))
-				.foregroundColor(Color(uiColor: viewModel.myReaction.comment != nil ? .designSystem(.white)! : .designSystem(.w85)!))
-				.frame(maxWidth: .infinity)
-				.multilineTextAlignment(.leading)
-				.lineLimit(nil)
-				.padding(16)
-				.background(
-					RoundedRectangle(cornerRadius: 12)
-						.foregroundColor(Color(uiColor: .designSystem(.w10)!))
-				)
-		}
-		.disabled(viewModel.myReaction.comment != nil)
-	}
-	
+	@ViewBuilder
 	func footerView(date: String) -> some View {
 		HStack {
 			Text("\(date)")

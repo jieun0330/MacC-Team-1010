@@ -27,6 +27,7 @@ struct InfoLikeCommentDetailView: View {
 				// 내용 ListView
 				ScrollView(showsIndicators: false) {
 					VStack(spacing: 0) {
+						
 						HStack {
 							Text("\(comments.count)개의 코멘트가 있어요")
 								.SF12R()
@@ -35,11 +36,12 @@ struct InfoLikeCommentDetailView: View {
 						}
 						.padding(.top, 16)
 						.padding(.bottom, 6)
+						
 						ForEach(comments) { comment in
 							reactionSingleView(comment: comment)
 								.padding(.vertical, 10)
 							if comment != comments.last {
-								Divider()
+								DividerView()
 							}
 						}
 					}
@@ -83,8 +85,8 @@ extension InfoLikeCommentDetailView {
 				.opacity(0)
 				
 			}
-			.padding(.vertical, 8)
-			.padding(.horizontal, 16)
+			.padding(.vertical, 11)
+			.padding(.horizontal, 8)
 			DividerView()
 		}
 	}
@@ -120,7 +122,7 @@ extension InfoLikeCommentDetailView {
 			Text(comment.content)
 				.SF14R()
 				.foregroundColor(.W85)
-				.frame(maxWidth: .infinity, alignment: .leading)
+				.frame(maxWidth: .infinity, alignment: .topLeading)
 			
 			// 리뷰 작성 날짜
 			HStack {

@@ -13,7 +13,7 @@ struct InfoNameView: View {
 	let name: String
 	let description: String
 	var body: some View {
-		VStack(spacing: 0) {
+		VStack(spacing: 4) {
 			Text(name)
 				.SF24B()
 				.foregroundColor(.White)

@@ -22,19 +22,7 @@ public struct InformationView: View {
 		
 		ScrollView(.vertical, showsIndicators: false) {
 			VStack(spacing: 0) {
-				ZStack {
-					LinearGradient(
-						stops: [
-							Gradient.Stop(color: .NightSky2Top, location: 0.00),
-							Gradient.Stop(color: .NightSky2Bottom, location: 1.00),
-						],
-						startPoint: UnitPoint(x: 0.45, y: 0),
-						endPoint: UnitPoint(x: 0.45, y: 1)
-					)
-					.ignoresSafeArea(.all, edges: .top)
-					
-					InformationCardView(viewModel: viewModel)
-				}
+				InformationCardView(viewModel: viewModel)
 				InformationDetailView(viewModel: viewModel)
 			}
 		}
@@ -56,32 +44,22 @@ public struct InformationView: View {
 			InfoLikeCommentDetailView(isPresented: $viewModel.showDetailCommentListSheet, comments: viewModel.comments, makHolyName: viewModel.makHoly.name)
 		})
 		// 코멘트 수정 ActionSheet
-		.confirmationDialog("", isPresented: $viewModel.showActionSheet) {
-			Button {
+		.confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden) {
+			
+			Button("수정하기") {
 				viewModel.showActionSheet.toggle()
 				viewModel.showCommentSheet.toggle()
-			} label: {
-				Text("수정하기")
-					.SF17R()
-					.foregroundColor(.Primary)
 			}
 			
-			Button {
+			Button("삭제하기", role: .destructive) {
 				viewModel.showActionSheet = false
 				viewModel.showDeleteAlert = true
-			} label: {
-				Text("삭제하기")
-					.SF17R()
-					.foregroundColor(.Alert)
 			}
 			
-			Button(role: .cancel) {
+			Button("취소하기", role: .cancel) {
 				print("취소하기")
-			} label: {
-				Text("취소하기")
-					.SF17R()
-					.foregroundColor(.Primary)
 			}
+			
 			
 		}
 		//코멘트 작성 Modal Sheet
@@ -91,10 +69,10 @@ public struct InformationView: View {
 				CommentEditSheet(
 					state: .update,
 					isPresented: $viewModel.showCommentSheet,
-					comment: comment, 
+					comment: comment,
 					saveCompletion: { myComment in
-					viewModel.updateComment(myComment: myComment)
-				})
+						viewModel.updateComment(myComment: myComment)
+					})
 			} else {
 				// 코멘트 추가
 				CommentEditSheet(
@@ -102,8 +80,8 @@ public struct InformationView: View {
 					isPresented: $viewModel.showCommentSheet,
 					comment: MyComment(),
 					saveCompletion: { myComment in
-					viewModel.insertComment(myComment: myComment)
-				})
+						viewModel.insertComment(myComment: myComment)
+					})
 			}
 			
 		})
@@ -112,7 +90,7 @@ public struct InformationView: View {
 				  primaryButton: .cancel(
 					Text("취소"),
 					action: {}
-				  ), secondaryButton: .default(
+				  ), secondaryButton: .destructive(
 					Text("삭제하기"),
 					action: {
 						viewModel.deleteComment()

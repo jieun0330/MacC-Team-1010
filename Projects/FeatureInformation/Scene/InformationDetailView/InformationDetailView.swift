@@ -14,6 +14,7 @@ struct InformationDetailView: View {
 		VStack(spacing: 20) {
 			
 			InfoDescriptionView(description: viewModel.makHoly.description)
+				.padding(.top, 10)
 			
 			InfoLikeCommentView(viewModel: viewModel)
 			

@@ -37,6 +37,7 @@ final class InformationViewModel: ObservableObject {
 	
 	private var user: User = User.user1
 	
+	// initial fetch data
 	@MainActor
 	func fetchDatas() {
 		Task {
@@ -107,7 +108,26 @@ final class InformationViewModel: ObservableObject {
 		guard let comment = myReaction.comment else {
 			return
 		}
-		self.updateComment(myComment: MyComment(isVisible: comment.isVisible, contents: comment.contents, date: "데이트 추가"))
+		Task {
+			do {
+				
+				let response = try await userRepo.updateComment(
+					UpdateCommentRequest(
+						userId: self.userId,
+						makNumber: self.makHolyId,
+						contents: comment.contents,
+						isVisible: comment.isVisible))
+				
+				if response.result?.isSuccess == false {
+					self.myReaction.comment?.isVisible.toggle()
+					// 네트워크 확인 Alert
+				}
+				
+			} catch {
+				Logger.debug(error: error, message: "InformationViewModel -toggleCommentVisible()")
+			}
+		}
+		
 	}
 	
 	func likeButtonTapped() {
@@ -167,6 +187,10 @@ final class InformationViewModel: ObservableObject {
 				print("addBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				if response.result?.isSuccess == false {
+					myReaction.isBookMarked.toggle()
+					//TODO:  찜하기 실패 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
 			}
@@ -181,6 +205,10 @@ final class InformationViewModel: ObservableObject {
 				print("deleteBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
+				if response.result?.isSuccess == false {
+					myReaction.isBookMarked.toggle()
+					//TODO:  찜삭제 실패 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
 			}
@@ -195,8 +223,12 @@ final class InformationViewModel: ObservableObject {
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = nil
+				
+				if response.result?.isSuccess == true {
+					self.myReaction.comment = nil
+				} else {
+					// 네트워크 확인 Alert
+				}
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
@@ -207,13 +239,23 @@ final class InformationViewModel: ObservableObject {
 	func updateComment(myComment: MyComment) {
 		Task {
 			do {
+				// insert comment
 				let response = try await userRepo.updateComment(
-					UpdateCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+					UpdateCommentRequest(
+						userId: self.userId,
+						makNumber: self.makHolyId,
+						contents: myComment.contents,
+						isVisible: myComment.isVisible))
+				
+				// fetch updated comment
+				if response.result?.isSuccess == true {
+					self.myReaction.comment = myComment
+				} else {
+					// 네트워크 확인 Alert
+				}
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = myComment
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}
@@ -224,12 +266,20 @@ final class InformationViewModel: ObservableObject {
 	func insertComment(myComment: MyComment) {
 		Task {
 			do {
+				// insert comment
 				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
+				
+				// fetch updated comment
+				if response.result?.isSuccess == true {
+					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+					self.myReaction = result.1
+				} else {
+					// 네트워크 확인 Alert
+				}
+				
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
-				//TODO: reponse 확인 로직
-				self.myReaction.comment = myComment
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteComment()")
 			}

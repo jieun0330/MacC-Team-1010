@@ -39,25 +39,24 @@ struct InfoAwardsView: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 0) {
-			DividerView()
-			ScrollView(.horizontal, showsIndicators: false) {
-				HStack(spacing: 0) {
-					Rectangle()
-						.frame(width: 16, height: 0)
-					ForEach(awards) { award in
-						
-						infoAwardsSingleView(award: award)
-						if award != awards.last {
-							Divider()
-								.foregroundColor(.W25)
-								.frame(width: 0.33, height: 42)
-						}
+		
+		ScrollView(.horizontal, showsIndicators: false) {
+			HStack(spacing: 0) {
+				Rectangle()
+					.frame(width: 16, height: 0)
+				ForEach(awards) { award in
+					
+					infoAwardsSingleView(award: award)
+					if award != awards.last {
+						Divider()
+							.foregroundColor(.W25)
+							.frame(width: 0.33, height: 42)
 					}
 				}
 			}
-			.scrollDisabled(!isScrollEnabled)
 		}
+		.scrollDisabled(!isScrollEnabled)
+		
 	}
 }
 
