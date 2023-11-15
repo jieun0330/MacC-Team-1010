@@ -125,7 +125,7 @@ private extension CommentEditSheet {
 	func footerView() -> some View {
 		VStack(spacing: 16) {
 			DividerView()
-			HStack(spacing: 0) {
+			HStack(spacing: 8) {
 				Spacer()
 				Text("비공개")
 					.SF14R()
