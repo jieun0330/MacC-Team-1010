@@ -11,11 +11,15 @@ import Core
 import DesignSystem
 
 struct LatestCommentSingleView: View {
+	@ObservedObject var viewModel: HomeViewModel
 	let comment: RecentComment
 	
 	var body: some View {
-		NavigationLink {
-			// 막걸리 상세 뷰로 이동
+		
+		Button {
+			if let id = comment.makNumber {
+				viewModel.resultMakHolyId = id
+			}
 		} label: {
 			HStack(spacing: 0) {
 				RoundedRectangle(cornerRadius: 12)

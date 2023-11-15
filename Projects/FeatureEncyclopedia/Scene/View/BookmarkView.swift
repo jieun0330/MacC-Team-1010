@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import FeatureInformation
 
 // 찜 뷰
 public struct BookmarkView: View {
@@ -42,20 +43,29 @@ public struct BookmarkView: View {
 				LazyVGrid(columns: columns, spacing: 16, content: {
 					
 					ForEach(viewModel.makModel, id: \.self) { mak in
-						ThumbnailView(mak: mak, type: .bookmark)
-							.onAppear {
-								if mak == viewModel.makModel.last {
-									if !viewModel.isLastPage {
-										var offset = viewModel.currentOffset
-										offset += 1
-										withAnimation {
-											viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+						Button {
+							if let id = mak.makSeq {
+								viewModel.resultMakHolyId = id
+							}
+						} label: {
+							ThumbnailView(mak: mak, type: .bookmark)
+								.onAppear {
+									if mak == viewModel.makModel.last {
+										if !viewModel.isLastPage {
+											var offset = viewModel.currentOffset
+											offset += 1
+											withAnimation {
+												viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+											}
 										}
 									}
 								}
-							}
+						}
 					}
 				})
+			}
+			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+				InformationView(makHolyId: makHolyId)
 			}
 		}
 	}

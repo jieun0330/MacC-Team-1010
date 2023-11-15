@@ -9,6 +9,7 @@ import SwiftUI
 import Core
 import DesignSystem
 import FeatureCategory
+import FeatureInformation
 
 public struct HomeView: View {
 	@StateObject var viewModel = HomeViewModel(
@@ -70,6 +71,10 @@ public struct HomeView: View {
 					}
 				}
 				.background(Color(uiColor: .designSystem(.darkbase)!))
+				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+					InformationView(makHolyId: makHolyId)
+				}
+				
 			}
 		}
 	}

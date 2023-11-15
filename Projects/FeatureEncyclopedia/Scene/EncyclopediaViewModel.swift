@@ -13,6 +13,7 @@ import Utils
 final class EncyclopediaViewModel: ObservableObject {
 	@Published var makModel: [GetUserMakFolderContent] = []
 	@Published var errorState = false
+	@Published var resultMakHolyId: Int? = nil
 	
 	var fetchLoading = true
 	let userRepository: DefaultUserRepository

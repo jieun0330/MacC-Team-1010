@@ -11,11 +11,15 @@ import Core
 import DesignSystem
 
 struct NewItemSingleView: View {
+	@ObservedObject var viewModel: HomeViewModel
 	let item: NewMakListMakgeolliDetail
 	
 	var body: some View {
-		NavigationLink {
-			// 막걸리 상세 뷰로 이동
+		
+		Button {
+			if let id = item.makNumber {
+				viewModel.resultMakHolyId = id
+			}
 		} label: {
 			Rectangle()
 				.foregroundColor(.clear)

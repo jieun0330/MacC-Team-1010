@@ -12,11 +12,14 @@ import DesignSystem
 import FeatureInformation
 
 struct MakgeolliInfoSingleView: View {
+	@ObservedObject var viewModel: CategoryViewModel
 	let makHoly: MakContent
 	
 	var body: some View {
-		NavigationLink {
-			// 막걸리 디테일 뷰로 이동
+		Button {
+			if let id = makHoly.makSeq {
+				viewModel.resultMakHolyId = id
+			}
 		} label: {
 			VStack(alignment: .leading, spacing: 0) {
 				RoundedRectangle(cornerRadius: 12)

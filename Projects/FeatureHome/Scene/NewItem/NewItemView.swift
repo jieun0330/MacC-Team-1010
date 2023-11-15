@@ -37,7 +37,7 @@ struct NewItemView: View {
 						.frame(width: 16, height: 1)
 						.padding(.trailing, -16)
 					ForEach(viewModel.newItems.prefix(10), id: \.self) { item in
-						NewItemSingleView(item: item)
+						NewItemSingleView(viewModel: viewModel, item: item)
 					}
 				}
 			}
