@@ -65,7 +65,7 @@ extension InfoCommentsListView {
 				}
 				
 				Text(comment.userName)
-					.font(.style(.SF14R))
+					.SF14R()
 					.foregroundColor(.W50)
 				
 				Spacer()
@@ -93,7 +93,7 @@ extension InfoCommentsListView {
 		.padding(16)
 		.background(
 			RoundedRectangle(cornerRadius: 15)
-				.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
+				.foregroundColor(.DarkGrey)
 		)
 	}
 	
@@ -110,7 +110,7 @@ extension InfoCommentsListView {
 		.padding(16)
 		.background(
 			RoundedRectangle(cornerRadius: 15)
-				.foregroundColor(Color(uiColor: .designSystem(.darkgrey)!))
+				.foregroundColor(.DarkGrey)
 		)
 	}
 	

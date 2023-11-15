@@ -71,7 +71,7 @@ extension InfoMyCommentView {
 			headerView(isVisible: comment.isVisible)
 			
 			Text(comment.contents)
-				.font(.style(.SF14R))
+				.SF14R()
 				.foregroundColor(.White)
 				.frame(maxWidth: .infinity, alignment: .topLeading)
 				.multilineTextAlignment(.leading)
