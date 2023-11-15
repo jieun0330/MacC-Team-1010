@@ -13,6 +13,7 @@ import Core
 struct SearchResultView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
 	@State private var isModelPresented: Bool = false
+	@State private var selectedMakHoly: SearchResult? = nil
 	
 	var body: some View {
 		if searchViewModel.fetchLoading {
@@ -30,21 +31,18 @@ struct SearchResultView: View {
 			ScrollView(showsIndicators: false) {
 				ForEach(searchViewModel.resultMakHolies, id: \.makNumber) { makHoly in
 					Button {
-						self.isModelPresented = true
+						self.selectedMakHoly = makHoly
 					} label: {
 						SearchResultSingleView(makHoly: makHoly)
-					}
-					.fullScreenCover(isPresented: $isModelPresented) {
-						InformationView(makHolyId: Int(makHoly.makNumber ?? 0), isModelPresented: $isModelPresented)
-							.onAppear {
-								searchViewModel.addSearchHistory(makName: makHoly.makName ?? "")
-							}
 					}
 					
 					if makHoly != searchViewModel.resultMakHolies.last {
 						DividerView()
 					}
 				}
+			}
+			.fullScreenCover(item: $selectedMakHoly) { makHoly in
+				InformationView(makHolyId: makHoly.makNumber ?? 0)
 			}
 		}
 	}
