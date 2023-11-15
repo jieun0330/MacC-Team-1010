@@ -13,36 +13,39 @@ import DesignSystem
 public struct InformationView: View {
 	
 	@StateObject var viewModel: InformationViewModel
-	@Binding var isModelPresented: Bool
 	
-	public init(makHolyId: Int, isModelPresented: Binding<Bool>) {
+	public init(makHolyId: Int) {
 		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository(), userRepo: DefaultUserRepository()))
-		self._isModelPresented = isModelPresented
 	}
 	
 	public var body: some View {
-		ZStack(alignment: .top) {
-			ScrollView(.vertical, showsIndicators: false) {
-				ZStack(alignment: .top) {
-					VStack(spacing: 0) {
-						InformationCardView(viewModel: viewModel)
-							.padding(.top, 28.5)
-						InformationDetailView(viewModel: viewModel)
+		ZStack(alignment: viewModel.isFetchCompleted ? .top : .center) {
+			if viewModel.isFetchCompleted {
+				ScrollView(.vertical, showsIndicators: false) {
+					ZStack(alignment: .top) {
+						VStack(spacing: 0) {
+							InformationCardView(viewModel: viewModel)
+								.padding(.top, 28.5)
+							InformationDetailView(viewModel: viewModel)
+						}
+						HStack {
+							InfoBookMarkButton(viewModel: viewModel)
+							Spacer()
+						}
+						.padding(.horizontal, 16)
 					}
-					HStack {
-						InfoBookMarkButton(viewModel: viewModel)
-						Spacer()
-					}
-					.padding(.horizontal, 16)
 				}
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
+				}
+			} else {
+				ProgressView()
 			}
-			.alert(isPresented: $viewModel.errorState) {
-				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-					  dismissButton: .default(Text("확인")))
-			}
+			// 상단 고정 Back Button
 			HStack {
 				Spacer()
-				InfoBackButton(isModelPresented: $isModelPresented)
+				InfoBackButton()
 			}
 			.padding(.horizontal, 16)
 		}
