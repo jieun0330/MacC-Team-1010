@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import Combine
 import DesignSystem
 import Utils
 
@@ -16,6 +17,7 @@ public struct OnboardingView: View {
 	
 	@State var nickname: String
 	@State var selectedImage: ImageName = .profileSweet
+	@State var isNavigation = false
 	
 	enum ImageName: String {
 		case profileSweet, profileHighlyHydrated, profileThick,
@@ -36,6 +38,11 @@ public struct OnboardingView: View {
 						.frame(height: 40)
 					
 					TextField("닉네임을 입력해주세요", text: $nickname)
+						.onReceive(Just(nickname)) { newValue in
+							if newValue.count > 6 {
+								nickname.removeLast()
+							}
+						}
 						.font(.style(.SF20B))
 						.underlined()
 					
@@ -46,23 +53,27 @@ public struct OnboardingView: View {
 					
 					Spacer()
 					
-					Text("이용약관과 개인정보처리방침에 동의하고 시작합니다.")
-						.SF12B()
-						.padding(.bottom, 16)
+					HStack(spacing: 0) {
+						Text("이용약관")
+							.foregroundColor(.Primary)
+							.SF12B()
+						Text("과 ")
+							.foregroundColor(.W50)
+							.SF12B()
+						Text("개인정보처리방침")
+							.foregroundColor(.Primary)
+							.SF12B()
+						Text("에 동의하고 시작합니다.")
+							.foregroundColor(.W50)
+							.SF12B()
+					}
+					.padding(.bottom, 16)
 					
-					NavigationLink {
-						CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
-							.background(Color(uiColor: .designSystem(.darkbase)!))
-							.navigationBarBackButtonHidden(true)
-							.navigationBarItems(leading: CustomBackButton())
-							.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!),
-											   for: .navigationBar)
-							.onAppear {
-								UserDefaultsSetting.profileImage = selectedImage.rawValue
-							}
+					Button {
+						isNavigation = true
 					} label: {
 						RoundedRectangle(cornerRadius: 12)
-							.fill(Color(uiColor: .designSystem(.goldenyellow)!))
+							.fill(Color(uiColor: .designSystem(nickname.isEmpty ? .w10 :.goldenyellow)!))
 							.frame(height: 50)
 							.overlay {
 								Text("다음")
@@ -71,10 +82,22 @@ public struct OnboardingView: View {
 							}
 							.padding(.bottom, 16)
 					}
+					.disabled(nickname.isEmpty ? true : false)
 				}
 				.padding(.horizontal, 16)
 				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.ignoresSafeArea(.keyboard)
+				.navigationDestination(isPresented: $isNavigation) {
+					CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
+						.background(Color(uiColor: .designSystem(.darkbase)!))
+						.navigationBarBackButtonHidden(true)
+						.navigationBarItems(leading: CustomBackButton())
+						.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!),
+										   for: .navigationBar)
+						.onAppear {
+							UserDefaultsSetting.profileImage = selectedImage.rawValue
+						}
+				}
 			}
 			.onTapGesture {
 				self.hideKeyboard()
@@ -87,7 +110,7 @@ private extension OnboardingView {
 	@ViewBuilder
 	func MakeProfileView(name: Binding<String>) -> some View {
 		Spacer()
-			.frame(height: 64)
+			.frame(height: 100)
 		
 		HStack(spacing: 0) {
 			Text(name.wrappedValue)

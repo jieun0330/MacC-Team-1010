@@ -8,9 +8,13 @@
 
 import Foundation
 import Core
+import Combine
 
 final class HomeViewModel: ObservableObject {
 	@Published var fetchLoading = true
+	@Published var makListLoading = true
+	@Published var commentsLoading = true
+	
 	@Published var newItems: [NewMakListMakgeolliDetail] = []
 	@Published var comments: [RecentComment] = []
 	
@@ -23,15 +27,25 @@ final class HomeViewModel: ObservableObject {
 	) {
 		self.makgeolliRepository = makgeolliRepository
 		self.homeRepository = homeRepository
+		initLoading()
+	}
+	
+	func initLoading() {
+		Publishers.CombineLatest($makListLoading, $commentsLoading)
+			.map { makListLoading, commentsLoading in
+				return !makListLoading && !commentsLoading ? false : true
+			}
+			.receive(on: DispatchQueue.main)
+			.assign(to: &$fetchLoading)
 	}
 	
 	@MainActor
 	func fetchNewMakList() {
 		Task {
 			do {
-//				let response = try await homeRepository.fetchNewMakList()
-//				newItems = response.result ?? []
-				fetchLoading = false
+				let response = try await homeRepository.fetchNewMakList()
+				newItems = response.result ?? []
+				makListLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
 			}
@@ -42,9 +56,9 @@ final class HomeViewModel: ObservableObject {
 	func fetchRecentComments() {
 		Task {
 			do {
-//				let response = try await homeRepository.fetchRecentComment()
-//				comments = response.result ?? []
-				fetchLoading = false
+				let response = try await homeRepository.fetchRecentComment()
+				comments = response.result ?? []
+				commentsLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
 			}

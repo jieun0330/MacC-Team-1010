@@ -28,13 +28,15 @@ struct MakgeolliInfoSingleView: View {
 								.padding(.bottom, 16)
 							
 							Text(makHoly.makName ?? "")
+								.foregroundColor(.White)
 								.lineLimit(1)
 								.font(.style(.SF12R))
 								.padding(.horizontal, 16)
 							
 							Text(BasicInfo.formattedSet(adv: makHoly.makAlcoholPercentage ?? 0.0,
-													 volume: makHoly.makVolume ?? 0,
-													 price: makHoly.makPrice ?? 0))
+														volume: makHoly.makVolume ?? 0,
+														price: makHoly.makPrice ?? 0))
+							.padding(.top, 2)
 							.font(.style(.SF10R))
 							.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 							.padding(.top, 2)
@@ -44,7 +46,7 @@ struct MakgeolliInfoSingleView: View {
 										   sourness: Int(makHoly.makTasteSour ?? -1.0),
 										   thickness: Int(makHoly.makTasteThick ?? -1.0),
 										   freshness: Int(makHoly.makTasteFresh ?? -1.0))
-							.padding(.top, 10)
+							.padding(.top, 16)
 						}
 						.padding(.vertical, 32)
 					}

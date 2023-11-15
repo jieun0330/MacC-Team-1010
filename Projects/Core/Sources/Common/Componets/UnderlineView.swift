@@ -30,7 +30,7 @@ public struct UnderlineView: ViewModifier {
 }
 
 extension View {
-	public func underlined(spacing: CGFloat = 3,
+	public func underlined(spacing: CGFloat = 5,
 						   height: CGFloat = 2,
 						   color: Color = .accentColor) -> some View {
 		self.modifier(UnderlineView(spacing: spacing,

@@ -11,7 +11,7 @@ import Foundation
 public enum CategoryType {
 	/// 특징으로 찾기
 	case characteristics
-	/// 주룩 개발자 픽
+	/// 2023 대한민국 주류대상
 	case event
 	/// 새로 나왔어요
 	case new
@@ -23,7 +23,7 @@ public enum CategoryType {
 		case .characteristics:
 			return "특징으로 찾기"
 		case .event:
-			return "주룩 개발자 픽"
+			return "2023 대한민국 주류대상"
 		case .new:
 			return "새로 나왔어요"
 		case .comment:

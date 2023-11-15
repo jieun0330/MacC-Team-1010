@@ -13,7 +13,7 @@ struct HashtagView: View {
 	@ObservedObject var viewModel: CategoryViewModel
 	
 	@Binding var targetTitle: [CharacteristicsType]
-
+	 
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			ScrollViewReader { scrollViewProxy in
@@ -28,11 +28,16 @@ struct HashtagView: View {
 private extension HashtagView {
 	@ViewBuilder
 	func createCharacteristicsHashtag(proxy: ScrollViewProxy) -> some View {
+		Spacer()
+			.frame(width: 16, height: 1)
+			.padding(.trailing, -10)
 		ForEach(CharacteristicsType.allCases, id: \.self) { characteristics in
-			HashtagSingleView(type: characteristics,
-							  proxy: proxy,
-							  viewModel: viewModel,
-							  targetTitle: $targetTitle)
+			if characteristics != .none {
+				HashtagSingleView(type: characteristics,
+								  proxy: proxy,
+								  viewModel: viewModel,
+								  targetTitle: $targetTitle)
+			}
 		}
 	}
 }

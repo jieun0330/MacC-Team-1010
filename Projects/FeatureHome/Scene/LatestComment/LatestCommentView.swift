@@ -15,7 +15,7 @@ struct LatestCommentView: View {
 	@ObservedObject var viewModel: HomeViewModel
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			NavigationLink {
 				CategoryView(type: .comment, targetTitle: [])
 			} label: {
@@ -24,14 +24,19 @@ struct LatestCommentView: View {
 						.font(.style(.SF20B))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(systemName: "chevron.right")
-						.font(.system(size: 22, weight: .bold))
+						.font(.system(size: 20, weight: .bold))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Spacer()
 				}
 			}
+			Spacer()
+				.frame(height: 20)
 			VStack(spacing: 16) {
 				ForEach(viewModel.comments.prefix(4), id: \.self) { comment in
 					LatestCommentSingleView(comment: comment)
+					if comment != viewModel.comments.prefix(4).last {
+						DividerView()
+					}
 				}
 			}
 		}

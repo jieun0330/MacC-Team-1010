@@ -36,32 +36,26 @@ public struct HomeView: View {
 						NavigationLink {
 							CategoryView(type: .event, targetTitle: [.none])
 						} label: {
-							GeometryReader { proxy in
-								let global = proxy.frame(in: .global)
-								Image(uiImage: .designSystem(.banner)!)
-									.resizable()
-									.aspectRatio(contentMode: .fill)
-									.offset(y: global.minY > 0 ? -global.minY : 0)
-									.frame(
-										height: global.minY > 0 ?
-										(UIScreen.main.bounds.height/2.5) + global.minY
-										: UIScreen.main.bounds.height/2.5
-									)
-							}
-							.frame(height: UIScreen.main.bounds.height / 2.5)
-							.padding(.bottom, 20)
-
+							Image(uiImage: .designSystem(.banner)!)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.padding(.bottom, 30)
 						}
 						
 						CharacteristicsView()
 						
-						DividerView(topPadding: 10, bottomPadding: 20)
+						Spacer()
+							.frame(height: 40)
 						
 						NewItemView(viewModel: viewModel)
 						
-						DividerView(topPadding: 10, bottomPadding: 20)
+						Spacer()
+							.frame(height: 40)
 						
 						LatestCommentView(viewModel: viewModel)
+						
+						Spacer()
+							.frame(height: 20)
 					}
 				}
 				.ignoresSafeArea(.all, edges: .top)

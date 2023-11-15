@@ -21,10 +21,11 @@ public struct SearchView: View {
 			SearchSuggestionView(searchViewModel: searchViewModel)
 				.searchable(
 					text: $searchViewModel.searchText,
-					prompt: "막걸리 이름, 양조장 ..."
+					prompt: "막걸리 이름 ..."
 				)
 				.onChange(of: searchViewModel.searchText) { newValue in
 					searchViewModel.searchState = true
+					searchViewModel.fetchLoading = true
 				}
 				.onSubmit(of: .search) {
 					searchViewModel.searchState = false
@@ -35,6 +36,11 @@ public struct SearchView: View {
 						whenContainedInInstancesOf: [UISearchBar.self]).title = "취소"
 					UISearchBar.appearance().tintColor = .designSystem(.primary)
 				}
+				.background(Color(uiColor: .designSystem(.darkbase)!))
+				.toolbarBackground(
+					Color.DarkBase,
+					for: .navigationBar
+				)
 		}
 	}
 }

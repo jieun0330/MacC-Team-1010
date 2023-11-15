@@ -31,7 +31,7 @@ struct SearchResultView: View {
 					NavigationLink {
 						InformationView(makHolyId: Int(makHoly.makNumber ?? 0))
 							.onAppear {
-								searchViewModel.addSearchHistory()
+								searchViewModel.addSearchHistory(makName: makHoly.makName ?? "")
 							}
 					} label: {
 						SearchResultSingleView(makHoly: makHoly)

@@ -21,8 +21,10 @@ struct NewCommentView: View {
 				ForEach(comments, id: \.self) { comment in
 					VStack(spacing: 0) {
 						NewCommentSingleView(comment: comment)
-						DividerView()
-							.padding(.vertical, 10)
+						if comment != comments.last {
+							DividerView()
+								.padding(.vertical, 10)
+						}
 					}
 					.padding(.horizontal, 16)
 				}

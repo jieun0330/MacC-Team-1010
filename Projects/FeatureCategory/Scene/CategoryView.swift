@@ -44,7 +44,6 @@ public struct CategoryView: View {
 				if type == .characteristics {
 					HashtagView(viewModel: viewModel,
 								targetTitle: $targetTitle)
-					.padding(.leading, 16)
 					.padding(.bottom, 10)
 				}
 				
