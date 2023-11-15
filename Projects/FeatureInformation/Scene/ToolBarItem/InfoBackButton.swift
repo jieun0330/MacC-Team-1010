@@ -10,11 +10,11 @@ import SwiftUI
 import DesignSystem
 
 struct InfoBackButton: View {
-	@Binding var isModelPresented: Bool
+	@Environment(\.presentationMode) var presentationMode
 	
 	public var body: some View {
 		Button(action: {
-			self.isModelPresented = false
+			self.presentationMode.wrappedValue.dismiss()
 		}) {
 			
 			Image(systemName: "xmark")
