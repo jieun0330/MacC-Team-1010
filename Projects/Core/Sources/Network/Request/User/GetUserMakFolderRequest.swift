@@ -12,6 +12,7 @@ public struct GetUserMakFolderRequest: Codable {
 	public let userId: Int
 	public let segmentName: String
 	public let offset: Int
+	public var size: Int = 12
 
 	public init(userId: Int, segmentName: String, offset: Int) {
 		self.userId = userId
