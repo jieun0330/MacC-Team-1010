@@ -20,7 +20,7 @@ struct InfoBackButton: View {
 			Image(systemName: "xmark")
 				.font(.system(size: 17, weight: .bold))
 				.foregroundColor(.W85)
-				.padding(6)
+				.padding(7)
 				.background(
 					.ultraThinMaterial,
 					in: Circle())
