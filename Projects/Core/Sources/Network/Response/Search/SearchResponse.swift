@@ -14,7 +14,8 @@ public struct SearchResponse: Codable {
 	public let result: [SearchResult]?
 }
 
-public struct SearchResult: Hashable, Codable {
+public struct SearchResult: Hashable, Codable, Identifiable {
+	public let id: UUID = UUID()
 	public let makNumber: Int?
 	public let makName: String?
 	public let makType: String?
