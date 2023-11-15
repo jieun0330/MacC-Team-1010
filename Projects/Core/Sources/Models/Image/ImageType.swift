@@ -19,9 +19,9 @@ public enum ImageType {
 		case .mini:
 			return CGSize(width: 29, height: 60)
 		case .small:
-			return CGSize(width: 66, height: 136)
-		case .middle:
 			return CGSize(width: 56, height: 114)
+		case .middle:
+			return CGSize(width: 78, height: 156)
 		case .large:
 			return CGSize(width: 118, height: 244)
 		}

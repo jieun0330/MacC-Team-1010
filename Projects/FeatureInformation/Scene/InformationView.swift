@@ -25,6 +25,10 @@ public struct InformationView: View {
 				InformationCardView(viewModel: viewModel)
 				InformationDetailView(viewModel: viewModel)
 			}
+			.alert(isPresented: $viewModel.errorState) {
+				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+					  dismissButton: .default(Text("확인")))
+			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationBarBackButtonHidden(true)
@@ -97,6 +101,7 @@ public struct InformationView: View {
 					}
 				  ))
 		}
+
 		
 		
 	}

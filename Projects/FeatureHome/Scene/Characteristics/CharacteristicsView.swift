@@ -36,16 +36,21 @@ struct CharacteristicsView: View {
 						.frame(width: 16, height: 1)
 						.padding(.trailing, -16)
 					ForEach(CharacteristicsType.allCases, id: \.self) { characteristic in
-						NavigationLink {
-							CategoryView(type: .characteristics,
-										 targetTitle: [characteristic])
-						} label: {
-							CharacteristicsSingleView(
-								title: characteristic.description,
-								image: characteristic.characteristicsImage
-							)
+						if characteristic != .none {
+							NavigationLink {
+								CategoryView(type: .characteristics,
+											 targetTitle: [characteristic])
+							} label: {
+								CharacteristicsSingleView(
+									title: characteristic.description,
+									image: characteristic.characteristicsImage
+								)
+							}
 						}
 					}
+					Spacer()
+						.frame(width: 16, height: 1)
+						.padding(.leading, -16)
 				}
 			}
 		}

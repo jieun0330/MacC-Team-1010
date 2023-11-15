@@ -39,7 +39,7 @@ struct NewItemSingleView: View {
 						.overlay {
 							VStack {
 								MakHolyImageView(imageId: item.makImageNumber ?? "-1",
-												 type: .middle)
+												 type: .small)
 								
 								Spacer()
 									.frame(height: 12)

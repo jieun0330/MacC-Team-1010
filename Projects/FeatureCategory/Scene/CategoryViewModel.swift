@@ -12,6 +12,7 @@ import Core
 final class CategoryViewModel: ObservableObject {
 	@Published var fetchLoading = true
 	@Published var fetchCommentLoading = true
+	@Published var errorState = false
 	@Published var makHolys: [MakContent] = []
 	@Published var comments: [RecentComment] = []
 	
@@ -51,11 +52,15 @@ final class CategoryViewModel: ObservableObject {
 				self.currentOffset = 0
 				self.isLastPage = response.result?.makInfo?.last ?? true
 				
-				makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
-				
-				fetchLoading = false
+				if response.status == 200 {
+					fetchLoading = false
+					makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
+				} else {
+					errorState = true
+				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}
@@ -81,11 +86,15 @@ final class CategoryViewModel: ObservableObject {
 				self.currentOffset = offset ?? 0
 				self.isLastPage = response.result?.makInfo?.last ?? true
 				
-				makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
-				
-				fetchLoading = false
+				if response.status == 200 {
+					fetchLoading = false
+					makHolys.append(contentsOf: response.result?.makInfo?.content ?? [])
+				} else {
+					errorState = true
+				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}
@@ -96,10 +105,15 @@ final class CategoryViewModel: ObservableObject {
 		Task {
 			do {
 				let response = try await homeRepository.fetchRecentComment()
-				comments = response.result ?? []
-				fetchCommentLoading = false
+				if response.status == 200 {
+					fetchLoading = false
+					comments = response.result ?? []
+				} else {
+					errorState = true
+				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}

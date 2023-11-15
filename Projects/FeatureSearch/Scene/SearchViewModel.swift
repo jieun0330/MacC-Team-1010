@@ -11,6 +11,7 @@ import Core
 import Combine
 
 final class SearchViewModel: ObservableObject {
+	@Published var errorState = false
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
 	@Published var resultMakHolies: [SearchResult] = []
@@ -82,12 +83,17 @@ final class SearchViewModel: ObservableObject {
 		Task {
 			do {
 				let response = try await searchRepository.fetchSearch(keyword: searchText)
-				DispatchQueue.main.async { [weak self] in
-					self?.resultMakHolies = response.result ?? []
-					self?.fetchLoading = false
+				if response.status == 200 {
+					DispatchQueue.main.async { [weak self] in
+						self?.resultMakHolies = response.result ?? []
+						self?.fetchLoading = false
+					}
+				} else {
+					errorState = true
 				}
 			} catch {
 				Logger.debug(error: error, message: "")
+				errorState = true
 			}
 		}
 	}

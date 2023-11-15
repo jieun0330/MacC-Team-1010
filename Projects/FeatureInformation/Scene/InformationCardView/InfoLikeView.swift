@@ -18,6 +18,10 @@ struct InfoLikeView: View {
 			likeButton()
 		}
 		.padding(.horizontal, 16)
+		.alert(isPresented: $viewModel.errorState) {
+			Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+				  dismissButton: .default(Text("확인")))
+		}
 	}
 }
 

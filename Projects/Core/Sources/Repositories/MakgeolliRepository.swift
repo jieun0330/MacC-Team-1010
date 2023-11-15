@@ -14,7 +14,7 @@ public protocol MakgeolliRepository {
 							 category: [String]?) async throws -> FindByFeaturesResponse
 	func fetchDetail(makNumber: Int, userId: Int) async throws -> (MakHoly, MyReaction)
 	func fetchMakLikesAndComments(
-		makNumber: Int) async throws -> (LikeDetail, [VisibleComment])
+		makNumber: Int, offset: Int) async throws -> MakLikesAndCommentsResponse
 }
 
 public final class DefaultMakgeolliRepository: MakgeolliRepository {
@@ -35,19 +35,14 @@ public final class DefaultMakgeolliRepository: MakgeolliRepository {
 		return (MakHoly(), MyReaction())
 	}
 	
-	public func fetchMakLikesAndComments(makNumber: Int) async throws -> (LikeDetail, [VisibleComment]) {
+	public func fetchMakLikesAndComments(makNumber: Int, offset: Int) async throws -> MakLikesAndCommentsResponse {
 		let request: [String: Any] = try MakLikesAndCommentsRequest(
 			makNumber: makNumber
 		).asDictionary()
 		let response = try await MakgeolliAPI.request(target: MakgeolliAPI.fetchMakLikesAndComments(
 			parameter: request), dataType: MakLikesAndCommentsResponse.self
 		)
-		
-		if let result = response.result {
-			return result.toEntity()
-		}
-		
-		return (LikeDetail(), [])
+		return response
 	}
 	
 	public func fetchFindByFeatures(sort: String?,

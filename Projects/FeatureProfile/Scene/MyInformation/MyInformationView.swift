@@ -42,9 +42,6 @@ struct MyInformationView: View {
 					.foregroundColor(Color(uiColor: .designSystem(.w50)!))
 					.padding(.bottom, 24)
 			}
-			.onAppear {
-				print("ddd \(UserDefaultsSetting.profileImage)")
-			}
 			.padding(.horizontal, 16)
 		}
 	}

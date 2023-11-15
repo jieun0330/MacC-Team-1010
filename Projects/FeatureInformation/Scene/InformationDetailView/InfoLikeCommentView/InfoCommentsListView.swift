@@ -30,6 +30,17 @@ struct InfoCommentsListView: View {
 					
 					ForEach(viewModel.comments) { comment in
 						reactionSingleView(comment: comment)
+							.onAppear {
+								if comment == viewModel.comments.last {
+									if !viewModel.isLastPage {
+										var offset = viewModel.currentOffset
+										offset += 1
+										withAnimation {
+											viewModel.fetchReactions(offset: offset)
+										}
+									}
+								}
+							}
 					}
 				}
 			}
