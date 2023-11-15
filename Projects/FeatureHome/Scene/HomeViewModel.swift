@@ -44,13 +44,13 @@ final class HomeViewModel: ObservableObject {
 	func fetchNewMakList() {
 		Task {
 			do {
-//				let response = try await homeRepository.fetchNewMakList()
-//				newItems = response.result ?? []
-//				if response.status == 200 {
-//					makListLoading = false
-//				} else {
-//					errorState = true
-//				}
+				let response = try await homeRepository.fetchNewMakList()
+				newItems = response.result ?? []
+				if response.status == 200 {
+					makListLoading = false
+				} else {
+					errorState = true
+				}
 				makListLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
@@ -63,13 +63,13 @@ final class HomeViewModel: ObservableObject {
 	func fetchRecentComments() {
 		Task {
 			do {
-//				let response = try await homeRepository.fetchRecentComment()
-//				comments = response.result ?? []
-//				if response.status == 200 {
-//					commentsLoading = false
-//				} else {
-//					errorState = true
-//				}
+				let response = try await homeRepository.fetchRecentComment()
+				comments = response.result ?? []
+				if response.status == 200 {
+					commentsLoading = false
+				} else {
+					errorState = true
+				}
 				commentsLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
