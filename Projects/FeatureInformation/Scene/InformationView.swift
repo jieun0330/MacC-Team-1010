@@ -21,26 +21,30 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
-		
-		ScrollView(.vertical, showsIndicators: false) {
-			VStack(spacing: 0) {
-				InformationCardView(viewModel: viewModel)
-				InformationDetailView(viewModel: viewModel)
+		ZStack(alignment: .top) {
+			ScrollView(.vertical, showsIndicators: false) {
+				ZStack(alignment: .top) {
+					VStack(spacing: 0) {
+						InformationCardView(viewModel: viewModel)
+							.padding(.top, 28.5)
+						InformationDetailView(viewModel: viewModel)
+					}
+					HStack {
+						InfoBookMarkButton(viewModel: viewModel)
+						Spacer()
+					}
+					.padding(.horizontal, 16)
+				}
 			}
 			.alert(isPresented: $viewModel.errorState) {
 				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
 					  dismissButton: .default(Text("확인")))
 			}
-		}
-		.navigationBarTitleDisplayMode(.inline)
-		.navigationBarBackButtonHidden(true)
-		.toolbar{
-			ToolbarItem(placement: .navigationBarLeading) {
-				InfoBackButton()
+			HStack {
+				Spacer()
+				InfoBackButton(isModelPresented: $isModelPresented)
 			}
-			ToolbarItem(placement: .navigationBarTrailing) {
-				InfoBookMarkButton(viewModel: viewModel)
-			}
+			.padding(.horizontal, 16)
 		}
 		.statusBarHidden(true)
 		.onAppear(perform: {
@@ -101,9 +105,6 @@ public struct InformationView: View {
 					}
 				  ))
 		}
-
-		
-		
 	}
 }
 
