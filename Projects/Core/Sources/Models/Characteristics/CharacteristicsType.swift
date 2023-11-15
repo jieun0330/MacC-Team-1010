@@ -26,7 +26,7 @@ public enum CharacteristicsType: String, CaseIterable, Hashable {
 		case .sour:
 			return "시큼한"
 		case .fresh:
-			return "탄삼감 좋은"
+			return "탄삼감 많은"
 		case .noAspartame:
 			return "아스파탐이 없는"
 		default:

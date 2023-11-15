@@ -41,7 +41,6 @@ final class InformationViewModel: ObservableObject {
 	
 	private var user: User = User.user1
 	
-	// initial fetch data
 	@MainActor
 	func fetchDatas() {
 		Task {
@@ -62,12 +61,12 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
-	// detail api
 	@MainActor
 	func fetchMakHoly() {
 		Task {
 			do {
-				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+				let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId,
+															  userId: self.userId)
 				self.makHoly = result.0
 				self.myReaction = result.1
 				print("fetchMakHoly Completed : -------")
@@ -81,7 +80,6 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
-	// makLikesAndComments  api
 	@MainActor
 	func fetchReactions(offset: Int = 0) {
 		Task {
@@ -110,13 +108,11 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
-	// Comment Visibe 변경
 	@MainActor
 	func toggleCommentVisible() {
 		
 		self.myReaction.comment?.isVisible.toggle()
 		
-		// Comment Visible 업데이트 API 연결
 		guard let comment = myReaction.comment else {
 			return
 		}
@@ -131,7 +127,6 @@ final class InformationViewModel: ObservableObject {
 				
 				if response.result?.isSuccess == false {
 					self.myReaction.comment?.isVisible.toggle()
-					// 네트워크 확인 Alert
 					errorState = true
 				}
 			} catch {
@@ -191,7 +186,9 @@ final class InformationViewModel: ObservableObject {
 	func addBookMark() {
 		Task {
 			do {
-				let response = try await userRepo.addWishList(WishListRequest(userId: self.userId, makNumber: self.makHolyId))
+				let response = try await userRepo.addWishList(WishListRequest(
+					userId: self.userId, makNumber: self.makHolyId)
+				)
 				print("addBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -210,7 +207,9 @@ final class InformationViewModel: ObservableObject {
 	func deleteBookMark() {
 		Task {
 			do {
-				let response = try await userRepo.deleteWishList(WishListRequest(userId: self.userId, makNumber: self.makHolyId))
+				let response = try await userRepo.deleteWishList(WishListRequest(
+					userId: self.userId, makNumber: self.makHolyId)
+				)
 				print("deleteBookMark Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -229,7 +228,9 @@ final class InformationViewModel: ObservableObject {
 	func deleteComment() {
 		Task {
 			do {
-				let response = try await userRepo.deleteComment(DeleteCommentRequest(userId: self.userId, makNumber: self.makHolyId))
+				let response = try await userRepo.deleteComment(DeleteCommentRequest(
+					userId: self.userId, makNumber: self.makHolyId)
+				)
 				print("deleteComment Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -237,7 +238,6 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == true {
 					self.myReaction.comment = nil
 				} else {
-					// 네트워크 확인 Alert
 					errorState = true
 				}
 			} catch {
@@ -251,19 +251,15 @@ final class InformationViewModel: ObservableObject {
 	func updateComment(myComment: MyComment) {
 		Task {
 			do {
-				// insert comment
 				let response = try await userRepo.updateComment(
 					UpdateCommentRequest(
 						userId: self.userId,
 						makNumber: self.makHolyId,
 						contents: myComment.contents,
 						isVisible: myComment.isVisible))
-				
-				// fetch updated comment
 				if response.result?.isSuccess == true {
 					self.myReaction.comment = myComment
 				} else {
-					// 네트워크 확인 Alert
 					errorState = true
 				}
 				print("deleteComment Completed : -------")
@@ -280,15 +276,15 @@ final class InformationViewModel: ObservableObject {
 	func insertComment(myComment: MyComment) {
 		Task {
 			do {
-				// insert comment
-				let response = try await userRepo.insertComment(InsertCommentRequest(userId: self.userId, makNumber: self.makHolyId, contents: myComment.contents, isVisible: myComment.isVisible))
-				
-				// fetch updated comment
+				let response = try await userRepo.insertComment(InsertCommentRequest(
+					userId: self.userId, makNumber: self.makHolyId,
+					contents: myComment.contents, isVisible: myComment.isVisible)
+				)
 				if response.result?.isSuccess == true {
-					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId, userId: self.userId)
+					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId,
+																  userId: self.userId)
 					self.myReaction = result.1
 				} else {
-					// 네트워크 확인 Alert
 					errorState = true
 				}
 				print("deleteComment Completed : -------")

@@ -91,7 +91,6 @@ public struct CommentView: View {
 										Spacer()
 										
 										Button {
-											print("@@@ mak 11 \(mak)")
 											self.targetMak = mak
 											showActionSheet = true
 										} label: {

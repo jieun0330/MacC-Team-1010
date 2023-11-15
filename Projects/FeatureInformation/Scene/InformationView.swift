@@ -69,9 +69,7 @@ public struct InformationView: View {
 				viewModel.showDeleteAlert = true
 			}
 			
-			Button("취소하기", role: .cancel) {
-				print("취소하기")
-			}
+			Button("취소하기", role: .cancel) { }
 		}
 		//코멘트 작성 Modal Sheet
 		.sheet(isPresented: $viewModel.showCommentSheet, content: {
