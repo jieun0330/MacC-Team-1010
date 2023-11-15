@@ -71,6 +71,8 @@ public enum TENTENAsset {
 		case visibleTrue
 		case visibleFalse
 		
+		case errorImage
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -178,7 +180,9 @@ public enum TENTENAsset {
 				return "visibleTrue"
 			case .visibleFalse:
 				return "visibleFalse"
-				
+			
+			case .errorImage:
+				return "errorImage"
 			}
 		}
 	}

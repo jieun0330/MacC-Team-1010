@@ -74,7 +74,6 @@ public struct HomeView: View {
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 					InformationView(makHolyId: makHolyId)
 				}
-				
 			}
 		}
 	}

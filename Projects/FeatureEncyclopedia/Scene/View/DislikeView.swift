@@ -10,7 +10,6 @@ import SwiftUI
 import Core
 import FeatureInformation
 
-// 아쉬워요 뷰
 public struct DislikeView: View {
 	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
@@ -30,40 +29,51 @@ public struct DislikeView: View {
 					viewModel.getUserMakFolder(segmentName: "dislike")
 				}
 		} else {
-			ScrollView {
-				HStack {
-					Text("\((viewModel.makModel).count)개의 막걸리가 아쉬워요")
-						.SF12R()
+			if viewModel.makModel.isEmpty {
+				VStack(spacing: 20) {
+					Text("비어있어요..")
+						.SF17R()
 						.foregroundColor(.W50)
-					Spacer()
+					Image(uiImage: .designSystem(.character)!)
 				}
-				.padding(.vertical, 10)
-				.padding(.leading, 12)
-				LazyVGrid(columns: columns, spacing: 16, content: {
-					ForEach(viewModel.makModel, id: \.self) { mak in
-						Button {
-							if let id = mak.makSeq {
-								viewModel.resultMakHolyId = id
-							}
-						} label: {
-							ThumbnailView(mak: mak, type: .dislike)
-								.onAppear {
-									if mak == viewModel.makModel.last {
-										if !viewModel.isLastPage {
-											var offset = viewModel.currentOffset
-											offset += 1
-											withAnimation {
-												viewModel.getUserMakFolder(segmentName: "dislike", offset: offset)
+			} else {
+				ScrollView {
+					HStack {
+						Text("\((viewModel.makModel).count)개의 막걸리가 아쉬워요")
+							.SF12R()
+							.foregroundColor(.W50)
+						Spacer()
+					}
+					.padding(.vertical, 10)
+					.padding(.leading, 12)
+					
+					LazyVGrid(columns: columns, spacing: 16, content: {
+						ForEach(viewModel.makModel, id: \.self) { mak in
+							Button {
+								if let id = mak.makSeq {
+									viewModel.resultMakHolyId = id
+								}
+							} label: {
+								ThumbnailView(mak: mak, type: .dislike)
+									.onAppear {
+										if mak == viewModel.makModel.last {
+											if !viewModel.isLastPage {
+												var offset = viewModel.currentOffset
+												offset += 1
+												withAnimation {
+													viewModel.getUserMakFolder(segmentName: "dislike", offset: offset)
+												}
 											}
 										}
 									}
-								}
+							}
 						}
-					}
-				})
-			}
-			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-				InformationView(makHolyId: makHolyId)
+					})
+					
+				}
+				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+					InformationView(makHolyId: makHolyId)
+				}
 			}
 		}
 	}

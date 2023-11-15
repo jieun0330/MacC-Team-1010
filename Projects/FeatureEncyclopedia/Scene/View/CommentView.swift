@@ -38,120 +38,131 @@ public struct CommentView: View {
 						  dismissButton: .default(Text("확인")))
 				}
 		} else {
-			ScrollView {
-				VStack {
-					HStack {
-						Text("\((viewModel.makModel).count)개의 막걸리에 코멘트를 남겼어요")
-							.SF12R()
-							.foregroundColor(.W50)
-						Spacer()
-					}
-					.padding(.vertical, 10)
-					.padding(.leading, 12)
-					
-					ForEach(viewModel.makModel, id: \.self) { mak in
-						Button {
-							if let id = mak.makSeq {
-								viewModel.resultMakHolyId = id
-							}
-						} label: {
-							HStack(alignment: .top) {
-								RoundedRectangle(cornerRadius: 12)
-									.foregroundColor(.DarkGrey)
-									.frame(width: 60, height: 80)
-									.overlay(
-										MakHolyImageView(imageId: mak.makImg!, type: .mini)
-									)
-								VStack(alignment: .leading) {
-									HStack {
-										Text(mak.makNm ?? "")
-											.foregroundColor(.White)
-											.SF14R()
-										
-										Image(uiImage: .designSystem(.like)!)
-										Spacer()
-										
-										if mak.cmVisibility! == "N" {
-											Image(uiImage: .designSystem(.lock)!)
-										}
-									}
-									
-									Text(mak.reactionComment ?? "")
-										.SF14R()
-										.foregroundColor(.W85)
-									
-									Spacer()
-										.frame(height: 20)
-									
-									HStack {
-										Text(mak.reactionCommentDate?.extractDateFromISOString() ?? "")
-											.SF14R()
-											.foregroundColor(.W25)
-										
-										Spacer()
-										
-										Button {
-											self.targetMak = mak
-											showActionSheet = true
-										} label: {
-											Text("수정")
-												.SF12R()
-										}
-									}
-								}
-								.padding(.leading)
-							}
+			if viewModel.makModel.isEmpty {
+				VStack(spacing: 20) {
+					Text("비어있어요..")
+						.SF17R()
+						.foregroundColor(.W50)
+					Image(uiImage: .designSystem(.character)!)
+				}
+			} else {
+				ScrollView {
+					VStack {
+						HStack {
+							Text("\((viewModel.makModel).count)개의 막걸리에 코멘트를 남겼어요")
+								.SF12R()
+								.foregroundColor(.W50)
+							Spacer()
 						}
-						.onAppear {
-							if mak == viewModel.makModel.last {
-								if !viewModel.isLastPage {
-									var offset = viewModel.currentOffset
-									offset += 1
-									withAnimation {
-										viewModel.getUserMakFolder(segmentName: "comment", offset: offset)
-									}
-								}
-							}
-						}
-						.padding()
-						Divider()
+						.padding(.vertical, 10)
+						.padding(.leading, 12)
 						
+						ForEach(viewModel.makModel, id: \.self) { mak in
+							Button {
+								if let id = mak.makSeq {
+									viewModel.resultMakHolyId = id
+								}
+							} label: {
+								HStack(alignment: .top) {
+									RoundedRectangle(cornerRadius: 12)
+										.foregroundColor(.DarkGrey)
+										.frame(width: 60, height: 80)
+										.overlay(
+											MakHolyImageView(imageId: mak.makImg!, type: .mini)
+										)
+									VStack(alignment: .leading) {
+										HStack {
+											Text(mak.makNm ?? "")
+												.foregroundColor(.White)
+												.SF14R()
+											
+											Image(uiImage: .designSystem(.like)!)
+											Spacer()
+											
+											if mak.cmVisibility! == "N" {
+												Image(uiImage: .designSystem(.lock)!)
+											}
+										}
+										
+										Text(mak.reactionComment ?? "")
+											.SF14R()
+											.foregroundColor(.W85)
+										
+										Spacer()
+											.frame(height: 20)
+										
+										HStack {
+											Text(mak.reactionCommentDate?.extractDateFromISOString() ?? "")
+												.SF14R()
+												.foregroundColor(.W25)
+											
+											Spacer()
+											
+											Button {
+												self.targetMak = mak
+												showActionSheet = true
+											} label: {
+												Text("수정")
+													.SF12R()
+											}
+										}
+									}
+									.padding(.leading)
+								}
+							}
+							.onAppear {
+								if mak == viewModel.makModel.last {
+									if !viewModel.isLastPage {
+										var offset = viewModel.currentOffset
+										offset += 1
+										withAnimation {
+											viewModel.getUserMakFolder(segmentName: "comment", offset: offset)
+										}
+									}
+								}
+							}
+							.padding()
+							if mak != viewModel.makModel.last {
+								DividerView()
+									.padding(.horizontal, 16)
+							}
+						}
 					}
 				}
-			}
-			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-				InformationView(makHolyId: makHolyId)
-			}
-			.alert(isPresented: $showingAlert) {
-				Alert(title: Text("코멘트 삭제"),
-					  message: Text("코멘트를 삭제하시겠어요?"),
-					  primaryButton: .default(
-						Text("취소")
-					  ),
-					  secondaryButton: .destructive(
-						Text("삭제하기"),
-						action: {
-							viewModel.deleteComment(makSeq: targetMak!.makSeq!)
-						}
-					  )
-				)
-			}
-			.sheet(isPresented: $showModal) {
-				CommentEditView(showModal: $showModal,
-								initialComment: targetMak!.reactionComment!,
-								viewModel: viewModel,
-								mak: targetMak!,
-								isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
-			}
-			.confirmationDialog("", isPresented: $showActionSheet,
-								titleVisibility: .hidden) {
-				Button("수정하기") {
-					showModal = true
+				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+					InformationView(makHolyId: makHolyId)
 				}
-				Button("삭제하기", role: .destructive) {
-					showingAlert = true
+				.alert(isPresented: $showingAlert) {
+					Alert(title: Text("코멘트 삭제"),
+						  message: Text("코멘트를 삭제하시겠어요?"),
+						  primaryButton: .default(
+							Text("취소")
+						  ),
+						  secondaryButton: .destructive(
+							Text("삭제하기"),
+							action: {
+								viewModel.deleteComment(makSeq: targetMak!.makSeq!)
+							}
+						  )
+					)
 				}
-				Button("취소하기", role: .cancel) { }
+				.sheet(isPresented: $showModal) {
+					CommentEditView(showModal: $showModal,
+									initialComment: targetMak!.reactionComment!,
+									viewModel: viewModel,
+									mak: targetMak!,
+									isSecretSelected: targetMak!.cmVisibility == "N" ? true : false)
+				}
+				.confirmationDialog("", isPresented: $showActionSheet,
+									titleVisibility: .hidden) {
+					Button("수정하기") {
+						showModal = true
+					}
+					Button("삭제하기", role: .destructive) {
+						showingAlert = true
+					}
+					Button("취소하기", role: .cancel) { }
+				}
 			}
 		}
 	}

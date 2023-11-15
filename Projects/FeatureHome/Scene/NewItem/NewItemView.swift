@@ -39,6 +39,9 @@ struct NewItemView: View {
 					ForEach(viewModel.newItems.prefix(10), id: \.self) { item in
 						NewItemSingleView(viewModel: viewModel, item: item)
 					}
+					Spacer()
+						.frame(width: 16, height: 1)
+						.padding(.leading, -16)
 				}
 			}
 		}

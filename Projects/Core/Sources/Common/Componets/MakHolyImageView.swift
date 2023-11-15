@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Kingfisher
+import DesignSystem
 
 public struct MakHolyImageView: View {
 	let imageId: String
@@ -36,11 +37,14 @@ public struct MakHolyImageView: View {
 			.loadDiskFileSynchronously()
 			.cacheMemoryOnly()
 			.fade(duration: 0.15)
-			.retry(maxCount: 3, interval: .seconds(5))
+			.retry(maxCount: 2, interval: .seconds(2))
 			.resizable()
 			.onFailure { error in
 				print("Image loading failed with error: \(error)")
 			}
+			.onFailureImage(UIImage(named: "errorImage",
+									in: Bundle(identifier: "com.tenten.julookdesignsystem"),
+									with: nil))
 			.scaledToFit()
 			.frame(width: self.type.size.width, height: self.type.size.height)
 	}

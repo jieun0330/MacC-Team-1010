@@ -10,7 +10,6 @@ import SwiftUI
 import Core
 import FeatureInformation
 
-// 찜 뷰
 public struct BookmarkView: View {
 	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
@@ -30,42 +29,50 @@ public struct BookmarkView: View {
 					viewModel.getUserMakFolder(segmentName: "wish")
 				}
 		} else {
-			ScrollView {
-				HStack {
-					Text("\((viewModel.makModel).count)개의 막걸리를 찜했어요")
-						.SF12R()
+			if viewModel.makModel.isEmpty {
+				VStack(spacing: 20) {
+					Text("비어있어요..")
+						.SF17R()
 						.foregroundColor(.W50)
-					Spacer()
+					Image(uiImage: .designSystem(.character)!)
 				}
-				.padding(.vertical, 10)
-				.padding(.leading, 12)
-				
-				LazyVGrid(columns: columns, spacing: 16, content: {
+			} else {
+				ScrollView {
+					HStack {
+						Text("\((viewModel.makModel).count)개의 막걸리를 찜했어요")
+							.SF12R()
+							.foregroundColor(.W50)
+						Spacer()
+					}
+					.padding(.vertical, 10)
+					.padding(.leading, 12)
 					
-					ForEach(viewModel.makModel, id: \.self) { mak in
-						Button {
-							if let id = mak.makSeq {
-								viewModel.resultMakHolyId = id
-							}
-						} label: {
-							ThumbnailView(mak: mak, type: .bookmark)
-								.onAppear {
-									if mak == viewModel.makModel.last {
-										if !viewModel.isLastPage {
-											var offset = viewModel.currentOffset
-											offset += 1
-											withAnimation {
-												viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+					LazyVGrid(columns: columns, spacing: 16, content: {
+						ForEach(viewModel.makModel, id: \.self) { mak in
+							Button {
+								if let id = mak.makSeq {
+									viewModel.resultMakHolyId = id
+								}
+							} label: {
+								ThumbnailView(mak: mak, type: .bookmark)
+									.onAppear {
+										if mak == viewModel.makModel.last {
+											if !viewModel.isLastPage {
+												var offset = viewModel.currentOffset
+												offset += 1
+												withAnimation {
+													viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+												}
 											}
 										}
 									}
-								}
+							}
 						}
-					}
-				})
-			}
-			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-				InformationView(makHolyId: makHolyId)
+					})
+				}
+				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+					InformationView(makHolyId: makHolyId)
+				}
 			}
 		}
 	}

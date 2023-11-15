@@ -32,7 +32,9 @@ public struct EncyclopediaView: View {
 				HeaderView()
 				Spacer()
 					.frame(height: 16)
+				Spacer()
 				BodyView(selectedType: selectedPicker)
+				Spacer()
 			}
 			.background(Color.DarkBase)
 		}
@@ -69,20 +71,22 @@ private extension EncyclopediaView {
 	
 	@ViewBuilder
 	func BodyView(selectedType: headerType) -> some View {
-		ScrollView(.vertical, showsIndicators: false) {
-			switch selectedType {
-			case .all:
-				AllView()
-			case .like:
-				LikeView()
-			case .dislike:
-				DislikeView()
-			case .bookmark:
-				BookmarkView()
-			case .comment:
-				CommentView()
-			}
+		switch selectedType {
+		case .all:
+			AllView()
+				.background(Color.DarkBase)
+		case .like:
+			LikeView()
+				.background(Color.DarkBase)
+		case .dislike:
+			DislikeView()
+				.background(Color.DarkBase)
+		case .bookmark:
+			BookmarkView()
+				.background(Color.DarkBase)
+		case .comment:
+			CommentView()
+				.background(Color.DarkBase)
 		}
-		.background(Color.DarkBase)
 	}
 }
