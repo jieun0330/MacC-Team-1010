@@ -44,6 +44,11 @@ struct InfoLikeCommentView: View {
 			
 			InfoCommentsListView(viewModel: viewModel)
 				.padding(.bottom, 20)
+				.onTapGesture {
+					if isEnough {
+						viewModel.showDetailCommentListSheet = true
+					}
+				}
 			
 		}
 	}
