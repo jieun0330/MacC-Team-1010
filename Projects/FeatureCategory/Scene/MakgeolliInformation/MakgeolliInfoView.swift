@@ -9,6 +9,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import FeatureInformation
 
 struct MakgeolliInfoView: View {
 	@ObservedObject var viewModel: CategoryViewModel
@@ -57,7 +58,7 @@ struct MakgeolliInfoView: View {
 				} else {
 					LazyVGrid(columns: columns, spacing: 0) {
 						ForEach(type == .event ? MakContent.mockDatas : viewModel.makHolys, id: \.self) { data in
-							MakgeolliInfoSingleView(makHoly: data)
+							MakgeolliInfoSingleView(viewModel: viewModel, makHoly: data)
 								.padding(.horizontal, 8)
 								.padding(.bottom, 16)
 								.onAppear {
@@ -79,6 +80,9 @@ struct MakgeolliInfoView: View {
 					}
 				}
 			}
+		}
+		.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+			InformationView(makHolyId: makHolyId)
 		}
 	}
 }

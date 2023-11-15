@@ -15,6 +15,7 @@ final class CategoryViewModel: ObservableObject {
 	@Published var errorState = false
 	@Published var makHolys: [MakContent] = []
 	@Published var comments: [RecentComment] = []
+	@Published var resultMakHolyId: Int? = nil
 	
 	var currentOffset: Int = 0
 	var isLastPage = false

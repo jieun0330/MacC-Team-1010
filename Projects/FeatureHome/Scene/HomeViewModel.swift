@@ -15,6 +15,7 @@ final class HomeViewModel: ObservableObject {
 	@Published var makListLoading = true
 	@Published var commentsLoading = true
 	@Published var errorState = false
+	@Published var resultMakHolyId: Int? = nil
 	
 	@Published var newItems: [NewMakListMakgeolliDetail] = []
 	@Published var comments: [RecentComment] = []
