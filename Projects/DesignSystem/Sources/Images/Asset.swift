@@ -19,6 +19,7 @@ public enum TENTENAsset {
 		case sour
 		case sweet
 		case thick
+        case free
 		
 		case scoreLarge0
 		case scoreLarge1
@@ -63,13 +64,6 @@ public enum TENTENAsset {
 		case lock
 		case nothingLike
 		
-		case profileSweet
-		case profileSour
-		case profileAspartameFree
-		case profileCarbonicAcid
-		case profileHighlyHydrated
-		case profileThick
-		
 		case banner
 		
 		case character
@@ -92,6 +86,8 @@ public enum TENTENAsset {
 				return "sweet"
 			case .thick:
 				return "thick"
+            case .free:
+                return "free"
 				
 			case .scoreLarge0:
 				return "scorelarge0"
@@ -171,20 +167,7 @@ public enum TENTENAsset {
 				return "lock"
 			case .nothingLike:
 				return "nothingLike"
-				
-			case .profileSweet:
-				return "profileSweet"
-			case .profileSour:
-				return "profileSour"
-			case .profileAspartameFree:
-				return "profileAspartameFree"
-			case .profileCarbonicAcid:
-				return "profileCarbonicAcid"
-			case .profileHighlyHydrated:
-				return "profileHighlyHydrated"
-			case .profileThick:
-				return "profileThick"
-				
+
 			case .banner:
 				return "banner"
 				
