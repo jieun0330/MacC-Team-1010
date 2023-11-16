@@ -26,6 +26,8 @@ struct NewCommentSingleView: View {
 			VStack(alignment: .leading, spacing: 0) {
 				HStack(spacing: 0) {
 					Text(comment.makName ?? "")
+						.multilineTextAlignment(.leading)
+						.lineLimit(1)
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
 					Image(uiImage: .designSystem(.like)!)

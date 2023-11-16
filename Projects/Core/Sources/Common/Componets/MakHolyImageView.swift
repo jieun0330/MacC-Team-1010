@@ -14,9 +14,9 @@ public struct MakHolyImageView: View {
 	let imageId: String
 	let type: ImageType
 	let ratio: ImageRatioType
-
-    @State private var isFailingToLoad = false
-    
+	
+	@State private var isFailingToLoad = false
+	
 	var imageURL: URL? {
 		let baseURL = "https://d2hyndjmu9mjcd.cloudfront.net/images/"
 		let urlString = "\(baseURL)\(imageId).png?\(self.type.query)&\(self.ratio.query)"
@@ -40,19 +40,19 @@ public struct MakHolyImageView: View {
 			.loadDiskFileSynchronously()
 			.cacheMemoryOnly()
 			.fade(duration: 0.15)
-			.retry(maxCount: 2, interval: .seconds(2))
+			.retry(maxCount: 1, interval: .seconds(2))
 			.resizable()
 			.onFailure { error in
 				print("Image loading failed with error: \(error)")
-                isFailingToLoad = true
+				isFailingToLoad = true
 			}
 			.onFailureImage(UIImage(named: "errorImage",
 									in: Bundle(identifier: "com.tenten.julookdesignsystem"),
 									with: nil)
-            
-            )
+							
+			)
 			.scaledToFit()
 			.frame(width: self.type.size.width, height: self.type.size.height)
-            .grayscale(isFailingToLoad ? 1.0 : 0.0)
+			.grayscale(isFailingToLoad ? 1.0 : 0.0)
 	}
 }
