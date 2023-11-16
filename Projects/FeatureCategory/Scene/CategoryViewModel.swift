@@ -107,7 +107,7 @@ final class CategoryViewModel: ObservableObject {
 			do {
 				let response = try await homeRepository.fetchRecentComment()
 				if response.status == 200 {
-					fetchLoading = false
+					fetchCommentLoading = false
 					comments = response.result ?? []
 				} else {
 					errorState = true

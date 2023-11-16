@@ -14,7 +14,8 @@ public struct RecentCommentsResponse: Codable {
 	public let result: [RecentComment]?
 }
 
-public struct RecentComment: Hashable, Codable {
+public struct RecentComment: Identifiable, Hashable, Codable {
+	public let id: UUID = UUID()
 	public let makNumber: Int?
 	public let makName: String?
 	public let makImageNumber: String?

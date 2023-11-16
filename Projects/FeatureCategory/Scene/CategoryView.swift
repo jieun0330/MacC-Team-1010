@@ -27,22 +27,28 @@ public struct CategoryView: View {
 	
 	public var body: some View {
 		if type == .comment {
-			NewCommentView(comments: viewModel.comments)
-				.background(Color(uiColor: .designSystem(.darkbase)!))
-				.navigationTitle(type.description)
-				.navigationBarTitleDisplayMode(.inline)
-				.navigationBarBackButtonHidden(true)
-				.navigationBarItems(leading: CustomBackButton())
-				.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
-				.onAppear {
-					if viewModel.fetchCommentLoading {
-						viewModel.fetchRecentComments()
+			if viewModel.fetchCommentLoading {
+				ProgressView()
+					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+					.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					.onAppear {
+						if viewModel.fetchCommentLoading {
+							viewModel.fetchRecentComments()
+						}
 					}
-				}
-				.alert(isPresented: $viewModel.errorState) {
-					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-						  dismissButton: .default(Text("확인")))
-				}
+					.alert(isPresented: $viewModel.errorState) {
+						Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+							  dismissButton: .default(Text("확인")))
+					}
+			} else {
+				NewCommentView(viewModel: viewModel)
+					.background(Color(uiColor: .designSystem(.darkbase)!))
+					.navigationTitle(type.description)
+					.navigationBarTitleDisplayMode(.inline)
+					.navigationBarBackButtonHidden(true)
+					.navigationBarItems(leading: CustomBackButton())
+					.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+			}
 		} else {
 			VStack(spacing: 0) {
 				if type == .characteristics {
