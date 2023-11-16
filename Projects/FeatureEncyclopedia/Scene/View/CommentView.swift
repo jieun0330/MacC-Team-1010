@@ -71,6 +71,7 @@ public struct CommentView: View {
                                         Text(mak.reactionComment ?? "")
                                             .SF14R()
                                             .foregroundColor(.W85)
+                                            .multilineTextAlignment(.leading)
                                         
                                         Spacer()
                                             .frame(height: 20)
