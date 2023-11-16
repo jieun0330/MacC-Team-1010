@@ -15,9 +15,6 @@ public struct MakHolyImageView: View {
 	let type: ImageType
 	let ratio: ImageRatioType
 	
-	@State private var isFailingToLoad = false
-	@State private var failureCount: Int = 0
-	
 	var imageURL: URL? {
 		if let baseURL = Bundle.main.infoDictionary?["IMAGE_API_URL"] as? String {
 			let urlString = "\(baseURL)\(imageId).png?\(self.type.query)&\(self.ratio.query)"
@@ -45,21 +42,8 @@ public struct MakHolyImageView: View {
 			.fade(duration: 0.15)
 			.retry(maxCount: 2, interval: .seconds(3))
 			.resizable()
-			.onFailure { error in
-				print("Image loading failed with error: \(error)")
-				failureCount += 1
-				if failureCount >= 2 {
-					isFailingToLoad = true
-				}
-			}
-			.onFailureImage(
-				UIImage(
-					named: "errorImage",
-					in: Bundle(identifier: "com.tenten.julookdesignsystem"),
-					with: nil)
-			)
+			.onFailureImage(.designSystem(.errorImage)!)
 			.scaledToFit()
 			.frame(width: self.type.size.width, height: self.type.size.height)
-			.grayscale(isFailingToLoad ? 1.0 : 0.0)
 	}
 }
