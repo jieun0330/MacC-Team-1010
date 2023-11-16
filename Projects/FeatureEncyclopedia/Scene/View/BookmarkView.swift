@@ -69,11 +69,11 @@ public struct BookmarkView: View {
 										}
 									}
 							}
+                            .padding(.horizontal, 8)
 						}
-                        .padding(.trailing, 16)
 					})
-                    .padding(.bottom)
-                    .padding(.leading, 16)
+                    // 썸네일 전체 뷰의 패딩
+                    .padding(.horizontal, 8)
 				}
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 					InformationView(makHolyId: makHolyId)

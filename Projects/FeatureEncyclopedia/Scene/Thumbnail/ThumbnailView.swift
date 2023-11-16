@@ -23,7 +23,7 @@ public struct ThumbnailView: View {
         Rectangle()
             .foregroundColor(.DarkGrey)
             .cornerRadius(18)
-            .frame(width: 110, height: 210)
+            .frame(height: 210)
             .overlay {
                 VStack {
                     MakHolyImageView(imageId: mak.makImg!, type: .small)
@@ -67,7 +67,6 @@ public struct ThumbnailView: View {
                 }
                 .padding(.top, 4)
             }
-//            .padding(.vertical, 4)
     }
 }
 
