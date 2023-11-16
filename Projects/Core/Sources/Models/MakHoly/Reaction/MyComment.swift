@@ -26,6 +26,6 @@ public struct MyComment {
 		}
 	
 	public init() {
-		self.init(isVisible: false, contents: "", date: "")
+		self.init(isVisible: true, contents: "", date: "")
 	}
 }
