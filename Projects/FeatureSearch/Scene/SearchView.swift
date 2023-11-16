@@ -38,6 +38,8 @@ public struct SearchView: View {
 							  ))
 					}
 			}
+			.navigationTitle("검색")
+			.navigationBarTitleDisplayMode(.inline)
 			.searchable(
 				text: $searchViewModel.searchText,
 				prompt: "막걸리 이름 ..."

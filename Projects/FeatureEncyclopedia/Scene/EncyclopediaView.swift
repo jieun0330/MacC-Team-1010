@@ -33,6 +33,12 @@ public struct EncyclopediaView: View {
 				BodyView(selectedType: selectedPicker)
 				Spacer()
 			}
+			.navigationTitle("내 막걸리")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbarBackground(
+				Color.DarkBase,
+				for: .navigationBar
+			)
 			.background(Color.DarkBase)
 		}
 	}
