@@ -76,7 +76,8 @@ struct CustomizationInfoView: View {
 				.padding(.bottom, 16)
 				.disabled(!yearOfBirth.isEmpty && sexType != .none ? false : true)
 			}
-			.navigationDestination(isPresented: $viewModel.navigationState) {
+			.padding(.horizontal, 16)
+			.fullScreenCover(isPresented: $viewModel.navigationState, content: {
 				TabView {
 					HomeView()
 						.tabItem {
@@ -103,13 +104,11 @@ struct CustomizationInfoView: View {
 								.font(.style(.SF10B))
 						}
 				}
-				.navigationBarBackButtonHidden()
+			})
+			.alert(isPresented: $viewModel.errorState) {
+				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+					  dismissButton: .default(Text("확인")))
 			}
-			.padding(.horizontal, 16)
-		}
-		.alert(isPresented: $viewModel.errorState) {
-			Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-				  dismissButton: .default(Text("확인")))
 		}
 	}
 }
