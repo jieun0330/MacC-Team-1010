@@ -26,10 +26,6 @@ public struct CommentView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .foregroundColor(Color(uiColor: .designSystem(.white)!))
                 .background(Color.DarkBase)
-                .alert(isPresented: $viewModel.errorState) {
-                    Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-                          dismissButton: .default(Text("확인")))
-                }
                 .onAppear {
                     viewModel.getUserMakFolder(segmentName: "comment")
                 }
@@ -39,23 +35,11 @@ public struct CommentView: View {
                 }
         } else {
             if viewModel.makModel.isEmpty {
-                VStack(spacing: 20) {
-                    Text("비어있어요..")
-                        .SF17R()
-                        .foregroundColor(.W50)
-                    Image(uiImage: .designSystem(.character)!)
-                }
+                isemptyView()
             } else {
                 ScrollView {
                     VStack {
-                        HStack {
-                            Text("\((viewModel.makModel).count)개의 막걸리에 코멘트를 남겼어요")
-                                .SF12R()
-                                .foregroundColor(.W50)
-                            Spacer()
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.leading, 12)
+                        headerView()
                         
                         ForEach(viewModel.makModel, id: \.self) { mak in
                             Button {
@@ -99,8 +83,8 @@ public struct CommentView: View {
                                             Spacer()
                                             
                                             Button {
+                                                showActionSheet.toggle()
                                                 self.targetMak = mak
-                                                showActionSheet = true
                                             } label: {
                                                 Text("수정")
                                                     .SF12R()
@@ -165,5 +149,29 @@ public struct CommentView: View {
                 }
             }
         }
+    }
+}
+
+extension CommentView {
+    @ViewBuilder
+    func isemptyView() -> some View {
+        VStack(spacing: 20) {
+            Text("비어있어요..")
+                .SF17R()
+                .foregroundColor(.W50)
+            Image(uiImage: .designSystem(.character)!)
+        }
+    }
+    
+    @ViewBuilder
+    func headerView() -> some View {
+        HStack {
+            Text("\((viewModel.makModel).count)개의 막걸리에 코멘트를 남겼어요")
+                .SF12R()
+                .foregroundColor(.W50)
+            Spacer()
+        }
+        .padding(.vertical, 10)
+        .padding(.leading, 12)
     }
 }

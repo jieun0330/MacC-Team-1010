@@ -90,7 +90,7 @@ final class EncyclopediaViewModel: ObservableObject {
 										 isVisible: isVisible)
 				)
 				if response.status == 200 {
-					self.getUserMakFolder()
+                    self.getUserMakFolder(segmentName: "comment")
 				} else {
 					errorState = true
 				}
