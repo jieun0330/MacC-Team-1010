@@ -27,7 +27,14 @@ public enum ImageType {
 		}
 	}
 	
+	public var querySize: CGSize {
+		switch self {
+		default:
+			return CGSize(width: 78, height: 156)
+		}
+	}
+	
 	public var query: String {
-		return "w=\(Int(size.width))&h=\(Int(size.height))"
+		return "w=\(Int(querySize.width))&h=\(Int(querySize.height))"
 	}
 }

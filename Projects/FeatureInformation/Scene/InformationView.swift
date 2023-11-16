@@ -20,6 +20,7 @@ public struct InformationView: View {
 	
 	public var body: some View {
 		ZStack(alignment: viewModel.isFetchCompleted ? .top : .center) {
+			Color.DarkBase.ignoresSafeArea()
 			if viewModel.isFetchCompleted {
 				ScrollView(.vertical, showsIndicators: false) {
 					ZStack(alignment: .top) {
