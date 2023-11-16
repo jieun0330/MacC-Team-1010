@@ -30,9 +30,6 @@ public struct EncyclopediaView: View {
 		NavigationStack {
 			VStack(spacing: 0) {
 				HeaderView()
-				Spacer()
-					.frame(height: 16)
-				Spacer()
 				BodyView(selectedType: selectedPicker)
 				Spacer()
 			}

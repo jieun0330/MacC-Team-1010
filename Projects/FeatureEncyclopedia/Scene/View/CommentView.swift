@@ -156,10 +156,12 @@ extension CommentView {
     @ViewBuilder
     func isemptyView() -> some View {
         VStack(spacing: 20) {
+            Spacer()
             Text("비어있어요..")
                 .SF17R()
                 .foregroundColor(.W50)
             Image(uiImage: .designSystem(.character)!)
+            Spacer()
         }
     }
     

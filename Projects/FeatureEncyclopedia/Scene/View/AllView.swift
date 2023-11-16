@@ -42,10 +42,12 @@ struct AllView: View {
 		} else {
 			if viewModel.makModel.isEmpty {
 				VStack(spacing: 20) {
+                    Spacer()
 					Text("비어있어요..")
 						.SF17R()
 						.foregroundColor(.W50)
 					Image(uiImage: .designSystem(.character)!)
+                    Spacer()
 				}
 			} else {
 				ScrollView(showsIndicators: false) {
@@ -56,7 +58,7 @@ struct AllView: View {
 						Spacer()
 					}
 					.padding(.vertical, 10)
-					.padding(.leading, 12)
+					.padding(.leading, 8)
 					
 					LazyVGrid(columns: columns, spacing: 20, content: {
 						ForEach(viewModel.makModel, id: \.self) { mak in
