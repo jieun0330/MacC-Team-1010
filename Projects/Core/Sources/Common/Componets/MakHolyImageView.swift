@@ -18,9 +18,11 @@ public struct MakHolyImageView: View {
 	@State private var isFailingToLoad = false
 	
 	var imageURL: URL? {
-		let baseURL = "https://d2hyndjmu9mjcd.cloudfront.net/images/"
-		let urlString = "\(baseURL)\(imageId).png?\(self.type.query)&\(self.ratio.query)"
-		return URL(string: urlString)
+		if let baseURL = Bundle.main.infoDictionary?["IMAGE_API_URL"] as? String {
+			let urlString = "\(baseURL)\(imageId).png?\(self.type.query)&\(self.ratio.query)"
+			return URL(string: urlString)
+		}
+		return nil
 	}
 	
 	public init(
