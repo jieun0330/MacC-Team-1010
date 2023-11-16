@@ -74,6 +74,7 @@ extension InfoMyCommentView {
 				.SF14R()
 				.foregroundColor(.White)
 				.frame(maxWidth: .infinity, alignment: .topLeading)
+				.fixedSize(horizontal: false, vertical: true)
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)
 				.padding(16)
