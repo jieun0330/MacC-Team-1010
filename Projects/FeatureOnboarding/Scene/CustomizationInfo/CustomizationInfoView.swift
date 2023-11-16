@@ -104,6 +104,12 @@ struct CustomizationInfoView: View {
 								.font(.style(.SF10B))
 						}
 				}
+				.onAppear {
+					UITabBar.appearance().backgroundColor = .designSystem(.darkwindow)!
+					UIView.appearance(whenContainedInInstancesOf:
+										[UIAlertController.self]).tintColor = .designSystem(.primary)!
+				}
+				.accentColor(Color(uiColor: .designSystem(.primary)!))
 			})
 			.alert(isPresented: $viewModel.errorState) {
 				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
