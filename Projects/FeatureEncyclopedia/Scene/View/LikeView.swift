@@ -13,7 +13,7 @@ import FeatureInformation
 public struct LikeView: View {
     @StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
     
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 3)
     public var body: some View {
         if viewModel.fetchLoading {
             ProgressView()

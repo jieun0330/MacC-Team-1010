@@ -18,6 +18,7 @@ public struct ProfileView: View {
 				MyInformationView()
 				SettingListView()
 			}
+            .background(Color.DarkBase)
 		}
 	}
 }
