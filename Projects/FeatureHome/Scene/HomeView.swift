@@ -75,6 +75,9 @@ public struct HomeView: View {
 					InformationView(makHolyId: makHolyId)
 				}
 			}
+			.onAppear {
+				viewModel.fetchRecentComments()
+			}
 		}
 	}
 }

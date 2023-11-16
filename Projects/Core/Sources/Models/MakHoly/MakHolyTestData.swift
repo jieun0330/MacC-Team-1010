@@ -9,12 +9,13 @@
 import Foundation
 
 extension MakContent {
-	public static var mockDatas: [MakContent] = [test1, test2, test3,
-												 test4, test5, test6,
-												 test7, test8, test9,
-												 test10]
+	public static var mockDatas: [MakContent] = [mock1, mock2, mock3,
+												 mock4, mock5, mock6,
+												 mock7, mock8, mock9,
+												 mock10, mock11, mock12,
+												 mock13, mock14]
 	
-	public static var test1: MakContent = MakContent(
+	public static var mock1: MakContent = MakContent(
 		makSeq: 15,
 		makName: "올빚베리",
 		makType: "탁주",
@@ -27,7 +28,7 @@ extension MakContent {
 		makTasteFresh: 3.0,
 		makImageNumber: "C37")
 	
-	public static var test2: MakContent = MakContent(
+	public static var mock2: MakContent = MakContent(
 		makSeq: 16,
 		makName: "지평생막걸리 쌀막걸리",
 		makType: "탁주",
@@ -40,7 +41,7 @@ extension MakContent {
 		makTasteFresh: 4.0,
 		makImageNumber: "C38")
 	
-	public static var test3: MakContent = MakContent(
+	public static var mock3: MakContent = MakContent(
 		makSeq: 17,
 		makName: "쌀은 원래 달다",
 		makType: "탁주",
@@ -53,7 +54,7 @@ extension MakContent {
 		makTasteFresh: -1.0,
 		makImageNumber: "1070")
 	
-	public static var test4: MakContent = MakContent(
+	public static var mock4: MakContent = MakContent(
 		makSeq: 18,
 		makName: "봉평메밀막걸리",
 		makType: "탁주",
@@ -66,7 +67,7 @@ extension MakContent {
 		makTasteFresh: 3.0,
 		makImageNumber: "C39")
 	
-	public static var test5: MakContent = MakContent(
+	public static var mock5: MakContent = MakContent(
 		makSeq: 20,
 		makName: "감천막걸리",
 		makType: "탁주",
@@ -79,7 +80,7 @@ extension MakContent {
 		makTasteFresh: 3.0,
 		makImageNumber: "943")
 	
-	public static var test6: MakContent = MakContent(
+	public static var mock6: MakContent = MakContent(
 		makSeq: 21,
 		makName: "마크홀리 오리지널 6.0",
 		makType: "탁주",
@@ -92,7 +93,7 @@ extension MakContent {
 		makTasteFresh: 1.0,
 		makImageNumber: "864")
 	
-	public static var test7: MakContent = MakContent(
+	public static var mock7: MakContent = MakContent(
 		makSeq: 22,
 		makName: "유톡자톡",
 		makType: "탁주",
@@ -105,7 +106,7 @@ extension MakContent {
 		makTasteFresh: 5.0,
 		makImageNumber: "1086")
 	
-	public static var test8: MakContent = MakContent(
+	public static var mock8: MakContent = MakContent(
 		makSeq: 23,
 		makName: "나루 생 막걸리 11.5도",
 		makType: "탁주",
@@ -118,7 +119,7 @@ extension MakContent {
 		makTasteFresh: 1.0,
 		makImageNumber: "135")
 	
-	public static var test9: MakContent = MakContent(
+	public static var mock9: MakContent = MakContent(
 		makSeq: 24,
 		makName: "하늘담9 생막걸리",
 		makType: "탁주",
@@ -131,7 +132,7 @@ extension MakContent {
 		makTasteFresh: 3.0,
 		makImageNumber: "C40")
 	
-	public static var test10: MakContent = MakContent(
+	public static var mock10: MakContent = MakContent(
 		makSeq: 25,
 		makName: "만복 생 전통주",
 		makType: "탁주",
@@ -143,6 +144,58 @@ extension MakContent {
 		makTasteThick: -1.0,
 		makTasteFresh: -1.0,
 		makImageNumber: "C41")
+	
+	public static var mock11: MakContent = MakContent(
+		makSeq: 34,
+		makName: "설하담",
+		makType: "탁주",
+		makAlcoholPercentage: 7.0,
+		makVolume: 940,
+		makPrice: 12000,
+		makTasteSweet: 4.0,
+		makTasteSour: 2.0,
+		makTasteThick: 2.0,
+		makTasteFresh: 1.0,
+		makImageNumber: "66")
+	
+	public static var mock12: MakContent = MakContent(
+		makSeq: 32,
+		makName: "동국이",
+		makType: "탁주",
+		makAlcoholPercentage: 8.0,
+		makVolume: 500,
+		makPrice: 13700,
+		makTasteSweet: 3.0,
+		makTasteSour: 2.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 2.0,
+		makImageNumber: "C44")
+	
+	public static var mock13: MakContent = MakContent(
+		makSeq: 31,
+		makName: "디오케이 막걸리",
+		makType: "탁주",
+		makAlcoholPercentage: 6.0,
+		makVolume: 500,
+		makPrice: 3000,
+		makTasteSweet: 3.0,
+		makTasteSour: 2.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 1.0,
+		makImageNumber: "C43")
+	
+	public static var mock14: MakContent = MakContent(
+		makSeq: 29,
+		makName: "너디호프 드라이",
+		makType: "탁주",
+		makAlcoholPercentage: 5.0,
+		makVolume: 700,
+		makPrice: 10000,
+		makTasteSweet: 2.0,
+		makTasteSour: 4.0,
+		makTasteThick: 3.0,
+		makTasteFresh: 2.0,
+		makImageNumber: "1011")
 }
 
 extension Award {
