@@ -36,6 +36,7 @@ struct NewCommentView: View {
 					}
 				}
 			}
+			.padding(.bottom, 16)
 			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 				InformationView(makHolyId: makHolyId)
 			}
