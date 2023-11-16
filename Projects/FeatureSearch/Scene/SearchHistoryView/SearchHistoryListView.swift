@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct SearchHistoryListView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
@@ -16,9 +17,7 @@ struct SearchHistoryListView: View {
 			VStack(spacing: 0) {
 				ForEach(searchViewModel.searchHistorys.reversed(), id: \.self) { searchHistory in
 					searchHistoryListSingleView(searchHistory: searchHistory)
-					Divider()
-						.foregroundColor(Color(uiColor: .designSystem(.w25)!))
-						.frame(height: 0.33)
+					DividerView()
 				}
 			}
 		}
