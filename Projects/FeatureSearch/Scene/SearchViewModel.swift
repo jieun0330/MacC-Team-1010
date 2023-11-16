@@ -16,7 +16,7 @@ final class SearchViewModel: ObservableObject {
 	@Published var searchHistorys: [String] = []
 	@Published var resultMakHolies: [SearchResult] = []
 	@Published var fetchLoading = true
-	
+	@Published var showAlert = false
 	private var cancellables = Set<AnyCancellable>()
 	var searchState = false
 	
