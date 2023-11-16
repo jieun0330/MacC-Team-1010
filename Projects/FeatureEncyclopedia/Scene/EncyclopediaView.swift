@@ -46,12 +46,13 @@ private extension EncyclopediaView {
 	private func HeaderView() -> some View {
 		HStack {
 			ForEach(headerType.allCases, id: \.self) { item in
-				VStack {
-					Text(item.rawValue)
-						.SF14R()
-						.frame(maxWidth: .infinity/5, minHeight: 42)
-						.foregroundColor(.White)
-					
+				ZStack(alignment: .bottom) {
+					VStack {
+						Text(item.rawValue)
+							.SF14R()
+							.frame(maxWidth: .infinity/5, minHeight: 42)
+							.foregroundColor(.White)
+					}
 					if selectedPicker == item {
 						Capsule()
 							.foregroundColor(.Lilac)
@@ -60,7 +61,7 @@ private extension EncyclopediaView {
 					}
 				}
 				.onTapGesture {
-					withAnimation(.easeInOut) {
+					withAnimation(.easeInOut(duration: 0.2)) {
 						self.selectedPicker = item
 					}
 				}
