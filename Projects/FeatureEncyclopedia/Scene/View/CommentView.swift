@@ -173,7 +173,7 @@ extension CommentView {
                 .foregroundColor(.W50)
             Spacer()
         }
-        .padding(.vertical, 10)
-        .padding(.leading, 12)
+        .padding(.top, 12)
+        .padding(.leading, 16)
     }
 }

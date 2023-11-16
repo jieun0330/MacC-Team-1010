@@ -46,9 +46,9 @@ public struct BookmarkView: View {
 							.foregroundColor(.W50)
 						Spacer()
 					}
-					.padding(.vertical, 10)
-					.padding(.leading, 12)
-					
+                    .padding(.top, 12)
+                    .padding(.leading, 16)
+
 					LazyVGrid(columns: columns, spacing: 16, content: {
 						ForEach(viewModel.makModel, id: \.self) { mak in
 							Button {
@@ -70,7 +70,10 @@ public struct BookmarkView: View {
 									}
 							}
 						}
+                        .padding(.trailing, 16)
 					})
+                    .padding(.bottom)
+                    .padding(.leading, 16)
 				}
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 					InformationView(makHolyId: makHolyId)

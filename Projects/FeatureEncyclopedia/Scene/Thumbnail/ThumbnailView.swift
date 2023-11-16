@@ -67,6 +67,7 @@ public struct ThumbnailView: View {
                 }
                 .padding(.top, 4)
             }
+//            .padding(.vertical, 4)
     }
 }
 
