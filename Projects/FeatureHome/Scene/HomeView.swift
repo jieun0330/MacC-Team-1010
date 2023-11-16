@@ -17,18 +17,16 @@ public struct HomeView: View {
 		homeRepository: DefaultHomeRepository()
 	)
 	
-	@State var viewOpacityValue = 0.0
-	
 	public init() {}
 	
 	public var body: some View {
-		if viewModel.fetchLoading {
+		if viewModel.makListLoading {
 			ProgressView()
 				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 				.tint(Color(uiColor: .designSystem(.white)!))
+				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.onAppear {
 					viewModel.fetchNewMakList()
-					viewModel.fetchRecentComments()
 				}
 				.alert(isPresented: $viewModel.errorState) {
 					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
@@ -64,12 +62,6 @@ public struct HomeView: View {
 					}
 				}
 				.ignoresSafeArea(.all, edges: .top)
-				.opacity(viewOpacityValue)
-				.onAppear {
-					withAnimation {
-						self.viewOpacityValue = 1.0
-					}
-				}
 				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 					InformationView(makHolyId: makHolyId)

@@ -31,6 +31,12 @@ public struct CategoryView: View {
 				ProgressView()
 					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 					.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					.background(Color(uiColor: .designSystem(.darkbase)!))
+					.navigationTitle(type.description)
+					.navigationBarTitleDisplayMode(.inline)
+					.navigationBarBackButtonHidden(true)
+					.navigationBarItems(leading: CustomBackButton())
+					.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 					.onAppear {
 						if viewModel.fetchCommentLoading {
 							viewModel.fetchRecentComments()
@@ -66,6 +72,10 @@ public struct CategoryView: View {
 						ProgressView()
 							.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 							.foregroundColor(Color(uiColor: .designSystem(.white)!))
+							.alert(isPresented: $viewModel.errorState) {
+								Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+							}
 					} else {
 						MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
 							.padding(.horizontal, 8)

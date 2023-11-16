@@ -8,10 +8,8 @@
 
 import Foundation
 import Core
-import Combine
 
 final class HomeViewModel: ObservableObject {
-	@Published var fetchLoading = true
 	@Published var makListLoading = true
 	@Published var commentsLoading = true
 	@Published var errorState = false
@@ -29,16 +27,6 @@ final class HomeViewModel: ObservableObject {
 	) {
 		self.makgeolliRepository = makgeolliRepository
 		self.homeRepository = homeRepository
-		initLoading()
-	}
-	
-	func initLoading() {
-		Publishers.CombineLatest($makListLoading, $commentsLoading)
-			.map { makListLoading, commentsLoading in
-				return !makListLoading && !commentsLoading ? false : true
-			}
-			.receive(on: DispatchQueue.main)
-			.assign(to: &$fetchLoading)
 	}
 	
 	@MainActor
@@ -52,7 +40,6 @@ final class HomeViewModel: ObservableObject {
 				} else {
 					errorState = true
 				}
-				makListLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
 				errorState = true
@@ -71,7 +58,6 @@ final class HomeViewModel: ObservableObject {
 				} else {
 					errorState = true
 				}
-				commentsLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
 				errorState = true
