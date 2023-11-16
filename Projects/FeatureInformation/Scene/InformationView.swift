@@ -25,31 +25,32 @@ public struct InformationView: View {
 					ZStack(alignment: .top) {
 						VStack(spacing: 0) {
 							InformationCardView(viewModel: viewModel)
-								.alert(isPresented: $viewModel.showDeleteAlert) {
-									Alert(title: Text("코멘트 삭제"), message: Text("코멘트를 삭제하시겠어요?"),
-										  primaryButton: .cancel(
-											Text("취소"),
-											action: {}
-										  ), secondaryButton: .destructive(
-											Text("삭제하기"),
-											action: {
-												viewModel.deleteComment()
-											}
-										  ))
-								}
 								.padding(.top, 28.5)
 							InformationDetailView(viewModel: viewModel)
-								.alert(isPresented: $viewModel.errorState) {
-									Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+							
+						}
+						.alert(isPresented: $viewModel.showDeleteAlert) {
+							Alert(title: Text("코멘트 삭제"), message: Text("코멘트를 삭제하시겠어요?"),
+								  primaryButton: .cancel(
+									Text("취소"),
+									action: {}
+								  ), secondaryButton: .destructive(
+									Text("삭제하기"),
+									action: {
+										viewModel.deleteComment()
+									}
+								  ))
 						}
 						HStack {
 							InfoBookMarkButton(viewModel: viewModel)
 							Spacer()
 						}
 						.padding(.horizontal, 16)
+						.alert(isPresented: $viewModel.errorState) {
+							Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+								  dismissButton: .default(Text("확인")))
+						}
 					}
-				}
 				}
 			} else {
 				ProgressView()
