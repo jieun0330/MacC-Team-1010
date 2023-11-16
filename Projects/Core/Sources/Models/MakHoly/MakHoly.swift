@@ -41,7 +41,7 @@ public struct MakHoly: Identifiable, Hashable {
 	public init() {
 		self.init(
 			id: -1,
-			name: "",
+			name: "로딩중 ...",
 			imageId: "",
 			taste: Taste(),
 			basicInfo: BasicInfo(),

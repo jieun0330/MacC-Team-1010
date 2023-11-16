@@ -20,11 +20,23 @@ public struct SearchView: View {
 		NavigationStack {
 			ZStack {
 				Color.DarkBase.ignoresSafeArea()
+					.alert(isPresented: $searchViewModel.errorState) {
+						Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+							  dismissButton: .default(Text("확인")))
+					}
 				SearchSuggestionView(searchViewModel: searchViewModel)
-			}
-			.alert(isPresented: $searchViewModel.errorState) {
-				Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-					  dismissButton: .default(Text("확인")))
+					.alert(isPresented: $searchViewModel.showAlert) {
+						Alert(title: Text("최근 검색어 지우기"), message: Text("검색한 기록을 모두 지울까요?"),
+							  primaryButton: .cancel(
+								Text("취소"),
+								action: {}
+							  ), secondaryButton: .destructive(
+								Text("지우기"),
+								action: {
+									searchViewModel.clearSearchHistory()
+								}
+							  ))
+					}
 			}
 			.searchable(
 				text: $searchViewModel.searchText,

@@ -9,6 +9,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import FeatureInformation
 
 struct NewCommentView: View {
 	@ObservedObject var viewModel: CategoryViewModel
@@ -19,15 +20,24 @@ struct NewCommentView: View {
 				Spacer()
 					.frame(height: 16)
 				ForEach(viewModel.comments, id: \.id) { comment in
-					VStack(spacing: 0) {
-						NewCommentSingleView(comment: comment)
-						if comment.id != viewModel.comments.last?.id {
-							DividerView()
-								.padding(.vertical, 10)
+					Button {
+						if let id = comment.makNumber {
+							self.viewModel.resultMakHolyId = id
 						}
+					} label: {
+						VStack(spacing: 0) {
+							NewCommentSingleView(comment: comment)
+							if comment.id != viewModel.comments.last?.id {
+								DividerView()
+									.padding(.vertical, 10)
+							}
+						}
+						.padding(.horizontal, 16)
 					}
-					.padding(.horizontal, 16)
 				}
+			}
+			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+				InformationView(makHolyId: makHolyId)
 			}
 		}
 	}
