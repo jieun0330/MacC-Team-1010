@@ -42,7 +42,7 @@ struct CustomizationInfoView: View {
 				Spacer()
 					.frame(height: 40)
 				
-				TextField("2004 (출생년도)", text: $yearOfBirth)
+				TextField("2023 (출생년도)", text: $yearOfBirth)
 					.font(.style(.SF20B))
 					.keyboardType(.numberPad)
 					.onReceive(Just(yearOfBirth)) { newValue in
@@ -52,7 +52,7 @@ struct CustomizationInfoView: View {
 						}
 						if self.yearOfBirth.count == 5 {
 							self.yearOfBirth.removeLast()
-						}
+                        }
 					}
 					.underlined()
 				
@@ -64,7 +64,7 @@ struct CustomizationInfoView: View {
 				} label: {
 					RoundedRectangle(cornerRadius: 12)
 						.fill(Color(uiColor: .designSystem(
-							!yearOfBirth.isEmpty && sexType != .none ? .goldenyellow : .w10)!)
+							yearOfBirth.count == 4 && sexType != .none ? .goldenyellow : .w10)!)
 						)
 						.frame(height: 50)
 						.overlay {
@@ -74,7 +74,7 @@ struct CustomizationInfoView: View {
 						}
 				}
 				.padding(.bottom, 16)
-				.disabled(!yearOfBirth.isEmpty && sexType != .none ? false : true)
+				.disabled(yearOfBirth.count == 4 && sexType != .none ? false : true)
 			}
 			.padding(.horizontal, 16)
 			.fullScreenCover(isPresented: $viewModel.navigationState, content: {
