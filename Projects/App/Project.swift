@@ -6,7 +6,8 @@ let project = Project.makeModule(
 	platform: .iOS,
 	product: .app,
 	dependencies: [
-		.Project.Feature
+		.Project.Feature,
+		.SPM.Mixpanel
 	],
 	sources: ["Sources/**"],
 	resources: ["Resources/**"],
