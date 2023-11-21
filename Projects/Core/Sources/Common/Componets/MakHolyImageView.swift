@@ -14,10 +14,11 @@ public struct MakHolyImageView: View {
 	let imageId: String
 	let type: ImageType
 	let ratio: ImageRatioType
+	private let cacheLifeTimeDuration: StorageExpiration = .days(14)
 	
 	var imageURL: URL? {
 		if let baseURL = Bundle.main.infoDictionary?["IMAGE_API_URL"] as? String {
-			let urlString = "\(baseURL)\(imageId).png?\(self.type.query)&\(self.ratio.query)"
+			let urlString = "\(baseURL)\(imageId).webp"
 			return URL(string: urlString)
 		}
 		return nil
@@ -37,10 +38,11 @@ public struct MakHolyImageView: View {
 			.placeholder {
 				ProgressView()
 			}
-			.loadDiskFileSynchronously()
-			.cacheMemoryOnly()
+			.loadDiskFileSynchronously(false)
+			.cancelOnDisappear(true)
+			.memoryCacheExpiration(cacheLifeTimeDuration)
+			.diskCacheExpiration(cacheLifeTimeDuration)
 			.fade(duration: 0.15)
-			.retry(maxCount: 2, interval: .seconds(3))
 			.resizable()
 			.onFailureImage(.designSystem(.errorImage)!)
 			.scaledToFit()
