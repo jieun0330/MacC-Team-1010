@@ -10,8 +10,8 @@ import Foundation
 
 public struct LikeDetail {
 	private let totalCount: Int
-	private let likeCount: Int
-	private let dislikeCount: Int
+	public let likeCount: Int
+	public let dislikeCount: Int
 	
 	public init(
 		totalCount: Int,
@@ -27,7 +27,7 @@ public struct LikeDetail {
 	}
 	
 	public var isEnough: Bool {
-		return totalCount > 5
+		return totalCount > 4
 	}
 	
 	public var likePercent: Int {

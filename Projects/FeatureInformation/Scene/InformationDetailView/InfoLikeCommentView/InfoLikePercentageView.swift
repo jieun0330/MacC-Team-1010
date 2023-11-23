@@ -59,11 +59,11 @@ extension InfoLikePercentageView {
 	func descriptionView() -> some View {
 		HStack {
 			if likeDetail.isEnough {
-				Text("좋았어요")
+				Text("좋았어요 (\(likeDetail.likeCount))")
 					.SF14R()
 					.foregroundColor(.W50)
 				Spacer()
-				Text("아쉬워요")
+				Text("아쉬워요 (\(likeDetail.dislikeCount))")
 					.SF14R()
 					.foregroundColor(.W50)
 			}
