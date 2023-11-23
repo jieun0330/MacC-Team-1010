@@ -136,9 +136,12 @@ private extension RootView {
 		debugPrint("predictionString \(predictionString)")
 		
 		let splitValue = predictionString.split(separator: " ")
-		
-		if Double(splitValue[1]) ?? -1.0 >= 70.0 {
-			makId = Int(splitValue[0]) ?? -1
+		if let percent = Double(splitValue[1]), percent >= 70.0 {
+			if let returnId = Int(splitValue[0]), returnId != -1 {
+				makId = returnId
+			} else {
+				showEmptyImageAlert = true
+			}
 		} else {
 			showEmptyImageAlert = true
 		}
