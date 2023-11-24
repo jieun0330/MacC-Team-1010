@@ -39,8 +39,8 @@ public struct NewMakListMainDetail: Codable {
 }
 
 public struct NewMakListTaste: Codable {
-	public let makTasteSweet: Int?
-	public let makTasteSour: Int?
-	public let makTasteThick: Int?
-	public let makTasteFresh: Int?
+	public let makTasteSweet: Double?
+	public let makTasteSour: Double?
+	public let makTasteThick: Double?
+	public let makTasteFresh: Double?
 }
