@@ -126,7 +126,7 @@ extension InfoMyCommentView {
 	@ViewBuilder
 	func footerView(date: String) -> some View {
 		HStack {
-			Text("\(date.extractDateFromISOString() ?? "")")
+			Text("\(date.formattedTimeAgo() ?? "")")
 				.SF12R()
 				.foregroundColor(.W50)
 			

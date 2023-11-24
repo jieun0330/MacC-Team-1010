@@ -75,7 +75,7 @@ public struct CommentView: View {
                                             .frame(height: 20)
                                         
                                         HStack {
-                                            Text(mak.reactionCommentDate?.extractDateFromISOString() ?? "")
+											Text(mak.reactionCommentDate?.formattedTimeAgo() ?? "")
                                                 .SF14R()
                                                 .foregroundColor(.W25)
                                             
