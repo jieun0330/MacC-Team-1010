@@ -19,7 +19,7 @@ public struct InformationView: View {
 	}
 	
 	public var body: some View {
-		ZStack(alignment: viewModel.isFetchCompleted ? .top : .center) {
+		ZStack(alignment: .top) {
 			Color.DarkBase.ignoresSafeArea()
 			if viewModel.isFetchCompleted {
 				ScrollView(.vertical, showsIndicators: false) {
@@ -54,7 +54,11 @@ public struct InformationView: View {
 					}
 				}
 			} else {
-				ProgressView()
+				VStack {
+					Spacer()
+					ProgressView()
+					Spacer()
+				}
 			}
 			// 상단 고정 Back Button
 			HStack {

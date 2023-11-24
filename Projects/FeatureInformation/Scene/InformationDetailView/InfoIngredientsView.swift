@@ -13,14 +13,13 @@ struct InfoIngredientsView: View {
 	let ingredients: String
 	
 	var body: some View {
-		VStack(alignment: .leading, spacing: 0) {
+		VStack(alignment: .leading, spacing: 20) {
 			HStack {
 				Text("원재료")
 					.SF20B()
 					.foregroundColor(.White)
 				Spacer()
 			}
-			.padding(.vertical, 20)
 			
 			Text(ingredients)
 				.SF14R()
@@ -28,8 +27,14 @@ struct InfoIngredientsView: View {
 				.multilineTextAlignment(.leading)
 				.lineLimit(nil)
 				.fixedSize(horizontal: false, vertical: true)
-				.padding(.bottom, 20)
+			
+			Text("정보출처: 식품안전나라")
+				.SF12B()
+				.foregroundColor(.W25)
+				.frame(maxWidth: .infinity, alignment: .leading)
+			
 		}
 		.padding(.horizontal, 16)
+		.padding(.vertical, 20)
 	}
 }
