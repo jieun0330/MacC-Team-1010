@@ -27,7 +27,7 @@ public struct LikeDetail {
 	}
 	
 	public var isEnough: Bool {
-		return totalCount > 4
+		return totalCount > 5
 	}
 	
 	public var likePercent: Int {
