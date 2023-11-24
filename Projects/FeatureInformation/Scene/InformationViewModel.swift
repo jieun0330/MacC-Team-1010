@@ -136,6 +136,7 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
+	@MainActor
 	func likeButtonTapped() {
 		switch self.myReaction.likeState {
 		case .like:
@@ -145,6 +146,7 @@ final class InformationViewModel: ObservableObject {
 		}
 	}
 	
+	@MainActor
 	func dislikeButtonTapped() {
 		switch self.myReaction.likeState {
 		case .dislike:
