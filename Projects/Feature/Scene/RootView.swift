@@ -102,7 +102,7 @@ public struct RootView: View {
 				InformationView(makHolyId: makHolyId)
 			}
 			.alert(isPresented: $showEmptyImageAlert) {
-				Alert(title: Text("막걸리 스캔에 실패했어요.."), message: Text("조금 더 라벨에 가깝게 찍어주시거나, 찾으시는 막걸리가 없다면 문의하기로 보내주세요."),
+				Alert(title: Text("라벨을 찾지 못했어요"), message: Text("라벨이 잘 보이게 다시 찍어주시거나 막걸리 이름으로 검색해보세요."),
 					  dismissButton: .default(Text("확인")))
 			}
 		}

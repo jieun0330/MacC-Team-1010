@@ -34,22 +34,24 @@ public struct CameraView: View {
 					.foregroundColor(Color.black.opacity(0.5))
 					.mask(
 						Window(size: CGSize(width: UIScreen.main.bounds.size.width - 32,
-											height: UIScreen.main.bounds.size.height / 2))
+											height: UIScreen.main.bounds.size.height / 3))
 						.fill(style: FillStyle(eoFill: true))
 					)
 					.ignoresSafeArea()
 				
 				RoundedRectangle(cornerRadius: 32).stroke(Color.white, lineWidth: 2)
 					.frame(width: UIScreen.main.bounds.size.width - 32,
-						   height: UIScreen.main.bounds.size.height / 2)
+						   height: UIScreen.main.bounds.size.height / 3)
 					.padding(.bottom, geometry.safeAreaInsets.bottom)
 					.padding(.bottom, 64)
 				
 				VStack {
 					Spacer()
-					Text("최대한 다른 사진이 안나오고 막걸리 라벨에 가깝게 찍어주세요 ~~~~")
+					Text("위의 사각형 영역에 막걸리 라벨이\n꽉 차도록 가까이서 찍어주세요")
+						.SF15R()
+						.multilineTextAlignment(.center)
 					Spacer()
-						.frame(height: 16)
+						.frame(height: 24)
 					Button(action: {viewModel.capturePhoto()}) {
 						Image(uiImage: .designSystem(.shutter)!)
 							.resizable()
@@ -61,7 +63,7 @@ public struct CameraView: View {
 			}
 		}
 		.alert(isPresented: $showPermissionAlert) {
-			Alert(title: Text("카메라 권한 오류"), message: Text("막걸리 스캔을 위해서는 카메라 권한 설정이 필요해요. 설정에서 카메라 권한을 확인해주세요."),
+			Alert(title: Text("카메라 권한이 필요해요"), message: Text("라벨을 스캔하기 위해서는 카메라 권한이 필요해요. 앱 설정에서 카메라 권한을 확인해주세요."),
 				  dismissButton: .default(Text("확인"), action: {
 				isCameraViewPresented = false
 			}))
