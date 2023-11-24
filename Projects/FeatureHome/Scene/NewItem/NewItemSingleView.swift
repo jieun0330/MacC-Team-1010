@@ -61,7 +61,7 @@ struct NewItemSingleView: View {
 														item.taste?.makTasteThick ?? -1.0,
 														item.taste?.makTasteFresh ?? -1.0])
 							}
-							.padding(.vertical, 12)
+							.padding(.vertical, 16)
 							.padding(.horizontal, 8)
 						}
 				)
