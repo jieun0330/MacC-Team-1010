@@ -17,16 +17,19 @@ final class SearchViewModel: ObservableObject {
 	@Published var resultMakHolies: [SearchResult] = []
 	@Published var fetchLoading = true
 	@Published var showAlert = false
+	
 	private var cancellables = Set<AnyCancellable>()
 	var searchState = false
 	
 	let searchRepository: DefaultSearchRepository
 	
+	@MainActor
 	init(searchRepository: DefaultSearchRepository) {
 		self.searchRepository = searchRepository
-		addSubscribers()
+		self.addSubscribers()
 	}
 	
+	@MainActor
 	private func addSubscribers() {
 		$searchText
 			.debounce(for: 1.0, scheduler: DispatchQueue.main)
@@ -39,11 +42,13 @@ final class SearchViewModel: ObservableObject {
 			.store(in: &cancellables)
 	}
 	
+	@MainActor
 	func clearSearchHistory() {
 		searchHistorys = []
 		saveSearchHistorys()
 	}
 	
+	@MainActor
 	func addSearchHistory(makName: String) {
 		if let existingIndex = searchHistorys.firstIndex(of: makName) {
 			searchHistorys.remove(at: existingIndex)
@@ -57,12 +62,14 @@ final class SearchViewModel: ObservableObject {
 		saveSearchHistorys()
 	}
 	
+	@MainActor
 	func fetchSearchHistorys() {
 		if let savedHistorys = UserDefaults.standard.array(forKey: "searchHistorys") as? [String] {
 			searchHistorys = savedHistorys
 		}
 	}
 	
+	@MainActor
 	func deleteSearchHistory(_ searchText: String) {
 		if let existingIndex = searchHistorys.firstIndex(of: searchText) {
 			searchHistorys.remove(at: existingIndex)
@@ -70,6 +77,7 @@ final class SearchViewModel: ObservableObject {
 		UISearchBar.appearance().tintColor = .green
 	}
 	
+	@MainActor
 	func setCompletion(_ completion: String) {
 		self.searchText = completion
 	}
@@ -78,6 +86,7 @@ final class SearchViewModel: ObservableObject {
 		UserDefaults.standard.set(searchHistorys, forKey: "searchHistorys")
 	}
 	
+	@MainActor
 	func searchMakHolies(searchText: String) {
 		fetchLoading = true
 		Task {

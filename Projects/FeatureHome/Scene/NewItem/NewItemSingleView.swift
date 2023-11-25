@@ -12,10 +12,10 @@ import DesignSystem
 
 struct NewItemSingleView: View {
 	@ObservedObject var viewModel: HomeViewModel
+	
 	let item: NewMakListMakgeolliDetail
 	
 	var body: some View {
-		
 		Button {
 			if let id = item.makNumber {
 				viewModel.resultMakHolyId = id
@@ -56,10 +56,10 @@ struct NewItemSingleView: View {
 								Spacer()
 									.frame(height: 12)
 								
-								TasteGraphView(scores: [item.taste?.makTasteSweet ?? -1,
-														item.taste?.makTasteSour ?? -1,
-														item.taste?.makTasteThick ?? -1,
-														item.taste?.makTasteFresh ?? -1])
+								TasteGraphView(scores: [item.taste?.makTasteSweet ?? -1.0,
+														item.taste?.makTasteSour ?? -1.0,
+														item.taste?.makTasteThick ?? -1.0,
+														item.taste?.makTasteFresh ?? -1.0])
 							}
 							.padding(.vertical, 12)
 							.padding(.horizontal, 8)
