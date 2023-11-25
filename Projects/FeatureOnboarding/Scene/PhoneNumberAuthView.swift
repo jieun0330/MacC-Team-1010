@@ -20,6 +20,7 @@ public struct PhoneNumberAuthView: View {
     @State private var showSecondTextField = false
     @State var timeRemaining: Int = 180
     @State private var isCountdownOver = false
+    @State private var showAlert = false
     
     let date = Date()
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -43,7 +44,10 @@ public struct PhoneNumberAuthView: View {
                     
                     VStack {
                         ZStack {
-                            Image(uiImage: .designSystem(.numBox)!)
+                            // 기본 설정
+//                            Image(uiImage: .designSystem(.numBox)!)
+                            // 인증번호 retry
+                            Image(uiImage: .designSystem(.numBox_warmRed)!)
                             TextField("000000", text: $certificationNumber)
                                 .frame(width: 300)
                                 .padding()
@@ -61,9 +65,18 @@ public struct PhoneNumberAuthView: View {
                             
                         }
                         HStack {
-                            Text("인증번호가 발송되었어요!")
+                            // 기본 설정
+//                            Text("인증번호가 발송되었어요!")
+//                                .SF12B()
+//                                .foregroundColor(.Primary2)
+                            // 인증번호 retry
+                            Text("인증 번호를 다시 확인해주세요")
                                 .SF12B()
-                                .foregroundColor(.Primary2)
+                                .foregroundColor(.Alert)
+                            // 인증시간이 지났어요
+                            Text("인증시간이 지났어요")
+                                .SF12B()
+                                .foregroundColor(.Alert)
 
                             Spacer()
                             
@@ -104,8 +117,19 @@ public struct PhoneNumberAuthView: View {
                 
                 nextButton()
             }
+            .navigationBarItems(trailing: Button(action: {
+                showAlert = true
+            }, label: {
+                Text("건너뛰기").SF14R().foregroundColor(.W25)
+            }))
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("막걸리 정보를 보관할 수 없어요"), message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
+                      primaryButton: .cancel(Text("안하기")), secondaryButton: .default(Text("보관하기")))
+            }
+            .font(.style(.SF12R))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 16)
         }
-        .navigationBarItems(trailing: Text("건너뛰기"))
     }
 }
 
@@ -115,7 +139,7 @@ extension PhoneNumberAuthView {
         Text("반가워요!")
         .SF24B()
         
-        HStack {
+        HStack(spacing: 0) {
             Text("본인 확인")
                 .foregroundColor(.Primary)
                 .SF24B()
@@ -190,7 +214,6 @@ extension PhoneNumberAuthView {
         Button {
             if phoneNumber.validatePhone(number: phoneNumber) {
                 showSecondTextField = true
-//                PhoneNumTextFieldStyle.configuration.
             } else {
                 showSecondTextField = false
             }
