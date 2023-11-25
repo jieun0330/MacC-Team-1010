@@ -43,7 +43,10 @@ public struct BirthView: View {
                 .padding(.bottom, 24)
             
             ZStack {
-                Image(uiImage: .designSystem(.numBox)!)
+                // 기본 설정
+//                Image(uiImage: .designSystem(.numBox)!)
+                // 생년월일 retry
+                Image(uiImage: .designSystem(.numBox_warmRed)!)
                 TextField("980123", text: $birthDay)
                     .frame(width: 300)
                     .textFieldStyle(CertiNumTextFieldStyle())
@@ -58,7 +61,12 @@ public struct BirthView: View {
                         }
                     }
             }
-            .padding(.bottom, 52)
+            .padding(.bottom, 8)
+            
+            Text("19세 이상의 성인만 이용할 수 있어요")
+                .SF12B()
+                .foregroundColor(.Alert)
+                .padding(.bottom, 24)
             
             HStack {
                 Text("개인정보(연락처, 생년월일) 수집 이용에 동의합니다")
