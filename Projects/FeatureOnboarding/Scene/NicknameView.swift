@@ -14,6 +14,7 @@ public struct NicknameView: View {
     
     @State var nickName = ""
     @State private var showNickDupli = false
+    @State private var showAlert = false
     
     public init(nickName: String = "") {
         self.nickName = nickName
@@ -54,10 +55,16 @@ public struct NicknameView: View {
                 .padding(.bottom, 153)
                 
                 if showNickDupli {
+                    // 기본
                     Text("사용할 수 있는 닉네임이에요!")
                         .SF12B()
                         .foregroundColor(.Primary2)
                         .padding(.bottom, 90)
+                    // 중복
+//                    Text("중복된 닉네임이에요")
+//                        .SF12B()
+//                        .foregroundColor(.Alert)
+//                        .padding(.bottom, 90)
                     
                     HStack(spacing: 0) {
                         Text("이용약관")
@@ -72,6 +79,10 @@ public struct NicknameView: View {
                     .font(.style(.SF12B))
                 }
                 nextButton()
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("완료했어요!"), message: Text("이제 ‘내 정보’의 핸드폰 번호 로그인로 내 데이터를 불러올 수 있어요!"),
+                      dismissButton: .default(Text("확인")))
             }
         }
     }
