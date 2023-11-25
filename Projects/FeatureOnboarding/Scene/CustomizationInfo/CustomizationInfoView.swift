@@ -24,7 +24,7 @@ struct CustomizationInfoView: View {
 	
 	@Binding var nickname: String
 	
-	var body: some View {
+    var body: some View {
 		ZStack {
 			if viewModel.fetchLoading {
 				ProgressView()

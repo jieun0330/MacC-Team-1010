@@ -15,8 +15,9 @@ public struct BirthView: View {
     @State var birthDay = ""
     @State private var isAgreed = false
     
-    public init() {
-        
+    public init(birthDay: String = "", isAgreed: Bool = false) {
+        self.birthDay = birthDay
+        self.isAgreed = isAgreed
     }
     
     public var body: some View {
@@ -26,7 +27,7 @@ public struct BirthView: View {
             Spacer()
             
             Text("본인 확인을 위해")
-            .SF24B()
+                .SF24B()
             
             HStack {
                 Text("생년월일")
@@ -44,7 +45,7 @@ public struct BirthView: View {
             
             ZStack {
                 // 기본 설정
-//                Image(uiImage: .designSystem(.numBox)!)
+                //                Image(uiImage: .designSystem(.numBox)!)
                 // 생년월일 retry
                 Image(uiImage: .designSystem(.numBox_warmRed)!)
                 TextField("980123", text: $birthDay)
@@ -83,7 +84,7 @@ public struct BirthView: View {
             Spacer()
             
             Button {
-
+                
             } label: {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color(uiColor: .designSystem(birthDay.isEmpty ? .w10 :.goldenyellow)!))

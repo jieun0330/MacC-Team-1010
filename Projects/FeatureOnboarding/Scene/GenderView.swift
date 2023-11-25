@@ -11,12 +11,14 @@ import DesignSystem
 
 public struct GenderView: View {
     
-    let genders = ["남성", "여성", "기타"]
     @State public var genderSelected: Int?
     @State var selected = [false, false, false]
     
-    public init() {
-        
+    let genders = ["남성", "여성", "기타"]
+    
+    public init(genderSelected: Int? = nil, selected: [Bool] = [false, false, false]) {
+        self.genderSelected = genderSelected
+        self.selected = selected
     }
     
     public var body: some View {
@@ -77,7 +79,7 @@ extension GenderView {
     @ViewBuilder
     func nextButton() -> some View {
         Button {
-            // 닉네임View
+            
         } label: {
             RoundedRectangle(cornerRadius: 12)
                 .frame(height: 50)

@@ -24,7 +24,7 @@ public struct PhoneNumberAuthView: View {
     
     let date = Date()
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-        
+    
     public init(phoneNumber: String, isNavigation: Bool = false) {
         self.phoneNumber = phoneNumber
         self.isNavigation = isNavigation
@@ -45,7 +45,7 @@ public struct PhoneNumberAuthView: View {
                     VStack {
                         ZStack {
                             // 기본 설정
-//                            Image(uiImage: .designSystem(.numBox)!)
+                            //                            Image(uiImage: .designSystem(.numBox)!)
                             // 인증번호 retry
                             Image(uiImage: .designSystem(.numBox_warmRed)!)
                             TextField("000000", text: $certificationNumber)
@@ -66,18 +66,18 @@ public struct PhoneNumberAuthView: View {
                         }
                         HStack {
                             // 기본 설정
-//                            Text("인증번호가 발송되었어요!")
-//                                .SF12B()
-//                                .foregroundColor(.Primary2)
+                            //                            Text("인증번호가 발송되었어요!")
+                            //                                .SF12B()
+                            //                                .foregroundColor(.Primary2)
                             // 인증번호 retry
-                            Text("인증 번호를 다시 확인해주세요")
-                                .SF12B()
-                                .foregroundColor(.Alert)
+                            //                            Text("인증 번호를 다시 확인해주세요")
+                            //                                .SF12B()
+                            //                                .foregroundColor(.Alert)
                             // 인증시간이 지났어요
                             Text("인증시간이 지났어요")
                                 .SF12B()
                                 .foregroundColor(.Alert)
-
+                            
                             Spacer()
                             
                             Text(converSecondsToTime(timeInSeconds: timeRemaining))
@@ -97,7 +97,7 @@ public struct PhoneNumberAuthView: View {
                         .frame(width: 300)
                     }
                 }
-
+                
                 TextField("010-1234-5678", text: $phoneNumber)
                     .padding(.top, 24)
                     .textFieldStyle(PhoneNumTextFieldStyle())
@@ -137,7 +137,7 @@ extension PhoneNumberAuthView {
     @ViewBuilder
     func headerView() -> some View {
         Text("반가워요!")
-        .SF24B()
+            .SF24B()
         
         HStack(spacing: 0) {
             Text("본인 확인")
@@ -148,6 +148,28 @@ extension PhoneNumberAuthView {
         }
         .padding(.bottom, 24)
     }
+    
+    func nextButton() -> some View {
+        Button {
+            if phoneNumber.validatePhone(number: phoneNumber) {
+                showSecondTextField = true
+            } else {
+                showSecondTextField = false
+            }
+        } label: {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(uiColor: .designSystem(phoneNumber.isEmpty ? .w10 :.goldenyellow)!))
+                .frame(height: 50)
+                .overlay {
+                    Text("다음")
+                        .foregroundColor(.White)
+                        .SF17R()
+                }
+                .padding(.bottom, 16)
+        }
+        .disabled(phoneNumber.isEmpty || !phoneNumber.validatePhone(number: phoneNumber))
+    }
+    
 }
 
 extension String {
@@ -182,12 +204,12 @@ struct PhoneNumTextFieldStyle: TextFieldStyle {
 
 struct CertiNumTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
-            
-            configuration
-                .font(.style(.SF24B))
-                .foregroundColor(.White)
-                .kerning(28)
-                .multilineTextAlignment(.leading)
+        
+        configuration
+            .font(.style(.SF24B))
+            .foregroundColor(.White)
+            .kerning(28)
+            .multilineTextAlignment(.leading)
     }
 }
 
@@ -204,30 +226,5 @@ extension PhoneNumberAuthView {
         let targetTime: Date = calendar.date(byAdding: .second, value: 3800, to: date, wrappingComponents: false) ?? Date()
         let remainSeconds = Int(targetTime.timeIntervalSince(date))
         self.timeRemaining = remainSeconds
-    }
-}
-
-
-extension PhoneNumberAuthView {
-    @ViewBuilder
-    func nextButton() -> some View {
-        Button {
-            if phoneNumber.validatePhone(number: phoneNumber) {
-                showSecondTextField = true
-            } else {
-                showSecondTextField = false
-            }
-        } label: {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(uiColor: .designSystem(phoneNumber.isEmpty ? .w10 :.goldenyellow)!))
-                .frame(height: 50)
-                .overlay {
-                    Text("다음")
-                        .foregroundColor(.White)
-                        .SF17R()
-                }
-                .padding(.bottom, 16)
-        }
-        .disabled(phoneNumber.isEmpty || !phoneNumber.validatePhone(number: phoneNumber))
     }
 }
