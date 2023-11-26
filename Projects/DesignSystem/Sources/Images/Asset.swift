@@ -75,6 +75,27 @@ public enum TENTENAsset {
 		case errorImage
 		
 		case shutter
+        
+        case ju1
+        case ju2
+        case ju3
+        case ju4
+        case ju5
+        case ju6
+        case ju7
+        case ju8
+        case ju9
+        case ju10
+        case ju11
+        case ju12
+        case ju13
+        case ju14
+        case ju15
+        case ju16
+        case ju17
+        case ju18
+        case ju19
+        case ju20
 		
 		public var description: String {
 			switch self {
@@ -191,6 +212,47 @@ public enum TENTENAsset {
 				
 			case .shutter:
 				return "shutter"
+                
+            case .ju1:
+                return "ju1"
+            case .ju2:
+                return "ju2"
+            case .ju3:
+                return "ju3"
+            case .ju4:
+                return "ju4"
+            case .ju5:
+                return "ju5"
+            case .ju6:
+                return "ju6"
+            case .ju7:
+                return "ju7"
+            case .ju8:
+                return "ju8"
+            case .ju9:
+                return "ju9"
+            case .ju10:
+                return "ju10"
+            case .ju11:
+                return "ju11"
+            case .ju12:
+                return "ju12"
+            case .ju13:
+                return "ju13"
+            case .ju14:
+                return "ju14"
+            case .ju15:
+                return "ju15"
+            case .ju16:
+                return "ju16"
+            case .ju17:
+                return "ju17"
+            case .ju18:
+                return "ju18"
+            case .ju19:
+                return "ju19"
+            case .ju20:
+                return "ju20"
 			}
 		}
 	}
