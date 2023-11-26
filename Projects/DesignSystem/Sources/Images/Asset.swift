@@ -50,6 +50,7 @@ public enum TENTENAsset {
 		
 		case home
 		case search
+		case camera
 		case heart
 		case person
 		
@@ -76,6 +77,8 @@ public enum TENTENAsset {
         case numBox
         case circle
         case numBox_warmRed
+		
+		case shutter
 		
 		public var description: String {
 			switch self {
@@ -148,6 +151,8 @@ public enum TENTENAsset {
 				return "home"
 			case .search:
 				return "search"
+			case .camera:
+				return "camera"
 			case .heart:
 				return "heart"
 			case .person:
@@ -195,6 +200,9 @@ public enum TENTENAsset {
                 
             case .numBox_warmRed:
                 return "numBox_warmRed"
+
+			case .shutter:
+				return "shutter"
 			}
 		}
 	}
