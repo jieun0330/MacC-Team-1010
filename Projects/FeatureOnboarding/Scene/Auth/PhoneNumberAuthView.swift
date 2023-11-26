@@ -133,14 +133,7 @@ public struct PhoneNumberAuthView: View {
 				},
 					  secondaryButton: .default(Text("보관하기")))
 			}
-			.font(.style(.SF12R))
-			.padding(.horizontal, 8)
-			.padding(.vertical, 16)
-			.background(Color(uiColor: .designSystem(.darkbase)!))
-			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
-			.fullScreenCover(isPresented: $isSkip, content: {
-				SkipNicknameView()
-			})
+			.modifier(OnboardingBackground())
 		}
 	}
 }

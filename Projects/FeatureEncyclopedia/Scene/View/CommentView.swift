@@ -23,9 +23,7 @@ public struct CommentView: View {
     public var body: some View {
         if viewModel.fetchLoading {
             ProgressView()
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .foregroundColor(Color(uiColor: .designSystem(.white)!))
-                .background(Color.DarkBase)
+				.modifier(ProgressViewBackground())
                 .onAppear {
                     viewModel.getUserMakFolder(segmentName: "comment")
                 }

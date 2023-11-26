@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 import Combine
 
@@ -100,13 +101,7 @@ public struct BirthView: View {
 			},
 				  secondaryButton: .default(Text("보관하기")))
 		}
-		.font(.style(.SF12R))
-		.padding(.horizontal, 8)
-		.padding(.vertical, 16)
-		.background(Color(uiColor: .designSystem(.darkbase)!))
-		.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
-		.navigationBarBackButtonHidden()
-		.background(Color(uiColor: .designSystem(.darkbase)!))
+		.modifier(OnboardingBackground())
 		.fullScreenCover(isPresented: $isSkip, content: {
 			SkipNicknameView()
 		})

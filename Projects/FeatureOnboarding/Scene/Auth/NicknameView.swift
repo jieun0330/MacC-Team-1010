@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 import Combine
 
@@ -104,13 +105,7 @@ public struct NicknameView: View {
 		}, label: {
 			Text("건너뛰기").SF14R().foregroundColor(.W25)
 		}))
-		.font(.style(.SF12R))
-		.padding(.horizontal, 8)
-		.padding(.vertical, 16)
-		.background(Color(uiColor: .designSystem(.darkbase)!))
-		.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
-		.navigationBarBackButtonHidden()
-		.background(Color(uiColor: .designSystem(.darkbase)!))
+		.modifier(OnboardingBackground())
 		.fullScreenCover(isPresented: $isSkip, content: {
 			SkipNicknameView()
 		})

@@ -22,9 +22,7 @@ public struct HomeView: View {
 	public var body: some View {
 		if viewModel.makListLoading {
 			ProgressView()
-				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-				.tint(Color(uiColor: .designSystem(.white)!))
-				.background(Color(uiColor: .designSystem(.darkbase)!))
+				.modifier(ProgressViewBackground())
 				.onAppear {
 					viewModel.fetchNewMakList()
 				}

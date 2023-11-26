@@ -28,8 +28,7 @@ struct CustomizationInfoView: View {
 		ZStack {
 			if viewModel.fetchLoading {
 				ProgressView()
-					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-					.foregroundColor(Color(uiColor: .designSystem(.white)!))
+					.modifier(ProgressViewBackground())
 			}
 			VStack(spacing: 0) {
 				MakeProfileView()
