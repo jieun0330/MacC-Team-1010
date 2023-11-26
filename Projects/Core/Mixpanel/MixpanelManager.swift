@@ -20,3 +20,15 @@ final public class MixpanelManager {
 		}
 	}
 }
+
+// MARK: - User Profiles
+extension MixpanelManager {
+	public func setUserProfile(userId: String, name: String, sex: String, yearOfBirth: String, signupMethod: SignUpMethod) {
+		Mixpanel.mainInstance().identify(distinctId: userId)
+		Mixpanel.mainInstance().people.set(property: "$name", to: name)
+		Mixpanel.mainInstance().people.set(property: "sex", to: sex)
+		Mixpanel.mainInstance().people.set(property: "yearOfBirth", to: yearOfBirth)
+		Mixpanel.mainInstance().people.set(property: signupMethod.mpProperty, to: signupMethod.mpMixpanelType)
+		Mixpanel.mainInstance().flush()
+	}
+}

@@ -86,6 +86,9 @@ public final class OnboardingViewModel: ObservableObject {
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "")
 						
+						MixpanelManager.shared.setUserProfile(userId: "\(userID)", name: nickname, sex: sex, yearOfBirth: ageRange, signupMethod: .ShortCut)
+						UserDefaultsSetting.nickname = nickname
+						
 						fetchLoading = false
 						navigationHome = true
 					}
