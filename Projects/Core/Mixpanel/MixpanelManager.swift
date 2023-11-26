@@ -23,7 +23,7 @@ final public class MixpanelManager {
 
 // MARK: - User Profiles
 extension MixpanelManager {
-	public func setUserProfile(userId: String, name: String, sex: String, yearOfBirth: String, signupMethod: SignUpMethod) {
+	public func setUserProfile(userId: String, name: String, sex: String, yearOfBirth: String, signupMethod: MPSignUpMethod) {
 		Mixpanel.mainInstance().identify(distinctId: userId)
 		Mixpanel.mainInstance().people.set(property: "$name", to: name)
 		Mixpanel.mainInstance().people.set(property: "sex", to: sex)
@@ -35,7 +35,7 @@ extension MixpanelManager {
 
 // MARK: - Sign Up
 extension MixpanelManager {
-	public func signupEvent(method: SignUpMethod) {
+	public func signupEvent(method: MPSignUpMethod) {
 		Mixpanel.mainInstance().track(event: MPEvent.signup.title, properties: [method.mpProperty : method.mpMixpanelType])
 	}
 	

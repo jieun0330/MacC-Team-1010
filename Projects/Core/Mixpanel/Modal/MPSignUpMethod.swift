@@ -1,5 +1,5 @@
 //
-//  SignUpMethod.swift
+//  MPSignUpMethod.swift
 //  Core
 //
 //  Created by Eric Lee on 11/26/23.
@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import Mixpanel
 
-public enum SignUpMethod: MPPropertiable {
+public enum MPSignUpMethod: MPPropertiable {
 	case ShortCut
 	case PhoneNum
 	
@@ -25,5 +24,4 @@ public enum SignUpMethod: MPPropertiable {
 			return "전화번호 가입"
 		}
 	}
-	
 }
