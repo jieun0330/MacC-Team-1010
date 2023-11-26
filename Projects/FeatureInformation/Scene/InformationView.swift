@@ -14,8 +14,11 @@ public struct InformationView: View {
 	
 	@StateObject var viewModel: InformationViewModel
 	
-	public init(makHolyId: Int) {
-		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, maHolyRepo: DefaultMakgeolliRepository(), userRepo: DefaultUserRepository()))
+	public init(makHolyId: Int, mpParamters: MPInfoClosedEventParameters) {
+		self._viewModel = StateObject(wrappedValue: InformationViewModel(makHolyId: makHolyId, 
+																		 maHolyRepo: DefaultMakgeolliRepository(),
+																		 userRepo: DefaultUserRepository(),
+																		 mpParameters: mpParamters))
 	}
 	
 	public var body: some View {
@@ -63,13 +66,14 @@ public struct InformationView: View {
 			// 상단 고정 Back Button
 			HStack {
 				Spacer()
-				InfoBackButton()
+				InfoBackButton(viewModel: viewModel)
 			}
 			.padding(.horizontal, 16)
 		}
 		.statusBarHidden(true)
 		.onAppear(perform: {
 			viewModel.fetchDatas()
+			MixpanelManager.shared.informationViewAppeared()
 		})
 		//코멘트 상세 Modal 화면
 		.sheet(isPresented: $viewModel.showDetailCommentListSheet, content: {

@@ -20,10 +20,16 @@ final class InformationViewModel: ObservableObject {
 	var currentOffset: Int = 0
 	var isLastPage = false
 	
-	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
+	var mpParameters: MPInfoClosedEventParameters
+	
+	init(makHolyId: Int,
+		 maHolyRepo: DefaultMakgeolliRepository,
+		 userRepo: DefaultUserRepository,
+		 mpParameters: MPInfoClosedEventParameters) {
 		self.makHolyId = makHolyId
 		self.maHolyRepo = maHolyRepo
 		self.userRepo = userRepo
+		self.mpParameters = mpParameters
 	}
 	
 	@Published var errorState = false
