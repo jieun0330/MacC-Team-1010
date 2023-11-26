@@ -26,7 +26,7 @@ public enum MPPreviousView: MPPropertiable {
 	var mpMixpanelType: String {
 		switch self {
 		case .homeNewItemCell:
-			return "Home_NewItemCell"
+			return "HomeView_NewItemCell"
 		case .homeNewCommentCell:
 			return "HomeView_NewComment"
 		case .eventView:
