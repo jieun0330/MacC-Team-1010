@@ -9,6 +9,10 @@
 import Foundation
 import Moya
 
+// phoneSignin
+// checkNickname/{nickname}
+// 내 막걸리 폴더 API 변경
+
 public enum UserAPI {
 	case skipSignin(parameter: UserRequest)
 	case updateComment(parameter: UpdateCommentRequest)

@@ -15,7 +15,7 @@ public enum SearchAPI {
 
 extension SearchAPI: TargetType {
 	public var baseURL: URL {
-		if let url = Bundle.main.infoDictionary?["Search_API_URL"] as? String {
+		if let url = Bundle.main.infoDictionary?["SEARCH_API_URL"] as? String {
 			return URL(string: url)!
 		}
 		return URL(string: "")!

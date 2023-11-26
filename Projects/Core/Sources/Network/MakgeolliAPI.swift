@@ -17,7 +17,7 @@ public enum MakgeolliAPI {
 
 extension MakgeolliAPI: TargetType {
 	public var baseURL: URL {
-		if let url = Bundle.main.infoDictionary?["Makgeolli_API_URL"] as? String {
+		if let url = Bundle.main.infoDictionary?["MAKGEOLLI_API_URL"] as? String {
 			return URL(string: url)!
 		}
 		return URL(string: "")!
