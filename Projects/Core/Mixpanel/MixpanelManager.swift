@@ -44,3 +44,12 @@ extension MixpanelManager {
 	}
 	
 }
+
+// MARK: - Search View
+extension MixpanelManager {
+	public func requestMakHoly(requestTerm: String) {
+		Mixpanel.mainInstance().track(event: MPEvent.requestMakHoly.title, properties: ["suggest_term" : requestTerm])
+	}
+}
+
+
