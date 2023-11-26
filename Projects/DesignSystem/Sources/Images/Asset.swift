@@ -19,7 +19,7 @@ public enum TENTENAsset {
 		case sour
 		case sweet
 		case thick
-        case free
+		case free
 		
 		case scoreLarge0
 		case scoreLarge1
@@ -73,10 +73,10 @@ public enum TENTENAsset {
 		case visibleFalse
 		
 		case errorImage
-        
-        case numBox
-        case circle
-        case numBox_warmRed
+		
+		case numBox
+		case circle
+		case numBox_warmRed
 		
 		case shutter
 		
@@ -95,8 +95,8 @@ public enum TENTENAsset {
 				return "sweet"
 			case .thick:
 				return "thick"
-            case .free:
-                return "free"
+			case .free:
+				return "free"
 				
 			case .scoreLarge0:
 				return "scorelarge0"
@@ -178,7 +178,7 @@ public enum TENTENAsset {
 				return "lock"
 			case .nothingLike:
 				return "nothingLike"
-
+				
 			case .banner:
 				return "banner"
 				
@@ -189,18 +189,17 @@ public enum TENTENAsset {
 				return "visibleTrue"
 			case .visibleFalse:
 				return "visibleFalse"
-			
+				
 			case .errorImage:
 				return "errorImage"
-                
-            case .numBox:
-                return "numBox"
-            case .circle:
-                return "circle"
-                
-            case .numBox_warmRed:
-                return "numBox_warmRed"
-
+				
+			case .numBox:
+				return "numBox"
+			case .circle:
+				return "circle"
+			case .numBox_warmRed:
+				return "numBox_warmRed"
+				
 			case .shutter:
 				return "shutter"
 			}
