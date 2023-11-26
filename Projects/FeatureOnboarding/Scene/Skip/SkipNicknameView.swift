@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 import Combine
 
@@ -157,15 +158,5 @@ private extension SkipNicknameView {
 					.padding()
 			}
 		}
-	}
-	
-	// 추후에 빼서 alert 2개씩 쓰는 부분에 적용시키기
-	struct AlertItem: Identifiable {
-		var id = UUID()
-		var title: Text
-		var message: Text?
-		var dismissButton: Alert.Button?
-		var primaryButton: Alert.Button?
-		var secondaryButton: Alert.Button?
 	}
 }
