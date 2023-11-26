@@ -24,7 +24,7 @@ public struct PhoneNumberAuthView: View {
 	@State private var isNavigation = false
 	@State private var certificationNumber = ""
 	@State private var showSecondTextField = false
-	@State private var timeRemaining: Int = 10
+	@State private var timeRemaining: Int = 180
 	@State private var showAlert = false
 	@State private var isSkip = false
 	
@@ -87,7 +87,7 @@ public struct PhoneNumberAuthView: View {
 								}
 							Button {
 								timerStatus = .normal
-								timeRemaining = 10
+								timeRemaining = 180
 								certificationNumber = ""
 							} label: {
 								Text("인증번호 재전송")
@@ -166,10 +166,15 @@ private extension PhoneNumberAuthView {
 		if showSecondTextField {
 			NavigationLink {
 				// 인증번호 확인 후 맞으면
+				
+				// 1. 이미 데이터가 있으면?
+				// 이미 데이터가 있어요 뷰
+				
+				// 2. 데이터가 없으면?
 				// 생년월일 뷰로 이동 + 뒤로 못가게
 				BirthView()
 				
-				// 틀리면
+				// 인증번호 틀리면
 				// alertStatus =. retry
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
