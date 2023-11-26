@@ -36,11 +36,11 @@ extension MixpanelManager {
 // MARK: - Sign Up
 extension MixpanelManager {
 	public func signupEvent(method: SignUpMethod) {
-		Mixpanel.mainInstance().track(event: EventName.signup.mpName, properties: [method.mpProperty : method.mpMixpanelType])
+		Mixpanel.mainInstance().track(event: MPEvent.signup.title, properties: [method.mpProperty : method.mpMixpanelType])
 	}
 	
 	public func signupStart() {
-		Mixpanel.mainInstance().time(event: EventName.signup.mpName)
+		Mixpanel.mainInstance().time(event: MPEvent.signup.title)
 	}
 	
 }

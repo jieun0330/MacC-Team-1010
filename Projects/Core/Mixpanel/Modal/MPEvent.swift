@@ -8,20 +8,20 @@
 
 import Foundation
 
-public enum EventName {
+public enum MPEvent {
 	
 	case signup
-	case suggestMakHoly
+	case requestMakHoly
 	case searchSubmit
 	case informationviewClosed
 	case hastagviewClosed
 	
-	public var mpName: String {
+	public var title: String {
 		switch self {
 		case .signup:
 			return "Sign_Up"
-		case .suggestMakHoly:
-			return "Suggest_Makholy"
+		case .requestMakHoly:
+			return "Request_Makholy"
 		case .searchSubmit:
 			return "Search_Submit"
 		case .informationviewClosed:
