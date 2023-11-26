@@ -73,6 +73,10 @@ public enum TENTENAsset {
 		case visibleFalse
 		
 		case errorImage
+        
+        case numBox
+        case circle
+        case numBox_warmRed
 		
 		case shutter
 		
@@ -188,7 +192,15 @@ public enum TENTENAsset {
 			
 			case .errorImage:
 				return "errorImage"
-				
+                
+            case .numBox:
+                return "numBox"
+            case .circle:
+                return "circle"
+                
+            case .numBox_warmRed:
+                return "numBox_warmRed"
+
 			case .shutter:
 				return "shutter"
 			}

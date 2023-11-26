@@ -18,6 +18,64 @@ import FeatureOnboarding
 import FeatureInformation
 
 public struct RootView: View {
+//    public init() {
+//        setCustomNavigationBar()
+//    }
+//    @Environment(\.presentationMode) var presentationMode
+    
+//    private let randomNickname = ["걸쭉한라쿤", "상큼한라쿤", "달달한라쿤",
+//                                  "상큼한수달", "포근한여우", "날렵한곰"]
+    
+//    public var body: some View {
+        
+//        NicknameView()
+//        GenderView()
+//        BirthView()
+//        CustomizationInfoView()
+//        PhoneNumberAuthView(phoneNumber: "")
+//        OnboardingView(nickname: randomNickname.randomElement()!)
+        
+        
+        
+//        if KeyChainManager.shared.read(account: .userId).isEmpty {
+//            OnboardingView(nickname: randomNickname.randomElement()!)
+//        } else {
+//            TabView {
+//                
+//                HomeView()
+//                    .tabItem {
+//                        Image(uiImage: .designSystem(.home)!)
+//                        Text("홈")
+//                            .font(.style(.SF10B))
+//                    }
+//                    .simultaneousGesture(
+//                        TapGesture().onEnded {
+//                            self.presentationMode.wrappedValue.dismiss()
+//                        }
+//                    )
+//                    
+//                SearchView()
+//                    .tabItem {
+//                        Image(uiImage: .designSystem(.search)!)
+//                        Text("검색")
+//                            .font(.style(.SF10B))
+//                    }
+//                EncyclopediaView()
+//                    .tabItem {
+//                        Image(uiImage: .designSystem(.heart)!)
+//                        Text("내 막걸리")
+//                            .font(.style(.SF10B))
+//                    }
+//                ProfileView()
+//                    .tabItem {
+//                        Image(uiImage: .designSystem(.person)!)
+//                        Text("내 정보")
+//                            .font(.style(.SF10B))
+//                    }
+//            }
+//        }
+//    }
+
 	@State var showPermissionAlert = false
 	@State var showEmptyImageAlert = false
 	@State var isCameraViewPresented = false
