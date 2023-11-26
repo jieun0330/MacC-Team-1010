@@ -129,6 +129,7 @@ private extension SkipNicknameView {
 				.padding(.horizontal, 16)
 				.padding(.bottom, 16)
 		}
+		.disabled(nickName == "")
 		.navigationDestination(isPresented: $isNavigationState) {
 			SkipGenderAndBirthView()
 		}

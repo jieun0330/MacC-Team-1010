@@ -142,6 +142,7 @@ private extension NicknameView {
 				}
 				.padding(.bottom, 16)
 		}
+		.disabled(nickName == "")
 	}
 	
 	struct NicknameTextFieldStyle: TextFieldStyle {
