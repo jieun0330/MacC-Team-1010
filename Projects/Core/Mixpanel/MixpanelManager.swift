@@ -32,3 +32,15 @@ extension MixpanelManager {
 		Mixpanel.mainInstance().flush()
 	}
 }
+
+// MARK: - Sign Up
+extension MixpanelManager {
+	public func signupEvent(method: SignUpMethod) {
+		Mixpanel.mainInstance().track(event: EventName.signup.mpName, properties: [method.mpProperty : method.mpMixpanelType])
+	}
+	
+	public func signupStart() {
+		Mixpanel.mainInstance().time(event: EventName.signup.mpName)
+	}
+	
+}
