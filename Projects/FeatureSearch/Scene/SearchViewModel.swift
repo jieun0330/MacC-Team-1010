@@ -35,7 +35,7 @@ final class SearchViewModel: ObservableObject {
 			.debounce(for: 1.0, scheduler: DispatchQueue.main)
 			.sink { [weak self] (searchText) in
 				if searchText != "" && self!.searchState {
-					self?.searchMakHolies(searchText: searchText)
+					self?.searchMakHolies(searchText: searchText, method: .auto)
 					self!.searchState = false
 				}
 			}
@@ -87,7 +87,7 @@ final class SearchViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func searchMakHolies(searchText: String) {
+	func searchMakHolies(searchText: String, method: MPSearchMethod) {
 		fetchLoading = true
 		Task {
 			do {
@@ -95,6 +95,10 @@ final class SearchViewModel: ObservableObject {
 				if response.status == 200 {
 					DispatchQueue.main.async { [weak self] in
 						self?.resultMakHolies = response.result ?? []
+						let success = !(self?.resultMakHolies.isEmpty ?? true)
+						MixpanelManager.shared.submitSearch(searchTerm: searchText,
+															success: success,
+															method: method)
 						self?.fetchLoading = false
 					}
 				} else {

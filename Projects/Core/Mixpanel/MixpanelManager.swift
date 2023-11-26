@@ -50,6 +50,14 @@ extension MixpanelManager {
 	public func requestMakHoly(requestTerm: String) {
 		Mixpanel.mainInstance().track(event: MPEvent.requestMakHoly.title, properties: ["suggest_term" : requestTerm])
 	}
+	
+	public func submitSearch(searchTerm: String, success: Bool, method: MPSearchMethod) {
+		Mixpanel.mainInstance().track(event: MPEvent.submitSearch.title,
+									  properties: ["search_term" : searchTerm,
+												   "success" : success,
+												   method.mpProperty : method.mpMixpanelType])
+	}
+	
 }
 
 

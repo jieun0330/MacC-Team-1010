@@ -12,7 +12,7 @@ public enum MPEvent {
 	
 	case signup
 	case requestMakHoly
-	case searchSubmit
+	case submitSearch
 	case informationviewClosed
 	case hastagviewClosed
 	
@@ -22,8 +22,8 @@ public enum MPEvent {
 			return "Sign_Up"
 		case .requestMakHoly:
 			return "Request_Makholy"
-		case .searchSubmit:
-			return "Search_Submit"
+		case .submitSearch:
+			return "Submit_Search"
 		case .informationviewClosed:
 			return "InformationView_Closed"
 		case .hastagviewClosed:
