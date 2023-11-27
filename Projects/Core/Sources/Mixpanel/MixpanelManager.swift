@@ -29,7 +29,12 @@ extension MixpanelManager {
 		Mixpanel.mainInstance().people.set(property: "sex", to: sex)
 		Mixpanel.mainInstance().people.set(property: "yearOfBirth", to: yearOfBirth)
 		Mixpanel.mainInstance().people.set(property: signupMethod.mpProperty, to: signupMethod.mpMixpanelType)
+		Mixpanel.mainInstance().people.set(property: "Closed_InformationView_Count", to: 0)
 		Mixpanel.mainInstance().flush()
+	}
+	
+	public func increaseClosedInformationViewCount() {
+		Mixpanel.mainInstance().people.increment(property: "Closed_InformationView_Count", by: 1)
 	}
 }
 
@@ -69,6 +74,7 @@ extension MixpanelManager {
 	public func informationViewClosed(parameters: MPInfoClosedEventParameters) {
 		Mixpanel.mainInstance().track(event: MPEvent.informationviewClosed.title,
 									  properties: parameters.mpProperties)
+		self.increaseClosedInformationViewCount()
 	}
 }
 
