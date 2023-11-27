@@ -70,7 +70,7 @@ public struct CategoryView: View {
 					} else {
 						MakgeolliInfoView(viewModel: viewModel, 
 										  type: type,
-										  mpTerm: targetTitle.description,
+										  mpTerm: "[\(targetTitle.map({ $0.description }).joined(separator: ", "))]",
 										  targetTitle: targetTitle)
 							.padding(.horizontal, 8)
 					}
