@@ -113,7 +113,9 @@ public struct CommentView: View {
                     }
                 }
                 .fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-                    InformationView(makHolyId: makHolyId)
+					InformationView(makHolyId: makHolyId, 
+									mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																			 myTerm: "코멘트"))
                 }
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("코멘트 삭제"),
