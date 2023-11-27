@@ -17,7 +17,6 @@ public struct SplashView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(Color(uiColor: .designSystem(.darkbase)!))
         .background(Color.black)
         .edgesIgnoringSafeArea(.all)
     }
