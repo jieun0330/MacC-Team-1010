@@ -96,11 +96,7 @@ public struct OnboardingView: View {
 				.ignoresSafeArea(.keyboard)
 				.navigationDestination(isPresented: $isNavigation) {
 					CustomizationInfoView(viewModel: viewModel, nickname: $nickname)
-						.background(Color(uiColor: .designSystem(.darkbase)!))
-						.navigationBarBackButtonHidden(true)
-						.navigationBarItems(leading: CustomBackButton())
-						.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!),
-										   for: .navigationBar)
+						.modifier(NavigationBarBackground())
 						.onAppear {
 							UserDefaultsSetting.profileImage = selectedImage.rawValue
 						}

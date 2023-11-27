@@ -18,8 +18,7 @@ struct SearchResultView: View {
 	var body: some View {
 		if searchViewModel.fetchLoading {
 			ProgressView()
-				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-				.foregroundColor(Color(uiColor: .designSystem(.white)!))
+				.modifier(ProgressViewBackground())
 		} else if searchViewModel.resultMakHolies.isEmpty {
 			VStack(spacing: 20) {
 				Text("검색 결과가 없어요..")

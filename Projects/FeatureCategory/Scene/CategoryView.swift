@@ -29,14 +29,8 @@ public struct CategoryView: View {
 		if type == .comment {
 			if viewModel.fetchCommentLoading {
 				ProgressView()
-					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-					.foregroundColor(Color(uiColor: .designSystem(.white)!))
-					.background(Color(uiColor: .designSystem(.darkbase)!))
-					.navigationTitle(type.description)
-					.navigationBarTitleDisplayMode(.inline)
-					.navigationBarBackButtonHidden(true)
-					.navigationBarItems(leading: CustomBackButton())
-					.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+					.modifier(ProgressViewBackground())
+					.modifier(NavigationBarBackground(type.description))
 					.onAppear {
 						if viewModel.fetchCommentLoading {
 							viewModel.fetchRecentComments()
@@ -48,12 +42,7 @@ public struct CategoryView: View {
 					}
 			} else {
 				NewCommentView(viewModel: viewModel)
-					.background(Color(uiColor: .designSystem(.darkbase)!))
-					.navigationTitle(type.description)
-					.navigationBarTitleDisplayMode(.inline)
-					.navigationBarBackButtonHidden(true)
-					.navigationBarItems(leading: CustomBackButton())
-					.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+					.modifier(NavigationBarBackground(type.description))
 			}
 		} else {
 			VStack(spacing: 0) {
@@ -70,8 +59,7 @@ public struct CategoryView: View {
 				default:
 					if viewModel.fetchLoading {
 						ProgressView()
-							.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-							.foregroundColor(Color(uiColor: .designSystem(.white)!))
+							.modifier(ProgressViewBackground())
 							.alert(isPresented: $viewModel.errorState) {
 								Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
 									  dismissButton: .default(Text("확인")))
@@ -82,12 +70,7 @@ public struct CategoryView: View {
 					}
 				}
 			}
-			.background(Color(uiColor: .designSystem(.darkbase)!))
-			.navigationTitle(type.description)
-			.navigationBarTitleDisplayMode(.inline)
-			.navigationBarBackButtonHidden(true)
-			.navigationBarItems(leading: CustomBackButton())
-			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
+			.modifier(NavigationBarBackground(type.description))
 			.onAppear {
 				if viewModel.fetchLoading && type != .event {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
