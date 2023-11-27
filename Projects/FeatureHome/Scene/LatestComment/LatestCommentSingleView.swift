@@ -18,7 +18,7 @@ struct LatestCommentSingleView: View {
 		
 		Button {
 			if let id = comment.makNumber {
-				viewModel.resultMakHolyId = id
+				viewModel.resultLatestestCommentMakHolyId = id
 			}
 		} label: {
 			HStack(spacing: 0) {

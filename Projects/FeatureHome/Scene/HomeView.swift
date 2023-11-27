@@ -54,20 +54,27 @@ public struct HomeView: View {
 							.frame(height: 40)
 						
 						NewItemView(viewModel: viewModel)
+							.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+								InformationView(makHolyId: makHolyId,
+												mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																						 previousView: .homeNewItemCell))
+							}
 						
 						Spacer()
 							.frame(height: 40)
 						
 						LatestCommentView(viewModel: viewModel)
+							.fullScreenCover(item: $viewModel.resultLatestestCommentMakHolyId) { makHolyId in
+							InformationView(makHolyId: makHolyId,
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 previousView: .homeNewCommentCell))
+			}
 						
 						Spacer()
 							.frame(height: 20)
 					}
 				}
 				.background(Color(uiColor: .designSystem(.darkbase)!))
-				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-					InformationView(makHolyId: makHolyId)
-				}
 			}
 			.onAppear {
 				viewModel.fetchRecentComments()
