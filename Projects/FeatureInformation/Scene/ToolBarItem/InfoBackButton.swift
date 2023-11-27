@@ -8,12 +8,15 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 struct InfoBackButton: View {
+	@ObservedObject var viewModel: InformationViewModel
 	@Environment(\.presentationMode) var presentationMode
 	
 	public var body: some View {
 		Button(action: {
+			MixpanelManager.shared.informationViewClosed(parameters: viewModel.mpParameters)
 			self.presentationMode.wrappedValue.dismiss()
 		}) {
 			

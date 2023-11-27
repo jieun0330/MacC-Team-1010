@@ -60,4 +60,16 @@ extension MixpanelManager {
 	
 }
 
+// MARK: - InfromtationView
+extension MixpanelManager {
+	public func informationViewAppeared() {
+		Mixpanel.mainInstance().time(event: MPEvent.informationviewClosed.title)
+	}
+	
+	public func informationViewClosed(parameters: MPInfoClosedEventParameters) {
+		Mixpanel.mainInstance().track(event: MPEvent.informationviewClosed.title,
+									  properties: parameters.mpProperties)
+	}
+}
+
 
