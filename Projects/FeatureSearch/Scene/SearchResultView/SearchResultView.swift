@@ -57,7 +57,10 @@ struct SearchResultView: View {
 				}
 			}
 			.fullScreenCover(item: $selectedMakHoly) { makHoly in
-				InformationView(makHolyId: makHoly.makNumber ?? 0)
+				let makHolyId = makHoly.makNumber ?? 0
+				InformationView(makHolyId: makHolyId, 
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 searchTerm: searchViewModel.searchText))
 					.onAppear {
 						if let name = makHoly.makName {
 							searchViewModel.addSearchHistory(makName: name)
