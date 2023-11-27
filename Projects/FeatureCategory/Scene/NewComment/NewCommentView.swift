@@ -11,6 +11,7 @@ import Core
 import DesignSystem
 import FeatureInformation
 
+// 코멘트가 달렸어요 상세 화면
 struct NewCommentView: View {
 	@ObservedObject var viewModel: CategoryViewModel
 	
@@ -38,7 +39,9 @@ struct NewCommentView: View {
 			}
 			.padding(.bottom, 16)
 			.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-				InformationView(makHolyId: makHolyId)
+				InformationView(makHolyId: makHolyId,
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 previousView: .newCommentView))
 			}
 		}
 	}

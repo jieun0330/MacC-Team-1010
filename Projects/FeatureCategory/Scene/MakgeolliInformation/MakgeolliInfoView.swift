@@ -17,6 +17,7 @@ struct MakgeolliInfoView: View {
 	@State var showAlert = false
 	
 	let type: CategoryType
+	let mpTerm: String
 	let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 2)
 	let targetTitle: [CharacteristicsType]
 	
@@ -109,7 +110,25 @@ struct MakgeolliInfoView: View {
 			}
 		}
 		.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-			InformationView(makHolyId: makHolyId)
+			switch type {
+			case .characteristics:
+				InformationView(makHolyId: makHolyId, 
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 hastagTerm: mpTerm))
+			case .event:
+				InformationView(makHolyId: makHolyId, 
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 eventTerm: mpTerm))
+			case .new:
+				InformationView(makHolyId: makHolyId, 
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 previousView: .newItemView))
+			case .comment:
+				// 실행되지 않을거임
+				InformationView(makHolyId: makHolyId,
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 previousView: .newCommentView))
+			}
 		}
 	}
 }
