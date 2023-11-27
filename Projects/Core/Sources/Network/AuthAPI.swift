@@ -13,7 +13,8 @@ import Moya
 // confirm
 
 public enum AuthAPI {
-	
+	case smsSend(parameter: SmsSendRequest)
+	case smsConfirm(parameter: SmsConfirmRequest)
 }
 
 extension AuthAPI: TargetType {
@@ -26,17 +27,23 @@ extension AuthAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		
+		case .smsSend:
+			return "/send"
+		case .smsConfirm:
+			return "/comfirm"
 		}
 	}
 	
 	public var method: Moya.Method {
-		return .get
+		return .post
 	}
 	
 	public var task: Moya.Task {
 		switch self {
-		
+		case .smsSend(let parameter):
+			return .requestJSONEncodable(parameter)
+		case .smsConfirm(let parameter):
+			return .requestJSONEncodable(parameter)
 		}
 	}
 	
