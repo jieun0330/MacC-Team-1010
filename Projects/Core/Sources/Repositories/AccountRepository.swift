@@ -10,10 +10,32 @@ import Foundation
 import Utils
 
 public protocol AccountRepository {
-	
+	func modifyUserNickname(_ request: ModifyNicknameRequest) async throws -> ModifyNicknameResponse
+	func deleteUserAccount(_ request: DeleteUserRequest) async throws -> DeleteUserResponse
+	func dataLinking(_ request: DataLinkingRequest) async throws -> DataLinkingResponse
 }
 
 public final class DefaultAccountRepository: AccountRepository {
 	public init() { }
 	
+	public func modifyUserNickname(_ request: ModifyNicknameRequest) async throws -> ModifyNicknameResponse {
+		let response = try await AccountAPI.request(target: AccountAPI.modifyUserNickname(
+			parameter: request), dataType: ModifyNicknameResponse.self
+		)
+		return response
+	}
+	
+	public func deleteUserAccount(_ request: DeleteUserRequest) async throws -> DeleteUserResponse {
+		let response = try await AccountAPI.request(target: AccountAPI.deleteUserAccount(
+			parameter: request), dataType: DeleteUserResponse.self
+		)
+		return response
+	}
+	
+	public func dataLinking(_ request: DataLinkingRequest) async throws -> DataLinkingResponse {
+		let response = try await AccountAPI.request(target: AccountAPI.dataLinking(
+			parameter: request), dataType: DataLinkingResponse.self
+		)
+		return response
+	}
 }

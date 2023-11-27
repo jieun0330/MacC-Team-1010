@@ -9,12 +9,10 @@
 import Foundation
 import Moya
 
-// modifyUserNickname
-// deleteUserAccount
-// dataLinking
-
 public enum AccountAPI {
-	
+	case modifyUserNickname(parameter: ModifyNicknameRequest)
+	case deleteUserAccount(parameter: DeleteUserRequest)
+	case dataLinking(parameter: DataLinkingRequest)
 }
 
 extension AccountAPI: TargetType {
@@ -27,17 +25,27 @@ extension AccountAPI: TargetType {
 	
 	public var path: String {
 		switch self {
-		
+		case .modifyUserNickname:
+			return "/modifyUserNickname"
+		case .deleteUserAccount:
+			return "/deleteUserAccount"
+		case .dataLinking:
+			return "dataLinking"
 		}
 	}
 	
 	public var method: Moya.Method {
-		return .get
+		return .post
 	}
 	
 	public var task: Moya.Task {
 		switch self {
-		
+		case .modifyUserNickname(parameter: let parameter):
+			return .requestJSONEncodable(parameter)
+		case .deleteUserAccount(parameter: let parameter):
+			return .requestJSONEncodable(parameter)
+		case .dataLinking(parameter: let parameter):
+			return .requestJSONEncodable(parameter)
 		}
 	}
 	
