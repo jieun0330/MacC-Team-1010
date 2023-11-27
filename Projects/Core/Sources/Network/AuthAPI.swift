@@ -9,9 +9,6 @@
 import Foundation
 import Moya
 
-// send
-// confirm
-
 public enum AuthAPI {
 	case smsSend(parameter: SmsSendRequest)
 	case smsConfirm(parameter: SmsConfirmRequest)

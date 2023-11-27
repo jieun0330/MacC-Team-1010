@@ -10,6 +10,7 @@ import Foundation
 import Utils
 
 public protocol UserRepository {
+	func phoneSignin(_ request: AuthUserRequest) async throws -> AuthUserResponse
 	func skipSignin(_ request: UserRequest) async throws -> UserResponse
 	func insertComment(_ request: InsertCommentRequest) async throws -> CommentResponse
 	func updateComment(_ request: UpdateCommentRequest) async throws -> CommentResponse
@@ -20,10 +21,25 @@ public protocol UserRepository {
 	func getUserMakFolder(
 		_ request: GetUserMakFolderRequest
 	) async throws -> GetUserMakFolderResponse
+	func checkNickname (_ nickname: String) async throws -> CheckNicknameResponse
 }
 
 public final class DefaultUserRepository: UserRepository {
 	public init() { }
+	
+	public func phoneSignin(_ request: AuthUserRequest) async throws -> AuthUserResponse {
+		let response = try await UserAPI.request(target: UserAPI.phoneSignin(
+			parameter: request), dataType: AuthUserResponse.self
+		)
+		return response
+	}
+	
+	public func checkNickname(_ nickname: String) async throws -> CheckNicknameResponse {
+		let response = try await UserAPI.request(target: UserAPI.checkNickname(
+			nickname: nickname), dataType: CheckNicknameResponse.self
+		)
+		return response
+	}
 	
 	public func skipSignin(_ request: UserRequest) async throws -> UserResponse {
 		let response = try await UserAPI.request(target: UserAPI.skipSignin(

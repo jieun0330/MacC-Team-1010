@@ -9,13 +9,11 @@
 import Foundation
 import Moya
 
-// phoneSignin
-// checkNickname/{nickname}
-// 내 막걸리 폴더 API 변경
-
 public enum UserAPI {
 	case getUserMakFolder(parameter: [String: Any])
+	case checkNickname(nickname: String)
 	
+	case phoneSignin(parameter: AuthUserRequest)
 	case skipSignin(parameter: UserRequest)
 	case updateComment(parameter: UpdateCommentRequest)
 	case insertComment(parameter: InsertCommentRequest)
@@ -37,6 +35,11 @@ extension UserAPI: TargetType {
 		switch self {
 		case .getUserMakFolder:
 			return "/getUserMakFolder"
+		case .checkNickname(let nickname):
+			return "/checkNickname/\(nickname)"
+			
+		case .phoneSignin:
+			return "/phoneSignIn"
 		case .skipSignin:
 			return "/SkipSignIn"
 		case .updateComment:
@@ -67,7 +70,11 @@ extension UserAPI: TargetType {
 		switch self {
 		case .getUserMakFolder(let parameter):
 			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+		case .checkNickname:
+			return .requestPlain
 			
+		case .phoneSignin(let parameter):
+			return .requestJSONEncodable(parameter)
 		case .skipSignin(let parameter):
 			return .requestJSONEncodable(parameter)
 		case .updateComment(let parameter):
