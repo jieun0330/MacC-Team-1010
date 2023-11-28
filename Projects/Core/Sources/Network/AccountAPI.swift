@@ -13,6 +13,7 @@ public enum AccountAPI {
 	case modifyUserNickname(parameter: ModifyNicknameRequest)
 	case deleteUserAccount(parameter: DeleteUserRequest)
 	case dataLinking(parameter: DataLinkingRequest)
+	case findMatchAccount(parameter: FindMatchAccountRequest)
 }
 
 extension AccountAPI: TargetType {
@@ -30,7 +31,9 @@ extension AccountAPI: TargetType {
 		case .deleteUserAccount:
 			return "/deleteUserAccount"
 		case .dataLinking:
-			return "dataLinking"
+			return "/dataLinking"
+		case .findMatchAccount:
+			return "/findMatchAccount"
 		}
 	}
 	
@@ -45,6 +48,8 @@ extension AccountAPI: TargetType {
 		case .deleteUserAccount(parameter: let parameter):
 			return .requestJSONEncodable(parameter)
 		case .dataLinking(parameter: let parameter):
+			return .requestJSONEncodable(parameter)
+		case .findMatchAccount(parameter: let parameter):
 			return .requestJSONEncodable(parameter)
 		}
 	}
