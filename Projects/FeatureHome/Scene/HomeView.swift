@@ -10,6 +10,7 @@ import Core
 import DesignSystem
 import FeatureCategory
 import FeatureInformation
+import Utils
 
 public struct HomeView: View {
 	@StateObject var viewModel = HomeViewModel(
@@ -34,14 +35,18 @@ public struct HomeView: View {
 			NavigationStack {
 				ScrollView(showsIndicators: false) {
 					VStack {
-						NavigationLink {
-							CategoryView(type: .event, targetTitle: [.none])
-						} label: {
-							Image(uiImage: .designSystem(.banner)!)
-								.resizable()
-								.aspectRatio(contentMode: .fit)
-								.padding(.bottom, 30)
+						HStack {
+							Text("모아보기")
+								.font(.system(size: 28, weight: .bold))
+							Spacer()
+							
+							Image(uiImage: UIImage(named: KeyChainManager.shared.read(account: .profileImage),
+												   in: DesignSystem.Constant.bundle, with: nil)!)
+							.resizable()
+							.frame(width: 30, height: 30)
 						}
+						.padding(.vertical, 20)
+						.padding(.horizontal, 16)
 						
 						CharacteristicsView()
 						
@@ -59,7 +64,6 @@ public struct HomeView: View {
 							.frame(height: 20)
 					}
 				}
-				.ignoresSafeArea(.all, edges: .top)
 				.background(Color(uiColor: .designSystem(.darkbase)!))
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 					InformationView(makHolyId: makHolyId)
