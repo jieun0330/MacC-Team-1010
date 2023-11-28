@@ -11,7 +11,7 @@ import DesignSystem
 import Core
 import Combine
 
-public struct PhoneNumberAuthView: View {
+struct PhoneNumberAuthView: View {
 	@Environment(\.dismiss) private var dismiss
 	
 	@StateObject var viewModel = ProfileViewModel(
@@ -30,9 +30,7 @@ public struct PhoneNumberAuthView: View {
 	let date = Date()
 	var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	
-	public init() { }
-	
-	public var body: some View {
+	var body: some View {
 		NavigationStack {
 			VStack(alignment: .center, spacing: 0) {
 				Spacer()
