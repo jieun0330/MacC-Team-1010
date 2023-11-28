@@ -18,6 +18,7 @@ public final class ProfileViewModel: ObservableObject {
 	@Published var navigationBirth = false
 	@Published var navigationLoadData = false
 	@Published var savedAlert = false
+	@Published var deleteAlert = false
 	
 	var findMatchUserData: FindMatchAccountUserResult?
 	
@@ -169,6 +170,33 @@ public final class ProfileViewModel: ObservableObject {
 					try KeyChainManager.shared.create(account: .phoneBackNum,
 													  data: (response.result?.phoneSuffix)!)
 					savedAlert = true
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
+	}
+	
+	@MainActor
+	func deleteUserAccount() {
+		Task {
+			do {
+				let response = try await accountRepository.deleteUserAccount(
+					DeleteUserRequest(userId: KeyChainManager.shared.read(account: .userId))
+				)
+				if response.status == 200 {
+					try KeyChainManager.shared.delete(account: .nickname)
+					try KeyChainManager.shared.delete(account: .phoneBackNum)
+					try KeyChainManager.shared.delete(account: .profileImage)
+					try KeyChainManager.shared.delete(account: .userId)
+					
+					UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+					DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+						exit(0)
+					}
 				}
 			} catch {
 				Logger.debug(error: error, message: "")

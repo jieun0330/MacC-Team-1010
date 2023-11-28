@@ -13,8 +13,10 @@ import DesignSystem
 struct SettingListView: View {
 	@ObservedObject var viewModel: ProfileViewModel
 	
+	@State var deleteAlert = false
+	
 	var body: some View {
-		VStack(spacing: 14) {
+		VStack(alignment: .leading, spacing: 14) {
 			VStack(alignment: .center, spacing: 0) {
 				Link(destination: URL(string: "https://forms.gle/wBx1vmudpuGKcxDbA")!) {
 					HStack {
@@ -94,6 +96,27 @@ struct SettingListView: View {
 				}
 			}
 			.padding(.horizontal, 16)
+			.padding(.bottom, 24)
+			
+			Text("탈퇴하기")
+				.foregroundColor(.Alert)
+				.font(.style(.SF12B))
+				.padding(.horizontal, 16)
+				.onTapGesture {
+					deleteAlert = true
+				}
+		}
+		.alert(isPresented: $deleteAlert) {
+			Alert(title: Text("정말 탈퇴하시겠어요?"), message: Text("탈퇴 시 계정의 모든 정보가 삭제되며, 복구되지 않아요. 탈퇴 시 앱이 종료돼요."),
+				  primaryButton: .cancel(
+					Text("취소"),
+					action: {}
+				  ), secondaryButton: .destructive(
+					Text("탈퇴"),
+					action: {
+						viewModel.deleteUserAccount()
+					}
+				  ))
 		}
 	}
 }
