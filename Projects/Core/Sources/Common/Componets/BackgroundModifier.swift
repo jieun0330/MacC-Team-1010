@@ -47,8 +47,8 @@ public struct NavigationBarBackground: ViewModifier {
 			.background(Color(uiColor: .designSystem(.darkbase)!))
 			.navigationTitle(title)
 			.navigationBarTitleDisplayMode(.inline)
-			.navigationBarBackButtonHidden()
-			.navigationBarItems(leading: CustomBackButton())
+//			.navigationBarBackButtonHidden()
+//			.navigationBarItems(leading: CustomBackButton())
 			.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 	}
 }
