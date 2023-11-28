@@ -11,6 +11,8 @@ import Core
 import DesignSystem
 
 struct SettingListView: View {
+	@ObservedObject var viewModel: ProfileViewModel
+	
 	var body: some View {
 		VStack(spacing: 14) {
 			VStack(alignment: .center, spacing: 0) {
