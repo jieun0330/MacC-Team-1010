@@ -13,6 +13,7 @@ public protocol AccountRepository {
 	func modifyUserNickname(_ request: ModifyNicknameRequest) async throws -> ModifyNicknameResponse
 	func deleteUserAccount(_ request: DeleteUserRequest) async throws -> DeleteUserResponse
 	func dataLinking(_ request: DataLinkingRequest) async throws -> DataLinkingResponse
+	func findMatchAccount(_ request: FindMatchAccountRequest) async throws -> FindMatchAccountResponse
 }
 
 public final class DefaultAccountRepository: AccountRepository {
@@ -35,6 +36,13 @@ public final class DefaultAccountRepository: AccountRepository {
 	public func dataLinking(_ request: DataLinkingRequest) async throws -> DataLinkingResponse {
 		let response = try await AccountAPI.request(target: AccountAPI.dataLinking(
 			parameter: request), dataType: DataLinkingResponse.self
+		)
+		return response
+	}
+	
+	public func findMatchAccount(_ request: FindMatchAccountRequest) async throws -> FindMatchAccountResponse {
+		let response = try await AccountAPI.request(target: AccountAPI.findMatchAccount(
+			parameter: request), dataType: FindMatchAccountResponse.self
 		)
 		return response
 	}
