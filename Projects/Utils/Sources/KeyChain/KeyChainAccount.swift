@@ -10,6 +10,9 @@ import Foundation
 
 public enum KeyChainAccount {
 	case userId
+	case nickname
+	case phoneBackNum
+	case profileImage
 	
 	var description: String {
 		return String(describing: self)
@@ -18,6 +21,12 @@ public enum KeyChainAccount {
 	var keyChainClass: CFString {
 		switch self {
 		case .userId:
+			return kSecClassGenericPassword
+		case .nickname:
+			return kSecClassGenericPassword
+		case .phoneBackNum:
+			return kSecClassGenericPassword
+		case .profileImage:
 			return kSecClassGenericPassword
 		}
 	}
