@@ -13,13 +13,12 @@ import Combine
 import Foundation
 
 public struct PhoneNumberAuthView: View {
-	enum PhoneNumberTimerStatus {
-		case normal
-		case retry
-		case timeout
-	}
+	@StateObject var viewModel = OnboardingViewModel(
+		userRepository: DefaultUserRepository(),
+		authRepository: DefaultAuthRepository(),
+		accountRepository: DefaultAccountRepository()
+	)
 	
-	@State private var timerStatus: PhoneNumberTimerStatus = .normal
 	@State private var phoneNumber = ""
 	@State private var isNavigation = false
 	@State private var certificationNumber = ""
@@ -46,7 +45,7 @@ public struct PhoneNumberAuthView: View {
 							.frame(width: 300)
 							.padding(.top, 24)
 							.padding(.bottom, 8)
-							.textFieldStyle(PhoneNumTextFieldStyle(alertStatus: timerStatus))
+							.textFieldStyle(PhoneNumTextFieldStyle(alertStatus: viewModel.timerStatus))
 							.keyboardType(.numberPad)
 							.onReceive(Just(certificationNumber)) { newValue in
 								let filtered = newValue.filter { "0123456789".contains($0) }
@@ -59,7 +58,7 @@ public struct PhoneNumberAuthView: View {
 							}
 						
 						HStack {
-							switch timerStatus {
+							switch viewModel.timerStatus {
 							case .normal:
 								Text("인증번호가 발송되었어요!")
 									.SF12B()
@@ -82,11 +81,13 @@ public struct PhoneNumberAuthView: View {
 									if timeRemaining > 0 {
 										timeRemaining -= 1
 									} else {
-										timerStatus = .timeout
+										viewModel.timerStatus = .timeout
 									}
 								}
 							Button {
-								timerStatus = .normal
+								let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+								viewModel.sendSMS(phoneNumber: cleanedPhoneNumber)
+								viewModel.timerStatus = .normal
 								timeRemaining = 180
 								certificationNumber = ""
 							} label: {
@@ -121,19 +122,35 @@ public struct PhoneNumberAuthView: View {
 				nextButton()
 			}
 			.navigationBarItems(trailing: Button(action: {
-				showAlert = true
+				viewModel.alertItem = AlertItem(title: Text("막걸리 정보를 보관할 수 없어요"),
+												message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
+												primaryButton: .cancel(Text("취소")) {},
+												secondaryButton: .default(Text("건너뛰기")) {
+					isSkip = true
+				})
 			}, label: {
 				Text("건너뛰기").SF14R().foregroundColor(.W25)
 			}))
-			.alert(isPresented: $showAlert) {
-				Alert(title: Text("막걸리 정보를 보관할 수 없어요"),
-					  message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-					  primaryButton: .cancel(Text("취소")) { },
-					  secondaryButton: .default(Text("건너뛰기")) {
-					isSkip = true
-				})
+			.alert(item: $viewModel.alertItem) { alertItem in
+				if alertItem.dismissButton == nil {
+					return Alert(title: alertItem.title,
+								 message: alertItem.message,
+								 primaryButton: alertItem.primaryButton!,
+								 secondaryButton: alertItem.secondaryButton!)
+				} else {
+					return Alert(title: alertItem.title,
+								 message: alertItem.message,
+								 dismissButton: alertItem.dismissButton)
+				}
 			}
 			.modifier(OnboardingBackground())
+			.navigationDestination(isPresented: $viewModel.navigationBirth) {
+				let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+				BirthView(viewModel: viewModel, phoneNumber: cleanedPhoneNumber)
+			}
+			.fullScreenCover(isPresented: $isSkip, content: {
+				SkipNicknameView()
+			})
 		}
 	}
 }
@@ -157,37 +174,30 @@ private extension PhoneNumberAuthView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		if showSecondTextField {
-			NavigationLink {
-				// 인증번호 확인 후 맞으면
-				
-				// 1. 이미 데이터가 있으면?
-				// 이미 데이터가 있어요 뷰
-				
-				// 2. 데이터가 없으면?
-				// 생년월일 뷰로 이동 + 뒤로 못가게
-				BirthView()
-				
-				// 인증번호 틀리면
-				// alertStatus =. retry
+			Button {
+				let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+				viewModel.confirmSMS(phoneNumber: cleanedPhoneNumber,
+									 certificationNumber: certificationNumber)
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color(uiColor: .designSystem(
-						certificationNumber.count != 6 || timerStatus == .timeout ? .w10 : .goldenyellow)!)
+						certificationNumber.count != 6 || viewModel.timerStatus == .timeout ? .w10 : .goldenyellow)!)
 					)
 					.frame(height: 50)
 					.overlay {
 						Text("다음")
 							.foregroundColor(
-								certificationNumber.count != 6 || timerStatus == .timeout ? .W25 : .White
+								certificationNumber.count != 6 || viewModel.timerStatus == .timeout ? .W25 : .White
 							)
 							.SF17R()
 					}
 					.padding(.bottom, 16)
 			}
-			.disabled(certificationNumber.count != 6 || timerStatus == .timeout)
+			.disabled(certificationNumber.count != 6 || viewModel.timerStatus == .timeout)
 		} else {
 			Button {
-				// 인증번호 보내기
+				let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+				viewModel.sendSMS(phoneNumber: cleanedPhoneNumber)
 				withAnimation {
 					showSecondTextField = true
 				}
@@ -211,16 +221,6 @@ private extension PhoneNumberAuthView {
 		let minutes = (timeInSeconds - hours*3600) / 60
 		let seconds = timeInSeconds % 60
 		return String(format: "%02i:%02i", minutes,seconds)
-	}
-	
-	func calcRemain() {
-		let calendar = Calendar.current
-		let targetTime: Date = calendar.date(byAdding: .second,
-											 value: 3800,
-											 to: date,
-											 wrappingComponents: false) ?? Date()
-		let remainSeconds = Int(targetTime.timeIntervalSince(date))
-		self.timeRemaining = remainSeconds
 	}
 	
 	struct PhoneNumTextFieldStyle: TextFieldStyle {

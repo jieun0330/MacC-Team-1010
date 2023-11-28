@@ -11,14 +11,26 @@ import Core
 import DesignSystem
 
 public struct GenderView: View {
+	@ObservedObject var viewModel: OnboardingViewModel
+	
 	@State var genderSelected: Int?
 	@State private var selected = [false, false, false]
 	@State private var showAlert = false
 	@State private var isSkip = false
 	
 	let genders = ["남성", "여성", "기타"]
+	var phoneNumber: String
+	var birthDay: String
 	
-	public init() { }
+	public init(
+		viewModel: OnboardingViewModel,
+		phoneNumber: String,
+		birthDay: String
+	) {
+		self.viewModel = viewModel
+		self.phoneNumber = phoneNumber
+		self.birthDay = birthDay
+	}
 	
 	public var body: some View {
 		VStack(alignment: .center, spacing: 0) {
@@ -88,7 +100,14 @@ private extension GenderView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		NavigationLink {
-			NicknameView()
+			if let idx = selected.firstIndex(of: true) {
+				NicknameView(
+					viewModel: viewModel,
+					phoneNumber: phoneNumber,
+					birthDay: birthDay,
+					sex: genders[idx]
+				)
+			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(

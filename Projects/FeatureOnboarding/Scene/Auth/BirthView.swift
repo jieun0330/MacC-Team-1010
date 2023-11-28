@@ -13,30 +13,31 @@ import Combine
 import FeatureHome
 
 public struct BirthView: View {
+	@ObservedObject var viewModel: OnboardingViewModel
+	
 	@State private var birthDay = ""
 	@State private var isAgreed = false
 	@State private var adultChk = false
 	@State private var showAlert = false
 	@State private var isSkip = false
-	@State private var isMain = false
-	@State private var alertItem: AlertItem?
-	@State private var navigationGenderView = false
 	
-	var isLoadDataState: Bool
+	var phoneNumber: String
 	
-	public init(isLoadDataState: Bool = false) {
-		self.isLoadDataState = isLoadDataState
+	public init(
+		viewModel: OnboardingViewModel,
+		phoneNumber: String = ""
+	) {
+		self.viewModel = viewModel
+		self.phoneNumber = phoneNumber
 	}
 	
 	public var body: some View {
 		VStack(spacing: 0) {
 			Spacer()
 			
-			if !isLoadDataState {
-				Text("본인 확인을 위해")
-					.SF24B()
-					.padding(.bottom, 4)
-			}
+			Text("본인 확인을 위해")
+				.SF24B()
+				.padding(.bottom, 4)
 			HStack {
 				Text("생년월일")
 					.foregroundColor(.Primary)
@@ -46,17 +47,10 @@ public struct BirthView: View {
 			}
 			.padding(.bottom, 8)
 			
-			if isLoadDataState {
-				Text("데이터 저장 시 입력하셨던 정보를 알려주세요.")
-					.SF14R()
-					.foregroundColor(.W50)
-					.padding(.bottom, 24)
-			} else {
-				Text("본인 확인 이후에 데이터 연동이 가능해져요!")
-					.SF14R()
-					.foregroundColor(.W50)
-					.padding(.bottom, 24)
-			}
+			Text("본인 확인 이후에 데이터 연동이 가능해져요!")
+				.SF14R()
+				.foregroundColor(.W50)
+				.padding(.bottom, 24)
 			
 			TextField("980123", text: $birthDay)
 				.frame(width: 300)
@@ -89,29 +83,7 @@ public struct BirthView: View {
 			Spacer()
 			
 			Button {
-				if isLoadDataState {
-					// 기존에 있던 유저인지 확인
-
-					// 1. 일치하는 데이터가 있다?
-					self.alertItem = AlertItem(title: Text("데이터를 불러왔어요!"),
-											   message: Text("핸드폰 번호에 저장된 막걸리 정보를 불러왔어요!"),
-											   dismissButton: .default(Text("완료")) {
-						// fullScreen Main으로 이동
-						isMain = true
-					})
-
-					// 2. 일치하는 데이터가 없다?
-					self.alertItem = AlertItem(title: Text("일치하는 정보가 없어요"),
-											   message: Text("새로운 데이터로 시작하시겠어요?"),
-											   primaryButton: .cancel(Text("새로만들기")) {
-						// GenderView로 이동
-						navigationGenderView = true
-					},
-											   secondaryButton: .default(Text("재입력")))
-				} else {
-					// GenderView로 이동
-					navigationGenderView = true
-				}
+				viewModel.findMatchAccount(phoneNumber: "01041411316", birth: birthDay)
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(
@@ -119,24 +91,15 @@ public struct BirthView: View {
 					)
 					.frame(height: 50)
 					.overlay {
-						if isLoadDataState {
-							Text("데이터 불러오기")
-								.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
-								.SF17R()
-						} else {
-							Text("다음")
-								.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
-								.SF17R()
-						}
+						Text("다음")
+							.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
+							.SF17R()
 					}
 					.padding(.bottom, 16)
 			}
 			.disabled(birthDay.count != 6 || !isAgreed)
 		}
-		.navigationDestination(isPresented: $navigationGenderView, destination: {
-			GenderView()
-		})
-		.alert(item: $alertItem) { alertItem in
+		.alert(item: $viewModel.alertItem) { alertItem in
 			if alertItem.dismissButton == nil {
 				return Alert(title: alertItem.title,
 							 message: alertItem.message,
@@ -149,10 +112,10 @@ public struct BirthView: View {
 			}
 		}
 		.navigationBarItems(trailing: Button(action: {
-			self.alertItem = AlertItem(title: Text("막걸리 정보를 보관할 수 없어요"),
-									   message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-									   primaryButton: .cancel(Text("취소")) {},
-									   secondaryButton: .default(Text("건너뛰기")) {
+			viewModel.alertItem = AlertItem(title: Text("막걸리 정보를 보관할 수 없어요"),
+											message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
+											primaryButton: .cancel(Text("취소")) {},
+											secondaryButton: .default(Text("건너뛰기")) {
 				isSkip = true
 			})
 		}, label: {
@@ -162,9 +125,12 @@ public struct BirthView: View {
 		.fullScreenCover(isPresented: $isSkip, content: {
 			SkipNicknameView()
 		})
-		.fullScreenCover(isPresented: $isMain, content: {
-			HomeView()
-		})
+		.navigationDestination(isPresented: $viewModel.navigationGender) {
+			GenderView(viewModel: viewModel, phoneNumber: phoneNumber, birthDay: birthDay)
+		}
+		.navigationDestination(isPresented: $viewModel.navigationLoadData) {
+			LoadDataView(findMatchUserData: viewModel.findMatchUserData ?? FindMatchAccountUserResult())
+		}
 	}
 }
 

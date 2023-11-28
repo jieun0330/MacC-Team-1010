@@ -9,12 +9,24 @@
 import SwiftUI
 import Core
 import DesignSystem
+import Utils
 
 public struct LoadDataView: View {
+	@StateObject var viewModel = OnboardingViewModel(
+		userRepository: DefaultUserRepository(),
+		authRepository: DefaultAuthRepository(),
+		accountRepository: DefaultAccountRepository()
+	)
+	
 	@State private var showAlert = false
 	@State private var isSkip = false
+	@State private var isMain = false
 	
-	public init() { }
+	var findMatchUserData: FindMatchAccountUserResult
+	
+	public init(findMatchUserData: FindMatchAccountUserResult) {
+		self.findMatchUserData = findMatchUserData
+	}
 	
 	public var body: some View {
 		VStack(spacing: 0) {
@@ -27,39 +39,27 @@ public struct LoadDataView: View {
 				Text("발견했어요!")
 					.SF24B()
 			}
-			
-			Spacer()
-				.frame(height: 24)
-			
-			Text("이전에 저장했던 데이터를 불러올까요?")
-				.foregroundColor(.W85)
-				.SF14R()
-			
+
 			Spacer()
 			
-			NavigationLink {
-				BirthView()
-			} label: {
-				RoundedRectangle(cornerRadius: 12)
-					.fill(Color.W10)
-					.frame(height: 50)
-					.overlay {
-						Text("아니오, 새로운 데이터로 시작할게요.")
-							.foregroundColor(.White)
-							.SF17R()
-					}
-			}
-			.padding(.horizontal, 16)
-			.padding(.bottom, 8)
-			
-			NavigationLink {
-				BirthView(isLoadDataState: true)
+			Button {
+				Task {
+					try KeyChainManager.shared.create(account: .userId,
+													  data: "\(findMatchUserData.userID ?? 0)")
+					try KeyChainManager.shared.create(account: .profileImage,
+													  data: "\("profileIcon1")")
+					try KeyChainManager.shared.create(account: .nickname,
+													  data: "\(findMatchUserData.userNickName ?? "")")
+					try KeyChainManager.shared.create(account: .phoneBackNum,
+													  data: "\(findMatchUserData.userPhone ?? "")")
+					isMain = true
+				}
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(Color.GoldenYellow)
 					.frame(height: 50)
 					.overlay {
-						Text("네, 이전 데이터를 불러올게요.")
+						Text("데이터 불러오기")
 							.foregroundColor(.White)
 							.SF17R()
 					}
@@ -82,6 +82,9 @@ public struct LoadDataView: View {
 		.modifier(OnboardingBackground())
 		.fullScreenCover(isPresented: $isSkip, content: {
 			SkipNicknameView()
+		})
+		.fullScreenCover(isPresented: $isMain, content: {
+			SubRootView()
 		})
 	}
 }
