@@ -27,7 +27,7 @@ extension AuthAPI: TargetType {
 		case .smsSend:
 			return "/send"
 		case .smsConfirm:
-			return "/comfirm"
+			return "/confirm"
 		}
 	}
 	
