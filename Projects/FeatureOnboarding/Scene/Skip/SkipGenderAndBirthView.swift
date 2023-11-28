@@ -9,16 +9,23 @@
 import SwiftUI
 import Combine
 import DesignSystem
+import FeatureHome
 
 public struct SkipGenderAndBirthView: View {
+	@ObservedObject var viewModel: OnboardingViewModel
+	
 	@State var genderSelected: Int?
 	@State private var selected = [false, false, false]
 	@State private var showAlert = false
 	@State private var birthDay = ""
 	
 	let genders = ["남성", "여성", "기타"]
+	var nickName: String
 	
-	public init() { }
+	public init( _ viewModel: OnboardingViewModel, _ nickName: String) {
+		self.viewModel = viewModel
+		self.nickName = nickName
+	}
 	
 	public var body: some View {
 		VStack(alignment: .center, spacing: 0) {
@@ -83,15 +90,19 @@ public struct SkipGenderAndBirthView: View {
 		.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 		.navigationBarBackButtonHidden()
 		.background(Color(uiColor: .designSystem(.darkbase)!))
+		.fullScreenCover(isPresented: $viewModel.navigationHome, content: {
+			SubRootView()
+		})
 	}
 }
 
 private extension SkipGenderAndBirthView {
 	@ViewBuilder
 	func nextButton() -> some View {
-		NavigationLink {
-			// skip user api set 하고 나서
-			// 메인으로 full modal
+		Button {
+			if let idx = selected.firstIndex(of: true) {
+				viewModel.skipSignin(nickname: nickName, sex: genders[idx], ageRange: birthDay)
+			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(

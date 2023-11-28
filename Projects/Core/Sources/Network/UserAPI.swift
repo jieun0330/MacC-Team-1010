@@ -61,6 +61,8 @@ extension UserAPI: TargetType {
 		switch self {
 		case .getUserMakFolder:
 			return .get
+		case .checkNickname:
+			return .get
 		default:
 			return .post
 		}

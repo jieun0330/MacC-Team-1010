@@ -12,17 +12,15 @@ import DesignSystem
 import Combine
 
 public struct SkipNicknameView: View {
-	enum NicknameState {
-		case normal
-		case notduplicate
-		case duplicate
-	}
+	@StateObject var viewModel = OnboardingViewModel(
+		userRepository: DefaultUserRepository(),
+		authRepository: DefaultAuthRepository(),
+		accountRepository: DefaultAccountRepository()
+	)
 	
 	@State private var nickName = ""
-	@State private var showNickDupli: NicknameState = .normal
-	@State private var alertItem: AlertItem?
 	@State private var isNavigationState = false
-	
+
 	public init() { }
 	
 	public var body: some View {
@@ -43,14 +41,17 @@ public struct SkipNicknameView: View {
 					.frame(width: 300)
 					.padding(.bottom, 8)
 					.keyboardType(.default)
-					.textFieldStyle(NicknameTextFieldStyle(showNickDupli: showNickDupli))
+					.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
+					.onChange(of: nickName) { _ in
+						viewModel.showNickDupli = .normal
+					}
 					.onReceive(Just(nickName)) { newValue in
 						if self.nickName.count == 7 {
 							self.nickName.removeLast()
 						}
 					}
 				
-				switch showNickDupli {
+				switch viewModel.showNickDupli {
 				case .normal:
 					EmptyView()
 				case .duplicate:
@@ -84,7 +85,7 @@ public struct SkipNicknameView: View {
 				
 				nextButton()
 			}
-			.alert(item: $alertItem) { alertItem in
+			.alert(item: $viewModel.alertItem) { alertItem in
 				if alertItem.dismissButton == nil {
 					return Alert(title: alertItem.title,
 								 message: alertItem.message,
@@ -107,23 +108,17 @@ private extension SkipNicknameView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		Button {
-			if showNickDupli == .notduplicate {
+			if viewModel.showNickDupli == .notduplicate {
 				isNavigationState = true
 			} else {
-				// 닉네임 중복 확인
-				
-				// 중복이면
-				// showNickDupli = .duplicate
-				
-				// 중복아니면
-				// showNickDupli = .notduplicate
+				viewModel.checkNickname(nickname: nickName)
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
-				.foregroundColor(showNickDupli == .notduplicate ? .Primary : .Lilac)
+				.foregroundColor(viewModel.showNickDupli == .notduplicate ? .Primary : .Lilac)
 				.frame(height: 50)
 				.overlay {
-					Text(showNickDupli == .notduplicate ? "다음" : "닉네임 중복 검사")
+					Text(viewModel.showNickDupli == .notduplicate ? "다음" : "닉네임 중복 검사")
 						.foregroundColor(.White)
 						.SF17R()
 				}
@@ -132,7 +127,7 @@ private extension SkipNicknameView {
 		}
 		.disabled(nickName == "")
 		.navigationDestination(isPresented: $isNavigationState) {
-			SkipGenderAndBirthView()
+			SkipGenderAndBirthView(viewModel, nickName)
 		}
 	}
 	

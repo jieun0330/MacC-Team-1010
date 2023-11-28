@@ -7,20 +7,73 @@
 //
 
 import Foundation
+import SwiftUI
 import Core
 import Utils
 
-final class OnboardingViewModel: ObservableObject {
+public final class OnboardingViewModel: ObservableObject {
 	@Published var errorState = false
 	@Published var fetchLoading = false
-	@Published var navigationState = false
+	@Published var navigationHome = false
+	@Published var navigationLoadData = false
+	@Published var navigationBirth = false
+	@Published var navigationGender = false
+	@Published var showNickDupli: NicknameState = .normal
+	@Published var timerStatus: PhoneNumberTimerStatus = .normal
+	@Published var alertItem: AlertItem?
+	
+	var findMatchUserData: FindMatchAccountUserResult?
 	
 	let userRepository: DefaultUserRepository
+	let authRepository: DefaultAuthRepository
+	let accountRepository: DefaultAccountRepository
 	
-	init(
-		userRepository: DefaultUserRepository
+	public init(
+		userRepository: DefaultUserRepository,
+		authRepository: DefaultAuthRepository,
+		accountRepository: DefaultAccountRepository
 	) {
 		self.userRepository = userRepository
+		self.authRepository = authRepository
+		self.accountRepository = accountRepository
+	}
+	
+	@MainActor
+	func phoneSignin(nickname: String, sex: String, phoneNumber: String, birth: String) async throws {
+		Task {
+			do {
+				let response = try await userRepository.phoneSignin(AuthUserRequest(userNickName: nickname,
+																					userPhone: phoneNumber,
+																					userSex: sex,
+																					userBirth: birth))
+				do {
+					if let response = response.result, let userID = response.userID {
+						try KeyChainManager.shared.create(account: .userId,
+														  data: "\(userID)")
+						try KeyChainManager.shared.create(account: .profileImage,
+														  data: "\("profileIcon1")")
+						try KeyChainManager.shared.create(account: .nickname,
+														  data: "\(nickname)")
+						try KeyChainManager.shared.create(account: .phoneBackNum,
+														  data: "\(response.userPhone ?? "")")
+					} else {
+						alertItem = AlertItem(title: Text("네트워크 에러"),
+											  message: Text("인터넷 연결상태를 확인해주세요."),
+											  dismissButton: .default(Text("확인")))
+					}
+				} catch {
+					Logger.debug(error: error, message: "")
+					alertItem = AlertItem(title: Text("네트워크 에러"),
+										  message: Text("인터넷 연결상태를 확인해주세요."),
+										  dismissButton: .default(Text("확인")))
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
 	}
 	
 	@MainActor
@@ -33,20 +86,125 @@ final class OnboardingViewModel: ObservableObject {
 																			   userAgeRange: ageRange))
 				do {
 					if let response = response.result, let userID = response.userID {
-						UserDefaultsSetting.nickname = nickname
-						try KeyChainManager.shared.create(account: .userId, data: "\(userID)")
+						try KeyChainManager.shared.create(account: .userId,
+														  data: "\(userID)")
+						try KeyChainManager.shared.create(account: .profileImage,
+														  data: "\("profileIcon1")")
+						try KeyChainManager.shared.create(account: .nickname,
+														  data: "\(nickname)")
+						try KeyChainManager.shared.create(account: .phoneBackNum,
+														  data: "")
+						
 						fetchLoading = false
-						navigationState = true
+						navigationHome = true
 					} else {
-						errorState = true
+						alertItem = AlertItem(title: Text("네트워크 에러"),
+											  message: Text("인터넷 연결상태를 확인해주세요."),
+											  dismissButton: .default(Text("확인")))
 					}
 				} catch {
 					Logger.debug(error: error, message: "")
-					errorState = true
+					alertItem = AlertItem(title: Text("네트워크 에러"),
+										  message: Text("인터넷 연결상태를 확인해주세요."),
+										  dismissButton: .default(Text("확인")))
 				}
 			} catch {
 				Logger.debug(error: error, message: "")
-				errorState = true
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
+	}
+	
+	@MainActor
+	func checkNickname(nickname: String) {
+		Task {
+			do {
+				let response = try await userRepository.checkNickname(nickname)
+				if let isSuccess = response.result?.isSuccess {
+					if isSuccess {
+						self.showNickDupli = .notduplicate
+					} else {
+						self.showNickDupli = .duplicate
+					}
+				} else {
+					alertItem = AlertItem(title: Text("네트워크 에러"),
+										  message: Text("인터넷 연결상태를 확인해주세요."),
+										  dismissButton: .default(Text("확인")))
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
+	}
+	
+	@MainActor
+	func sendSMS(phoneNumber: String) {
+		Task {
+			do {
+				let response = try await authRepository.smsSend(SmsSendRequest(phone: phoneNumber))
+				if response.status == 200 {
+					
+				} else {
+					alertItem = AlertItem(title: Text("네트워크 에러"),
+										  message: Text("인터넷 연결상태를 확인해주세요."),
+										  dismissButton: .default(Text("확인")))
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
+	}
+	
+	@MainActor
+	func confirmSMS(phoneNumber: String, certificationNumber: String) {
+		Task {
+			do {
+				let response = try await authRepository.smsConfirm(
+					SmsConfirmRequest(phone: phoneNumber,
+									  certificationNumber: certificationNumber)
+				)
+				if response.status == 200 {
+					navigationBirth = true
+				} else {
+					timerStatus = .retry
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
+			}
+		}
+	}
+	
+	@MainActor
+	func findMatchAccount(phoneNumber: String, birth: String) {
+		Task {
+			do {
+				let response = try await accountRepository.findMatchAccount(
+					FindMatchAccountRequest(phone: phoneNumber, birth: birth)
+				)
+				if response.status == 200 {
+					if response.result!.isAccountExisted! {
+						findMatchUserData = response.result?.userResults
+						navigationLoadData = true
+					} else {
+						navigationGender = true
+					}
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				alertItem = AlertItem(title: Text("네트워크 에러"),
+									  message: Text("인터넷 연결상태를 확인해주세요."),
+									  dismissButton: .default(Text("확인")))
 			}
 		}
 	}
