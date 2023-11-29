@@ -7,16 +7,23 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 
 public struct ProfileView: View {
+	@StateObject var viewModel = ProfileViewModel(
+		userRepository: DefaultUserRepository(),
+		authRepository: DefaultAuthRepository(),
+		accountRepository: DefaultAccountRepository()
+	)
+	
 	public init() { }
 	
 	public var body: some View {
 		NavigationStack {
 			ScrollView(.vertical, showsIndicators: false) {
-				MyInformationView()
-				SettingListView()
+				MyInformationView(viewModel: viewModel)
+				SettingListView(viewModel: viewModel)
 			}
             .background(Color.DarkBase)
 		}

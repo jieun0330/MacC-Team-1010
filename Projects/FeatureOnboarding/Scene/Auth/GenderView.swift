@@ -11,14 +11,23 @@ import Core
 import DesignSystem
 
 public struct GenderView: View {
-	@State var genderSelected: Int?
+	@ObservedObject var viewModel: OnboardingViewModel
+	
 	@State private var selected = [false, false, false]
-	@State private var showAlert = false
-	@State private var isSkip = false
 	
 	let genders = ["남성", "여성", "기타"]
+	var phoneNumber: String
+	var birthDay: String
 	
-	public init() { }
+	public init(
+		viewModel: OnboardingViewModel,
+		phoneNumber: String,
+		birthDay: String
+	) {
+		self.viewModel = viewModel
+		self.phoneNumber = phoneNumber
+		self.birthDay = birthDay
+	}
 	
 	public var body: some View {
 		VStack(alignment: .center, spacing: 0) {
@@ -64,23 +73,7 @@ public struct GenderView: View {
 			
 			nextButton()
 		}
-		.navigationBarItems(trailing: Button(action: {
-			showAlert = true
-		}, label: {
-			Text("건너뛰기").SF14R().foregroundColor(.W25)
-		}))
-		.alert(isPresented: $showAlert) {
-			Alert(title: Text("막걸리 정보를 보관할 수 없어요"),
-				  message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-				  primaryButton: .cancel(Text("안하기")) {
-				isSkip = true
-			},
-				  secondaryButton: .default(Text("보관하기")))
-		}
 		.modifier(OnboardingBackground())
-		.fullScreenCover(isPresented: $isSkip, content: {
-			SkipNicknameView()
-		})
 	}
 }
 
@@ -88,7 +81,14 @@ private extension GenderView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		NavigationLink {
-			NicknameView()
+			if let idx = selected.firstIndex(of: true) {
+				NicknameView(
+					viewModel: viewModel,
+					phoneNumber: phoneNumber,
+					birthDay: birthDay,
+					sex: genders[idx]
+				)
+			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(

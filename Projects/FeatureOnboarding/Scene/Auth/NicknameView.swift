@@ -12,78 +12,97 @@ import DesignSystem
 import Combine
 
 public struct NicknameView: View {
-	enum NicknameState {
-		case normal
-		case notduplicate
-		case duplicate
-	}
+	@ObservedObject var viewModel: OnboardingViewModel
 	
 	@State private var nickName = ""
-	@State private var showNickDupli: NicknameState = .normal
-	@State private var alertItem: AlertItem?
-	@State private var isSkip = false
+	@State private var isMain = false
 	
-	public init() { }
+	var phoneNumber: String
+	var birthDay: String
+	var sex: String
+	
+	public init(
+		viewModel: OnboardingViewModel,
+		phoneNumber: String,
+		birthDay: String,
+		sex: String
+	) {
+		self.viewModel = viewModel
+		self.phoneNumber = phoneNumber
+		self.birthDay = birthDay
+		self.sex = sex
+	}
 	
 	public var body: some View {
-		VStack(alignment: .center, spacing: 0) {
-			Spacer()
-			
-			HStack(spacing: 0) {
-				Text("닉네임")
-					.foregroundColor(.Primary)
-					.SF24B()
-				Text("을 입력해주세요")
-					.SF24B()
-			}
-			.padding(.bottom, 24)
-			
-			TextField("걸쭉한막걸리", text: $nickName)
-				.frame(width: 300)
-				.padding(.bottom, 8)
-				.keyboardType(.default)
-				.textFieldStyle(NicknameTextFieldStyle(showNickDupli: showNickDupli))
-				.onReceive(Just(nickName)) { newValue in
-					if self.nickName.count == 7 {
-						self.nickName.removeLast()
+		ZStack {
+			VStack(alignment: .center, spacing: 0) {
+				Spacer()
+				
+				HStack(spacing: 0) {
+					Text("닉네임")
+						.foregroundColor(.Primary)
+						.SF24B()
+					Text("을 입력해주세요")
+						.SF24B()
+				}
+				.padding(.bottom, 24)
+				
+				TextField("걸쭉한막걸리", text: $nickName)
+					.frame(width: 300)
+					.padding(.bottom, 8)
+					.keyboardType(.default)
+					.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
+					.onChange(of: nickName) { _ in
+						viewModel.showNickDupli = .normal
 					}
-				}
-			
-			switch showNickDupli {
-			case .normal:
-				EmptyView()
-			case .duplicate:
-				Text("중복된 닉네임이에요")
-					.SF12B()
-					.foregroundColor(.Alert)
-			case .notduplicate:
-				Text("사용할 수 있는 닉네임이에요!")
-					.SF12B()
-					.foregroundColor(.Primary2)
-			}
-			
-			Spacer()
-			
-			HStack(spacing: 0) {
-				Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
-					Text("이용약관")
+					.onReceive(Just(nickName)) { newValue in
+						self.nickName = newValue.replacingOccurrences(of: " ", with: "")
+						if self.nickName.count == 7 {
+							self.nickName.removeLast()
+						}
+					}
+				
+				switch viewModel.showNickDupli {
+				case .normal:
+					EmptyView()
+				case .duplicate:
+					Text("중복된 닉네임이에요")
+						.SF12B()
+						.foregroundColor(.Alert)
+				case .notduplicate:
+					Text("사용할 수 있는 닉네임이에요!")
+						.SF12B()
 						.foregroundColor(.Primary2)
 				}
-				Text("과 ")
-					.foregroundColor(.W50)
-				Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
-					Text("개인정보처리방침")
-						.foregroundColor(.Primary2)
+				
+				Spacer()
+				
+				HStack(spacing: 0) {
+					Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
+						Text("이용약관")
+							.foregroundColor(.Primary2)
+					}
+					Text("과 ")
+						.foregroundColor(.W50)
+					Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
+						Text("개인정보처리방침")
+							.foregroundColor(.Primary2)
+					}
+					Text("에 동의하고 시작합니다.")
+						.foregroundColor(.W50)
 				}
-				Text("에 동의하고 시작합니다.")
-					.foregroundColor(.W50)
+				.font(.style(.SF12B))
+				.padding(.bottom, 16)
+				
+				nextButton()
 			}
-			.font(.style(.SF12B))
-			.padding(.bottom, 16)
-			
-			nextButton()
+			if viewModel.fetchLoading {
+				ProgressView()
+					.modifier(ProgressViewBackground())
+					.opacity(0.5)
+			}
 		}
-		.alert(item: $alertItem) { alertItem in
+		.alert(item: $viewModel.alertItem) { alertItem in
 			if alertItem.dismissButton == nil {
 				return Alert(title: alertItem.title,
 							 message: alertItem.message,
@@ -95,19 +114,9 @@ public struct NicknameView: View {
 							 dismissButton: alertItem.dismissButton)
 			}
 		}
-		.navigationBarItems(trailing: Button(action: {
-			self.alertItem = AlertItem(title: Text("막걸리 정보를 보관할 수 없어요"),
-									   message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-									   primaryButton: .cancel(Text("안하기")) {
-				isSkip = true
-			},
-									   secondaryButton: .default(Text("보관하기")) { })
-		}, label: {
-			Text("건너뛰기").SF14R().foregroundColor(.W25)
-		}))
 		.modifier(OnboardingBackground())
-		.fullScreenCover(isPresented: $isSkip, content: {
-			SkipNicknameView()
+		.fullScreenCover(isPresented: $isMain, content: {
+			SubRootView()
 		})
 	}
 }
@@ -116,27 +125,31 @@ private extension NicknameView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		Button {
-			if showNickDupli == .notduplicate {
-				self.alertItem = AlertItem(title: Text("완료했어요!"),
-										   message: Text("이제 ‘내 정보’의 핸드폰 번호 로그인으로 내 데이터를 불러올 수 있어요!"),
-										   dismissButton: .default(Text("확인")) {
-					// fullmodal home
-				})
+			if viewModel.showNickDupli == .notduplicate {
+				Task {
+					do {
+						try await viewModel.phoneSignin(nickname: nickName,
+														sex: sex,
+														phoneNumber: phoneNumber,
+														birth: birthDay)
+						viewModel.alertItem = AlertItem(title: Text("완료했어요!"),
+														message: Text("이제 ‘내 정보’의 핸드폰 번호 로그인으로 내 데이터를 불러올 수 있어요!"),
+														dismissButton: .default(Text("확인")) {
+							isMain = true
+						})
+					} catch {
+						fatalError()
+					}
+				}
 			} else {
-				// 닉네임 중복 확인
-				
-				// 중복이면
-				// showNickDupli = .duplicate
-				
-				// 중복아니면
-				// showNickDupli = .notduplicate
+				viewModel.checkNickname(nickname: nickName)
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
-				.foregroundColor(showNickDupli == .notduplicate ? .Primary : .Lilac)
+				.foregroundColor(viewModel.showNickDupli == .notduplicate ? .Primary : .Lilac)
 				.frame(height: 50)
 				.overlay {
-					Text(showNickDupli == .notduplicate ? "완료" : "닉네임 중복 검사")
+					Text(viewModel.showNickDupli == .notduplicate ? "완료" : "닉네임 중복 검사")
 						.foregroundColor(.White)
 						.SF17R()
 				}

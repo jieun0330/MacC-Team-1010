@@ -11,11 +11,11 @@ import DesignSystem
 
 public struct CustomBackButton: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	
+
 	let title: String
-	
+
 	public init(title: String = "돌아가기") { self.title = title }
-	
+
 	public var body: some View {
 		Button(action: {
 			self.presentationMode.wrappedValue.dismiss()
@@ -28,13 +28,9 @@ public struct CustomBackButton: View {
 	}
 }
 
-extension UINavigationController: UIGestureRecognizerDelegate {
-	override open func viewDidLoad() {
-		super.viewDidLoad()
-		interactivePopGestureRecognizer?.delegate = self
-	}
-	
-	public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-		return viewControllers.count > 1
-	}
+extension UINavigationController {
+  open override func viewWillLayoutSubviews() {
+	super.viewWillLayoutSubviews()
+	  navigationBar.topItem?.backButtonDisplayMode = .minimal
+  }
 }

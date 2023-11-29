@@ -9,6 +9,8 @@ import SwiftUI
 import DesignSystem
 
 public struct CameraView: View {
+	@Environment(\.dismiss) private var dismiss
+	
 	@ObservedObject public var viewModel: CameraViewModel
 	
 	@Binding public var isCameraViewPresented: Bool
@@ -46,6 +48,17 @@ public struct CameraView: View {
 					.padding(.bottom, 64)
 				
 				VStack {
+					HStack {
+						Spacer()
+						Image(systemName: "xmark.circle.fill")
+							.resizable()
+							.frame(width: 24, height: 24)
+							.padding(.trailing, 24)
+							.padding(.top, 24)
+							.onTapGesture {
+								dismiss()
+							}
+					}
 					Spacer()
 					Text("위의 사각형 영역에 막걸리 라벨이\n꽉 차도록 가까이서 찍어주세요")
 						.SF15R()

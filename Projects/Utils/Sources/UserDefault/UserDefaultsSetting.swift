@@ -8,10 +8,6 @@
 
 import Foundation
 
-public enum UserDefaultsSetting {	
-	@UserDefaultsWrapper(key: "profileImage", defaultValue: "")
-	public static var profileImage
+public enum UserDefaultsSetting {
 	
-	@UserDefaultsWrapper(key: "nickname", defaultValue: "")
-	public static var nickname
 }

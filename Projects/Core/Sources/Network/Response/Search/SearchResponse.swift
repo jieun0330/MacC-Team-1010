@@ -15,7 +15,7 @@ public struct SearchResponse: Codable {
 }
 
 public struct SearchResult: Hashable, Codable, Identifiable {
-    public var id: UUID = UUID()
+    public let id: UUID = UUID()
 	public let makNumber: Int?
 	public let makName: String?
 	public let makType: String?

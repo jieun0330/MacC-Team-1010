@@ -12,79 +12,88 @@ import DesignSystem
 import Combine
 
 public struct SkipNicknameView: View {
-	enum NicknameState {
-		case normal
-		case notduplicate
-		case duplicate
-	}
+	@StateObject var viewModel = OnboardingViewModel(
+		userRepository: DefaultUserRepository(),
+		authRepository: DefaultAuthRepository(),
+		accountRepository: DefaultAccountRepository()
+	)
 	
 	@State private var nickName = ""
-	@State private var showNickDupli: NicknameState = .normal
-	@State private var alertItem: AlertItem?
 	@State private var isNavigationState = false
 	
 	public init() { }
 	
 	public var body: some View {
 		NavigationStack {
-			VStack(alignment: .center, spacing: 0) {
-				Spacer()
-				
-				HStack(spacing: 0) {
-					Text("닉네임")
-						.foregroundColor(.Primary)
-						.SF24B()
-					Text("을 입력해주세요")
-						.SF24B()
-				}
-				.padding(.bottom, 24)
-				
-				TextField("걸쭉한막걸리", text: $nickName)
-					.frame(width: 300)
-					.padding(.bottom, 8)
-					.keyboardType(.default)
-					.textFieldStyle(NicknameTextFieldStyle(showNickDupli: showNickDupli))
-					.onReceive(Just(nickName)) { newValue in
-						if self.nickName.count == 7 {
-							self.nickName.removeLast()
+			ZStack {
+				VStack(alignment: .center, spacing: 0) {
+					Spacer()
+					
+					HStack(spacing: 0) {
+						Text("닉네임")
+							.foregroundColor(.Primary)
+							.SF24B()
+						Text("을 입력해주세요")
+							.SF24B()
+					}
+					.padding(.bottom, 24)
+					
+					TextField("걸쭉한막걸리", text: $nickName)
+						.frame(width: 300)
+						.padding(.bottom, 8)
+						.keyboardType(.default)
+						.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
+						.onChange(of: nickName) { _ in
+							viewModel.showNickDupli = .normal
 						}
-					}
-				
-				switch showNickDupli {
-				case .normal:
-					EmptyView()
-				case .duplicate:
-					Text("중복된 닉네임이에요")
-						.SF12B()
-						.foregroundColor(.Alert)
-				case .notduplicate:
-					Text("사용할 수 있는 닉네임이에요!")
-						.SF12B()
-						.foregroundColor(.Primary2)
-				}
-				
-				Spacer()
-				
-				HStack(spacing: 0) {
-					Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
-						Text("이용약관")
+						.onReceive(Just(nickName)) { newValue in
+							self.nickName = newValue.replacingOccurrences(of: " ", with: "")
+							if self.nickName.count == 7 {
+								self.nickName.removeLast()
+							}
+						}
+					
+					switch viewModel.showNickDupli {
+					case .normal:
+						EmptyView()
+					case .duplicate:
+						Text("중복된 닉네임이에요")
+							.SF12B()
+							.foregroundColor(.Alert)
+					case .notduplicate:
+						Text("사용할 수 있는 닉네임이에요!")
+							.SF12B()
 							.foregroundColor(.Primary2)
 					}
-					Text("과 ")
-						.foregroundColor(.W50)
-					Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
-						Text("개인정보처리방침")
-							.foregroundColor(.Primary2)
+					
+					Spacer()
+					
+					HStack(spacing: 0) {
+						Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
+							Text("이용약관")
+								.foregroundColor(.Primary2)
+						}
+						Text("과 ")
+							.foregroundColor(.W50)
+						Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
+							Text("개인정보처리방침")
+								.foregroundColor(.Primary2)
+						}
+						Text("에 동의하고 시작합니다.")
+							.foregroundColor(.W50)
 					}
-					Text("에 동의하고 시작합니다.")
-						.foregroundColor(.W50)
+					.font(.style(.SF12B))
+					.padding(.bottom, 16)
+					
+					nextButton()
 				}
-				.font(.style(.SF12B))
-				.padding(.bottom, 16)
-				
-				nextButton()
+				if viewModel.fetchLoading {
+					ProgressView()
+						.modifier(ProgressViewBackground())
+						.opacity(0.5)
+				}
 			}
-			.alert(item: $alertItem) { alertItem in
+			.alert(item: $viewModel.alertItem) { alertItem in
 				if alertItem.dismissButton == nil {
 					return Alert(title: alertItem.title,
 								 message: alertItem.message,
@@ -107,23 +116,17 @@ private extension SkipNicknameView {
 	@ViewBuilder
 	func nextButton() -> some View {
 		Button {
-			if showNickDupli == .notduplicate {
+			if viewModel.showNickDupli == .notduplicate {
 				isNavigationState = true
 			} else {
-				// 닉네임 중복 확인
-				
-				// 중복이면
-				// showNickDupli = .duplicate
-				
-				// 중복아니면
-				// showNickDupli = .notduplicate
+				viewModel.checkNickname(nickname: nickName)
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
-				.foregroundColor(showNickDupli == .notduplicate ? .Primary : .Lilac)
+				.foregroundColor(viewModel.showNickDupli == .notduplicate ? .Primary : .Lilac)
 				.frame(height: 50)
 				.overlay {
-					Text(showNickDupli == .notduplicate ? "다음" : "닉네임 중복 검사")
+					Text(viewModel.showNickDupli == .notduplicate ? "다음" : "닉네임 중복 검사")
 						.foregroundColor(.White)
 						.SF17R()
 				}
@@ -132,7 +135,7 @@ private extension SkipNicknameView {
 		}
 		.disabled(nickName == "")
 		.navigationDestination(isPresented: $isNavigationState) {
-			SkipGenderAndBirthView()
+			SkipGenderAndBirthView(viewModel, nickName)
 		}
 	}
 	

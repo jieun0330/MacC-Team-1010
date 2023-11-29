@@ -10,6 +10,10 @@ import Foundation
 import Moya
 
 public enum UserAPI {
+	case getUserMakFolder(parameter: [String: Any])
+	case checkNickname(nickname: String)
+	
+	case phoneSignin(parameter: AuthUserRequest)
 	case skipSignin(parameter: UserRequest)
 	case updateComment(parameter: UpdateCommentRequest)
 	case insertComment(parameter: InsertCommentRequest)
@@ -17,8 +21,6 @@ public enum UserAPI {
 	case evaluateMak(parameter: EvaluateMakRequest)
 	case addWishList(parameter: WishListRequest)
 	case deleteWishList(parameter: WishListRequest)
-	
-	case getUserMakFolder(parameter: [String: Any])
 }
 
 extension UserAPI: TargetType {
@@ -31,6 +33,13 @@ extension UserAPI: TargetType {
 	
 	public var path: String {
 		switch self {
+		case .getUserMakFolder:
+			return "/getUserMakFolder"
+		case .checkNickname(let nickname):
+			return "/checkNickname/\(nickname)"
+			
+		case .phoneSignin:
+			return "/phoneSignIn"
 		case .skipSignin:
 			return "/SkipSignIn"
 		case .updateComment:
@@ -45,14 +54,14 @@ extension UserAPI: TargetType {
 			return "/addWishList"
 		case .deleteWishList:
 			return "/deleteWishList"
-		case .getUserMakFolder:
-			return "/getUserMakFolder"
 		}
 	}
 	
 	public var method: Moya.Method {
 		switch self {
 		case .getUserMakFolder:
+			return .get
+		case .checkNickname:
 			return .get
 		default:
 			return .post
@@ -61,6 +70,13 @@ extension UserAPI: TargetType {
 	
 	public var task: Moya.Task {
 		switch self {
+		case .getUserMakFolder(let parameter):
+			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+		case .checkNickname:
+			return .requestPlain
+			
+		case .phoneSignin(let parameter):
+			return .requestJSONEncodable(parameter)
 		case .skipSignin(let parameter):
 			return .requestJSONEncodable(parameter)
 		case .updateComment(let parameter):
@@ -75,9 +91,6 @@ extension UserAPI: TargetType {
 			return .requestJSONEncodable(parameter)
 		case .deleteWishList(let parameter):
 			return .requestJSONEncodable(parameter)
-			
-		case .getUserMakFolder(let parameter):
-			return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
 		}
 	}
 	

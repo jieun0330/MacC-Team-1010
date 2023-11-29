@@ -54,5 +54,6 @@ struct CharacteristicsView: View {
 				}
 			}
 		}
+		.modifier(NavigationBarBackground())
 	}
 }
