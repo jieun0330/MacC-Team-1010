@@ -10,7 +10,6 @@ import SwiftUI
 import Core
 import DesignSystem
 import Combine
-import FeatureHome
 
 public struct BirthView: View {
 	@Environment(\.dismiss) private var dismiss

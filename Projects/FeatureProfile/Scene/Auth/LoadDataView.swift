@@ -74,7 +74,7 @@ public struct LoadDataView: View {
 			.padding(.horizontal, 16)
 		}
 		.alert(isPresented: $showAlert) {
-			Alert(title: Text("데이터 불러오기 성공"), message: Text("데이터를 성공적으로 불러왔어요. 앱을 재시작 해주세요."),
+			Alert(title: Text("불러왔어요!"), message: Text("데이터를 성공적으로 불러왔어요. 앱을 재시작 해주세요."),
 				  dismissButton: .default(Text("확인"), action: {
 				UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {

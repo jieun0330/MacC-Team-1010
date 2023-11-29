@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Core
 import DesignSystem
 import Utils
 
@@ -81,6 +82,7 @@ struct MyInformationView: View {
 			}
 			.padding(.horizontal, 16)
 		}
+		.modifier(NavigationBarBackground())
 		.fullScreenCover(isPresented: $isDataLinking) {
 			PhoneNumberAuthView()
 		}
