@@ -31,73 +31,81 @@ public struct BirthView: View {
 	}
 	
 	public var body: some View {
-		VStack(spacing: 0) {
-			Spacer()
-			
-			Text("본인 확인을 위해")
-				.SF24B()
-				.padding(.bottom, 4)
-			HStack {
-				Text("생년월일")
-					.foregroundColor(.Primary)
-					.SF24B()
-				Text("을 입력해주세요")
-					.SF24B()
-			}
-			.padding(.bottom, 8)
-			
-			Text("본인 확인 이후에 데이터 연동이 가능해져요!")
-				.SF14R()
-				.foregroundColor(.W50)
-				.padding(.bottom, 24)
-			
-			TextField("980123", text: $birthDay)
-				.frame(width: 300)
-				.textFieldStyle(BirthDayTextFieldStyle())
-				.keyboardType(.numberPad)
-				.onReceive(Just(birthDay)) { newValue in
-					let filtered = newValue.filter { "0123456789".contains($0) }
-					if filtered != newValue {
-						self.birthDay = filtered
-					}
-					if self.birthDay.count == 7 {
-						self.birthDay.removeLast()
-					}
-				}
-				.padding(.bottom, 24)
-			
-			HStack {
-				Text("개인정보(연락처, 생년월일) 수집 이용에 동의합니다")
-					.SF12B()
-					.foregroundColor(.W85)
+		ZStack {
+			VStack(spacing: 0) {
+				Spacer()
 				
-				Button(action: {
-					self.isAgreed.toggle()
-				}, label: {
-					isAgreed ? Image(uiImage: .designSystem(.isSelectedTrue)!) :
-					Image(uiImage: .designSystem(.circle)!)
-				})
-			}
-			
-			Spacer()
-			
-			Button {
-				let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
-				viewModel.findMatchAccount(phoneNumber: cleanedPhoneNumber, birth: birthDay)
-			} label: {
-				RoundedRectangle(cornerRadius: 12)
-					.fill(
-						Color(uiColor: .designSystem(birthDay.count != 6 || !isAgreed ? .w10 :.goldenyellow)!)
-					)
-					.frame(height: 50)
-					.overlay {
-						Text("다음")
-							.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
-							.SF17R()
+				Text("본인 확인을 위해")
+					.SF24B()
+					.padding(.bottom, 4)
+				HStack {
+					Text("생년월일")
+						.foregroundColor(.Primary)
+						.SF24B()
+					Text("을 입력해주세요")
+						.SF24B()
+				}
+				.padding(.bottom, 8)
+				
+				Text("본인 확인 이후에 데이터 연동이 가능해져요!")
+					.SF14R()
+					.foregroundColor(.W50)
+					.padding(.bottom, 24)
+				
+				TextField("980123", text: $birthDay)
+					.frame(width: 300)
+					.textFieldStyle(BirthDayTextFieldStyle())
+					.keyboardType(.numberPad)
+					.onReceive(Just(birthDay)) { newValue in
+						let filtered = newValue.filter { "0123456789".contains($0) }
+						if filtered != newValue {
+							self.birthDay = filtered
+						}
+						if self.birthDay.count == 7 {
+							self.birthDay.removeLast()
+						}
 					}
-					.padding(.bottom, 16)
+					.padding(.bottom, 24)
+				
+				HStack {
+					Text("개인정보(연락처, 생년월일) 수집 이용에 동의합니다")
+						.SF12B()
+						.foregroundColor(.W85)
+					
+					Button(action: {
+						self.isAgreed.toggle()
+					}, label: {
+						isAgreed ? Image(uiImage: .designSystem(.isSelectedTrue)!) :
+						Image(uiImage: .designSystem(.circle)!)
+					})
+				}
+				
+				Spacer()
+				
+				Button {
+					let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+					viewModel.findMatchAccount(phoneNumber: cleanedPhoneNumber, birth: birthDay)
+				} label: {
+					RoundedRectangle(cornerRadius: 12)
+						.fill(
+							Color(uiColor: .designSystem(birthDay.count != 6 || !isAgreed ? .w10 :.goldenyellow)!)
+						)
+						.frame(height: 50)
+						.overlay {
+							Text("다음")
+								.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
+								.SF17R()
+						}
+						.padding(.bottom, 16)
+				}
+				.disabled(birthDay.count != 6 || !isAgreed)
 			}
-			.disabled(birthDay.count != 6 || !isAgreed)
+			
+			if viewModel.fetchLoading {
+				ProgressView()
+					.modifier(ProgressViewBackground())
+					.opacity(0.5)
+			}
 		}
 		.alert(item: $viewModel.alertItem) { alertItem in
 			if alertItem.dismissButton == nil {

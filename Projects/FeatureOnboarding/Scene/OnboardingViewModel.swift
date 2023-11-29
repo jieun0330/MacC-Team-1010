@@ -40,6 +40,7 @@ public final class OnboardingViewModel: ObservableObject {
 	
 	@MainActor
 	func phoneSignin(nickname: String, sex: String, phoneNumber: String, birth: String) async throws {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await userRepository.phoneSignin(AuthUserRequest(userNickName: nickname,
@@ -56,6 +57,7 @@ public final class OnboardingViewModel: ObservableObject {
 														  data: "\(nickname)")
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "\(response.userPhone ?? "")")
+						fetchLoading = false
 					} else {
 						alertItem = AlertItem(title: Text("네트워크 에러"),
 											  message: Text("인터넷 연결상태를 확인해주세요."),
@@ -119,6 +121,7 @@ public final class OnboardingViewModel: ObservableObject {
 	
 	@MainActor
 	func checkNickname(nickname: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await userRepository.checkNickname(nickname)
@@ -128,6 +131,7 @@ public final class OnboardingViewModel: ObservableObject {
 					} else {
 						self.showNickDupli = .duplicate
 					}
+					fetchLoading = false
 				} else {
 					alertItem = AlertItem(title: Text("네트워크 에러"),
 										  message: Text("인터넷 연결상태를 확인해주세요."),
@@ -144,11 +148,12 @@ public final class OnboardingViewModel: ObservableObject {
 	
 	@MainActor
 	func sendSMS(phoneNumber: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await authRepository.smsSend(SmsSendRequest(phone: phoneNumber))
 				if response.status == 200 {
-					
+					fetchLoading = false
 				} else {
 					alertItem = AlertItem(title: Text("네트워크 에러"),
 										  message: Text("인터넷 연결상태를 확인해주세요."),
@@ -165,6 +170,7 @@ public final class OnboardingViewModel: ObservableObject {
 	
 	@MainActor
 	func confirmSMS(phoneNumber: String, certificationNumber: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await authRepository.smsConfirm(
@@ -176,6 +182,7 @@ public final class OnboardingViewModel: ObservableObject {
 				} else {
 					timerStatus = .retry
 				}
+				fetchLoading = false
 			} catch {
 				Logger.debug(error: error, message: "")
 				alertItem = AlertItem(title: Text("네트워크 에러"),
@@ -187,6 +194,7 @@ public final class OnboardingViewModel: ObservableObject {
 	
 	@MainActor
 	func findMatchAccount(phoneNumber: String, birth: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await accountRepository.findMatchAccount(
@@ -199,6 +207,7 @@ public final class OnboardingViewModel: ObservableObject {
 					} else {
 						navigationGender = true
 					}
+					fetchLoading = false
 				}
 			} catch {
 				Logger.debug(error: error, message: "")

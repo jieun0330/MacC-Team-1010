@@ -34,7 +34,7 @@ public struct NicknameView: View {
 	}
 	
 	public var body: some View {
-		NavigationStack {
+		ZStack {
 			VStack(alignment: .center, spacing: 0) {
 				Spacer()
 				
@@ -96,23 +96,28 @@ public struct NicknameView: View {
 				
 				nextButton()
 			}
-			.alert(item: $viewModel.alertItem) { alertItem in
-				if alertItem.dismissButton == nil {
-					return Alert(title: alertItem.title,
-								 message: alertItem.message,
-								 primaryButton: alertItem.primaryButton!,
-								 secondaryButton: alertItem.secondaryButton!)
-				} else {
-					return Alert(title: alertItem.title,
-								 message: alertItem.message,
-								 dismissButton: alertItem.dismissButton)
-				}
+			if viewModel.fetchLoading {
+				ProgressView()
+					.modifier(ProgressViewBackground())
+					.opacity(0.5)
 			}
-			.modifier(OnboardingBackground())
-			.fullScreenCover(isPresented: $isMain, content: {
-				SubRootView()
-			})
 		}
+		.alert(item: $viewModel.alertItem) { alertItem in
+			if alertItem.dismissButton == nil {
+				return Alert(title: alertItem.title,
+							 message: alertItem.message,
+							 primaryButton: alertItem.primaryButton!,
+							 secondaryButton: alertItem.secondaryButton!)
+			} else {
+				return Alert(title: alertItem.title,
+							 message: alertItem.message,
+							 dismissButton: alertItem.dismissButton)
+			}
+		}
+		.modifier(OnboardingBackground())
+		.fullScreenCover(isPresented: $isMain, content: {
+			SubRootView()
+		})
 	}
 }
 

@@ -20,71 +20,78 @@ public struct SkipNicknameView: View {
 	
 	@State private var nickName = ""
 	@State private var isNavigationState = false
-
+	
 	public init() { }
 	
 	public var body: some View {
 		NavigationStack {
-			VStack(alignment: .center, spacing: 0) {
-				Spacer()
-				
-				HStack(spacing: 0) {
-					Text("닉네임")
-						.foregroundColor(.Primary)
-						.SF24B()
-					Text("을 입력해주세요")
-						.SF24B()
-				}
-				.padding(.bottom, 24)
-				
-				TextField("걸쭉한막걸리", text: $nickName)
-					.frame(width: 300)
-					.padding(.bottom, 8)
-					.keyboardType(.default)
-					.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
-					.onChange(of: nickName) { _ in
-						viewModel.showNickDupli = .normal
+			ZStack {
+				VStack(alignment: .center, spacing: 0) {
+					Spacer()
+					
+					HStack(spacing: 0) {
+						Text("닉네임")
+							.foregroundColor(.Primary)
+							.SF24B()
+						Text("을 입력해주세요")
+							.SF24B()
 					}
-					.onReceive(Just(nickName)) { newValue in
-						self.nickName = newValue.replacingOccurrences(of: " ", with: "")
-						if self.nickName.count == 7 {
-							self.nickName.removeLast()
+					.padding(.bottom, 24)
+					
+					TextField("걸쭉한막걸리", text: $nickName)
+						.frame(width: 300)
+						.padding(.bottom, 8)
+						.keyboardType(.default)
+						.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
+						.onChange(of: nickName) { _ in
+							viewModel.showNickDupli = .normal
 						}
-					}
-				
-				switch viewModel.showNickDupli {
-				case .normal:
-					EmptyView()
-				case .duplicate:
-					Text("중복된 닉네임이에요")
-						.SF12B()
-						.foregroundColor(.Alert)
-				case .notduplicate:
-					Text("사용할 수 있는 닉네임이에요!")
-						.SF12B()
-						.foregroundColor(.Primary2)
-				}
-				
-				Spacer()
-				
-				HStack(spacing: 0) {
-					Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
-						Text("이용약관")
+						.onReceive(Just(nickName)) { newValue in
+							self.nickName = newValue.replacingOccurrences(of: " ", with: "")
+							if self.nickName.count == 7 {
+								self.nickName.removeLast()
+							}
+						}
+					
+					switch viewModel.showNickDupli {
+					case .normal:
+						EmptyView()
+					case .duplicate:
+						Text("중복된 닉네임이에요")
+							.SF12B()
+							.foregroundColor(.Alert)
+					case .notduplicate:
+						Text("사용할 수 있는 닉네임이에요!")
+							.SF12B()
 							.foregroundColor(.Primary2)
 					}
-					Text("과 ")
-						.foregroundColor(.W50)
-					Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
-						Text("개인정보처리방침")
-							.foregroundColor(.Primary2)
+					
+					Spacer()
+					
+					HStack(spacing: 0) {
+						Link(destination: URL(string: "https://yawner.notion.site/4b903a09999046d78a2ce8d35fcd8992?pvs=4")!) {
+							Text("이용약관")
+								.foregroundColor(.Primary2)
+						}
+						Text("과 ")
+							.foregroundColor(.W50)
+						Link(destination: URL(string: "https://yawner.notion.site/24c563728a9c44db8e81b779ac41f425?pvs=4")!) {
+							Text("개인정보처리방침")
+								.foregroundColor(.Primary2)
+						}
+						Text("에 동의하고 시작합니다.")
+							.foregroundColor(.W50)
 					}
-					Text("에 동의하고 시작합니다.")
-						.foregroundColor(.W50)
+					.font(.style(.SF12B))
+					.padding(.bottom, 16)
+					
+					nextButton()
 				}
-				.font(.style(.SF12B))
-				.padding(.bottom, 16)
-				
-				nextButton()
+				if viewModel.fetchLoading {
+					ProgressView()
+						.modifier(ProgressViewBackground())
+						.opacity(0.5)
+				}
 			}
 			.alert(item: $viewModel.alertItem) { alertItem in
 				if alertItem.dismissButton == nil {

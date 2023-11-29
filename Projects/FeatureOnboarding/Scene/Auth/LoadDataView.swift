@@ -19,7 +19,6 @@ public struct LoadDataView: View {
 	)
 	
 	@State private var showAlert = false
-	@State private var isSkip = false
 	@State private var isMain = false
 	
 	var findMatchUserData: FindMatchAccountUserResult
@@ -39,7 +38,7 @@ public struct LoadDataView: View {
 				Text("발견했어요!")
 					.SF24B()
 			}
-
+			
 			Spacer()
 			
 			Button {
@@ -66,23 +65,7 @@ public struct LoadDataView: View {
 			}
 			.padding(.horizontal, 16)
 		}
-		.navigationBarItems(trailing: Button(action: {
-			showAlert = true
-		}, label: {
-			Text("건너뛰기").SF14R().foregroundColor(.W25)
-		}))
-		.alert(isPresented: $showAlert) {
-			Alert(title: Text("막걸리 정보를 보관할 수 없어요"),
-				  message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-				  primaryButton: .cancel(Text("취소")) { },
-				  secondaryButton: .default(Text("건너뛰기")) {
-				isSkip = true
-			})
-		}
 		.modifier(OnboardingBackground())
-		.fullScreenCover(isPresented: $isSkip, content: {
-			SkipNicknameView()
-		})
 		.fullScreenCover(isPresented: $isMain, content: {
 			SubRootView()
 		})
