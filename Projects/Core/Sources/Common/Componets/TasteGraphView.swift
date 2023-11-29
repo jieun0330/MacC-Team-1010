@@ -10,7 +10,8 @@ import SwiftUI
 import DesignSystem
 
 public struct TasteGraphView: View {
-	let scores: [Double]
+	private let taste = ["단", "신", "걸", "탄"]
+	private let scores: [Double]
 	
 	public init (scores: [Double]) {
 		self.scores = scores
@@ -18,22 +19,59 @@ public struct TasteGraphView: View {
 	
 	public var body: some View {
 		HStack(spacing: 4) {
-			ForEach(scores, id: \.self) { score in
+			ForEach(0..<scores.count, id: \.self) { index  in
+				let score = scores[index]
+				let taste = taste[index]
 				switch score {
 				case 0.0..<1.0:
-					Image(uiImage: .designSystem(.graph0)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph0)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				case 1.0..<2.0:
-					Image(uiImage: .designSystem(.graph1)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph1)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				case 2.0..<3.0:
-					Image(uiImage: .designSystem(.graph2)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph2)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				case 3.0..<4.0:
-					Image(uiImage: .designSystem(.graph3)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph3)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				case 4.0..<5.0:
-					Image(uiImage: .designSystem(.graph4)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph4)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				case 5.0:
-					Image(uiImage: .designSystem(.graph5)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graph5)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				default:
-					Image(uiImage: .designSystem(.graphNull)!)
+					VStack(spacing: 4) {
+						Image(uiImage: .designSystem(.graphNull)!)
+						Text(taste)
+							.SF10B()
+							.foregroundColor(.W50)
+					}
 				}
 			}
 		}

@@ -77,7 +77,7 @@ extension InfoCommentsListView {
 			
 			// 리뷰 작성 날짜
 			HStack {
-				Text(comment.date.extractDateFromISOString() ?? "")
+				Text(comment.date.formattedTimeAgo() ?? "")
 					.SF14R()
 					.foregroundColor(.W50)
 				

@@ -17,6 +17,7 @@ final class CategoryViewModel: ObservableObject {
 	@Published var comments: [RecentComment] = []
 	@Published var resultMakHolyId: Int? = nil
 	
+	var sortText = "추천순"
 	var currentOffset: Int = 0
 	var isLastPage = false
 	

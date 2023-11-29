@@ -43,7 +43,7 @@ struct NewCommentSingleView: View {
 					.font(.style(.SF14R))
 					.foregroundColor(Color(uiColor: .designSystem(.w85)!))
 				Spacer()
-				Text(comment.commentInfo?.writeDate?.extractDateFromISOString() ?? "")
+				Text(comment.commentInfo?.writeDate?.formattedTimeAgo() ?? "")
 					.font(.style(.SF14R))
 					.foregroundColor(Color(uiColor: .designSystem(.w25)!))
 			}

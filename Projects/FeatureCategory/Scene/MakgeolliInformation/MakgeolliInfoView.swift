@@ -23,31 +23,58 @@ struct MakgeolliInfoView: View {
 	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
 			ScrollViewReader { reader in
-				HStack(spacing: 4) {
-					Image(systemName: "questionmark.circle.fill")
-						.foregroundColor(Color(uiColor: .designSystem(.w50)!))
-					Button {
-						showAlert = true
-					} label: {
-						Text("리스트 순서가 궁금해요")
+				if type != .event && type != .new {
+					HStack(spacing: 4) {
+						Button {
+							showAlert = true
+						} label: {
+							Text("어떤 순서로 정렬되나요")
+								.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+						}
+						Image(systemName: "questionmark.circle.fill")
 							.foregroundColor(Color(uiColor: .designSystem(.w50)!))
+						Spacer()
+						Menu {
+							Button {
+								viewModel.sortText = "추천순"
+								viewModel.initFetchCategoryMakgeolli(sort: nil,
+																	 offset: nil, categories: targetTitle)
+							} label: {
+								Text("추천순")
+							}
+							Button {
+								viewModel.sortText = "높은 도수순"
+								viewModel.initFetchCategoryMakgeolli(sort: "highAlcohol",
+																	 offset: nil, categories: targetTitle)
+							} label: {
+								Text("높은 도수순")
+							}
+							Button {
+								viewModel.sortText = "낮은 도수순"
+								viewModel.initFetchCategoryMakgeolli(sort: "lowAlcohol",
+																	 offset: nil, categories: targetTitle)
+							} label: {
+								Text("낮은 도수순")
+							}
+						} label: {
+							HStack(spacing: 4) {
+								Text(viewModel.sortText)
+									.SF12B()
+									.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+								Image(systemName: "chevron.up.chevron.down")
+									.font(.style(.SF12B))
+									.foregroundColor(Color(uiColor: .designSystem(.primary)!))
+							}
+						}
 					}
-					Spacer()
-					Button {
-						showAlert = true
-					} label: {
-						Text("추천순")
-							.foregroundColor(Color(uiColor: .designSystem(.primary)!))
-					}	
+					.alert(isPresented: $showAlert) {
+						Alert(title: Text("추천순으로 정렬"), message: Text("다른 유저들의 '좋았어요' 평가가 많을수록, 그리고 최근에 나온 막걸리일수록 리스트 상단에 정렬돼요."),
+							  dismissButton: .default(Text("확인")))
+					}
+					.font(.style(.SF12R))
+					.padding(.horizontal, 8)
+					.padding(.vertical, 16)
 				}
-				.alert(isPresented: $showAlert) {
-					Alert(title: Text("추천순으로 정렬"), message: Text("추천순으로 보여드릴 수 있도록 준비중이니 업데이트 될 때까지 조금만 기다려주세요!"),
-						  dismissButton: .default(Text("확인")))
-				}
-				.font(.style(.SF12R))
-				.padding(.horizontal, 8)
-				.padding(.vertical, 16)
-				
 				if type != .event && viewModel.makHolys.isEmpty {
 					VStack(spacing: 20) {
 						Text("검색 결과가 없어요..")
