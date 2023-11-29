@@ -83,7 +83,8 @@ public struct BirthView: View {
 			Spacer()
 			
 			Button {
-				viewModel.findMatchAccount(phoneNumber: "01041411316", birth: birthDay)
+				let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+				viewModel.findMatchAccount(phoneNumber: cleanedPhoneNumber, birth: birthDay)
 			} label: {
 				RoundedRectangle(cornerRadius: 12)
 					.fill(
