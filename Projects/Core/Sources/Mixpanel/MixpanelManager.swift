@@ -29,12 +29,20 @@ extension MixpanelManager {
 		Mixpanel.mainInstance().people.set(property: "sex", to: sex)
 		Mixpanel.mainInstance().people.set(property: "yearOfBirth", to: yearOfBirth)
 		Mixpanel.mainInstance().people.set(property: signupMethod.mpProperty, to: signupMethod.mpMixpanelType)
-		Mixpanel.mainInstance().people.set(property: "Closed_InformationView_Count", to: 0)
+		Mixpanel.mainInstance().people.set(property: MPUserCount.closedInformationView.title, to: 0)
+		Mixpanel.mainInstance().people.set(property: MPUserCount.like.title, to: 0)
+		Mixpanel.mainInstance().people.set(property: MPUserCount.dislike.title, to: 0)
+		Mixpanel.mainInstance().people.set(property: MPUserCount.bookmark.title, to: 0)
+		Mixpanel.mainInstance().people.set(property: MPUserCount.comment.title, to: 0)
 		Mixpanel.mainInstance().flush()
 	}
 	
-	public func increaseClosedInformationViewCount() {
-		Mixpanel.mainInstance().people.increment(property: "Closed_InformationView_Count", by: 1)
+	public func increaseUserCount(property: MPUserCount) {
+		Mixpanel.mainInstance().people.increment(property: property.title, by: 1)
+	}
+	
+	public func decreaseUserCount(property: MPUserCount) {
+		Mixpanel.mainInstance().people.increment(property: property.title, by: -1)
 	}
 }
 
@@ -74,7 +82,7 @@ extension MixpanelManager {
 	public func informationViewClosed(parameters: MPInfoClosedEventParameters) {
 		Mixpanel.mainInstance().track(event: MPEvent.informationviewClosed.title,
 									  properties: parameters.mpProperties)
-		self.increaseClosedInformationViewCount()
+		self.increaseUserCount(property: .closedInformationView)
 	}
 }
 

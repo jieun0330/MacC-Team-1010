@@ -163,13 +163,22 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func postLikeState() {
+	func postLikeState(from: LikeState) {
 		Task {
 			do {
 				let response = try await userRepo.evaluateMak(EvaluateMakRequest(
 					userId: self.userId,
 					makNumber: self.makHolyId,
 					likeState: self.myReaction.likeState))
+				switch myReaction.likeState {
+				case .none:
+					MixpanelManager.shared.decreaseUserCount(property: from == .like ? .like : .dislike)
+				case .like:
+					MixpanelManager.shared.increaseUserCount(property: .like)
+				case .dislike:
+					MixpanelManager.shared.increaseUserCount(property: .dislike)
+				}
+				
 				print("postLikeState Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -203,7 +212,9 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
 					errorState = true
+					return
 				}
+				MixpanelManager.shared.increaseUserCount(property: .bookmark)
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
 				errorState = true
@@ -224,7 +235,9 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
 					errorState = true
+					return
 				}
+				MixpanelManager.shared.decreaseUserCount(property: .bookmark)
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
 				errorState = true
@@ -245,6 +258,7 @@ final class InformationViewModel: ObservableObject {
 				
 				if response.result?.isSuccess == true {
 					self.myReaction.comment = nil
+					MixpanelManager.shared.decreaseUserCount(property: .comment)
 				} else {
 					errorState = true
 				}
@@ -289,6 +303,7 @@ final class InformationViewModel: ObservableObject {
 					contents: myComment.contents, isVisible: myComment.isVisible)
 				)
 				if response.result?.isSuccess == true {
+					MixpanelManager.shared.increaseUserCount(property: .comment)
 					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId,
 																  userId: self.userId)
 					self.myReaction = result.1
