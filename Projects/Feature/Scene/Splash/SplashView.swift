@@ -7,21 +7,20 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 public struct SplashView: View {
-    public var body: some View {
-        VStack{
-            CharacterTurnView()
-                .frame(width: 200)
-                .aspectRatio(contentMode: .fit)
-            
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
-    }
-    
-    public init() {
-        
-    }
+	public var body: some View {
+		VStack{
+			CharacterTurnView()
+				.frame(width: 200)
+				.aspectRatio(contentMode: .fit)
+			
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(Color.DarkBase)
+		.edgesIgnoringSafeArea(.all)
+	}
+	
+	public init() { }
 }
