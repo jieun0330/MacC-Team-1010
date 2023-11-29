@@ -42,6 +42,7 @@ struct EditProfileView: View {
 					viewModel.showNickDupli = .normal
 				}
 				.onReceive(Just(nickName)) { newValue in
+					self.nickName = newValue.replacingOccurrences(of: " ", with: "")
 					if self.nickName.count == 7 {
 						self.nickName.removeLast()
 					}
