@@ -18,7 +18,6 @@ public struct LoadDataView: View {
 		accountRepository: DefaultAccountRepository()
 	)
 	
-	@State private var showAlert = false
 	@State private var isMain = false
 	
 	var findMatchUserData: FindMatchAccountUserResult

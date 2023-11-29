@@ -8,15 +8,14 @@
 
 import SwiftUI
 import Combine
+import Core
 import DesignSystem
 import FeatureHome
 
 public struct SkipGenderAndBirthView: View {
 	@ObservedObject var viewModel: OnboardingViewModel
 	
-	@State var genderSelected: Int?
 	@State private var selected = [false, false, false]
-	@State private var showAlert = false
 	@State private var birthDay = ""
 	
 	let genders = ["남성", "여성", "기타"]

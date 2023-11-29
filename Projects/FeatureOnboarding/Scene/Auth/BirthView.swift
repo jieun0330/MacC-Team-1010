@@ -17,8 +17,6 @@ public struct BirthView: View {
 	
 	@State private var birthDay = ""
 	@State private var isAgreed = false
-	@State private var adultChk = false
-	@State private var showAlert = false
 	
 	var phoneNumber: String
 	

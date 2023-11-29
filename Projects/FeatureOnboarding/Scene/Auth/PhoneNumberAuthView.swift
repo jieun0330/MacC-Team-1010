@@ -20,11 +20,9 @@ public struct PhoneNumberAuthView: View {
 	)
 	
 	@State private var phoneNumber = ""
-	@State private var isNavigation = false
 	@State private var certificationNumber = ""
 	@State private var showSecondTextField = false
 	@State private var timeRemaining: Int = 180
-	@State private var showAlert = false
 	@State private var isSkip = false
 	
 	let date = Date()

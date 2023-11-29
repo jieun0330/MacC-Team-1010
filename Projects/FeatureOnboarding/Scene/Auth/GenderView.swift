@@ -13,9 +13,7 @@ import DesignSystem
 public struct GenderView: View {
 	@ObservedObject var viewModel: OnboardingViewModel
 	
-	@State var genderSelected: Int?
 	@State private var selected = [false, false, false]
-	@State private var showAlert = false
 	
 	let genders = ["남성", "여성", "기타"]
 	var phoneNumber: String

@@ -138,7 +138,7 @@ private extension NicknameView {
 							isMain = true
 						})
 					} catch {
-						viewModel.errorState = true
+						fatalError()
 					}
 				}
 			} else {
