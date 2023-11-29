@@ -37,7 +37,7 @@ struct MakgeolliInfoView: View {
 						Menu {
 							Button {
 								viewModel.sortText = "추천순"
-								viewModel.initFetchCategoryMakgeolli(sort: "makSeq",
+								viewModel.initFetchCategoryMakgeolli(sort: nil,
 																	 offset: nil, categories: targetTitle)
 							} label: {
 								Text("추천순")
