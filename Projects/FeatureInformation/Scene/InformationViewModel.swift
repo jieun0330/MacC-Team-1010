@@ -186,9 +186,15 @@ final class InformationViewModel: ObservableObject {
 						mpParameters.deleteDisLikeCount += 1
 					}
 				case .like:
+					if from == .dislike {
+						MixpanelManager.shared.decreaseUserCount(property: .dislike)
+					}
 					MixpanelManager.shared.increaseUserCount(property: .like)
 					mpParameters.addLikeCount += 1
 				case .dislike:
+					if from == .like {
+						MixpanelManager.shared.decreaseUserCount(property: .like)
+					}
 					MixpanelManager.shared.increaseUserCount(property: .dislike)
 					mpParameters.addDisLikeCount += 1
 				}
