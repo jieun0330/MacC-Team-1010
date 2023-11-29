@@ -18,7 +18,7 @@ public final class ProfileViewModel: ObservableObject {
 	@Published var navigationBirth = false
 	@Published var navigationLoadData = false
 	@Published var savedAlert = false
-	@Published var deleteAlert = false
+	@Published var fetchLoading = false
 	
 	var findMatchUserData: FindMatchAccountUserResult?
 	
@@ -38,6 +38,7 @@ public final class ProfileViewModel: ObservableObject {
 	
 	@MainActor
 	func checkNickname(nickname: String) async throws {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await userRepository.checkNickname(nickname)
@@ -47,22 +48,17 @@ public final class ProfileViewModel: ObservableObject {
 					} else {
 						self.showNickDupli = .duplicate
 					}
-				} else {
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
 	
 	@MainActor
 	func modifyUserNickname(nickname: String, selectedProfileIcon: String) async throws {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await accountRepository.modifyUserNickname(
@@ -76,44 +72,32 @@ public final class ProfileViewModel: ObservableObject {
 						try KeyChainManager.shared.create(account: .profileImage,
 														  data: selectedProfileIcon)
 					}
-				} else {
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
 	
 	@MainActor
 	func sendSMS(phoneNumber: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await authRepository.smsSend(SmsSendRequest(phone: phoneNumber))
-				print("response \(response)")
 				if response.status == 200 {
-					
-				} else {
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
 	
 	@MainActor
 	func confirmSMS(phoneNumber: String, certificationNumber: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await authRepository.smsConfirm(
@@ -125,17 +109,16 @@ public final class ProfileViewModel: ObservableObject {
 				} else {
 					timerStatus = .retry
 				}
+				fetchLoading = false
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
 	
 	@MainActor
 	func findMatchAccount(phoneNumber: String, birth: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await accountRepository.findMatchAccount(
@@ -148,18 +131,17 @@ public final class ProfileViewModel: ObservableObject {
 					} else {
 						dataLinking(phoneNumber: phoneNumber, birth: birth)
 					}
+					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
 	
 	@MainActor
 	func dataLinking(phoneNumber: String, birth: String) {
+		fetchLoading = true
 		Task {
 			do {
 				let response = try await accountRepository.dataLinking(
@@ -170,12 +152,10 @@ public final class ProfileViewModel: ObservableObject {
 					try KeyChainManager.shared.create(account: .phoneBackNum,
 													  data: (response.result?.phoneSuffix)!)
 					savedAlert = true
+					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -199,11 +179,17 @@ public final class ProfileViewModel: ObservableObject {
 					}
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
+	}
+}
+
+private extension ProfileViewModel {
+	func handleNetworkError(_ error: Error) {
+		Logger.debug(error: error, message: "")
+		alertItem = AlertItem(title: Text("네트워크 에러"),
+							  message: Text("인터넷 연결상태를 확인해주세요."),
+							  dismissButton: .default(Text("확인")))
 	}
 }

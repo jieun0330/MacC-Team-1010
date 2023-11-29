@@ -19,7 +19,6 @@ public struct BirthView: View {
 	
 	@State private var birthDay = ""
 	@State private var isAgreed = false
-	@State private var showAlert = false
 	
 	var phoneNumber: String
 	
@@ -32,72 +31,79 @@ public struct BirthView: View {
 	}
 	
 	public var body: some View {
-		VStack(spacing: 0) {
-			Spacer()
-			HStack(spacing: 0) {
-				Text("생년월일")
-					.foregroundColor(.Primary)
-					.SF24B()
-				Text("을 입력해주세요")
-					.SF24B()
-			}
-			.padding(.bottom, 8)
-			
-			Text("휴대폰 번호 변경 시에도 계정을 보호합니다")
-				.SF14R()
-				.foregroundColor(.W50)
-				.padding(.bottom, 4)
-			Text("수정이 불가하니 정확하게 입력해주세요")
-				.SF14R()
-				.foregroundColor(.W50)
-				.padding(.bottom, 24)
-			
-			TextField("980123", text: $birthDay)
-				.frame(width: 300)
-				.textFieldStyle(BirthDayTextFieldStyle())
-				.keyboardType(.numberPad)
-				.onReceive(Just(birthDay)) { newValue in
-					let filtered = newValue.filter { "0123456789".contains($0) }
-					if filtered != newValue {
-						self.birthDay = filtered
-					}
-					if self.birthDay.count == 7 {
-						self.birthDay.removeLast()
-					}
+		ZStack {
+			VStack(spacing: 0) {
+				Spacer()
+				HStack(spacing: 0) {
+					Text("생년월일")
+						.foregroundColor(.Primary)
+						.SF24B()
+					Text("을 입력해주세요")
+						.SF24B()
 				}
-				.padding(.bottom, 24)
-			
-			HStack {
-				Text("개인정보(연락처, 생년월일) 수집 이용에 동의합니다")
-					.SF12B()
-					.foregroundColor(.W85)
+				.padding(.bottom, 8)
 				
-				Button(action: {
-					self.isAgreed.toggle()
-				}, label: {
-					isAgreed ? Image(uiImage: .designSystem(.isSelectedTrue)!) :
-					Image(uiImage: .designSystem(.circle)!)
-				})
-			}
-			
-			Spacer()
-			
-			Button {
-				viewModel.findMatchAccount(phoneNumber: phoneNumber, birth: birthDay)
-			} label: {
-				RoundedRectangle(cornerRadius: 12)
-					.fill(
-						Color(uiColor: .designSystem(birthDay.count != 6 || !isAgreed ? .w10 :.goldenyellow)!)
-					)
-					.frame(height: 50)
-					.overlay {
-						Text("다음")
-							.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
-							.SF17R()
+				Text("휴대폰 번호 변경 시에도 계정을 보호합니다")
+					.SF14R()
+					.foregroundColor(.W50)
+					.padding(.bottom, 4)
+				Text("수정이 불가하니 정확하게 입력해주세요")
+					.SF14R()
+					.foregroundColor(.W50)
+					.padding(.bottom, 24)
+				
+				TextField("980123", text: $birthDay)
+					.frame(width: 300)
+					.textFieldStyle(BirthDayTextFieldStyle())
+					.keyboardType(.numberPad)
+					.onReceive(Just(birthDay)) { newValue in
+						let filtered = newValue.filter { "0123456789".contains($0) }
+						if filtered != newValue {
+							self.birthDay = filtered
+						}
+						if self.birthDay.count == 7 {
+							self.birthDay.removeLast()
+						}
 					}
-					.padding(.bottom, 16)
+					.padding(.bottom, 24)
+				
+				HStack {
+					Text("개인정보(연락처, 생년월일) 수집 이용에 동의합니다")
+						.SF12B()
+						.foregroundColor(.W85)
+					
+					Button(action: {
+						self.isAgreed.toggle()
+					}, label: {
+						isAgreed ? Image(uiImage: .designSystem(.isSelectedTrue)!) :
+						Image(uiImage: .designSystem(.circle)!)
+					})
+				}
+				
+				Spacer()
+				
+				Button {
+					viewModel.findMatchAccount(phoneNumber: phoneNumber, birth: birthDay)
+				} label: {
+					RoundedRectangle(cornerRadius: 12)
+						.fill(
+							Color(uiColor: .designSystem(birthDay.count != 6 || !isAgreed ? .w10 :.goldenyellow)!)
+						)
+						.frame(height: 50)
+						.overlay {
+							Text("다음")
+								.foregroundColor(birthDay.count != 6 || !isAgreed ? .W25 : .White)
+								.SF17R()
+						}
+						.padding(.bottom, 16)
+				}
+				.disabled(birthDay.count != 6 || !isAgreed)
 			}
-			.disabled(birthDay.count != 6 || !isAgreed)
+			if viewModel.fetchLoading {
+				ProgressView()
+					.modifier(ProgressViewBackground())
+					.opacity(0.5)
+			}
 		}
 		.alert(isPresented: $viewModel.savedAlert) {
 			Alert(title: Text("저장했어요!"), message: Text("데이터를 성공적으로 저장했어요. 앱을 재시작 해주세요."),

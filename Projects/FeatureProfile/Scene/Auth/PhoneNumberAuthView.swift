@@ -21,103 +21,108 @@ struct PhoneNumberAuthView: View {
 	)
 	
 	@State private var phoneNumber = ""
-	@State private var isNavigation = false
 	@State private var certificationNumber = ""
 	@State private var showSecondTextField = false
 	@State private var timeRemaining: Int = 180
-	@State private var showAlert = false
 	
 	let date = Date()
 	var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
 		NavigationStack {
-			VStack(alignment: .center, spacing: 0) {
-				Spacer()
-				
-				headerView()
-				
-				if showSecondTextField {
-					VStack(spacing: 0) {
-						TextField("000000", text: $certificationNumber)
-							.frame(width: 300)
-							.padding(.top, 24)
-							.padding(.bottom, 8)
-							.textFieldStyle(PhoneNumTextFieldStyle(alertStatus: viewModel.timerStatus))
-							.keyboardType(.numberPad)
-							.onReceive(Just(certificationNumber)) { newValue in
-								let filtered = newValue.filter { "0123456789".contains($0) }
-								if filtered != newValue {
-									self.certificationNumber = filtered
-								}
-								if self.certificationNumber.count == 7 {
-									self.certificationNumber.removeLast()
-								}
-							}
-						
-						HStack {
-							switch viewModel.timerStatus {
-							case .normal:
-								Text("인증번호가 발송되었어요!")
-									.SF12B()
-									.foregroundColor(.Primary2)
-							case .retry:
-								Text("인증 번호를 다시 확인해주세요")
-									.SF12B()
-									.foregroundColor(.Alert)
-							case .timeout:
-								Text("인증시간이 지났어요")
-									.SF12B()
-									.foregroundColor(.Alert)
-							}
-							
-							Spacer()
-							
-							Text(converSecondsToTime(timeInSeconds: timeRemaining))
-								.SF14R()
-								.onReceive(timer) { _ in
-									if timeRemaining > 0 {
-										timeRemaining -= 1
-									} else {
-										viewModel.timerStatus = .timeout
+			ZStack {
+				VStack(alignment: .center, spacing: 0) {
+					Spacer()
+					
+					headerView()
+					
+					if showSecondTextField {
+						VStack(spacing: 0) {
+							TextField("000000", text: $certificationNumber)
+								.frame(width: 300)
+								.padding(.top, 24)
+								.padding(.bottom, 8)
+								.textFieldStyle(PhoneNumTextFieldStyle(alertStatus: viewModel.timerStatus))
+								.keyboardType(.numberPad)
+								.onReceive(Just(certificationNumber)) { newValue in
+									let filtered = newValue.filter { "0123456789".contains($0) }
+									if filtered != newValue {
+										self.certificationNumber = filtered
+									}
+									if self.certificationNumber.count == 7 {
+										self.certificationNumber.removeLast()
 									}
 								}
-							Button {
-								let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
-								viewModel.sendSMS(phoneNumber: cleanedPhoneNumber)
-								viewModel.timerStatus = .normal
-								timeRemaining = 180
-								certificationNumber = ""
-							} label: {
-								Text("인증번호 재전송")
-									.SF12B()
-									.foregroundColor(.Primary)
+							
+							HStack {
+								switch viewModel.timerStatus {
+								case .normal:
+									Text("인증번호가 발송되었어요!")
+										.SF12B()
+										.foregroundColor(.Primary2)
+								case .retry:
+									Text("인증 번호를 다시 확인해주세요")
+										.SF12B()
+										.foregroundColor(.Alert)
+								case .timeout:
+									Text("인증시간이 지났어요")
+										.SF12B()
+										.foregroundColor(.Alert)
+								}
+								
+								Spacer()
+								
+								Text(converSecondsToTime(timeInSeconds: timeRemaining))
+									.SF14R()
+									.onReceive(timer) { _ in
+										if timeRemaining > 0 {
+											timeRemaining -= 1
+										} else {
+											viewModel.timerStatus = .timeout
+										}
+									}
+								Button {
+									let cleanedPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+									viewModel.sendSMS(phoneNumber: cleanedPhoneNumber)
+									viewModel.timerStatus = .normal
+									timeRemaining = 180
+									certificationNumber = ""
+								} label: {
+									Text("인증번호 재전송")
+										.SF12B()
+										.foregroundColor(.Primary)
+								}
+							}
+							.frame(width: 300)
+						}
+					}
+					
+					TextField("010-1234-5678", text: $phoneNumber)
+						.foregroundColor(showSecondTextField ? Color.W85 : .White)
+						.padding(.top, 24)
+						.textFieldStyle(PhoneNumTextFieldStyle(inputPhoneNumberState: showSecondTextField))
+						.keyboardType(.numberPad)
+						.onChange(of: phoneNumber) { _ in
+							var withoutHypen = String(phoneNumber.replacingOccurrences(of: "-", with: "").prefix(11))
+							if withoutHypen.count >= 8  {
+								withoutHypen.insert("-", at: phoneNumber.index(phoneNumber.startIndex, offsetBy: 3))
+								withoutHypen.insert("-", at: phoneNumber.index(phoneNumber.endIndex, offsetBy: -5))
+								phoneNumber = withoutHypen
+							} else {
+								phoneNumber = withoutHypen
 							}
 						}
-						.frame(width: 300)
-					}
+						.disabled(showSecondTextField)
+					
+					Spacer()
+					
+					nextButton()
 				}
-				
-				TextField("010-1234-5678", text: $phoneNumber)
-					.foregroundColor(showSecondTextField ? Color.W85 : .White)
-					.padding(.top, 24)
-					.textFieldStyle(PhoneNumTextFieldStyle(inputPhoneNumberState: showSecondTextField))
-					.keyboardType(.numberPad)
-					.onChange(of: phoneNumber) { _ in
-						var withoutHypen = String(phoneNumber.replacingOccurrences(of: "-", with: "").prefix(11))
-						if withoutHypen.count >= 8  {
-							withoutHypen.insert("-", at: phoneNumber.index(phoneNumber.startIndex, offsetBy: 3))
-							withoutHypen.insert("-", at: phoneNumber.index(phoneNumber.endIndex, offsetBy: -5))
-							phoneNumber = withoutHypen
-						} else {
-							phoneNumber = withoutHypen
-						}
-					}
-					.disabled(showSecondTextField)
-				
-				Spacer()
-				
-				nextButton()
+				if viewModel.fetchLoading {
+					ProgressView()
+						.modifier(ProgressViewBackground())
+						.opacity(0.5)
+				}
 			}
 			.navigationBarItems(trailing: Button(action: {
 				dismiss()

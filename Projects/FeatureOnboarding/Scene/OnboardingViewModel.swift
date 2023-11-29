@@ -12,7 +12,6 @@ import Core
 import Utils
 
 public final class OnboardingViewModel: ObservableObject {
-	@Published var errorState = false
 	@Published var fetchLoading = false
 	@Published var navigationHome = false
 	@Published var navigationLoadData = false
@@ -58,22 +57,12 @@ public final class OnboardingViewModel: ObservableObject {
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "\(response.userPhone ?? "")")
 						fetchLoading = false
-					} else {
-						alertItem = AlertItem(title: Text("네트워크 에러"),
-											  message: Text("인터넷 연결상태를 확인해주세요."),
-											  dismissButton: .default(Text("확인")))
 					}
 				} catch {
-					Logger.debug(error: error, message: "")
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+					handleNetworkError(error)
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -99,22 +88,12 @@ public final class OnboardingViewModel: ObservableObject {
 						
 						fetchLoading = false
 						navigationHome = true
-					} else {
-						alertItem = AlertItem(title: Text("네트워크 에러"),
-											  message: Text("인터넷 연결상태를 확인해주세요."),
-											  dismissButton: .default(Text("확인")))
 					}
 				} catch {
-					Logger.debug(error: error, message: "")
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
+					handleNetworkError(error)
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -132,16 +111,9 @@ public final class OnboardingViewModel: ObservableObject {
 						self.showNickDupli = .duplicate
 					}
 					fetchLoading = false
-				} else {
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -154,16 +126,9 @@ public final class OnboardingViewModel: ObservableObject {
 				let response = try await authRepository.smsSend(SmsSendRequest(phone: phoneNumber))
 				if response.status == 200 {
 					fetchLoading = false
-				} else {
-					alertItem = AlertItem(title: Text("네트워크 에러"),
-										  message: Text("인터넷 연결상태를 확인해주세요."),
-										  dismissButton: .default(Text("확인")))
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -184,10 +149,7 @@ public final class OnboardingViewModel: ObservableObject {
 				}
 				fetchLoading = false
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
 	}
@@ -210,11 +172,17 @@ public final class OnboardingViewModel: ObservableObject {
 					fetchLoading = false
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				alertItem = AlertItem(title: Text("네트워크 에러"),
-									  message: Text("인터넷 연결상태를 확인해주세요."),
-									  dismissButton: .default(Text("확인")))
+				handleNetworkError(error)
 			}
 		}
+	}
+}
+
+private extension OnboardingViewModel {
+	func handleNetworkError(_ error: Error) {
+		Logger.debug(error: error, message: "")
+		alertItem = AlertItem(title: Text("네트워크 에러"),
+							  message: Text("인터넷 연결상태를 확인해주세요."),
+							  dismissButton: .default(Text("확인")))
 	}
 }
