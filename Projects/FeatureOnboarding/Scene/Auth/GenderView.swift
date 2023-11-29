@@ -16,7 +16,6 @@ public struct GenderView: View {
 	@State var genderSelected: Int?
 	@State private var selected = [false, false, false]
 	@State private var showAlert = false
-	@State private var isSkip = false
 	
 	let genders = ["남성", "여성", "기타"]
 	var phoneNumber: String
@@ -76,23 +75,7 @@ public struct GenderView: View {
 			
 			nextButton()
 		}
-		.navigationBarItems(trailing: Button(action: {
-			showAlert = true
-		}, label: {
-			Text("건너뛰기").SF14R().foregroundColor(.W25)
-		}))
-		.alert(isPresented: $showAlert) {
-			Alert(title: Text("막걸리 정보를 보관할 수 없어요"),
-				  message: Text("번호를 입력하지 않으면 기기 변동 시 내 막걸리 정보를 불러올 수 없어요"),
-				  primaryButton: .cancel(Text("취소")) { },
-				  secondaryButton: .default(Text("건너뛰기")) {
-				isSkip = true
-			})
-		}
 		.modifier(OnboardingBackground())
-		.fullScreenCover(isPresented: $isSkip, content: {
-			SkipNicknameView()
-		})
 	}
 }
 
