@@ -56,6 +56,10 @@ public final class OnboardingViewModel: ObservableObject {
 														  data: "\(nickname)")
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "\(response.userPhone ?? "")")
+						
+						MixpanelManager.shared.setUserProfile(userId: "\(userID)", name: nickname, sex: sex, yearOfBirth: self.birthToYear(birth: birth), signupMethod: .PhoneNum)
+						MixpanelManager.shared.signupEvent(method: .PhoneNum)
+						
 						fetchLoading = false
 					}
 				} catch {
@@ -187,5 +191,17 @@ private extension OnboardingViewModel {
 		alertItem = AlertItem(title: Text("네트워크 에러"),
 							  message: Text("인터넷 연결상태를 확인해주세요."),
 							  dismissButton: .default(Text("확인")))
+	}
+	
+	func birthToYear(birth: String) -> String {
+		guard let firstTwoDigits = Int(birth.prefix(2)) else {
+			return "000000"
+		}
+
+		if firstTwoDigits < 25 {
+			return "20" + birth.dropFirst(2)
+		} else {
+			return "19" + birth.dropFirst(2)
+		}
 	}
 }
