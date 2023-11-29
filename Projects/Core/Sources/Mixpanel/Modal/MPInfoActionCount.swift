@@ -27,11 +27,7 @@ public struct MPInfoActionCount {
 	public var deleteLikeCount: Int = 0
 	public var addDisLikeCount: Int = 0
 	public var deleteDisLikeCount: Int = 0
-	
-	// Link 조회 관련 인터렉션
-	public var goSalesCount: Int = 0
-	public var goBreweryCount: Int = 0
-	
+		
 	public var mpProperties: [String: MixpanelType] {
 		return [
 			"add_comment_count": addCommentCount,
@@ -45,9 +41,7 @@ public struct MPInfoActionCount {
 			"add_like_count": addLikeCount,
 			"delete_like_count": deleteLikeCount,
 			"add_dislike_count": addDisLikeCount,
-			"delete_dislike_count": deleteDisLikeCount,
-			"go_sales_count": goSalesCount,
-			"go_brewery_count": goBreweryCount
+			"delete_dislike_count": deleteDisLikeCount
 		]
 	}
 }
