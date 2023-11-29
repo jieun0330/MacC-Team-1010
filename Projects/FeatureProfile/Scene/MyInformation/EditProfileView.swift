@@ -37,7 +37,7 @@ struct EditProfileView: View {
 				.frame(width: 300)
 				.padding(.bottom, 8)
 				.keyboardType(.default)
-				.textFieldStyle(NicknameTextFieldStyle())
+				.textFieldStyle(NicknameTextFieldStyle(showNickDupli: viewModel.showNickDupli))
 				.onChange(of: nickName) { _ in
 					viewModel.showNickDupli = .normal
 				}
