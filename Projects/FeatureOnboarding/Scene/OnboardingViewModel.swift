@@ -88,7 +88,6 @@ public final class OnboardingViewModel: ObservableObject {
 						
 						MixpanelManager.shared.setUserProfile(userId: "\(userID)", name: nickname, sex: sex, yearOfBirth: ageRange, signupMethod: .ShortCut)
 						MixpanelManager.shared.signupEvent(method: .ShortCut)
-						UserDefaultsSetting.nickname = nickname
 						
 						fetchLoading = false
 						navigationHome = true
