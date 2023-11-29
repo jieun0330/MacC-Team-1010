@@ -11,6 +11,7 @@ import Foundation
 public enum MPSignUpMethod: MPPropertiable {
 	case ShortCut
 	case PhoneNum
+	case PhoneNumLoad
 	
 	var mpProperty: String {
 		return "method"
@@ -22,6 +23,8 @@ public enum MPSignUpMethod: MPPropertiable {
 			return "간편 가입"
 		case .PhoneNum:
 			return "전화번호 가입"
+		case .PhoneNumLoad:
+			return "전화번호 백업 불러오기 로그인"
 		}
 	}
 }
