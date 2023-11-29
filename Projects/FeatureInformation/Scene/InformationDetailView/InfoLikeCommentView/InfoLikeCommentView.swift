@@ -35,6 +35,7 @@ struct InfoLikeCommentView: View {
 			.padding(.horizontal, 16)
 			.onTapGesture {
 				if isEnough {
+					viewModel.mpParameters.commentDetailCount += 1
 					viewModel.showDetailCommentListSheet = true
 				}
 			}
