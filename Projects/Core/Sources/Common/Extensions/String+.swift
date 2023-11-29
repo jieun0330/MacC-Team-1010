@@ -67,9 +67,9 @@ public extension String {
 		}
 
 		if firstTwoDigits < 25 {
-			return "20" + self.dropFirst(2)
+			return "20" + "\(firstTwoDigits)"
 		} else {
-			return "19" + self.dropFirst(2)
+			return "19" + "\(firstTwoDigits)"
 		}
 	}
 }
