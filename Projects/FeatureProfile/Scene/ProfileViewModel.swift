@@ -172,7 +172,7 @@ public final class ProfileViewModel: ObservableObject {
 					try KeyChainManager.shared.delete(account: .phoneBackNum)
 					try KeyChainManager.shared.delete(account: .profileImage)
 					try KeyChainManager.shared.delete(account: .userId)
-					
+					UserDefaults.standard.removeObject(forKey: "searchHistorys")
 					UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
 					DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
 						exit(0)
