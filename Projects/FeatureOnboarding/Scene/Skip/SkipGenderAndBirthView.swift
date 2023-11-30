@@ -93,6 +93,18 @@ public struct SkipGenderAndBirthView: View {
 					.opacity(0.5)
 			}
 		}
+		.alert(item: $viewModel.alertItem) { alertItem in
+			if alertItem.dismissButton == nil {
+				return Alert(title: alertItem.title,
+							 message: alertItem.message,
+							 primaryButton: alertItem.primaryButton!,
+							 secondaryButton: alertItem.secondaryButton!)
+			} else {
+				return Alert(title: alertItem.title,
+							 message: alertItem.message,
+							 dismissButton: alertItem.dismissButton)
+			}
+		}
 		.toolbarBackground(Color(uiColor: .designSystem(.darkbase)!), for: .navigationBar)
 		.navigationBarBackButtonHidden()
 		.background(Color(uiColor: .designSystem(.darkbase)!))
@@ -107,6 +119,10 @@ private extension SkipGenderAndBirthView {
 	func nextButton() -> some View {
 		Button {
 			if let idx = selected.firstIndex(of: true) {
+				viewModel.alertItem = AlertItem(title: Text("환영합니다"),
+												message: Text("가입이 완료되었어요."),
+												dismissButton: .default(Text("확인")) {
+				})
 				viewModel.skipSignin(nickname: nickName, sex: genders[idx], ageRange: birthDay)
 			}
 		} label: {
