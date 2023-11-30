@@ -9,11 +9,14 @@
 import SwiftUI
 import Feature
 import DesignSystem
+import Core
 
 @main
 struct _App: App {
     @State private var isLoading: Double = 1 // 스플래시 뷰를 부르는 변수
-    
+	init() {
+		MixpanelManager.shared.initMixpanel()
+	}
     var body: some Scene {
         WindowGroup {
             ZStack {

@@ -50,6 +50,13 @@ public struct LoadDataView: View {
 													  data: "\(findMatchUserData.userNickName ?? "")")
 					try KeyChainManager.shared.create(account: .phoneBackNum,
 													  data: "\(findMatchUserData.userPhone ?? "")")
+					
+					MixpanelManager.shared.setUserProfile(userId: "\(findMatchUserData.userID ?? -1)",
+														  name: "\(findMatchUserData.userNickName ?? "백업 오류")",
+														  sex: "\(findMatchUserData.userSex ?? "백업 오류")",
+														  yearOfBirth: findMatchUserData.userBirth?.birthToYear() ??  "백업 오류",
+														  signupMethod: .PhoneNumLoad)
+					MixpanelManager.shared.signupEvent(method: .PhoneNumLoad)
 					isMain = true
 				}
 			} label: {

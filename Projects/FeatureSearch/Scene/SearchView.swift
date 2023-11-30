@@ -50,7 +50,7 @@ public struct SearchView: View {
 			}
 			.onSubmit(of: .search) {
 				searchViewModel.searchState = false
-				searchViewModel.searchMakHolies(searchText: searchViewModel.searchText)
+				searchViewModel.searchMakHolies(searchText: searchViewModel.searchText, method: .submit)
 			}
 			.onAppear {
 				UIBarButtonItem.appearance(

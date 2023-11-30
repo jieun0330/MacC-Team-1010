@@ -96,7 +96,9 @@ public struct RootView: View {
 				)
 			}
 			.fullScreenCover(item: $makId) { makHolyId in
-				InformationView(makHolyId: makHolyId)
+				InformationView(makHolyId: makHolyId, 
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 previousView: .imageSearchView))
 			}
 			.alert(isPresented: $showEmptyImageAlert) {
 				Alert(title: Text("라벨을 찾지 못했어요"), message: Text("라벨이 잘 보이게 다시 찍어주시거나 막걸리 이름으로 검색해보세요."),

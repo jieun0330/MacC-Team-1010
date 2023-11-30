@@ -54,7 +54,10 @@ public struct CategoryView: View {
 				
 				switch type {
 				case .event:
-					MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
+					MakgeolliInfoView(viewModel: viewModel,
+									  type: type,
+									  mpTerm: "상단 배너-주류 대상",
+									  targetTitle: targetTitle)
 						.padding(.horizontal, 8)
 				default:
 					if viewModel.fetchLoading {
@@ -65,7 +68,10 @@ public struct CategoryView: View {
 									  dismissButton: .default(Text("확인")))
 							}
 					} else {
-						MakgeolliInfoView(viewModel: viewModel, type: type, targetTitle: targetTitle)
+						MakgeolliInfoView(viewModel: viewModel, 
+										  type: type,
+										  mpTerm: "[\(targetTitle.map({ $0.description }).joined(separator: ", "))]",
+										  targetTitle: targetTitle)
 							.padding(.horizontal, 8)
 					}
 				}

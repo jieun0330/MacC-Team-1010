@@ -60,4 +60,16 @@ public extension String {
 		return NSPredicate(format: "SELF MATCHES %@", regex)
 			.evaluate(with: number)
 	}
+	
+	func birthToYear() -> String {
+		guard let firstTwoDigits = Int(self.prefix(2)) else {
+			return "000000"
+		}
+
+		if firstTwoDigits < 25 {
+			return "20" + "\(firstTwoDigits)"
+		} else {
+			return "19" + "\(firstTwoDigits)"
+		}
+	}
 }

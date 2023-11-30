@@ -20,10 +20,16 @@ final class InformationViewModel: ObservableObject {
 	var currentOffset: Int = 0
 	var isLastPage = false
 	
-	init(makHolyId: Int, maHolyRepo: DefaultMakgeolliRepository, userRepo: DefaultUserRepository) {
+	var mpParameters: MPInfoClosedEventParameters
+	
+	init(makHolyId: Int,
+		 maHolyRepo: DefaultMakgeolliRepository,
+		 userRepo: DefaultUserRepository,
+		 mpParameters: MPInfoClosedEventParameters) {
 		self.makHolyId = makHolyId
 		self.maHolyRepo = maHolyRepo
 		self.userRepo = userRepo
+		self.mpParameters = mpParameters
 	}
 	
 	@Published var errorState = false
@@ -125,7 +131,13 @@ final class InformationViewModel: ObservableObject {
 						contents: comment.contents,
 						isVisible: comment.isVisible))
 				
-				if response.result?.isSuccess == false {
+				if response.result?.isSuccess == true {
+					if comment.isVisible == true {
+						mpParameters.editCommentVisible += 1
+					} else {
+						mpParameters.editCommentInvisible += 1
+					}
+				} else {
 					self.myReaction.comment?.isVisible.toggle()
 					errorState = true
 				}
@@ -157,13 +169,36 @@ final class InformationViewModel: ObservableObject {
 	}
 	
 	@MainActor
-	func postLikeState() {
+	func postLikeState(from: LikeState) {
 		Task {
 			do {
 				let response = try await userRepo.evaluateMak(EvaluateMakRequest(
 					userId: self.userId,
 					makNumber: self.makHolyId,
 					likeState: self.myReaction.likeState))
+				switch myReaction.likeState {
+				case .none:
+					if from == .like {
+						MixpanelManager.shared.decreaseUserCount(property: .like)
+						mpParameters.deleteLikeCount += 1
+					} else {
+						MixpanelManager.shared.decreaseUserCount(property: .dislike)
+						mpParameters.deleteDisLikeCount += 1
+					}
+				case .like:
+					if from == .dislike {
+						MixpanelManager.shared.decreaseUserCount(property: .dislike)
+					}
+					MixpanelManager.shared.increaseUserCount(property: .like)
+					mpParameters.addLikeCount += 1
+				case .dislike:
+					if from == .like {
+						MixpanelManager.shared.decreaseUserCount(property: .like)
+					}
+					MixpanelManager.shared.increaseUserCount(property: .dislike)
+					mpParameters.addDisLikeCount += 1
+				}
+				
 				print("postLikeState Completed : -------")
 				print("response : \(response)")
 				print("----------------------------------")
@@ -197,7 +232,10 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
 					errorState = true
+					return
 				}
+				MixpanelManager.shared.increaseUserCount(property: .bookmark)
+				mpParameters.addBookmarkCount += 1
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -addBookMark()")
 				errorState = true
@@ -218,7 +256,10 @@ final class InformationViewModel: ObservableObject {
 				if response.result?.isSuccess == false {
 					myReaction.isBookMarked.toggle()
 					errorState = true
+					return
 				}
+				MixpanelManager.shared.decreaseUserCount(property: .bookmark)
+				mpParameters.deleteBookmarkCount += 1
 			} catch {
 				Logger.debug(error: error, message: "InformationViewModel -deleteBookMark()")
 				errorState = true
@@ -239,6 +280,8 @@ final class InformationViewModel: ObservableObject {
 				
 				if response.result?.isSuccess == true {
 					self.myReaction.comment = nil
+					MixpanelManager.shared.decreaseUserCount(property: .comment)
+					mpParameters.deleteCommentCount += 1
 				} else {
 					errorState = true
 				}
@@ -261,6 +304,7 @@ final class InformationViewModel: ObservableObject {
 						isVisible: myComment.isVisible))
 				if response.result?.isSuccess == true {
 					self.myReaction.comment = myComment
+					mpParameters.editCommentCount += 1
 				} else {
 					errorState = true
 				}
@@ -283,6 +327,8 @@ final class InformationViewModel: ObservableObject {
 					contents: myComment.contents, isVisible: myComment.isVisible)
 				)
 				if response.result?.isSuccess == true {
+					MixpanelManager.shared.increaseUserCount(property: .comment)
+					mpParameters.addCommentCount += 1
 					let result = try await maHolyRepo.fetchDetail(makNumber: self.makHolyId,
 																  userId: self.userId)
 					self.myReaction = result.1

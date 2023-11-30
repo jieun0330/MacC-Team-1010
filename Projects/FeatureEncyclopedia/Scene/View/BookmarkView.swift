@@ -74,7 +74,9 @@ public struct BookmarkView: View {
                     .padding(.horizontal, 8)
 				}
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-					InformationView(makHolyId: makHolyId)
+					InformationView(makHolyId: makHolyId, 
+									mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																			 myTerm: "찜"))
 				}
 			}
 		}

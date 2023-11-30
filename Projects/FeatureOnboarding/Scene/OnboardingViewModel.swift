@@ -56,6 +56,13 @@ public final class OnboardingViewModel: ObservableObject {
 														  data: "\(nickname)")
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "\(response.userPhone ?? "")")
+						
+						MixpanelManager.shared.setUserProfile(userId: "\(userID)", 
+															  name: nickname,
+															  sex: sex, yearOfBirth: birth.birthToYear(),
+															  signupMethod: .PhoneNum)
+						MixpanelManager.shared.signupEvent(method: .PhoneNum)
+						
 						fetchLoading = false
 					}
 				} catch {
@@ -85,6 +92,12 @@ public final class OnboardingViewModel: ObservableObject {
 														  data: "\(nickname)")
 						try KeyChainManager.shared.create(account: .phoneBackNum,
 														  data: "")
+						
+						MixpanelManager.shared.setUserProfile(userId: "\(userID)", 
+															  name: nickname, sex: sex,
+															  yearOfBirth: ageRange,
+															  signupMethod: .ShortCut)
+						MixpanelManager.shared.signupEvent(method: .ShortCut)
 						
 						fetchLoading = false
 						navigationHome = true
