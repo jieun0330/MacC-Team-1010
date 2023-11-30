@@ -11,12 +11,11 @@ import Core
 import Combine
 
 final class SearchViewModel: ObservableObject {
-	@Published var errorState = false
 	@Published var searchText: String = ""
 	@Published var searchHistorys: [String] = []
 	@Published var resultMakHolies: [SearchResult] = []
 	@Published var fetchLoading = true
-	@Published var showAlert = false
+	@Published var alertItem: AlertItem?
 	
 	private var cancellables = Set<AnyCancellable>()
 	var searchState = false
@@ -101,13 +100,19 @@ final class SearchViewModel: ObservableObject {
 															method: method)
 						self?.fetchLoading = false
 					}
-				} else {
-					errorState = true
 				}
 			} catch {
-				Logger.debug(error: error, message: "")
-				errorState = true
+				handleNetworkError(error)
 			}
 		}
+	}
+}
+
+private extension SearchViewModel {
+	func handleNetworkError(_ error: Error) {
+		Logger.debug(error: error, message: "")
+		alertItem = AlertItem(title: Text("네트워크 에러"),
+							  message: Text("인터넷 연결상태를 확인해주세요."),
+							  dismissButton: .default(Text("확인")))
 	}
 }

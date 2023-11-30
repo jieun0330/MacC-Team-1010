@@ -132,8 +132,8 @@ private extension NicknameView {
 														sex: sex,
 														phoneNumber: phoneNumber,
 														birth: birthDay)
-						viewModel.alertItem = AlertItem(title: Text("완료했어요!"),
-														message: Text("이제 ‘내 정보’의 핸드폰 번호 로그인으로 내 데이터를 불러올 수 있어요!"),
+						viewModel.alertItem = AlertItem(title: Text("환영합니다"),
+														message: Text("가입이 완료되었어요."),
 														dismissButton: .default(Text("확인")) {
 							isMain = true
 						})
