@@ -119,11 +119,12 @@ private extension SkipGenderAndBirthView {
 	func nextButton() -> some View {
 		Button {
 			if let idx = selected.firstIndex(of: true) {
+				viewModel.skipSignin(nickname: nickName, sex: genders[idx], ageRange: birthDay)
 				viewModel.alertItem = AlertItem(title: Text("환영합니다"),
 												message: Text("가입이 완료되었어요."),
 												dismissButton: .default(Text("확인")) {
+					viewModel.navigationHome = true
 				})
-				viewModel.skipSignin(nickname: nickName, sex: genders[idx], ageRange: birthDay)
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)

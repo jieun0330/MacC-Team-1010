@@ -100,7 +100,6 @@ public final class OnboardingViewModel: ObservableObject {
 						MixpanelManager.shared.signupEvent(method: .ShortCut)
 						
 						fetchLoading = false
-						navigationHome = true
 					}
 				} catch {
 					handleNetworkError(error)
