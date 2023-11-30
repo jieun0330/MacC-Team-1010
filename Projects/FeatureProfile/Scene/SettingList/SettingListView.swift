@@ -91,7 +91,7 @@ struct SettingListView: View {
 					Text("버전정보")
 						.font(.style(.SF17R))
 					Spacer()
-					Text("1.0.0")
+					Text("1.1.0")
 						.font(.style(.SF12B))
 				}
 			}
