@@ -154,7 +154,7 @@ private extension EditProfileView {
 						try await viewModel.modifyUserNickname(nickname: nickName,
 															   selectedProfileIcon: selectedProfileIcon)
 						
-						viewModel.alertItem = AlertItem(title: Text("완료했어요!"),
+						viewModel.alertItem = AlertItem(title: Text("완료했어요"),
 														message: Text("성공적으로 프로필 정보가 변경되었어요."),
 														dismissButton: .default(Text("확인")) {
 							dismiss()
