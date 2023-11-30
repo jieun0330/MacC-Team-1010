@@ -8,6 +8,7 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
 struct SearchHistoryControllerView: View {
 	@ObservedObject var searchViewModel: SearchViewModel
@@ -21,7 +22,13 @@ struct SearchHistoryControllerView: View {
 			Spacer()
 			
 			Button(action: {
-				searchViewModel.showAlert = true
+				searchViewModel.alertItem = AlertItem(title: Text("최근 검색어 지우기"),
+													  message: Text("검색한 기록을 모두 지울까요?"),
+													  primaryButton: .cancel(Text("취소")) {},
+													  secondaryButton: .default(Text("지우기")) {
+					searchViewModel.clearSearchHistory()
+				})
+				
 			}, label: {
 				Text("지우기")
 					.font(.style(.SF14R))
