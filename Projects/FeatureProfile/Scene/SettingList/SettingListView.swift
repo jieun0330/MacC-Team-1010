@@ -14,6 +14,7 @@ struct SettingListView: View {
 	@ObservedObject var viewModel: ProfileViewModel
 	
 	@State var deleteAlert = false
+	let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.1.0"
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 14) {
@@ -91,7 +92,7 @@ struct SettingListView: View {
 					Text("버전정보")
 						.font(.style(.SF17R))
 					Spacer()
-					Text("1.1.0")
+					Text(version)
 						.font(.style(.SF12B))
 				}
 			}
