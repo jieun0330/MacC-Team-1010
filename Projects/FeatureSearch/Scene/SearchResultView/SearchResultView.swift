@@ -33,6 +33,9 @@ struct SearchResultView: View {
 				
 				Button(action: {
 					MixpanelManager.shared.requestMakHoly(requestTerm: searchViewModel.searchText)
+					searchViewModel.alertItem = AlertItem(title: Text("등록 요청 완료"),
+														  message: Text("빠른 시일내에 추가할게요!"),
+														  dismissButton: .default(Text("확인")))
 				}, label: {
 					Text("등록 요청하기")
 						.SF17R()
