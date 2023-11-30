@@ -41,7 +41,7 @@ public struct RootView: View {
 				HomeView()
 					.tabItem {
 						Image(uiImage: .designSystem(.home)!)
-						Text("홈")
+						Text("모아보기")
 							.font(.style(.SF10B))
 					}.tag(1)
 				SearchView()
