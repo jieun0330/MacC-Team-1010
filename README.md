@@ -1,22 +1,37 @@
-# MacC-Team-1010
+# 🌾 주룩 (Julook)
+![KakaoTalk_Photo_2023-12-01-13-41-59](https://github.com/DeveloperAcademy-POSTECH/MacC-Team-1010/assets/50910456/547561d9-ee9b-4829-91b6-0bd734c75942)
 
-### 코드 리뷰 규칙
-##### P1: 꼭 반영해주세요 (Request changes)  
-##### P2: 적극적으로 고려해주세요 (Request changes)  
-##### P3: 웬만하면 반영해 주세요 (Comment)  
-##### P4: 반영해도 좋고 넘어가도 좋습니다 (Approve)  
-##### P5: 그냥 사소한 의견입니다 (Approve)  
+<br>
 
-> 사용법 및 레퍼런스 : 노션 ➡️ 개발 사전 준비 ➡️ 하단에 코드 리뷰 페이지 참고
----
+##  Members 
 
-### Tuist
-##### Tuist clean
-##### Tuist fetch
-##### Tuist generate (실행)
+| **나경빈** | **박지은** | **김성훈** | **이민섭** | **김예림** |
+|:---:|:---:|:---:|:---:|:---:|
+| ```Designer``` | ```iOS Developer``` | ```iOS Developer``` | ```iOS Developer``` | ```Backend Developer``` |
+<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team-1010/assets/50910456/5d6fa45b-f593-4d46-9427-b88a886d22a0" width="150" height="150" />|<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team-1010/assets/50910456/e3379948-7fc5-4482-8ea4-b95e1b95ef0f" width="150" height="150" />|<img src="https://avatars.githubusercontent.com/u/50910456?v=4" width="150" height="150" />|<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team-1010/assets/50910456/1499190d-07d7-47b5-9dd6-1d63e9610cd7" width="150" height="150" />|<img src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team-1010/assets/50910456/8c2eaff1-37cc-4ebc-a168-a6baba6fff45" width="150" height="150" />|
+|[나경빈](https://github.com/ngbeen)|[박지은](https://github.com/jieun0330)|[김성훈](https://github.com/ungchun)|[이민섭](https://github.com/mininim)|[김예림](https://github.com/yerimee82)|
 
----
 
-### 커밋 규칙
 
-<img width="514" alt="스크린샷 2023-08-19 오후 6 58 21" src="https://github.com/honghoker/Daon/assets/50910456/ff427695-f26c-4be8-8a0e-19b9fda8cc1a">
+<br>
+
+## 🛠 Skills 
+
+### Architecture
+```MVVM```
+
+### Tech Stack
+
+```SwiftUI```  
+
+```Tuist```  
+
+```CreateML```
+
+### Library
+
+```Moya```  
+
+```Kingfisher```  
+
+```Mixpanel```
