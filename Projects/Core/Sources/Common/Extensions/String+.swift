@@ -63,7 +63,7 @@ public extension String {
 	
 	func birthToYear() -> String {
 		guard let firstTwoDigits = Int(self.prefix(2)) else {
-			return "000000"
+			return ""
 		}
 
 		if firstTwoDigits < 25 {
