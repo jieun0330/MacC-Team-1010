@@ -40,7 +40,7 @@ public struct SkipGenderAndBirthView: View {
 				}
 				.padding(.bottom, 8)
 				
-				Text("막걸리 추천이 더 정확해져요!")
+				Text("막걸리 추천이 더 정확해져요! (선택)")
 					.SF14R()
 					.foregroundColor(.W50)
 					.padding(.bottom, 24)
@@ -125,22 +125,28 @@ private extension SkipGenderAndBirthView {
 												dismissButton: .default(Text("확인")) {
 					viewModel.navigationHome = true
 				})
+			} else {
+				viewModel.skipSignin(nickname: nickName, sex: "", ageRange: birthDay)
+				viewModel.alertItem = AlertItem(title: Text("환영합니다"),
+												message: Text("가입이 완료되었어요."),
+												dismissButton: .default(Text("확인")) {
+					viewModel.navigationHome = true
+				})
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(
-					Color(uiColor: .designSystem(selected.contains(true) && birthDay.count == 4 ? .goldenyellow : .w10)!)
+					Color(uiColor: .designSystem(.goldenyellow)!)
 				)
 				.frame(height: 50)
 				.overlay {
 					Text("완료")
-						.foregroundColor(selected.contains(true) && birthDay.count == 4 ? .White : .W25)
+						.foregroundColor(.White)
 						.SF17R()
 				}
 				.padding(.bottom, 16)
 				.padding(.horizontal, 16)
 		}
-		.disabled(!selected.contains(true) || birthDay.count != 4)
 	}
 	
 	struct BirthDayTextFieldStyle: TextFieldStyle {

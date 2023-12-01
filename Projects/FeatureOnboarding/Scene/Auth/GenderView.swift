@@ -42,7 +42,7 @@ public struct GenderView: View {
 			}
 			.padding(.bottom, 8)
 			
-			Text("막걸리 추천이 더 정확해져요!")
+			Text("막걸리 추천이 더 정확해져요! (선택)")
 				.SF14R()
 				.foregroundColor(.W50)
 				.padding(.bottom, 24)
@@ -88,20 +88,26 @@ private extension GenderView {
 					birthDay: birthDay,
 					sex: genders[idx]
 				)
+			} else {
+				NicknameView(
+					viewModel: viewModel,
+					phoneNumber: phoneNumber,
+					birthDay: birthDay,
+					sex: ""
+				)
 			}
 		} label: {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(
-					Color(uiColor: .designSystem(selected.contains(true) ? .goldenyellow : .w10)!)
+					Color(uiColor: .designSystem(.goldenyellow)!)
 				)
 				.frame(height: 50)
 				.overlay {
 					Text("다음")
-						.foregroundColor(selected.contains(true) ? .White : .W25)
+						.foregroundColor(.White)
 						.SF17R()
 				}
 				.padding(.bottom, 16)
 		}
-		.disabled(!selected.contains(true))
 	}
 }
