@@ -33,6 +33,45 @@ final class CategoryViewModel: ObservableObject {
 	}
 	
 	@MainActor
+	func initNewCategoryMakgeolli() {
+		fetchLoading = true
+		Task {
+			do {
+				makHolys = []
+				
+				let response = try await self.homeRepository.fetchNewMakList()
+				if response.status == 200 {
+					makHolys = response.result!.map { makData in
+						return mapMakDataToMakContent(makData)
+					}
+					fetchLoading = false
+				} else {
+					errorState = true
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				errorState = true
+			}
+		}
+		
+		func mapMakDataToMakContent(_ makData: NewMakListMakgeolliDetail) -> MakContent {
+			return MakContent(
+				makSeq: makData.makNumber ?? 0,
+				makName: makData.makName ?? "",
+				makType: makData.makType ?? "",
+				makAlcoholPercentage: makData.mainDetail?.makAlcoholPercentage ?? 0.0,
+				makVolume: makData.mainDetail?.makVolume ?? 0,
+				makPrice: Int(makData.mainDetail?.makPrice ?? 0),
+				makTasteSweet: makData.taste.makTasteSweet ?? -1.0,
+				makTasteSour: makData.taste.makTasteSour ?? -1.0,
+				makTasteThick: makData.taste.makTasteThick ?? -1.0,
+				makTasteFresh: makData.taste.makTasteFresh ?? -1.0,
+				makImageNumber: makData.makImageNumber ?? ""
+			)
+		}
+	}
+	
+	@MainActor
 	func initFetchCategoryMakgeolli(sort: String?,
 									offset: Int?,
 									categories: [CharacteristicsType]?) {

@@ -90,7 +90,7 @@ struct MakgeolliInfoView: View {
 								.padding(.horizontal, 8)
 								.padding(.bottom, 16)
 								.onAppear {
-									if type != .event {
+									if type != .event && type != .new {
 										if data == viewModel.makHolys.last {
 											if !viewModel.isLastPage {
 												var offset = viewModel.currentOffset

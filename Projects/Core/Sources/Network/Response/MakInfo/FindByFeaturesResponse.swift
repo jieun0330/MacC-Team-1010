@@ -45,6 +45,20 @@ public struct MakContent: Hashable, Codable {
 	public let makTasteThick: Double?
 	public let makTasteFresh: Double?
 	public let makImageNumber: String?
+	
+	public init(makSeq: Int?, makName: String?, makType: String?, makAlcoholPercentage: Double?, makVolume: Int?, makPrice: Int?, makTasteSweet: Double?, makTasteSour: Double?, makTasteThick: Double?, makTasteFresh: Double?, makImageNumber: String?) {
+		self.makSeq = makSeq
+		self.makName = makName
+		self.makType = makType
+		self.makAlcoholPercentage = makAlcoholPercentage
+		self.makVolume = makVolume
+		self.makPrice = makPrice
+		self.makTasteSweet = makTasteSweet
+		self.makTasteSour = makTasteSour
+		self.makTasteThick = makTasteThick
+		self.makTasteFresh = makTasteFresh
+		self.makImageNumber = makImageNumber
+	}
 }
 
 public struct FindByFeaturesResponsePageable: Codable {

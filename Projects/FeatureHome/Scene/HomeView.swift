@@ -41,7 +41,7 @@ public struct HomeView: View {
 							Spacer()
 							
 							Image(uiImage: UIImage(named: KeyChainManager.shared.read(account: .profileImage),
-												   in: DesignSystem.Constant.bundle, with: nil)!)
+												   in: DesignSystem.Constant.bundle, with: nil) ?? .designSystem(.profileIcon1)!)
 							.resizable()
 							.frame(width: 30, height: 30)
 						}

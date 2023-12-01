@@ -53,7 +53,7 @@ public struct CategoryView: View {
 				}
 				
 				switch type {
-				case .event:
+				case .event, .new:
 					MakgeolliInfoView(viewModel: viewModel,
 									  type: type,
 									  mpTerm: "상단 배너-주류 대상",
@@ -78,7 +78,9 @@ public struct CategoryView: View {
 			}
 			.modifier(NavigationBarBackground(type.description))
 			.onAppear {
-				if viewModel.fetchLoading && type != .event {
+				if type == .new {
+					viewModel.initNewCategoryMakgeolli()
+				} else if viewModel.fetchLoading && type != .event {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
 				}
 			}

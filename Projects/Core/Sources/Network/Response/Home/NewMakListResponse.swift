@@ -20,7 +20,7 @@ public struct NewMakListMakgeolliDetail: Hashable, Codable {
 	public let makType: String?
 	public let makImageNumber: String?
 	public let mainDetail: NewMakListMainDetail?
-	public let taste: NewMakListTaste?
+	public let taste: NewMakListTaste
 	
 	public static func == (lhs: NewMakListMakgeolliDetail,
 						   rhs: NewMakListMakgeolliDetail) -> Bool {

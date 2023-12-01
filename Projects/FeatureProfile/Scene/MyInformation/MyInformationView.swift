@@ -93,6 +93,6 @@ private extension MyInformationView {
 	@ViewBuilder
 	func ProfileImageView() -> some View {
 		Image(uiImage: UIImage(named: KeyChainManager.shared.read(account: .profileImage),
-							   in: DesignSystem.Constant.bundle, with: nil)!)
+							   in: DesignSystem.Constant.bundle, with: nil) ?? .designSystem(.profileIcon1)!)
 	}
 }
