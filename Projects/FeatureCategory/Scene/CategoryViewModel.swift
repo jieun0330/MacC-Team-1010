@@ -23,13 +23,16 @@ final class CategoryViewModel: ObservableObject {
 	
 	let makgeolliRepository: DefaultMakgeolliRepository
 	let homeRepository: DefaultHomeRepository
+	let topicRepository: DefaultTopicRepository
 	
 	init(
 		makgeolliRepository: DefaultMakgeolliRepository,
-		homeRepository: DefaultHomeRepository
+		homeRepository: DefaultHomeRepository,
+		topicRepository: DefaultTopicRepository
 	) {
 		self.makgeolliRepository = makgeolliRepository
 		self.homeRepository = homeRepository
+		self.topicRepository = topicRepository
 	}
 	
 	@MainActor
@@ -149,6 +152,46 @@ final class CategoryViewModel: ObservableObject {
 				if response.status == 200 {
 					fetchCommentLoading = false
 					comments = response.result ?? []
+				} else {
+					errorState = true
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				errorState = true
+			}
+		}
+	}
+	
+	@MainActor
+	func initFetchPohangMakgeolli() {
+		fetchLoading = true
+		Task {
+			do {
+				let response = try await topicRepository.fetchPohangMakgeolli()
+
+				if response.status == 200 {
+					fetchLoading = false
+					makHolys.append(contentsOf: response.result?.content ?? [])
+				} else {
+					errorState = true
+				}
+			} catch {
+				Logger.debug(error: error, message: "")
+				errorState = true
+			}
+		}
+	}
+	
+	@MainActor
+	func initFetch2023KoreaAward() {
+		fetchLoading = true
+		Task {
+			do {
+				let response = try await topicRepository.fetchKoreaAward2023(size: 16)
+
+				if response.status == 200 {
+					fetchLoading = false
+					makHolys.append(contentsOf: response.result?.content ?? [])
 				} else {
 					errorState = true
 				}

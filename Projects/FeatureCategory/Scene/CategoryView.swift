@@ -13,7 +13,8 @@ import FeatureInformation
 public struct CategoryView: View {
 	@StateObject private var viewModel = CategoryViewModel(
 		makgeolliRepository: DefaultMakgeolliRepository(),
-		homeRepository: DefaultHomeRepository()
+		homeRepository: DefaultHomeRepository(),
+		topicRepository: DefaultTopicRepository()
 	)
 	
 	@State var targetTitle: [CharacteristicsType]
@@ -53,7 +54,7 @@ public struct CategoryView: View {
 				}
 				
 				switch type {
-				case .event, .new:
+				case .pohang, .koreaAward2023, .new:
 					MakgeolliInfoView(viewModel: viewModel,
 									  type: type,
 									  mpTerm: "상단 배너-주류 대상",
@@ -78,9 +79,13 @@ public struct CategoryView: View {
 			}
 			.modifier(NavigationBarBackground(type.description))
 			.onAppear {
-				if type == .new {
+				if type == .pohang {
+					viewModel.initFetchPohangMakgeolli()
+				} else if type == .koreaAward2023 {
+					viewModel.initFetch2023KoreaAward()
+				} else if type == .new {
 					viewModel.initNewCategoryMakgeolli()
-				} else if viewModel.fetchLoading && type != .event {
+				} else if viewModel.fetchLoading {
 					viewModel.initFetchCategoryMakgeolli(sort: nil, offset: nil, categories: targetTitle)
 				}
 			}

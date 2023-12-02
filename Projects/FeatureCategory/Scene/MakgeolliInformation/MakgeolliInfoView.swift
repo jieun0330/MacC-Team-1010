@@ -24,7 +24,7 @@ struct MakgeolliInfoView: View {
 	var body: some View {
 		ScrollView(.vertical, showsIndicators: false) {
 			ScrollViewReader { reader in
-				if type != .event && type != .new {
+				if type != .pohang && type != .koreaAward2023 && type != .new {
 					HStack(spacing: 4) {
 						Button {
 							showAlert = true
@@ -76,7 +76,7 @@ struct MakgeolliInfoView: View {
 					.padding(.horizontal, 8)
 					.padding(.vertical, 16)
 				}
-				if type != .event && viewModel.makHolys.isEmpty {
+				if type != .pohang && type != .koreaAward2023 && type != .new && viewModel.makHolys.isEmpty {
 					VStack(spacing: 20) {
 						Text("검색 결과가 없어요..")
 							.SF17R()
@@ -85,12 +85,12 @@ struct MakgeolliInfoView: View {
 					}
 				} else {
 					LazyVGrid(columns: columns, spacing: 0) {
-						ForEach(type == .event ? MakContent.mockDatas : viewModel.makHolys, id: \.self) { data in
+						ForEach(viewModel.makHolys, id: \.self) { data in
 							MakgeolliInfoSingleView(viewModel: viewModel, makHoly: data)
 								.padding(.horizontal, 8)
 								.padding(.bottom, 16)
 								.onAppear {
-									if type != .event && type != .new {
+									if type != .new && type != .pohang && type != .koreaAward2023{
 										if data == viewModel.makHolys.last {
 											if !viewModel.isLastPage {
 												var offset = viewModel.currentOffset
@@ -112,15 +112,19 @@ struct MakgeolliInfoView: View {
 		.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
 			switch type {
 			case .characteristics:
-				InformationView(makHolyId: makHolyId, 
+				InformationView(makHolyId: makHolyId,
 								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
 																		 hastagTerm: mpTerm))
-			case .event:
-				InformationView(makHolyId: makHolyId, 
+			case .pohang:
+				InformationView(makHolyId: makHolyId,
+								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
+																		 eventTerm: mpTerm))
+			case .koreaAward2023:
+				InformationView(makHolyId: makHolyId,
 								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
 																		 eventTerm: mpTerm))
 			case .new:
-				InformationView(makHolyId: makHolyId, 
+				InformationView(makHolyId: makHolyId,
 								mpParamters: MPInfoClosedEventParameters(id: makHolyId,
 																		 previousView: .newItemView))
 			case .comment:
