@@ -56,10 +56,10 @@ struct NewItemSingleView: View {
 								Spacer()
 									.frame(height: 12)
 								
-								TasteGraphView(scores: [item.taste?.makTasteSweet ?? -1.0,
-														item.taste?.makTasteSour ?? -1.0,
-														item.taste?.makTasteThick ?? -1.0,
-														item.taste?.makTasteFresh ?? -1.0])
+								TasteGraphView(scores: [item.taste.makTasteSweet ?? -1.0,
+														item.taste.makTasteSour ?? -1.0,
+														item.taste.makTasteThick ?? -1.0,
+														item.taste.makTasteFresh ?? -1.0])
 							}
 							.padding(.vertical, 16)
 							.padding(.horizontal, 8)
