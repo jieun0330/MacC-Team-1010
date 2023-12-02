@@ -110,6 +110,9 @@ public enum TENTENAsset {
 		case profileIcon7
 		case profileIcon8
 		
+		case koreaAward
+		case pohang
+		
 		public var description: String {
 			switch self {
 			case .mockMakgeolli:
@@ -290,6 +293,11 @@ public enum TENTENAsset {
 				return "profileIcon7"
 			case .profileIcon8:
 				return "profileIcon8"
+				
+			case .koreaAward:
+				return "koreaAward"
+			case .pohang:
+				return "pohang"
 			}
 		}
 	}
