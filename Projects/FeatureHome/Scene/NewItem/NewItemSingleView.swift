@@ -23,27 +23,17 @@ struct NewItemSingleView: View {
 		} label: {
 			Rectangle()
 				.foregroundColor(.clear)
-				.frame(width: 110, height: 230)
+				.frame(width: 104, height: 240)
 				.background(Color(uiColor: .designSystem(.darkgrey)!))
 				.cornerRadius(18)
 				.overlay(
 					RoundedRectangle(cornerRadius: 18)
-						.inset(by: 1.5)
-						.stroke(
-							LinearGradient(
-								stops: [
-									Gradient.Stop(color: Color(red: 0.18, green: 0.18, blue: 0.39),
-												  location: 0.00),
-									Gradient.Stop(color: Color(red: 0.71, green: 0.66, blue: 0.48),
-												  location: 1.00)
-								],
-								startPoint: UnitPoint(x: 0.5, y: 0),
-								endPoint: UnitPoint(x: 0.5, y: 1)
-							), lineWidth: 3)
+						.fill(Color.DarkGrey)
 						.overlay {
 							VStack {
 								MakHolyImageView(imageId: item.makImageNumber ?? "-1",
 												 type: .small)
+								.padding(.top, 5)
 								
 								Spacer()
 									.frame(height: 12)
@@ -52,6 +42,7 @@ struct NewItemSingleView: View {
 									.foregroundColor(.White)
 									.font(.style(.SF12R))
 									.lineLimit(1)
+									.padding(.horizontal, 8)
 								
 								Spacer()
 									.frame(height: 12)
@@ -60,9 +51,9 @@ struct NewItemSingleView: View {
 														item.taste.makTasteSour ?? -1.0,
 														item.taste.makTasteThick ?? -1.0,
 														item.taste.makTasteFresh ?? -1.0])
+								.padding(.horizontal, 20)
 							}
 							.padding(.vertical, 16)
-							.padding(.horizontal, 8)
 						}
 				)
 		}
