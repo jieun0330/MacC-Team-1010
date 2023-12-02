@@ -63,6 +63,11 @@ public struct HomeView: View {
 						Spacer()
 							.frame(height: 40)
 						
+						TopicView()
+						
+						Spacer()
+							.frame(height: 40)
+						
 						LatestCommentView(viewModel: viewModel)
 							.fullScreenCover(item: $viewModel.resultLatestestCommentMakHolyId) { makHolyId in
 							InformationView(makHolyId: makHolyId,
