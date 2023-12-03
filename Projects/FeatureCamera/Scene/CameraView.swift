@@ -36,14 +36,14 @@ public struct CameraView: View {
 					.foregroundColor(Color.black.opacity(0.5))
 					.mask(
 						Window(size: CGSize(width: UIScreen.main.bounds.size.width - 32,
-											height: UIScreen.main.bounds.size.height / 3))
+											height: UIScreen.main.bounds.size.height / 2))
 						.fill(style: FillStyle(eoFill: true))
 					)
 					.ignoresSafeArea()
 				
 				RoundedRectangle(cornerRadius: 32).stroke(Color.white, lineWidth: 2)
 					.frame(width: UIScreen.main.bounds.size.width - 32,
-						   height: UIScreen.main.bounds.size.height / 3)
+						   height: UIScreen.main.bounds.size.height / 2)
 					.padding(.bottom, geometry.safeAreaInsets.bottom)
 					.padding(.bottom, 64)
 				
