@@ -11,6 +11,7 @@ import Core
 import Utils
 
 final class EncyclopediaViewModel: ObservableObject {
+	@Published var totalMak: Int = 0
 	@Published var makModel: [GetUserMakFolderContent] = []
 	@Published var errorState = false
 	@Published var resultMakHolyId: Int? = nil
@@ -31,12 +32,14 @@ final class EncyclopediaViewModel: ObservableObject {
 		Task {
 			do {
 				makModel = []
+				totalMak = 0
 				let response = try await self.userRepository.getUserMakFolder(
 					GetUserMakFolderRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 											segmentName: segmentName,
 											offset: offset)
 				)
 				if response.status == 200 {
+					totalMak = response.result?.totalMakCount ?? 0
 					makModel = response.result?.makUserTable?.content ?? []
 					isLastPage = response.result?.makUserTable?.last ?? true
 					fetchLoading = false

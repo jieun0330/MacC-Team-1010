@@ -16,6 +16,7 @@ public struct GetUserMakFolderResponse: Codable {
 
 public struct GetUserMakFolderResult: Codable {
     public let userId: Int?
+	public let totalMakCount: Int?
     public let makUserTable: MakUserTable?
 }
 
