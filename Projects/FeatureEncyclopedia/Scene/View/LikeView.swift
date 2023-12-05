@@ -11,75 +11,75 @@ import Core
 import FeatureInformation
 
 public struct LikeView: View {
-    @StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
-    
-    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 3)
-    public var body: some View {
-        if viewModel.fetchLoading {
-            ProgressView()
+	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
+	
+	private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 3)
+	public var body: some View {
+		if viewModel.fetchLoading {
+			ProgressView()
 				.modifier(ProgressViewBackground())
-                .alert(isPresented: $viewModel.errorState) {
-                    Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
-                          dismissButton: .default(Text("확인")))
-                }
-                .onAppear {
-                    viewModel.getUserMakFolder(segmentName: "like")
-                }
-        } else {
-            if viewModel.makModel.isEmpty {
-                VStack(spacing: 20) {
-                    Spacer()
-                    Text("비어있어요..")
-                        .SF17R()
-                        .foregroundColor(.W50)
-                    Image(uiImage: .designSystem(.character)!)
-                    Spacer()
-                }
-            } else {
-                ScrollView {
-                    HStack {
-                        Text("\((viewModel.makModel.filter { $0.reactionLike == "LIKE" }).count)개의 막걸리가 좋았어요")
-                            .SF12R()
-                            .foregroundColor(.W50)
-                        Spacer()
-                    }
-                    .padding(.top, 12)
-                    .padding(.leading, 16)
-                    
-                    LazyVGrid(columns: columns, spacing: 16, content: {
-                        ForEach(viewModel.makModel, id: \.self) { mak in
-                            if mak.reactionLike == "LIKE" {
-                                Button {
-                                    if let id = mak.makSeq {
-                                        viewModel.resultMakHolyId = id
-                                    }
-                                } label: {
-                                    ThumbnailView(mak: mak, type: .like)
-                                        .onAppear {
-                                            if mak == viewModel.makModel.last {
-                                                if !viewModel.isLastPage {
-                                                    var offset = viewModel.currentOffset
-                                                    offset += 1
-                                                    withAnimation {
-                                                        viewModel.getUserMakFolder(segmentName: "like", offset: offset)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                }
-                                .padding(.horizontal, 8)
-                            }
-                        }
-                    })
-                    // 썸네일 전체 뷰의 패딩
-                    .padding(.horizontal, 8)
-                }
-                .fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-					InformationView(makHolyId: makHolyId, 
+				.alert(isPresented: $viewModel.errorState) {
+					Alert(title: Text("네트워크 에러"), message: Text("인터넷 연결상태를 확인해주세요."),
+						  dismissButton: .default(Text("확인")))
+				}
+				.onAppear {
+					viewModel.getUserMakFolder(segmentName: "like")
+				}
+		} else {
+			if viewModel.makModel.isEmpty {
+				VStack(spacing: 20) {
+					Spacer()
+					Text("비어있어요..")
+						.SF17R()
+						.foregroundColor(.W50)
+					Image(uiImage: .designSystem(.character)!)
+					Spacer()
+				}
+			} else {
+				ScrollView {
+					HStack {
+						Text("\(viewModel.totalElement)개의 막걸리가 좋았어요")
+							.SF12R()
+							.foregroundColor(.W50)
+						Spacer()
+					}
+					.padding(.top, 12)
+					.padding(.leading, 16)
+					
+					LazyVGrid(columns: columns, spacing: 16, content: {
+						ForEach(viewModel.makModel, id: \.self) { mak in
+							if mak.reactionLike == "LIKE" {
+								Button {
+									if let id = mak.makSeq {
+										viewModel.resultMakHolyId = id
+									}
+								} label: {
+									ThumbnailView(mak: mak, type: .like)
+										.onAppear {
+											if mak == viewModel.makModel.last {
+												if !viewModel.isLastPage {
+													var offset = viewModel.currentOffset
+													offset += 1
+													withAnimation {
+														viewModel.nextGetUserMakFolder(segmentName: "like", offset: offset)
+													}
+												}
+											}
+										}
+								}
+								.padding(.horizontal, 8)
+							}
+						}
+					})
+					// 썸네일 전체 뷰의 패딩
+					.padding(.horizontal, 8)
+				}
+				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
+					InformationView(makHolyId: makHolyId,
 									mpParamters: MPInfoClosedEventParameters(id: makHolyId,
 																			 myTerm: "좋았어요"))
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 }

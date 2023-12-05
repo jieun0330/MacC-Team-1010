@@ -13,8 +13,8 @@ import FeatureInformation
 public struct BookmarkView: View {
 	@StateObject var viewModel = EncyclopediaViewModel(userRepository: DefaultUserRepository())
 	
-    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 3)
-    
+	private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 3)
+	
 	public var body: some View {
 		if viewModel.fetchLoading {
 			ProgressView()
@@ -29,24 +29,24 @@ public struct BookmarkView: View {
 		} else {
 			if viewModel.makModel.isEmpty {
 				VStack(spacing: 20) {
-                    Spacer()
+					Spacer()
 					Text("비어있어요..")
 						.SF17R()
 						.foregroundColor(.W50)
 					Image(uiImage: .designSystem(.character)!)
-                    Spacer()
+					Spacer()
 				}
 			} else {
 				ScrollView {
 					HStack {
-						Text("\((viewModel.makModel).count)개의 막걸리를 찜했어요")
+						Text("\(viewModel.totalElement)개의 막걸리를 찜했어요")
 							.SF12R()
 							.foregroundColor(.W50)
 						Spacer()
 					}
-                    .padding(.top, 12)
-                    .padding(.leading, 16)
-
+					.padding(.top, 12)
+					.padding(.leading, 16)
+					
 					LazyVGrid(columns: columns, spacing: 16, content: {
 						ForEach(viewModel.makModel, id: \.self) { mak in
 							Button {
@@ -61,20 +61,20 @@ public struct BookmarkView: View {
 												var offset = viewModel.currentOffset
 												offset += 1
 												withAnimation {
-													viewModel.getUserMakFolder(segmentName: "wish", offset: offset)
+													viewModel.nextGetUserMakFolder(segmentName: "wish", offset: offset)
 												}
 											}
 										}
 									}
 							}
-                            .padding(.horizontal, 8)
+							.padding(.horizontal, 8)
 						}
 					})
-                    // 썸네일 전체 뷰의 패딩
-                    .padding(.horizontal, 8)
+					// 썸네일 전체 뷰의 패딩
+					.padding(.horizontal, 8)
 				}
 				.fullScreenCover(item: $viewModel.resultMakHolyId) { makHolyId in
-					InformationView(makHolyId: makHolyId, 
+					InformationView(makHolyId: makHolyId,
 									mpParamters: MPInfoClosedEventParameters(id: makHolyId,
 																			 myTerm: "찜"))
 				}

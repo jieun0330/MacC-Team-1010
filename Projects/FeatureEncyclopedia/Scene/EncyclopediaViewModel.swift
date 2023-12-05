@@ -12,6 +12,7 @@ import Utils
 
 final class EncyclopediaViewModel: ObservableObject {
 	@Published var totalMak: Int = 0
+	@Published var totalElement: Int = 0
 	@Published var makModel: [GetUserMakFolderContent] = []
 	@Published var errorState = false
 	@Published var resultMakHolyId: Int? = nil
@@ -33,6 +34,7 @@ final class EncyclopediaViewModel: ObservableObject {
 			do {
 				makModel = []
 				totalMak = 0
+				totalElement = 0
 				let response = try await self.userRepository.getUserMakFolder(
 					GetUserMakFolderRequest(userId: Int(KeyChainManager().read(account: .userId))!,
 											segmentName: segmentName,
@@ -40,6 +42,7 @@ final class EncyclopediaViewModel: ObservableObject {
 				)
 				if response.status == 200 {
 					totalMak = response.result?.totalMakCount ?? 0
+					totalElement = response.result?.makUserTable?.totalElements ?? 0
 					makModel = response.result?.makUserTable?.content ?? []
 					isLastPage = response.result?.makUserTable?.last ?? true
 					fetchLoading = false
@@ -57,7 +60,6 @@ final class EncyclopediaViewModel: ObservableObject {
 	
 	@MainActor
 	func nextGetUserMakFolder(segmentName: String = "entire", offset: Int) {
-		fetchLoading = true
 		Task {
 			do {
 				let response = try await self.userRepository.getUserMakFolder(
@@ -69,7 +71,6 @@ final class EncyclopediaViewModel: ObservableObject {
 				if response.status == 200 {
 					isLastPage = response.result?.makUserTable?.last ?? true
 					makModel.append(contentsOf: response.result?.makUserTable?.content ?? [])
-					fetchLoading = false
 				} else {
 					errorState = true
 					makModel = []
