@@ -36,8 +36,13 @@ struct LatestCommentSingleView: View {
 							.lineLimit(1)
 							.font(.style(.SF14R))
 							.foregroundColor(Color(uiColor: .designSystem(.white)!))
-						Image(uiImage: .designSystem(.like)!)
-							.padding(.leading, 4)
+						if comment.commentInfo?.userLikeOrNot == "Y" {
+							Image(uiImage: .designSystem(.like)!)
+								.padding(.leading, 4)
+						} else if comment.commentInfo?.userLikeOrNot == "N" {
+							Image(uiImage: .designSystem(.sorry)!)
+								.padding(.leading, 4)
+						}
 						Spacer()
 						Text(comment.commentInfo?.userNickName ?? "")
 							.font(.style(.SF14R))

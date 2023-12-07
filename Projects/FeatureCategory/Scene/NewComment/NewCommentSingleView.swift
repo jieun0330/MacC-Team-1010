@@ -13,7 +13,7 @@ import DesignSystem
 struct NewCommentSingleView: View {
 	let comment: RecentComment
 	
-    var body: some View {
+	var body: some View {
 		HStack(alignment: .top, spacing: 0) {
 			RoundedRectangle(cornerRadius: 12)
 				.fill(Color(uiColor: .designSystem(.darkgrey)!))
@@ -30,8 +30,13 @@ struct NewCommentSingleView: View {
 						.lineLimit(1)
 						.font(.style(.SF14R))
 						.foregroundColor(Color(uiColor: .designSystem(.white)!))
-					Image(uiImage: .designSystem(.like)!)
-						.padding(.leading, 4)
+					if comment.commentInfo?.userLikeOrNot == "Y" {
+						Image(uiImage: .designSystem(.like)!)
+							.padding(.leading, 4)
+					} else if comment.commentInfo?.userLikeOrNot == "N" {
+						Image(uiImage: .designSystem(.sorry)!)
+							.padding(.leading, 4)
+					}
 					Spacer()
 					Text(comment.commentInfo?.userNickName ?? "")
 						.font(.style(.SF14R))
@@ -49,5 +54,5 @@ struct NewCommentSingleView: View {
 			}
 			Spacer()
 		}
-    }
+	}
 }
